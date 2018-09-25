@@ -1,5 +1,5 @@
 
-NAME = myrbtree
+NAME = fdf
 LIBNAME = lib$(NAME)
 
 ROOT = .

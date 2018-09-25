@@ -1,5 +1,3 @@
-OBJS := $(patsubst %,$(OBJ_DIR)/%.o,$(TARGETS))
-
 all : header library
 
 .PHONY : header

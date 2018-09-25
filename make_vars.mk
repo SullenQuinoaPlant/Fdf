@@ -1,19 +1,16 @@
-NAME = myrbtree
-LIBNAME = lib$(NAME)
-GIT_REPO = https://github.com/SullenQuinoaPlant/.git
+NAME = fdf
+GIT_REPO = https://github.com/SullenQuinoaPlant/Fdf.git
 
-CALL_DIR := $(shell pwd)
 SRC_DIR := $(ROOT)/sources
 INC_DIR := $(ROOT)/includes
 OBJ_DIR := $(ROOT)/objects
 LIB_DIR := $(ROOT)/libs
 LIBS_L := $(LIB_DIR)/objects
 LIBS_I := $(LIB_DIR)/includes
-OUT_DIR_LIB := $(LIBS_L)
-OUT_DIR_H := $(LIBS_I)
+OUT_DIR_PROG := $(ROOT)
 TEST_DIR := $(ROOT)/tests
 AUX_DIR := $(TEST_DIR)/auxilliaries
-RELEASE_DIR := $(ROOT)/release_$(NAME)
+RELEASE_DIR := $(ROOT)/release
 
 include $(ROOT)/targets.mk
 SRCS = $(patsubst %,$(SRC_DIR)/%.c,$(TARGETS))
