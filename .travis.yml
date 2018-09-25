@@ -1,0 +1,9 @@
+language: c
+os:
+ - linux
+install:
+ - make build_dependencies
+ - make build_test_dependencies
+script:
+ - make
+ - make tests

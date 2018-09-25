@@ -1,0 +1,3 @@
+libcmocka.*
+cmocka_build/
+cmocka_source/
