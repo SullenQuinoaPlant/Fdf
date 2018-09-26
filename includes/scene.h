@@ -24,22 +24,25 @@ typedef struct				s_scene_lines
 	size_t	ar_sz;
 }							t_s_sl;
 
-/*
-**Scene active objects, can be acted upon:
-*/
-
-typedef struct				s_scene_object
+typedef struct				s_scene_areas
 {
-	t_s_d	*dot_str;
-	t_s_l	*line_str;
-	t_s_a	*area_str;
-}
+	t_s_a	*ar;
+	size_ta	ar_sz;
+}							t_s_sa;
+
+typedef struct s_scene_object	t_s_so;
+struct						s_scene_object
+	t_s_o	*ar;
+	size_t	ar_sz;
+};
 
 typedef struct				s_scene
 {
-	t_s_sp	*points;
-	t_s_sd	*dots;
-	t_s_sl	*lines;
+	t_s_sp	points;
+	t_s_sd	dots;
+	t_s_sl	lines;
+	t_s_sa	areas;
+	t_s_so	objects;
 }							t_s_s;
 
 typedef int	(*t_scene_builder)(t_s_sbi*, t_s_s*);
@@ -63,7 +66,7 @@ int							add_tssbis_to_scene(
 */
 int							make_scene(
 	t_s_sbi	**input_str,
-	t_s_s	**p_ret_scene
+	t_s_s	**p_ret_scene);
 
 # define SYS_ERR -1
 # define SUCCESS 0
