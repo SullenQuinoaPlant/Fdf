@@ -43,7 +43,7 @@ typedef struct				s_scene_points
 typedef struct				s_free_scene_point
 {
 	t_s_sp	*free;
-	size_t	count;
+	t_s_sp	*last;
 }							t_s_fsp;
 
 typedef struct				s_scene_dots
