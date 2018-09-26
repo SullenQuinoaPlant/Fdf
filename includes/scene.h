@@ -94,6 +94,9 @@ int							add_tssbis_to_scene(
 void						free_tssbi_str(
 	t_s_sbi	*str);
 
+void						free_tssp(
+	t_s_sp *points);
+
 void						init_tsp_ar(
 	t_s_p	*ar);
 
@@ -111,9 +114,6 @@ int							make_scene(
 
 void						scene_teardown(
 	t_s_s	**scene);
-
-void						tssp_free(
-	t_s_sp *points);
 
 # define SYS_ERR -1
 # define SUCCESS 0
