@@ -44,7 +44,6 @@ typedef struct				s_point
 		};
 	};
 	int		refs;
-	t_tag	pos;
 }							t_s_p;
 
 /*

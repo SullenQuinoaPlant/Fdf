@@ -12,32 +12,39 @@
 **	index a dynamically allocated array of these arrays.
 **Most significant bits identify give tagged element position within array.
 **
-**NOTE : in t_s_p, t_s_d, t_s_d, t_s_o:
-**	only the in-array position bits are stored,
-**	pre-shifted.
-**
 ** - **ars: pointer to array of arrays.
 ** - ar_count: number of allocated arrays.
 ** - nxt_tag: next position where to store a new element.
 **
-**AR_MASK used to retrieve array number.
-**POS_SHIFT used to shift out array number,
-**	get position within array.
-**AR_SZ is determined by t_tag type size and mask
+**TAG_AR_MASK used to retrieve array number.
+**TAG_POS_SHIFT used to shift out array number,
+**	and get position within array.
+**TAG_AR_SZ is determined by t_tag type size and mask
 */
 
 # define TAG_AR_MASK (t_tag)0xffff
+# define TAM TAG_AR_MASK
 # define TAG_POS_SHIFT 16 
+# define TPS TAG_POS_SHIFT
 # define TAG_AR_SZ ((~(t_tag)0) >> POS_SHIFT) + 1
+# define TAS TAG_AR_SZ
 
-/*
-**
+typedef struct s_free_scene_points	t_s_fsp;
 typedef struct				s_scene_points
 {
 	t_s_p	**ar;
 	size_t	ar_sz;
-	t_tag	nxt_tag;
+	t_list	*nxt;
 }							t_s_sp;
+
+/*
+**(t_s_fsp)s are stored in nxt list of (t_s_sp)
+*/
+typedef struct				s_free_scene_point
+{
+	t_s_sp	*free;
+	size_t	count;
+}							t_s_fsp;
 
 typedef struct				s_scene_dots
 {
@@ -91,8 +98,20 @@ int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
 	t_s_s	*p_scene);
 
+void						free_tssa(
+	t_s_sa *areas);
+
 void						free_tssbi_str(
 	t_s_sbi	*str);
+
+void						free_tssd(
+	t_s_sd *dots);
+
+void						free_tssl(
+	t_s_sl *lines);
+
+void						free_tsso(
+	t_s_so *objects);
 
 void						free_tssp(
 	t_s_sp *points);
