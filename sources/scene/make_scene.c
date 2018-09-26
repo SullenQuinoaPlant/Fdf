@@ -28,10 +28,8 @@ int						make_scene(
 
 	if (!p_ret_scene)
 		return (BAD_ARGS);
-	r = SYS_ERR;
-	if ((r = init_scene(p_ret_scene)) != SUCCESS &&_input_str)
-		free_tssbis(input_str);
-	else if (input_str)
+	if ((r = init_scene(p_ret_scene)) == SUCCESS && input_str)
 		r = add_tssbis_to_scene(input_str, *p_ret_scene);
+	free_tssbi_str(input_str);
 	return (r);
 }
