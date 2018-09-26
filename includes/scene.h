@@ -2,6 +2,7 @@
 # define SCENE_H
 
 # include <stddef.h>
+# include "outer.h"
 # include "scene_objects.h"
 # include "parsed.h"
 
@@ -11,15 +12,33 @@ typedef struct				s_scene_points
 	size_t	ar_sz;
 }							t_s_sp;
 
+typedef struct				s_scene_dots
+{
+	t_s_d	*ar;
+	size_t	ar_sz;
+}
+
 typedef struct				s_scene_lines
 {
 	t_s_l	*ar;
 	size_t	ar_sz;
 }							t_s_sl;
 
+/*
+**Scene active objects, can be acted upon:
+*/
+
+typedef struct				s_scene_object
+{
+	t_s_d	*dot_str;
+	t_s_l	*line_str;
+	t_s_a	*area_str;
+}
+
 typedef struct				s_scene
 {
 	t_s_sp	points;
+	t_s_sd	dots;
 	t_s_sl	lines;
 }							t_s_s;
 

@@ -6,7 +6,7 @@ static int				use_input(
 {
 	t_scene_builder	f[e_sit_sz] = {
 		scene_builder_empty,
-		scene_builder_cpgfxyrz
+		scene_builder_cdgfxyrz
 	};
 	int		r;
 

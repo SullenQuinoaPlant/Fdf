@@ -6,7 +6,8 @@ static int				init_scene(
 	if (!(*p_ret_scene = malloc(sizeof(t_s_s))))
 		return (SYS_ERR);
 	(*p_ret_scene)->points = (t_s_sp){0, 0};
-	(*p_ret_scene)->lines = (t_s_sl){0,0};
+	(*p_ret_scene)->dots = (t_s_sd){0, 0};
+	(*p_ret_scene)->lines = (t_s_sl){0, 0};
 	return (SUCCESS);
 }
 
