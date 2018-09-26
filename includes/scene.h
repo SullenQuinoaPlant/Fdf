@@ -3,6 +3,7 @@
 
 # include <stddef.h>
 # include "scene_objects.h"
+# include "parsed.h"
 
 typedef struct				s_scene_points
 {

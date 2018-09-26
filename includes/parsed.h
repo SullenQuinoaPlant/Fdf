@@ -12,9 +12,7 @@
 **	(x, y) position, one and only one z-axis value is assigned.
 ** - the parse is described in a 3-dimensional (t_cgfxyrz) array
 **	where the dimensions are assigned as follows : ar[x][y][z]
-** - the has_pos switch in combination twith the position[] can
-**	be used to specify a location for the grid in scene space. If
-**	none is given, scene builder will attempt to do something reasonable.
+** - the offset array specifies the offset for x (offset[0]) and y (offset[1])
 */
 typedef int	(**t_cpgfxyrz)[1];
 typedef struct				s_cartesian_point_grid_fullxy_regularz
@@ -22,8 +20,7 @@ typedef struct				s_cartesian_point_grid_fullxy_regularz
 	size_t			x_sz;
 	size_t			y_sz;
 	t_cpgfxyrz		ar;
-	int				has_pos;
-	int				position[3];
+	int				offset[2];
 }							t_s_cpgfxyrz;
 
 typedef enum				e_scene_input_types

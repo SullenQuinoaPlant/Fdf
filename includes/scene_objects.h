@@ -2,18 +2,37 @@
 # define OBJECTS_H
 
 /*
-**Objects that may live in the scene.
+**Things that live in the scene, or that impact
+**the scene display; stuff.
 */
 
+/*
+**s_point describes a point in space.
+*/
 typedef struct				s_point
 {
 	union
 	{
+		struct cart
+		{
+			int		x;
+			int		y;
+			int		z;
+		};
 		struct
 		{
 			int		x;
 			int		y;
 			int		z;
+		};
+	};
+	union
+	{
+		struct polr
+		{
+			double	t;
+			double	p;
+			double	r;
 		};
 		struct
 		{
@@ -22,14 +41,24 @@ typedef struct				s_point
 			double	r;
 		};
 	};
-	uint32_t	rgba;
+	int		refs;
 }							t_s_p;
 
 /*
 **t_s_v stands for typedef struct vector
-**describe vectors as (point) - (0,0,0):
+**represents vectors as (point) - (0,0,0):
 */
 typedef t_s_p	t_s_v;
+
+typedef uint32_t	t_rgba;
+
+**Visible objects:
+*/
+typedef struct				s_dot
+{
+	t_s_p	pos;
+	t_rgba	rgba;
+}
 
 # define L_END1 0
 # define L_END2 1
@@ -42,6 +71,7 @@ typedef struct				s_line
 		t_s_p	ends[2];
 		t_s_p	pnr[2];
 	}
+	t_rgba	rgba[2];
 }							t_s_l;
 
 #endif
