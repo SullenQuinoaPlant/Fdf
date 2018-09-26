@@ -37,9 +37,9 @@ typedef struct				s_scene_object
 
 typedef struct				s_scene
 {
-	t_s_sp	points;
-	t_s_sd	dots;
-	t_s_sl	lines;
+	t_s_sp	*points;
+	t_s_sd	*dots;
+	t_s_sl	*lines;
 }							t_s_s;
 
 typedef int	(*t_scene_builder)(t_s_sbi*, t_s_s*);
