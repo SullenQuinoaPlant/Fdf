@@ -44,7 +44,7 @@ typedef struct				s_point
 		};
 	};
 	int		refs;
-	t_tag	tag;
+	t_tag	pos;
 }							t_s_p;
 
 /*
@@ -61,7 +61,7 @@ typedef struct				s_dot
 	t_s_p	pos;
 	t_rgba	rgba;
 	int		refs;
-	t_tag	tag;
+	t_tag	pos;
 }
 
 # define L_END1 0
@@ -77,7 +77,7 @@ typedef struct				s_line
 	}
 	t_rgba	rgba[2];
 	int		refs;
-	t_tag	tag;
+	t_tag	pos;
 }							t_s_l;
 
 # define VERT1 0
@@ -89,7 +89,7 @@ typedef struct				s_area
 	t_rgba	rgba[3];
 	t_s_v	out_norm;
 	int		refs;
-	t_tag	tag;
+	t_tag	pos;
 }							t_s_a;
 
 /*
@@ -101,6 +101,7 @@ struct						s_object
 	t_s_d	*dot_str;
 	t_s_l	*line_str;
 	t_s_a	*area_str;
+	t_s_o	*subobjs_str;
 };
 
 #endif
