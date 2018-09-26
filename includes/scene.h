@@ -28,13 +28,13 @@
 
 # define TAG_AR_MASK (t_tag)0xffff
 # define TAG_POS_SHIFT 16 
-# define TAG_AR_SZ (~(t_tag)0) >> POS_SHIFT
+# define TAG_AR_SZ ((~(t_tag)0) >> POS_SHIFT) + 1
 
 /*
 **
 typedef struct				s_scene_points
 {
-	t_s_p	**ars;
+	t_s_p	**ar;
 	size_t	ar_sz;
 	t_tag	nxt_tag;
 }							t_s_sp;
@@ -91,6 +91,9 @@ int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
 	t_s_s	*p_scene);
 
+void						free_tssbi_str(
+	t_s_sbi	*str);
+
 void						init_tsp_ar(
 	t_s_p	*ar);
 
@@ -108,6 +111,9 @@ int							make_scene(
 
 void						scene_teardown(
 	t_s_s	**scene);
+
+void						tssp_free(
+	t_s_sp *points);
 
 # define SYS_ERR -1
 # define SUCCESS 0
