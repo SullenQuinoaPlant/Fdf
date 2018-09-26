@@ -54,6 +54,7 @@ typedef struct				s_point
 typedef t_s_p	t_s_v;
 
 
+/*
 **Visible objects:
 */
 typedef struct				s_dot
