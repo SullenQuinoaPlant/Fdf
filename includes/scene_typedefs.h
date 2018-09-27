@@ -38,6 +38,10 @@ typedef unsigned int	t_tag;
 # define TAC TAG_AR_CAP
 # define TAG_NXT_CAP (DEF_TAG_AR_SZ / 4)
 
+# define USPSV_TAG_POS_MASK (t_tag)0xffffU
+# define USPSV_TAG_POS_SHIFT 16
+# define USPSV_TAG_AR_SZ ((size_t)1 << USPSV_TAG_POS_SHIFT)
+
 /*
 **used to store colors :
 **0xRED;GREEN;BLUE;ALPHA
