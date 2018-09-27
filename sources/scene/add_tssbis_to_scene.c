@@ -8,10 +8,8 @@ static int				use_input(
 		scene_builder_empty,
 		scene_builder_cdgfxyrz
 	};
-	int		r;
 
-	r = f[input->type](input->input, scene);
-	return (r);
+	return (f[input->type](input->input, scene));
 }
 
 int						add_tssbis_to_scene(
