@@ -12,27 +12,14 @@ int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
 	t_s_s	*p_scene);
 
-void						free_spnv(
-	t_s_spnv *points);
+void						free_slna(
+	t_s_slna	*p);
 
-void						free_tssa(
-	t_s_sa *areas);
+void						free_spnv(
+	t_s_spnv	*p);
 
 void						free_tssbi_str(
 	t_s_sbi	*str);
-
-void						free_tssd(
-	t_s_sd *dots);
-
-void						free_tssl(
-	t_s_sl *lines);
-
-void						free_tsso(
-	t_s_so *objects);
-
-int							get_nxt_uspsv(
-	t_s_s		*scene,
-	t_u_spsv	**p_ret);
 
 int							init_slna(
 	t_s_slna	*p);
