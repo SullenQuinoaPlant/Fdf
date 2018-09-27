@@ -29,9 +29,12 @@ static int				add_p_ar(
 int						init_tssp(
 	t_s_sp *p)
 {
-	int		r;
+	t_s_fsp const	last_link = (t_s_fsp){0, 0};
+	t_list			*p;
 
-	r = SYS_ERR;
+	if (!(p = ft_lstnew(&last_link, sizeof(t_s_fsd))))
+		return (SYS_ERR);
+	p->nxt = p;
 	p->ar_sz = 0;
 	return (r = add_p_ar(p));
 }
@@ -46,6 +49,7 @@ void					free_tssp(
 	while (p < lim)
 		ft_cleanfree(p, TAG_AR_SZ * sizeof(t_s_p));
 	ft_cleanfree(points->ar, sizeof(t_s_p*) * points->ar_sz);
+	ft_lstdel(&points->nxt, ft_cleanfree);
 }
 
 int						get_nxt_p(

@@ -61,10 +61,16 @@ typedef struct				s_free_scene_dots
 
 typedef struct				s_scene_lines
 {
-	t_s_l	**ars;
+	t_s_l	**ar;
 	size_t	ar_sz;
-	t_tag	nxt_tag;
+	t_list	*nxt;
 }							t_s_sl;
+
+typedef struct				s_free_scene_lines
+{
+	t_s_sl	*free;
+	t_s_sl	*last;
+}							t_s_fsl;
 
 typedef struct				s_scene_areas
 {

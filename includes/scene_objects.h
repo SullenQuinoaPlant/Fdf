@@ -76,7 +76,6 @@ typedef struct				s_line
 	}
 	t_rgba	rgba[2];
 	int		refs;
-	t_tag	pos;
 }							t_s_l;
 
 # define VERT1 0

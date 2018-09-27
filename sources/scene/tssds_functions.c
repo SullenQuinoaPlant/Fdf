@@ -4,6 +4,7 @@ static int				add_d_ar(
 	t_s_sd *p)
 {
 	t_s_d	**ar;
+	t_s_d	*q;
 	t_list	*tl;
 	size_t	sz;
 
@@ -12,11 +13,11 @@ static int				add_d_ar(
 		(tl = ft_lstnew(&(t_s_fsd){(q = ar[p->ar_sz]), q}, sizeof(t_s_fsp))))
 	{
 		((t_s_fsp*)tl->content)->last += TAS - 1;
+		ft_lstadd(&p->nxt, tl);
 		ft_bzero(ar[p->ar_sz], sz);
 		ft_memcpy(ar, p->ar, (sz = p->ar_sz++ * sizeof(t_s_d*)));
 		ft_cleanfree(p->ar, sz);
 		p->ar = ar;
-		ft_lstadd(&p->nxt, tl);
 		return (SUCCESS);
 	}
 	if (ar[p->ar_sz])
@@ -29,11 +30,14 @@ static int				add_d_ar(
 int						init_tssd(
 	t_s_sd *p)
 {
-	int		r;
+	t_s_fsd const	last_link = (t_s_fsd){0, 0};
+	t_list			*p;
 
-	r = SYS_ERR;
+	if (!(p = ft_lstnew(&last_link, sizeof(t_s_fsd))))
+		return (SYS_ERR);
+	p->nxt = p;
 	p->ar_sz = 0;
-	return (r = add_p_ar(p));
+	return (add_p_ar(p));
 }
 
 void				free_tssd(
@@ -46,6 +50,7 @@ void				free_tssd(
 	while (p < lim)
 		ft_cleanfree(p, TAG_AR_SZ * sizeof(t_s_d));
 	ft_cleanfree(dots->ar, sizeof(t_s_d*) * dots->ar_sz);
+	ft_lstdel(dots->nxt, ft_cleanfree);
 }
 
 int						get_nxt_d(
