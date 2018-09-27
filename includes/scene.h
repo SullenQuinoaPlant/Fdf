@@ -8,26 +8,26 @@
 
 /*
 **Scene elements are stored in array of a defined size.
-**Least significant bits of tags are used to
+**Most significant bits of tags are used to
 **	index a dynamically allocated array of these arrays.
-**Most significant bits identify give tagged element position within array.
+**Least significant bits give tagged element position within array.
 **
-** - **ars: pointer to array of arrays.
-** - ar_count: number of allocated arrays.
-** - nxt_tag: next position where to store a new element.
+** - **ar: pointer to array of arrays.
+** - ar_sz: number of allocated arrays.
+** - nxt: list of next positions where to store new elements.
 **
-**TAG_AR_MASK used to retrieve array number.
-**TAG_POS_SHIFT used to shift out array number,
-**	and get position within array.
-**TAG_AR_SZ is determined by t_tag type size and mask
+**TAG_POS_MASK used to retrieve intra-array position.
+**TAG_AR_SHIFT used to shift out intra-array position bits.
+**TAG_AR_SZ is determined by TAG_AR_SHIFT
+**
+**NOTE :
+**The TAG defines may be adjusted per element type.
+**See scene_objects.h (u_spsv TAGs, for example, differ from default)
 */
 
-# define TAG_AR_MASK (t_tag)0xffff
-# define TAM TAG_AR_MASK
-# define TAG_POS_SHIFT 16 
-# define TPS TAG_POS_SHIFT
-# define TAG_AR_SZ ((~(t_tag)0) >> POS_SHIFT) + 1
-# define TAS TAG_AR_SZ
+# define DEF_TAG_POS_MASK ((t_tag)0xff)
+# define DEF_TAG_POS_SHIFT 8 
+# define DEF_TAG_AR_SZ ((size_t)1 << POS_SHIFT)
 
 typedef struct s_free_scene_points	t_s_fsp;
 typedef struct				s_scene_points
