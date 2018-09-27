@@ -12,19 +12,25 @@ int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
 	t_s_s	*p_scene);
 
-void						free_slna(
+void						free_slnas(
 	t_s_slna	*p);
 
-void						free_spnv(
+void						free_sobjs(
+	t_s_so		*p);
+
+void						free_spnvs(
 	t_s_spnv	*p);
 
 void						free_tssbi_str(
 	t_s_sbi	*str);
 
-int							init_slna(
+int							init_tsslna(
 	t_s_slna	*p);
 
-int							init_spnv(
+int							init_tsso(
+	t_s_so		*p);
+
+int							init_tsspnv(
 	t_s_spnv	*p);
 
 /*

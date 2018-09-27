@@ -5,18 +5,18 @@
 **pointer to type size, T_P_SZ
 **size of structure of pointers to free type slots, FT_SZ
 */
-#define T_SZ sizeof(t_u_slsa);
-#define T_P_SZ sizeof(t_u_slsa*)
+#define T_SZ sizeof(t_s_o);
+#define T_P_SZ sizeof(t_s_o*)
 #define FT_SZ sizeof(t_s_ft)
 
 #define TPM DEF_TAG_POS_MASK
 #define TPS DEF_TAG_POS_SHIFT
 #define TAS DEF_TAG_AR_SZ
 
-static int				add_uslsa_ar(
-	t_s_slna *p)
+static int				add_obj_ar(
+	t_s_so *p)
 {
-	t_u_slsa	**ar;
+	t_s_o	**ar;
 	t_tag		last;
 	t_list		*tl;
 	size_t		sz;
@@ -40,8 +40,8 @@ static int				add_uslsa_ar(
 	return (SYS_ERR);
 }
 
-int						init_tsslna(
-	t_s_slna *p)
+int						init_tsso(
+	t_s_so *p)
 {
 	t_s_ft const	last_link = (t_s_ft){0, 0};
 	t_list			*tl;
@@ -50,11 +50,11 @@ int						init_tsslna(
 		return (SYS_ERR);
 	p->nxt = tl;
 	p->ar_sz = 0;
-	return (add_uslsa_ar(p));
+	return (add_obj_ar(p));
 }
 
-void					free_slnas(
-	t_s_slna *p)
+void					free_sobjs(
+	t_s_so *p)
 {
 	t_s_p *const	lim = *points->ar + points->ar_sz;
 	t_s_p			*pp;
@@ -66,17 +66,17 @@ void					free_slnas(
 	ft_lstdel(&p->nxt, ft_cleanfree);
 }
 
-int						get_nxt_uslsa(
+int						get_nxt_obj(
 	t_s_s *scene,
 	t_tag *p_ret)
 {
-	t_s_slna *const	p = scene->points;
+	t_s_so *const	p = scene->points;
 	t_s_ft			*ftgs;
 	int				r;
 
 	while (!(ftgs = (t_s_fsp*)p->nxt->content))
 		if ((r = TAC - scene->ar_allocs < (TAS * T_S) ? MEM_CAP : 0) ||
-			(r = add_uslsa_ar(p)) != SUCCESS)
+			(r = add_obj_ar(p)) != SUCCESS)
 			return (r);
 		else
 			scene->ar_allocs += TAS * T_S;

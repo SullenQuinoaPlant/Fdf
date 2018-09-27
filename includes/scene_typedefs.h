@@ -94,10 +94,8 @@ typedef struct				s_scene
 	size_t		ar_allocs;
 	size_t		nxt_allocs;
 	t_s_spnv	pnvs;
-	t_s_sd	dots;
-	t_s_sl	lines;
-	t_s_sa	areas;
-	t_s_so	objects;
+	t_s_slna	lnas;
+	t_s_so		os;
 }							t_s_s;
 
 typedef int	(*t_scene_builder)(t_s_sbi*, t_s_s*);

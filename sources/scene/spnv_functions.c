@@ -40,7 +40,7 @@ static int				add_uspsv_ar(
 	return (SYS_ERR);
 }
 
-int						init_spnv(
+int						init_tsspnv(
 	t_s_spnv *p)
 {
 	t_s_ft const	last_link = (t_s_ft){0, 0};
@@ -53,7 +53,7 @@ int						init_spnv(
 	return (add_uspsv_ar(p));
 }
 
-void					free_spnv(
+void					free_spnvs(
 	t_s_spnv *p)
 {
 	t_s_p *const	lim = *points->ar + points->ar_sz;
