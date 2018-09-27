@@ -40,7 +40,7 @@ typedef struct				s_scene_points
 /*
 **(t_s_fsp)s are stored in nxt list of (t_s_sp)
 */
-typedef struct				s_free_scene_point
+typedef struct				s_free_scene_points
 {
 	t_s_sp	*free;
 	t_s_sp	*last;
@@ -50,8 +50,14 @@ typedef struct				s_scene_dots
 {
 	t_s_d	**ar;
 	size_t	ar_sz;
-	t_tag	nxt_tag;
+	t_list	*nxt;
 }
+
+typedef struct				s_free_scene_dots
+{
+	t_s_sd	*free;
+	t_s_sd	*last;
+}							t_s_fsd;
 
 typedef struct				s_scene_lines
 {
@@ -115,6 +121,10 @@ void						free_tsso(
 
 void						free_tssp(
 	t_s_sp *points);
+
+int							get_nxt_p(
+	t_s_s	*scene,
+	t_s_p	**p_ret);
 
 void						init_tsp_ar(
 	t_s_p	*ar);

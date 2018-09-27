@@ -61,7 +61,6 @@ typedef struct				s_dot
 	t_s_p	pos;
 	t_rgba	rgba;
 	int		refs;
-	t_tag	pos;
 }
 
 # define L_END1 0

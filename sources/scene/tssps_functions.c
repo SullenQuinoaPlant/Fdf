@@ -36,7 +36,7 @@ int						init_tssp(
 	return (r = add_p_ar(p));
 }
 
-void				free_tssp(
+void					free_tssp(
 	t_s_sp *points)
 {
 	t_s_p *const	lim = *points->ar + points->ar_sz;
@@ -50,7 +50,7 @@ void				free_tssp(
 
 int						get_nxt_p(
 	t_s_s *scene,
-	t_s_p **p_ret;
+	t_s_p **p_ret)
 {
 	t_s_sp *const	p = scene->points;
 	t_s_fsp			*fp;

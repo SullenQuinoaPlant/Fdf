@@ -1,29 +1,5 @@
 #include "scene.h"
 
-void				free_tssp(
-	t_s_sp *points)
-{
-	t_s_p *const	lim = *points->ar + points->ar_sz;
-	t_s_p			*p;
-
-	p = *points->ar;
-	while (p < lim)
-		ft_cleanfree(p, TAG_AR_SZ * sizeof(t_s_p));
-	ft_cleanfree(points->ar, sizeof(t_s_p*) * points->ar_sz);
-}
-
-void				free_tssd(
-	t_s_sd *dots)
-{
-	t_s_d *const	lim = *dots->ar + dots->ar_sz;
-	t_s_d			*p;
-
-	o = *dots->ar;
-	while (p < lim)
-		ft_cleanfree(p, TAG_AR_SZ * sizeof(t_s_d));
-	ft_cleanfree(dots->ar, sizeof(t_s_d*) * dots->ar_sz);
-}
-
 void				free_tssl(
 	t_s_sl *lines)
 {
