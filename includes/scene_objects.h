@@ -154,9 +154,15 @@ typedef struct				s_fill
 /*
 **Scene objects, can be displayed
 */
+/*
+**Array of tags that are part of an object.
+**count are used, from index 0.
+**sz is array size. May have trailing unused tag slots.
+*/
 typedef struct				s_tag_array
 {
 	t_tag	*ar;
+	size_t	count;
 	size_t	sz;
 }							t_s_ta;
 

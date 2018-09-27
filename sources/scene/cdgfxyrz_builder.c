@@ -7,11 +7,11 @@
 static int					add_points(
 	t_s_cdgfxyrz *p,
 	t_s_s *s,
-	t_tag *tag_ar,
+	t_tag *tags,
 	int *r)
 {
 	t_s_cxyd (*const	par)[p->y_sz][1] = (t_s_cxyd(*)[p->y_sz][1])p->ar;
-	t_tag (*const		tag)[p->y_sz] = (t_tag(*)[p->y_sz])tag_ar;
+	t_tag (*const		tag)[p->y_sz] = (t_tag(*)[p->y_sz])tags;
 	size_t				i;
 	size_t				j;
 	t_s_p				point;
@@ -34,27 +34,33 @@ static int					add_points(
 	return ((*r = SUCCESS));
 }
 
-static int				add_lines(
+static int				add_xlines(
 	t_s_cdgfxyrz *p,
-	t_tag *tag_ar,
+	t_tag *tags,
 	t_s_s *s,
-	int *r)
+	t_s_o *o)
 {
-	t_s_cxyd (*const	par)[p->y_sz][1] = (t_s_cxyd(*)[p->y_sz][1])p->ar;
-	t_tag (*const		tag)[p->y_sz] = (t_tag(*)[p->y_sz])tag_ar;
 	size_t	i;
-	size_t	j;
 	t_s_l	line;
+	t_tag	tag;
+	int		r;
 
-	while (++i < p->x_sz >> (j = -1))
-		while (++j < p->y_sz - 1)
+	while (++i < p->x_sz * p->y_sz)
+		if (i % p->x_sz)
 		{
-			line.ends = (t_tag[2]){tag[i][j], tag[i][j + 1]};
-			line.rgba = (t_rgba[2]){par[i][j].col, par[i][j + 1].col};
-			line.
+			if ((r = get_nxt_uslsa(s, &tag)) != SUCCESS)
+				return (r);
+			line.ends = (t_tag[2]){tags[k - 1], tags[k]};
+			line.rgba = (t_rgba[2]){par[k - 1].col, par[k].col};
+			line.refs = 1;
+			chg_uspsv_ref(tags[k - 1], 1, s);
+			chg_uspsv_ref(tags[k], 1, s);
+			o->lnas.ar[++o->lnas.count] = tag;
 		}
-	return ((*r = SUCCESS));
+	return (r);
 }
+
+static int				add_y_lines(
 
 int						cdgfxyrz_builder(
 	t_s_sbi *sbi,
