@@ -13,4 +13,9 @@ typedef uint32_t	t_rgba;
 */
 typedef unsigned int	t_tag;
 
+# define SYS_ERR -1
+# define SUCCESS 0
+# define BAD_ARGS 1
+# define MEM_CAP 2
+
 #endif

@@ -12,6 +12,9 @@
 **	index a dynamically allocated array of these arrays.
 **Least significant bits give tagged element position within array.
 **
+**Allocations system calls for these arrays is capped.
+**See TAG_AR_CAP
+**
 **TAG_POS_MASK used to retrieve intra-array position.
 **TAG_AR_SHIFT used to shift out intra-array position bits.
 **TAG_AR_SZ is determined by TAG_AR_SHIFT
@@ -25,11 +28,16 @@
 ** - **ar: pointer to array of arrays.
 ** - ar_sz: number of allocated arrays.
 ** - nxt: list of next positions where to store new elements.
+**	These list allocations are capped by TAG_NXT_CAP
 */
 
 # define DEF_TAG_POS_MASK ((t_tag)0xff)
 # define DEF_TAG_POS_SHIFT 8 
 # define DEF_TAG_AR_SZ ((size_t)1 << DEF_TAG_POS_SHIFT)
+
+# define TAG_AR_CAP ((size_t)1 << 30)
+# define TAC TAG_AR_CAP
+# define TAG_NXT_CAP (DEF_TAG_AR_SZ / 4)
 
 typedef struct				s_scene_points_and_vectors
 {
@@ -86,7 +94,9 @@ typedef struct				s_scene_objects
 
 typedef struct				s_scene
 {
-	t_s_sp	points;
+	size_t		ar_allocs;
+	size_t		nxt_allocs;
+	t_s_spnv	pnvs;
 	t_s_sd	dots;
 	t_s_sl	lines;
 	t_s_sa	areas;
@@ -108,6 +118,9 @@ int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
 	t_s_s	*p_scene);
 
+void						free_spnv(
+	t_s_spnv *points);
+
 void						free_tssa(
 	t_s_sa *areas);
 
@@ -123,18 +136,12 @@ void						free_tssl(
 void						free_tsso(
 	t_s_so *objects);
 
-void						free_tssp(
-	t_s_sp *points);
+int							get_nxt_uspsv(
+	t_s_s		*scene,
+	t_u_spsv	**p_ret);
 
-int							get_nxt_p(
-	t_s_s	*scene,
-	t_s_p	**p_ret);
-
-void						init_tsp_ar(
-	t_s_p	*ar);
-
-int							init_tssp(
-	t_s_sp	*p);
+int							init_spnv(
+	t_s_spnv *p);
 
 /*
 **Allocates and initilizes a scene, with optional
@@ -147,9 +154,5 @@ int							make_scene(
 
 void						scene_teardown(
 	t_s_s	**scene);
-
-# define SYS_ERR -1
-# define SUCCESS 0
-# define BAD_ARGS 1
 
 #endif

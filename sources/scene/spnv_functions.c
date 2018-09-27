@@ -34,7 +34,7 @@ static int				add_uspsv_ar(
 		ft_lstadd(&p->nxt, tl);
 		return (SUCCESS);
 	}
-	if (ar[p->ar_sz])
+	if (ar && ar[p->ar_sz])
 		free(ar[p->ar_sz]);
 	if (ar)
 		free(ar);
@@ -51,7 +51,7 @@ int						init_spnv(
 		return (SYS_ERR);
 	p->nxt = tl;
 	p->ar_sz = 0;
-	return (add_p_ar(p));
+	return (add_uspsv_ar(p));
 }
 
 void					free_spnv(
@@ -77,9 +77,15 @@ int						get_nxt_uspsv(
 
 	*p_ret = 0;
 	while (!(fpnv = (t_s_fsp*)p->nxt->content))
-		if ((r = add_uspsv_ar(p)) != SUCCESS)
+		if ((r = TAC - scene->ar_allocs < (TAS * T_S) ? MEM_CAP : 0) ||
+			(r = add_uspsv_ar(p)) != SUCCESS)
 			return (r);
+		else
+			scene->ar_allocs += TAS * T_S;
 	if ((*p_ret = fpnv->free++) == fp->last)
+	{
 		ft_lstdelhead(&p->nxt);
+		scene->nxt_allocs--;
+	}
 	return (SUCCESS);
 }
