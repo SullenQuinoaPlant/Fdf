@@ -11,7 +11,7 @@
 **	(x, y) position, one and only one z-axis value is assigned.
 ** - the parse is described in a 2-dimensional (t_cgfxyrz) array
 **	where the dimensions are assigned as follows : ar[x][y]
-** - the offset array specifies the offset for x (offset[0]) and y (offset[1])
+** - the "at" array specifies where to place grid origin in scene, not optional.
 */
 typedef struct				s_cartesian_xy_dot
 {
@@ -19,15 +19,15 @@ typedef struct				s_cartesian_xy_dot
 	t_rgba	col;
 }							t_s_cxyd;
 
-typedef t_s_cxyd	(**t_cdgfxyrz)[1];
+typedef t_s_cxyd	(*t_cdgfxyrz)[][1];
 
 typedef struct				s_cartesian_dot_grid_fullxy_regularz
 {
 	size_t			x_sz;
 	size_t			y_sz;
-	t_cpgfxyrz		ar;
-	int				offset[2];
-}							t_s_cdotgfxyrz;
+	t_cdgfxyrz		ar;
+	double			at[3];
+}							t_s_cdgfxyrz;
 
 typedef enum				e_scene_input_types
 {

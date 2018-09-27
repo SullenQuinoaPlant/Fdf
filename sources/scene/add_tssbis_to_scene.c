@@ -1,12 +1,21 @@
 #include "scene.h"
 
+static int				no_scene_builder(
+	t_s_sbi *a,
+	t_s_s *b)
+{
+	(void)a;
+	(void)b;
+	return (SUCCESS);
+}
+
 static int				use_input(
 	t_s_sbi *input,
 	t_s_s *scene)
 {
 	t_scene_builder	f[e_sit_sz] = {
-		scene_builder_empty,
-		scene_builder_cdgfxyrz
+		no_scene_builder,
+		cdgfxyrz_builder
 	};
 
 	return (f[input->type](input->input, scene));
