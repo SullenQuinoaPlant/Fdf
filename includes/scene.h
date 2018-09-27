@@ -12,10 +12,6 @@
 **	index a dynamically allocated array of these arrays.
 **Least significant bits give tagged element position within array.
 **
-** - **ar: pointer to array of arrays.
-** - ar_sz: number of allocated arrays.
-** - nxt: list of next positions where to store new elements.
-**
 **TAG_POS_MASK used to retrieve intra-array position.
 **TAG_AR_SHIFT used to shift out intra-array position bits.
 **TAG_AR_SZ is determined by TAG_AR_SHIFT
@@ -23,28 +19,30 @@
 **NOTE :
 **The TAG defines may be adjusted per element type.
 **See scene_objects.h (u_spsv TAGs, for example, differ from default)
+**
+**
+**Within element-specific structures:
+** - **ar: pointer to array of arrays.
+** - ar_sz: number of allocated arrays.
+** - nxt: list of next positions where to store new elements.
 */
 
 # define DEF_TAG_POS_MASK ((t_tag)0xff)
 # define DEF_TAG_POS_SHIFT 8 
-# define DEF_TAG_AR_SZ ((size_t)1 << POS_SHIFT)
+# define DEF_TAG_AR_SZ ((size_t)1 << DEF_TAG_POS_SHIFT)
 
-typedef struct s_free_scene_points	t_s_fsp;
-typedef struct				s_scene_points
+typedef struct				s_scene_points_and_vectors
 {
-	t_s_p	**ar;
-	size_t	ar_sz;
-	t_list	*nxt;
-}							t_s_sp;
+	t_u_spsv	**ar;
+	size_t		ar_sz;
+	t_list		*nxt;
+}							t_s_spnv;
 
-/*
-**(t_s_fsp)s are stored in nxt list of (t_s_sp)
-*/
-typedef struct				s_free_scene_points
+typedef struct				s_free_points_and_vectors
 {
-	t_s_sp	*free;
-	t_s_sp	*last;
-}							t_s_fsp;
+	t_u_spsv	*free;
+	t_u_spsv	*last;
+}							t_s_fpnv;
 
 typedef struct				s_scene_dots
 {

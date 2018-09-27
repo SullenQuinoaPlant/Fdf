@@ -17,15 +17,15 @@ typedef struct				s_point
 	{
 		struct cart
 		{
-			int		x;
-			int		y;
-			int		z;
+			double		x;
+			double		y;
+			double		z;
 		};
 		struct
 		{
-			int		x;
-			int		y;
-			int		z;
+			double		x;
+			double		y;
+			double		z;
 		};
 	};
 	union
@@ -52,15 +52,15 @@ typedef struct				s_vector
 	{
 		struct cart
 		{
-			int		x;
-			int		y;
-			int		z;
+			double		x;
+			double		y;
+			double		z;
 		};
 		struct
 		{
-			int		x;
-			int		y;
-			int		z;
+			double		x;
+			double		y;
+			double		z;
 		};
 	};
 	union
