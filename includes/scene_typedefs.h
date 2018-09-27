@@ -44,6 +44,12 @@ typedef unsigned int	t_tag;
 */
 typedef uint32_t	t_rgba;
 
+typedef struct				s_free_tags
+{
+	t_tag	free;
+	t_tag	last;
+}							t_s_ft;
+
 typedef struct				s_scene_points_and_vectors
 {
 	t_u_spsv	**ar;
@@ -51,24 +57,12 @@ typedef struct				s_scene_points_and_vectors
 	t_list		*nxt;
 }							t_s_spnv;
 
-typedef struct				s_free_points_and_vectors
-{
-	t_u_spsv	*free;
-	t_u_spsv	*last;
-}							t_s_fpnv;
-
 typedef struct				s_scene_dots
 {
 	t_s_d	**ar;
 	size_t	ar_sz;
 	t_list	*nxt;
-}
-
-typedef struct				s_free_scene_dots
-{
-	t_s_sd	*free;
-	t_s_sd	*last;
-}							t_s_fsd;
+}							t_s_sd;
 
 typedef struct				s_scene_lines_and_arrows
 {
@@ -76,12 +70,6 @@ typedef struct				s_scene_lines_and_arrows
 	size_t		ar_sz;
 	t_list		*nxt;
 }							t_s_slna;
-
-typedef struct				s_free_lines_and_arrows
-{
-	u_t_slsa	*free;
-	u_t_slsa	*last;
-}							t_s_flna;
 
 typedef struct				s_scene_areas
 {
@@ -97,6 +85,10 @@ typedef struct				s_scene_objects
 	t_tag	nxt_tag;
 }							t_s_so;
 
+/*
+** - ar_allocs counts bytes
+** - nxt_allocs counts individual allocs not bytes.
+*/
 typedef struct				s_scene
 {
 	size_t		ar_allocs;

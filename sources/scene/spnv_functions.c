@@ -7,9 +7,9 @@
 */
 #define T_SZ sizeof(t_u_spsv);
 #define T_P_SZ sizeof(t_u_spsv*)
-#define FT_SZ sizeof(t_s_fpnv)
+#define FT_SZ sizeof(t_s_ft)
 
-#define TAM USPSV_TAG_AR_MASK
+#define TPM USPSV_TAG_POS_MASK
 #define TPS USPSV_TAG_POS_SHIFT
 #define TAS USPSV_TAG_AR_SZ
 
@@ -17,15 +17,14 @@ static int				add_uspsv_ar(
 	t_s_spnv *p)
 {
 	t_u_spsv	**ar;
-	t_u_spsv	*pp;
+	t_tag		last;
 	t_list		*tl;
 	size_t		sz;
 
 	if ((ar = malloc((p->ar_sz + 1) * T_P_SZ)) &&
 		(ar[p->ar_sz] = malloc(sizeof(T_SZ * TAS))) &&
-		(pp = ar[p->ar_sz] + TAS - 1) &&
-		(tl = ft_lstnew(&(t_s_fpnv){ar[p->ar_sz], pp}, FT_SZ)))
-
+		(last = (t_tag)p->ar_sz << TPS | TPM) &&
+		(tl = ft_lstnew(&(t_s_ft){last & ~TPM, last}, FT_SZ)))
 	{
 		ft_bzero(ar[p->ar_sz], U_SZ * TAS);
 		ft_memcpy(ar, p->ar, (sz = p->ar_sz++ * U_P_SZ));
@@ -44,7 +43,7 @@ static int				add_uspsv_ar(
 int						init_spnv(
 	t_s_spnv *p)
 {
-	t_s_fpnv const	last_link = (t_s_fpnv){0, 0};
+	t_s_ft const	last_link = (t_s_ft){0, 0};
 	t_list			*tl;
 
 	if (!(tl = ft_lstnew(&last_link, FT_SZ)))
@@ -69,20 +68,19 @@ void					free_spnv(
 
 int						get_nxt_uspsv(
 	t_s_s *scene,
-	t_u_spsv **p_ret)
+	t_tag *p_ret)
 {
 	t_s_spnv *const	p = scene->points;
-	t_s_fpnv		*fpnv;
+	t_s_ft			*ftgs;
 	int				r;
 
-	*p_ret = 0;
-	while (!(fpnv = (t_s_fsp*)p->nxt->content))
+	while (!(ftgs = (t_s_fsp*)p->nxt->content))
 		if ((r = TAC - scene->ar_allocs < (TAS * T_S) ? MEM_CAP : 0) ||
 			(r = add_uspsv_ar(p)) != SUCCESS)
 			return (r);
 		else
 			scene->ar_allocs += TAS * T_S;
-	if ((*p_ret = fpnv->free++) == fp->last)
+	if ((*p_ret = ftgs->free++) == fp->last)
 	{
 		ft_lstdelhead(&p->nxt);
 		scene->nxt_allocs--;

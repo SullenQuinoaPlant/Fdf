@@ -81,9 +81,10 @@ typedef struct				s_vector
 	int		refs;
 }							t_s_v;
 
-# define USPSV_TAG_AR_MASK (t_tag)0xffff
-# define USPSV_TAG_POS_SHIFT 16 
-# define USPSV_TAG_AR_SZ ((~(t_tag)0) >> POS_SHIFT) + 1
+# define USPSV_TAG_POS_MASK (t_tag)0xffffU
+# define USPSV_TAG_POS_SHIFT 16
+# define USPSV_TAG_AR_SZ ((size_t)1 << USPSV_TAG_POS_SHIFT)
+
 typedef union				u_spsv
 {
 	t_s_p	p;
