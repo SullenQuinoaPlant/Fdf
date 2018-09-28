@@ -185,7 +185,7 @@ struct						s_object
 	t_s_ta			lnas;
 	t_s_ta			fills;
 	t_s_ta			subos;
-	t_tag 		  handle;
+	t_tag 		  	handle;
 	t_rgba			rgba;
 	unsigned int	refs;
 };

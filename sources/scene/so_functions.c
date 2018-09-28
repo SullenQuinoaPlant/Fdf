@@ -68,7 +68,8 @@ void					free_sobjs(
 
 int						get_nxt_obj(
 	t_s_s *scene,
-	t_tag *p_ret)
+	t_tag *ret,
+	t_s_o **retaddr)
 {
 	t_s_so *const	p = scene->os;
 	t_s_ft			*ftgs;
@@ -80,25 +81,32 @@ int						get_nxt_obj(
 			return (r);
 		else
 			scene->ar_allocs += TAS * T_S;
-	if ((*p_ret = ftgs->free++) == fp->last)
+	if ((*ret = ftgs->free++) == fp->last)
 	{
 		ft_lstdelhead(&p->nxt);
 		scene->nxt_allocs--;
 	}
+	if (retaddr)
+		*retaddr = &(scene->os.ar[*ret >> TPS])[*ret & TPM];
 	return (SUCCESS);
 }
 
 int						new_scene_obj(
 	t_s_s *scene,
-	t_s_o **p_ret)
+	t_s_o **ret,
+	t_tag *ret_tag)
 {
 	t_tag	tag;
+	t_s_o	*obj;
 	int		r;
 
-	*p_ret = 0;
-	if ((r = get_nxt_obj(scene, &tag)) == SUCCESS)
-	{
-		p_ret = &(scene->os.ar[tag >> TPS])[tag & TPM];
-	}
+	*ret = 0;
+	if ((r = get_nxt_obj(scene, &tag, &obj)) != SUCCESS ||
+		(r = get_nxt_uspsv(scene, &tag)) != SUCCESS)
+		return (r);
+	ft_bzero(obj, sizeof(t_s_o));
+	obj->refs = 1;
+	if (ret_tag)
+		*ret_tag = tag;
 	return (r);
 }

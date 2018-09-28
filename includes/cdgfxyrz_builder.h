@@ -10,4 +10,5 @@ int							cdgfxyrz_add_lines(
 	t_tag			*tags,
 	t_s_s			*scene,
 	t_s_o			*object);
+
 #endif

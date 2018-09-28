@@ -34,6 +34,14 @@ static int					add_points(
 	return ((*r = SUCCESS));
 }
 
+static int				get_container_obj(
+	t_s_cdgfxyrz *p,
+	t_s_s *s,
+	t_s_o *o)
+{
+}
+	
+
 static void				add_point_refs(
 	t_s_cdgfxyrz *p,
 	t_tag *tags,
