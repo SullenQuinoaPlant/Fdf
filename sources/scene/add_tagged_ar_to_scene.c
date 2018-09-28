@@ -26,11 +26,11 @@ static int			add_actually(
 		free(ar);
 	return (SYS_ERR);
 }
+
 /*
-**Add tagged array to scene.
-** star: Scene Tagged ARay
+** tar: Tagged ARay
 */
-int					add_star(
+int					add_tar(
 	t_s_se *se,
 	t_s_s *s)
 {

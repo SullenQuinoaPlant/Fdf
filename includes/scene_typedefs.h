@@ -65,68 +65,42 @@ typedef struct				s_scene_elements
 
 typedef enum				e_scene_element_groups
 {
-	e_pnv,
-	e_d,
-	e_lna,
-	e_o,
+	e_spnv,
+	e_sd,
+	e_slna,
+	e_sa,
+	e_so,
 	e_seg_sz
 }							t_e_seg;
 
-typedef struct				s_scene_points_and_vectors
-{
-	t_u_spsv	**ar;
-	size_t		ar_sz;
-	t_list		*nxt;
-}							t_s_spnv;
-
-typedef struct				s_scene_dots
-{
-	t_s_d	**ar;
-	size_t	ar_sz;
-	t_list	*nxt;
-}							t_s_sd;
-
-typedef struct				s_scene_lines_and_arrows
-{
-	t_u_slsa	**ar;
-	size_t		ar_sz;
-	t_list		*nxt;
-}							t_s_slna;
-
-typedef struct				s_scene_areas
-{
-	t_s_a	**ars;
-	size_t	ar_sz;
-	t_tag	nxt_tag;
-}							t_s_sa;
-
-typedef struct				s_scene_objects
-{
-	t_s_o	**ars;
-	size_t	ar_sz;
-	t_tag	nxt_tag;
-}							t_s_so;
-
-/*
-**Scene projections own their own set of the scene points.
-**The coordinates of these points are modified accoring to projection transform.
-**Tags are used to identify points reliably accross point sets.
-**Points should not be deleted from projections: change scene set, then update.
-*/
 /*
 **t_pctr as in: point coordinate transform
 */
-typedef void (*	t_pctr)(void*, t_s_p**, size_t, t_s_p**);
+typedef void	(*t_pctr)(void*, size_t, t_s_p**);
+
+/*
+**Scene projections own their own set of the scene points.
+**The coordinates of these points are modified.
+**Tags are used to identify points reliably accross point sets.
+**Projections points should not be modified;
+**	instead, change scene points then update.
+*/
+
 typedef struct				s_projection
 {
-	t_s_prj			*up;
-	t_pctr			tr;
-	t_s_p			**tr_res;
-	void			*tr_arg;
-	size_t			tr_arg_sz;
-	int				refs;
+	int			refs;
+	t_s_prj		*up;
+	t_pctr		tr;
+	t_s_p		**pnv;
+	void		*stuff;
 }							t_s_prj;
 
+typedef struct				s_scene_projections
+{
+	t_s_prj		nullproj;
+	t_s_prj		*ar;
+	size_t		ar_sz;
+}							t_s_sprj;
 
 typedef struct s_view		t_s_v;
 struct						s_view
@@ -150,12 +124,12 @@ typedef struct				s_scene
 {
 	size_t		ar_allocs;
 	size_t		nxt_allocs;
-	t_s_se		elems[e_seg_sz];
-	t_s_prj		nullproj;
+	t_s_se		es[e_seg_sz];
+	t_s_sprj	prjs;
 	t_s_sv		*views;
 }							t_s_s;
 
-typedef int	(*t_scene_builder)(t_s_sbi*, t_s_s*);
-typedef int	(*t_tssbi_freer)(t_s_sbi*);
+typedef int		(*t_scene_builder)(t_s_sbi*, t_s_s*);
+typedef int		(*t_tssbi_freer)(t_s_sbi*);
 
 #endif
