@@ -70,7 +70,7 @@ int						get_nxt_obj(
 	t_s_s *scene,
 	t_tag *p_ret)
 {
-	t_s_so *const	p = scene->points;
+	t_s_so *const	p = scene->os;
 	t_s_ft			*ftgs;
 	int				r;
 
@@ -86,4 +86,19 @@ int						get_nxt_obj(
 		scene->nxt_allocs--;
 	}
 	return (SUCCESS);
+}
+
+int						new_scene_obj(
+	t_s_s *scene,
+	t_s_o **p_ret)
+{
+	t_tag	tag;
+	int		r;
+
+	*p_ret = 0;
+	if ((r = get_nxt_obj(scene, &tag)) == SUCCESS)
+	{
+		p_ret = &(scene->os.ar[tag >> TPS])[tag & TPM];
+	}
+	return (r);
 }
