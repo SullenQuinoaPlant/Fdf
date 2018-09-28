@@ -9,8 +9,8 @@
 **	index a dynamically allocated array of these arrays.
 **Least significant bits give tagged element position within array.
 **
-**Allocations system calls for these arrays is capped.
-**See TAG_AR_CAP
+**Memory allocation for these arrays is capped.
+**	see TAG_AR_CAP
 **
 **TAG_POS_MASK used to retrieve intra-array position.
 **TAG_AR_SHIFT used to shift out intra-array position bits.
@@ -25,7 +25,7 @@
 ** - **ar: pointer to array of arrays.
 ** - ar_sz: number of allocated arrays.
 ** - nxt: list of next positions where to store new elements.
-**	These list allocations are capped by TAG_NXT_CAP
+**		These list allocations are capped by TAG_NXT_CAP
 */
 
 typedef unsigned int	t_tag;
@@ -44,15 +44,23 @@ typedef unsigned int	t_tag;
 
 /*
 **used to store colors :
-**0xRED;GREEN;BLUE;ALPHA
+**0xALPHA;RED;GREEN;BLUE
 */
-typedef uint32_t	t_rgba;
+typedef uint32_t	t_argb;
 
 typedef struct				s_free_tags
 {
 	t_tag	free;
 	t_tag	last;
 }							t_s_ft;
+
+typedef struct				s_scene_elements
+{
+	void		**ar;
+	size_t		ar_sz;
+	size_t		e_sz;
+	t_list		*nxt;
+}							t_s_se;
 
 typedef struct				s_scene_points_and_vectors
 {
