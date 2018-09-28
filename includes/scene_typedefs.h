@@ -90,6 +90,34 @@ typedef struct				s_scene_objects
 }							t_s_so;
 
 /*
+**Scene projections own their own set of the scene points.
+**The coordinates of these points are modified accoring to projection transform.
+**Tags are used to identify points reliably accross point sets.
+**Points should not be deleted from projections: change scene set, then update.
+*/
+/*
+**t_pctr as in: point coordinate transform
+*/
+typedef void (*	t_pctr)(void*, t_s_p**, size_t, t_s_p**);
+typedef struct				s_projection
+{
+	t_s_prj			*up;
+	t_pctr			tr;
+	t_s_p			**tr_res;
+	void			*tr_arg;
+	size_t			tr_arg_sz;
+	int				refs;
+}							t_s_prj;
+
+typedef struct s_scene_views	t_s_sv;
+struct						s_scene_views
+{
+	t_s_prj	*proj;
+	t_s_sv	*nxt;
+	t_s_sv	*prv;
+};
+
+/*
 ** - ar_allocs counts bytes
 ** - nxt_allocs counts individual allocs not bytes.
 */
@@ -100,6 +128,8 @@ typedef struct				s_scene
 	t_s_spnv	pnvs;
 	t_s_slna	lnas;
 	t_s_so		os;
+	t_s_prj		nullproj;
+	t_s_sv		*views;
 }							t_s_s;
 
 typedef int	(*t_scene_builder)(t_s_sbi*, t_s_s*);

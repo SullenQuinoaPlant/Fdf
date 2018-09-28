@@ -26,8 +26,8 @@ static int				add_uspsv_ar(
 		(last = (t_tag)p->ar_sz << TPS | TPM) &&
 		(tl = ft_lstnew(&(t_s_ft){last & ~TPM, last}, FT_SZ)))
 	{
-		ft_bzero(ar[p->ar_sz], U_SZ * TAS);
-		ft_memcpy(ar, p->ar, (sz = p->ar_sz++ * U_P_SZ));
+		ft_bzero(ar[p->ar_sz], T_SZ * TAS);
+		ft_memcpy(ar, p->ar, (sz = p->ar_sz++ * T_P_SZ));
 		ft_cleanfree(p->ar, sz);
 		p->ar = ar;
 		ft_lstadd(&p->nxt, tl);
@@ -40,17 +40,32 @@ static int				add_uspsv_ar(
 	return (SYS_ERR);
 }
 
-int						init_tsspnv(
-	t_s_spnv *p)
+static int				add_uspsv_ar_to_scene(
+	t_s_s *s
 {
+	int		r;
+
+	if ((r = add_uspsv_ar(&s->pnvs)) == SUCCESS)
+	{
+		s->nxt_allocs++;
+		s->ar_allocs += TAS * T_S;
+	}
+	return (r);
+}
+
+int						init_tsspnv(
+	t_s_s *s)
+{
+	t_s_spnv *const	p = &s->pnvs;
 	t_s_ft const	last_link = (t_s_ft){0, 0};
 	t_list			*tl;
+	int				r;
 
 	if (!(tl = ft_lstnew(&last_link, FT_SZ)))
 		return (SYS_ERR);
 	p->nxt = tl;
 	p->ar_sz = 0;
-	return (add_uspsv_ar(p));
+	return (add_uspsv_ar_to_scene(s));
 }
 
 void					free_spnvs(
@@ -67,23 +82,21 @@ void					free_spnvs(
 }
 
 int						get_nxt_uspsv(
-	t_s_s *scene,
+	t_s_s *s,
 	t_tag *p_ret)
 {
-	t_s_spnv *const	p = scene->points;
+	t_s_spnv *const	p = s->points;
 	t_s_ft			*ftgs;
 	int				r;
 
 	while (!(ftgs = (t_s_fsp*)p->nxt->content))
-		if ((r = TAC - scene->ar_allocs < (TAS * T_S) ? MEM_CAP : 0) ||
-			(r = add_uspsv_ar(p)) != SUCCESS)
+		if ((r = TAC - s->ar_allocs < (TAS * T_S) ? MEM_CAP : 0) ||
+			(r = add_uspsv_ar_to_scene(s)) != SUCCESS)
 			return (r);
-		else
-			scene->ar_allocs += TAS * T_S;
 	if ((*p_ret = ftgs->free++) == fp->last)
 	{
 		ft_lstdelhead(&p->nxt);
-		scene->nxt_allocs--;
+		s->nxt_allocs--;
 	}
 	return (SUCCESS);
 }

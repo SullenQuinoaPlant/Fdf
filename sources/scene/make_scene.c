@@ -1,5 +1,15 @@
 #include "scene.h"
 
+static int				init_vars(
+	t_s_s *s)
+{
+	s->ar_allocs = 0;
+	s->nxt_allocs = 0;
+	s->nullproj = (t_s_prj){0, 0, 0, 0, 0, 0};
+	s->views = 0;
+	return (SUCCESS);
+}
+
 static int				init_scene(
 	t_s_s **p_ret_scene)
 {
@@ -9,6 +19,7 @@ static int				init_scene(
 	r = SYS_ERR;
 	*p_ret_scene = 0;
 	if (!(scene = malloc(sizeof(t_s_s))) ||
+		(r = init_vars(scene) != SUCCESS) ||
 		(r = init_tssp(&scene->points)) != SUCCESS ||
 		(r = init_tssd(&scene->dots)) != SUCCESS ||
 		(r = init_tssl(&scene->lines)) != SUCCESS ||
