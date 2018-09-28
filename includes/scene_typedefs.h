@@ -30,17 +30,18 @@
 
 typedef unsigned int	t_tag;
 
-# define DEF_TAG_POS_MASK ((t_tag)0xff)
-# define DEF_TAG_POS_SHIFT 8 
-# define DEF_TAG_AR_SZ ((size_t)1 << DEF_TAG_POS_SHIFT)
+# define TAG_POS_MASK ((t_tag)0xff)
+# define TAG_POS_SHIFT 8 
+# define TAG_AR_SZ ((size_t)1 << DEF_TAG_POS_SHIFT)
+
+# define TPM TAG_POS_MASK 
+# define TPS TAG_POS_SHIFT
+# define TAS TAG_AR_SZ 
 
 # define TAG_AR_CAP ((size_t)1 << 30)
-# define TAC TAG_AR_CAP
 # define TAG_NXT_CAP (DEF_TAG_AR_SZ / 4)
-
-# define USPSV_TAG_POS_MASK (t_tag)0xffffU
-# define USPSV_TAG_POS_SHIFT 16
-# define USPSV_TAG_AR_SZ ((size_t)1 << USPSV_TAG_POS_SHIFT)
+# define TAC TAG_AR_CAP
+# define TNC TAG_NXT_CAP
 
 /*
 **used to store colors :
