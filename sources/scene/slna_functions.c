@@ -14,12 +14,13 @@
 #define TAS DEF_TAG_AR_SZ
 
 static int				add_uslsa_ar(
-	t_s_slna *p)
+	t_s_s *s)
 {
-	t_u_slsa	**ar;
-	t_tag		last;
-	t_list		*tl;
-	size_t		sz;
+	t_s_slna *const	p = &s->lnas;
+	t_u_slsa		**ar;
+	t_tag			last;
+	t_list			*tl;
+	size_t			sz;
 
 	if ((ar = malloc((p->ar_sz + 1) * T_P_SZ)) &&
 		(ar[p->ar_sz] = malloc(sizeof(T_SZ * TAS))) &&
@@ -41,8 +42,9 @@ static int				add_uslsa_ar(
 }
 
 int						init_tsslna(
-	t_s_slna *p)
+	t_s_s *s)
 {
+	t_s_slna *const	p = &s->lnas;
 	t_s_ft const	last_link = (t_s_ft){0, 0};
 	t_list			*tl;
 
@@ -50,7 +52,7 @@ int						init_tsslna(
 		return (SYS_ERR);
 	p->nxt = tl;
 	p->ar_sz = 0;
-	return (add_uslsa_ar(p));
+	return (add_star(add_uslsa_ar, TAS * T_SZ, s));
 }
 
 void					free_slnas(
@@ -67,23 +69,22 @@ void					free_slnas(
 }
 
 int						get_nxt_uslsa(
-	t_s_s *scene,
+	t_s_s *s,
 	t_tag *p_ret)
 {
-	t_s_slna *const	p = scene->points;
+	t_s_slna *const	p = &s->lnas;
+	size_t const	sz = TAS * T_S;
 	t_s_ft			*ftgs;
 	int				r;
 
 	while (!(ftgs = (t_s_fsp*)p->nxt->content))
-		if ((r = TAC - scene->ar_allocs < (TAS * T_S) ? MEM_CAP : 0) ||
-			(r = add_uslsa_ar(p)) != SUCCESS)
+		if ((r = TAC - s->ar_allocs < sz ? MEM_CAP : 0) ||
+			(r = add_star(add_uslsa_ar, sz, s)) != SUCCESS)
 			return (r);
-		else
-			scene->ar_allocs += TAS * T_S;
 	if ((*p_ret = ftgs->free++) == fp->last)
 	{
 		ft_lstdelhead(&p->nxt);
-		scene->nxt_allocs--;
+		s->nxt_allocs--;
 	}
 	return (SUCCESS);
 }

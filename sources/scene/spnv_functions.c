@@ -32,6 +32,7 @@ static int				add_uspsv_ar(
 		ft_cleanfree(p->ar, sz);
 		p->ar = ar;
 		ft_lstadd(&p->nxt, tl);
+		s->nullproj.tr_res = ar;
 		return (SUCCESS);
 	}
 	if (ar && ar[p->ar_sz])

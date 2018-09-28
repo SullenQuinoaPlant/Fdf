@@ -20,11 +20,9 @@ static int				init_scene(
 	*p_ret_scene = 0;
 	if (!(scene = malloc(sizeof(t_s_s))) ||
 		(r = init_vars(scene) != SUCCESS) ||
-		(r = init_tssp(&scene->points)) != SUCCESS ||
-		(r = init_tssd(&scene->dots)) != SUCCESS ||
-		(r = init_tssl(&scene->lines)) != SUCCESS ||
-		(r = init_tssa(&scene->areas)) != SUCCESS ||
-		(r = init_tsso(&scene->objects)) != SUCCESS)
+		(r = init_tsspnv(scene)) != SUCCESS ||
+		(r = init_tsslna(scene)) != SUCCESS ||
+		(r = init_tsso(scene)) != SUCCESS)
 		scene_teardown(&scene);
 	*p_ret_scene = scene;
 	return (r);
