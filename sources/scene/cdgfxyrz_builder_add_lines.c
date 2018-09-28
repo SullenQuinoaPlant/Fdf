@@ -22,14 +22,14 @@ static int				add_most_lines(
 			(r = get_nxt_uslsa(s, &tag[1])) == SUCCESS)
 		{
 			l.ends[0] = tags[i * p->y_sz + j];
-			l.rgba[0] = p->ar[i * p->y_sz + j].col;
+			l.argb[0] = p->ar[i * p->y_sz + j].col;
 			l.refs = 1;
 			l.ends[1] = tags[i * p->y_sz + j - 1];
-			l.rgba[1] = p->ar[i * p->y_sz + j - 1].col;
+			l.argb[1] = p->ar[i * p->y_sz + j - 1].col;
 			(s->lnas.ar[tag[0] >> TPS])[tag[0] & TPM] = l;
 			o->lnas.ar[++o->lnas.count] = tag[0];
 			l.ends[1] = tags[(i - 1) * p->y_sz + j];
-			l.rgba[1] = p->ar[(i - 1) * p->y_sz + j].col;
+			l.argb[1] = p->ar[(i - 1) * p->y_sz + j].col;
 			(s->lnas.ar[tag[1] >> TPS])[tag[1] & TPM] = l;
 			o->lnas.ar[++o->lnas.count] = tag[1];
 		}
@@ -55,7 +55,7 @@ static int				add_y0_edge_lines(
 		(r = get_nxt_uslsa(s, &tag) != SUCCESS))
 	{
 		l.ends = (t_tag[2]){tags[i], tags[j];
-		l.rgba = (t_rgba[2]){p->ar[i].col, p->ar[j]};
+		l.argb = (t_argb[2]){p->ar[i].col, p->ar[j]};
 		(s->lnas.ar[tag[0] >> TPS])[tag[0] & TPM] = l;
 		o->lnas[++o->lnas.count] = tag;
 	}
@@ -81,7 +81,7 @@ static int				add_x0_edge_lines(
 		(r = get_nxt_uslsa(s, &tag) != SUCCESS))
 	{
 		l.ends = (t_tag[2]){tags[i], tags[j];
-		l.rgba = (t_rgba[2]){p->ar[i].col, p->ar[j]};
+		l.argb = (t_argb[2]){p->ar[i].col, p->ar[j]};
 		(s->lnas.ar[tag[0] >> TPS])[tag[0] & TPM] = l;
 		o->lnas[++o->lnas.count] = tag;
 	}
