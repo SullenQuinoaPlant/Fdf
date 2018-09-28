@@ -98,7 +98,7 @@ typedef union				u_spsv
 typedef struct				s_dot
 {
 	t_tag	pos_p;
-	t_rgba	rgba;
+	t_argb	argb;
 	unsigned int	refs;
 }							t_s_d;
 
@@ -111,7 +111,7 @@ typedef struct				s_dot
 typedef struct				s_line
 {
 	t_tag	end_p[2];
-	t_rgba	rgba[2];
+	t_argb	argb[2];
 	unsigned int	refs;
 }							t_s_l;
 /*
@@ -122,7 +122,7 @@ typedef struct				s_line
 typedef struct				s_arrow
 {
 	t_tag	pnv[2];
-	t_rgba	rgba[2];
+	t_argb	argb[2];
 	unsigned int	refs;
 }							t_s_a;
 
@@ -146,7 +146,7 @@ typedef union				u_slsa
 typedef struct				s_fill
 {
 	t_tag	vrt_p[3];
-	t_rgba	rgba[3];
+	t_argb	argb[3];
 	t_tag	norm_v;
 	unsigned int	refs;
 }							t_s_f;
@@ -186,7 +186,7 @@ struct						s_object
 	t_s_ta			fills;
 	t_s_ta			subos;
 	t_tag 		  	handle;
-	t_rgba			rgba;
+	t_argb			argb;
 	unsigned int	refs;
 };
 

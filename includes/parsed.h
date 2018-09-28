@@ -16,7 +16,7 @@
 typedef struct				s_cartesian_xy_dot
 {
 	int		z;
-	t_rgba	col;
+	t_argb	col;
 }							t_s_cxyd;
 
 typedef t_s_cxyd	(*t_cdgfxyrz)[][1];
