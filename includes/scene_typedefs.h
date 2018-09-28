@@ -66,6 +66,7 @@ typedef struct				s_scene_elements
 typedef enum				e_scene_element_groups
 {
 	e_pnv,
+	e_d,
 	e_lna,
 	e_o,
 	e_seg_sz
