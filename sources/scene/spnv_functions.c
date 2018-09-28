@@ -13,6 +13,8 @@
 #define TPS USPSV_TAG_POS_SHIFT
 #define TAS USPSV_TAG_AR_SZ
 
+#define AR_SZ (TAS * T_SZ)
+
 static int				add_uspsv_ar(
 	t_s_s *s)
 {
@@ -54,7 +56,7 @@ int						init_tsspnv(
 		return (SYS_ERR);
 	p->nxt = tl;
 	p->ar_sz = 0;
-	return (add_star(add_uspsv_ar, TAS * T_SZ, s));
+	return (add_star(add_uspsv_ar, AR_SZ, s));
 }
 
 void					free_spnvs(
@@ -65,7 +67,7 @@ void					free_spnvs(
 
 	pp = *p->ar;
 	while (pp < lim)
-		ft_cleanfree(pp, TAS * T_SZ;
+		ft_cleanfree(pp, AR_SZ;
 	ft_cleanfree(p->ar, T_P_SZ * p->ar_sz);
 	ft_lstdel(&p->nxt, ft_cleanfree);
 }
@@ -105,5 +107,26 @@ int						chg_uspsv_ref(
 	else if (chg < 0 && *refs < (unsigned int)(-chg))
 		return (NEGATIVE_REF_COUNT);
 	*refs += chg;
+	return (SUCCESS);
+}
+
+int						pnv_deep_copy(
+	t_s_s *s,
+	t_s_uspsv ***ret)
+{
+	t_s_spnv *const	p = s->pnvs;
+	size_t			sz;
+	size_t			i;
+	t_s_uspsv (*	p_ret)[TAS];
+
+	sz = p->ar_sz * AR_SZ;
+	if (TAC - s->ar_allocs < sz)
+		return (MEM_CAP);
+	if (!(*ret = malloc(sz)))
+		return (SYS_ERR);
+	p_ret = (t_s_uspsv(*)[TAS])ret;
+	i = -1;
+	while (++i < p->ar_sz)
+		ft_memcpy(&p_ret[i], p->ar[i], AR_SZ);
 	return (SUCCESS);
 }
