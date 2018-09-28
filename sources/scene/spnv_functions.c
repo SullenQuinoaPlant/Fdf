@@ -14,12 +14,13 @@
 #define TAS USPSV_TAG_AR_SZ
 
 static int				add_uspsv_ar(
-	t_s_spnv *p)
+	t_s_s *s)
 {
-	t_u_spsv	**ar;
-	t_tag		last;
-	t_list		*tl;
-	size_t		sz;
+	t_s_spnv *const	p = &s->pnvs;
+	t_u_spsv		**ar;
+	t_tag			last;
+	t_list			*tl;
+	size_t			sz;
 
 	if ((ar = malloc((p->ar_sz + 1) * T_P_SZ)) &&
 		(ar[p->ar_sz] = malloc(sizeof(T_SZ * TAS))) &&
@@ -40,19 +41,6 @@ static int				add_uspsv_ar(
 	return (SYS_ERR);
 }
 
-static int				add_uspsv_ar_to_scene(
-	t_s_s *s
-{
-	int		r;
-
-	if ((r = add_uspsv_ar(&s->pnvs)) == SUCCESS)
-	{
-		s->nxt_allocs++;
-		s->ar_allocs += TAS * T_S;
-	}
-	return (r);
-}
-
 int						init_tsspnv(
 	t_s_s *s)
 {
@@ -65,7 +53,7 @@ int						init_tsspnv(
 		return (SYS_ERR);
 	p->nxt = tl;
 	p->ar_sz = 0;
-	return (add_uspsv_ar_to_scene(s));
+	return (add_star(add_uspsv_ar, TAS * T_SZ, s));
 }
 
 void					free_spnvs(
@@ -86,12 +74,13 @@ int						get_nxt_uspsv(
 	t_tag *p_ret)
 {
 	t_s_spnv *const	p = s->points;
+	size_t const	sz = TAS * T_S;
 	t_s_ft			*ftgs;
 	int				r;
 
 	while (!(ftgs = (t_s_fsp*)p->nxt->content))
-		if ((r = TAC - s->ar_allocs < (TAS * T_S) ? MEM_CAP : 0) ||
-			(r = add_uspsv_ar_to_scene(s)) != SUCCESS)
+		if ((r = TAC - s->ar_allocs < sz ? MEM_CAP : 0) ||
+			(r = add_star(add_uspsv_ar, sz, s)) != SUCCESS)
 			return (r);
 	if ((*p_ret = ftgs->free++) == fp->last)
 	{
