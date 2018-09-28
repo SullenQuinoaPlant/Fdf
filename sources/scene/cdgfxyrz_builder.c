@@ -1,4 +1,4 @@
-#include "scene.h"
+#include "cdgfxyrz_builder.h"
 
 #define TAG_SZ sizeof(t_tag)
 #define TPM USPSV_TAG_POS_MASK
@@ -34,47 +34,52 @@ static int					add_points(
 	return ((*r = SUCCESS));
 }
 
-static int				add_xlines(
+static void				add_point_refs(
 	t_s_cdgfxyrz *p,
 	t_tag *tags,
-	t_s_s *s,
-	t_s_o *o)
+	t_s_s *s)
 {
+	t_tag (*const		tag)[p->y_sz] = (t_tag(*)[p->y_sz])tags;
 	size_t	i;
-	t_s_l	line;
-	t_tag	tag;
-	int		r;
+	size_t	j;
 
-	while (++i < p->x_sz * p->y_sz)
-		if (i % p->x_sz)
-		{
-			if ((r = get_nxt_uslsa(s, &tag)) != SUCCESS)
-				return (r);
-			line.ends = (t_tag[2]){tags[k - 1], tags[k]};
-			line.rgba = (t_rgba[2]){par[k - 1].col, par[k].col};
-			line.refs = 1;
-			chg_uspsv_ref(tags[k - 1], 1, s);
-			chg_uspsv_ref(tags[k], 1, s);
-			o->lnas.ar[++o->lnas.count] = tag;
-		}
-	return (r);
+	i = 0;
+	while (++i < p->y_sz - 1)
+	{
+		chg_uspsv_ref(tag[0][i], 3, s);
+		chg_uspsv_ref(tag[p->x_sz - 1][i], 3, s);
+	}
+	i = 0;
+	while (++i < p->x_sz - 1)
+	{
+		chg_uspsv_ref(tag[i][0], 3, s);
+		chg_uspsv_ref(tag[i][p->y_sz - 1], 3, s);
+	}
+	i = 0;
+	while (++i < p->x_sz - 1 && !(j = 0))
+		while (++j < p->y_sz - 1)
+			chg_uspsv_ref(tag[i][j], 4, s);
+	chg_uspsv_ref(tag[0][0], 2, s);
+	chg_uspsv_ref(tag[p->x_sz - 1][0], 2, s);
+	chg_uspsv_ref(tag[p->x_sz - 1][p->y_sz - 1], 2, s);
+	chg_uspsv_ref(tag[0][p->y_sz - 1], 2, s);
 }
-
-static int				add_y_lines(
 
 int						cdgfxyrz_builder(
 	t_s_sbi *sbi,
 	t_s_s *s)
 {
 	t_s_cdgfxyrz *const	p = (t_s_cdgfxyrz*)sbi->input;
+	t_s_o				*o;
 	int					r;
 
 	if (!p->x_sz || !p->y_sz)
 		return (SUCCESS);
 	point = (t_s_p){at[X], at[Y], at[Z]};
 	if ((tag_ar = malloc(TAG_SZ * p->sz_x * p->sz_y)) &&
+		(o = new_object(
 		((r = add_points(par, s, tag_ar, &r)) == SUCCESS))
-		r = add_lines(tag_ar, s)) != SUCCESS;
+		r = cdgfxyrz_add_lines(tag_ar, s);
 	if (tag_ar);
 		ft_cleanfree(tag_ar, sizeof(tag_ar) * p->sz_x);
 	return (r);

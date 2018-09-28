@@ -48,7 +48,7 @@ typedef struct				s_point
 			double	r;
 		};
 	};
-	int		refs;
+	unsigned int	refs;
 }							t_s_p;
 
 typedef struct				s_vector
@@ -83,7 +83,7 @@ typedef struct				s_vector
 			double	r;
 		};
 	};
-	int		refs;
+	unsigned int	refs;
 }							t_s_v;
 
 typedef union				u_spsv
@@ -99,7 +99,7 @@ typedef struct				s_dot
 {
 	t_tag	pos_p;
 	t_rgba	rgba;
-	int		refs;
+	unsigned int	refs;
 }							t_s_d;
 
 /*
@@ -112,7 +112,7 @@ typedef struct				s_line
 {
 	t_tag	end_p[2];
 	t_rgba	rgba[2];
-	int		refs;
+	unsigned int	refs;
 }							t_s_l;
 /*
 **arrows are vectors positioned in space.
@@ -123,7 +123,7 @@ typedef struct				s_arrow
 {
 	t_tag	pnv[2];
 	t_rgba	rgba[2];
-	int		refs;
+	unsigned int	refs;
 }							t_s_a;
 
 typedef union				u_slsa
@@ -148,7 +148,7 @@ typedef struct				s_fill
 	t_tag	vrt_p[3];
 	t_rgba	rgba[3];
 	t_tag	norm_v;
-	int		refs;
+	unsigned int	refs;
 }							t_s_f;
 
 /*
@@ -180,14 +180,14 @@ typedef struct				s_tag_array
 typedef struct s_object	t_s_o;
 struct						s_object
 {
-	t_s_ta	pnvs;
-	t_s_ta	dots;
-	t_s_ta	lnas;
-	t_s_ta	fills;
-	t_s_ta	subos;
-	t_tag	handle;
-	t_rgba	rgba;
-	int		refs;
+	t_s_ta			pnvs;
+	t_s_ta			dots;
+	t_s_ta			lnas;
+	t_s_ta			fills;
+	t_s_ta			subos;
+	t_tag 		  handle;
+	t_rgba			rgba;
+	unsigned int	refs;
 };
 
 #endif

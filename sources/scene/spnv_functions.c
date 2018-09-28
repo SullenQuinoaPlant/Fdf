@@ -87,3 +87,20 @@ int						get_nxt_uspsv(
 	}
 	return (SUCCESS);
 }
+
+int						chg_uspsv_ref(
+	t_tag tag,
+	int chg,
+	t_s_s *s)
+{
+	int		r;
+	int		*refs;
+
+	refs = &(s->pnvs.ar[tag >> TPS])[tag & TPM].refs;
+	if (chg > 0 && UINT_MAX - *refs <= (unsigned int)chg)
+		return (REF_COUNT_TOO_BIG);
+	else if (chg < 0 && *refs < (unsigned int)(-chg))
+		return (NEGATIVE_REF_COUNT);
+	*refs += chg;
+	return (SUCCESS);
+}
