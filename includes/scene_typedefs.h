@@ -109,12 +109,20 @@ typedef struct				s_projection
 	int				refs;
 }							t_s_prj;
 
-typedef struct s_scene_views	t_s_sv;
-struct						s_scene_views
+/*
+**event key:
+*/
+typedef SOMETHING	t_ekey;
+typedef int (*	t_ehandler)(t_ekey, t_s_v*, t_s_s*, void*);
+
+typedef struct s_view		t_s_v;
+struct						s_view
 {
-	t_s_prj	*proj;
-	t_s_sv	*nxt;
-	t_s_sv	*prv;
+	t_s_prj		*proj;
+	t_ehandler	ehdl;
+	void		*state;
+	t_s_sv		*nxt;
+	t_s_sv		*prv;
 };
 
 /*
