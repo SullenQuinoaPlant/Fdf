@@ -63,6 +63,14 @@ typedef struct				s_scene_elements
 	t_list		*nxt;
 }							t_s_se;
 
+typedef enum				e_scene_element_groups
+{
+	e_pnv,
+	e_lna,
+	e_o,
+	e_seg_sz
+}							t_e_seg;
+
 typedef struct				s_scene_points_and_vectors
 {
 	t_u_spsv	**ar;
@@ -118,20 +126,19 @@ typedef struct				s_projection
 	int				refs;
 }							t_s_prj;
 
-/*
-**event key:
-*/
-typedef SOMETHING	t_ekey;
-typedef int (*	t_ehandler)(t_ekey, t_s_v*, t_s_s*, void*);
 
 typedef struct s_view		t_s_v;
 struct						s_view
 {
-	t_s_prj		*proj;
-	t_ehandler	ehdl;
-	void		*state;
+	int			id;
 	t_s_sv		*nxt;
 	t_s_sv		*prv;
+	t_s_prj		*proj;
+	void		*state;
+	int (		*on_expose)(void*);
+	int (		*on_key)(int, void*);
+	int (		*on_mouse)(int, int, int, void*);
+	int (		*on_loop)(void*);
 };
 
 /*
@@ -142,9 +149,7 @@ typedef struct				s_scene
 {
 	size_t		ar_allocs;
 	size_t		nxt_allocs;
-	t_s_spnv	pnvs;
-	t_s_slna	lnas;
-	t_s_so		os;
+	t_s_se		elems[e_seg_sz];
 	t_s_prj		nullproj;
 	t_s_sv		*views;
 }							t_s_s;
