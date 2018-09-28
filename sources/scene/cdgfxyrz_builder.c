@@ -34,11 +34,25 @@ static int					add_points(
 	return ((*r = SUCCESS));
 }
 
+/*
+**LINE_COUNT  is :
+**(x_sz - 1) * y_sz + (y_sz - 1) * x_sz
+*/
 static int				get_container_obj(
 	t_s_cdgfxyrz *p,
 	t_s_s *s,
-	t_s_o *o)
+	t_s_o **o)
 {
+	size_t const	l_sz = (p->x_sz - 1) * p->y_sz + (p->y_sz - 1) * p->x_sz;
+	int				r;
+
+	*o = 0;
+	if ((r = new_scene_obj(s, &o, 0)) != SUCCESS ||
+		!(o->lnas.ar = malloc(TAG_SZ * l_sz)))
+		return (r != SUCCESS ? r : SYS_ERR);
+	o->lnas.count = 0;
+	o->lnas.sz = l_sz;
+	return (r);
 }
 	
 
@@ -86,8 +100,8 @@ int						cdgfxyrz_builder(
 		return (SUCCESS);
 	r = SYS_ERR;
 	if ((tags = malloc(TAG_SZ * p->sz_x * p->sz_y)) &&
-		(r = new_scene_obj(s, &o)) == SUCCESS &&
-		((r = add_points(p, s, tags, &r)) == SUCCESS) &&
+		(r = get_container_obj(p, s, &o)) == SUCCESS &&
+		(r = add_points(p, s, tags, &r)) == SUCCESS &&
 		(r = cdgfxyrz_add_lines(p, tags, s, o)) == SUCCESS)
 		add_point_refs(p, tags, s);
 	if (tags);
