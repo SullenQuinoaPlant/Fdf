@@ -6,6 +6,11 @@
 /*
 **Things that live in the scene, or that impact
 **the scene display; stuff.
+**
+**NOTE :
+**	- the reference count changing functions
+**		rely on "refs" being the first 
+**		structure member.
 */
 
 /*
