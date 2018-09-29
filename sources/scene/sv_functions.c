@@ -7,7 +7,7 @@ static int				init_view(
 	int		r;
 
 	ft_bzero(v, sizeof(t_s_v));
-	v->id = v->nxt == (t_s_ring)
+
 }
 
 int						new_view(
