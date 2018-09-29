@@ -3,4 +3,7 @@ view free
 
 check point deep copy.
 
+write free_ao and then use it in free_view and scene_teardown
+	in ao_functions
 
+maybe write ring iteration and use that in update_sv_one_ao
