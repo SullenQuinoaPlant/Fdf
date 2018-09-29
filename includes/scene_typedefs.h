@@ -116,30 +116,22 @@ typedef struct				s_vector
 	{
 		struct cart
 		{
-			double		x;
-			double		y;
-			double		z;
+			double	xyz[3];
 		};
 		struct
 		{
-			double		x;
-			double		y;
-			double		z;
+			double	xyz[3];
 		};
 	};
 	union
 	{
 		struct polr
 		{
-			double	t;
-			double	p;
-			double	r;
+			double	tpr[3];
 		};
 		struct
 		{
-			double	t;
-			double	p;
-			double	r;
+			double	tpr[3];
 		};
 	};
 }							t_s_v;
@@ -279,7 +271,7 @@ typedef struct				s_projection
 	int			refs;
 	t_s_prj		*up;
 	t_pctr		tr;
-	t_s_p		**pnv;
+	t_u_spsv	**pnv;
 	void		*stuff;
 }							t_s_prj;
 

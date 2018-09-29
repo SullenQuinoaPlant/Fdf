@@ -1,32 +1,15 @@
 #include "scene.h"
 
-int						chg_uspsv_ref(
-	t_tag tag,
-	int chg,
-	t_s_s *s)
-{
-	int		r;
-	int		*refct;
-
-	refct = &(s->pnvs.ar[tag >> TPS])[tag & TPM].refct;
-	if (chg > 0 && UINT_MAX - *refct <= (unsigned int)chg)
-		return (REF_COUNT_TOO_BIG);
-	else if (chg < 0 && *refct < (unsigned int)(-chg))
-		return (NEGATIVE_REF_COUNT);
-	*refct += chg;
-	return (SUCCESS);
-}
-
-int						pnv_deep_copy(
+int						pnvg_deep_copy(
 	t_s_s *s,
 	t_s_uspsv ***ret)
 {
-	t_s_spnv *const	p = s->pnvs;
-	size_t			sz;
+	t_s_se *const	p = &s->se[e_pnvg];
+	size_t const	subsz = TAS * sizeof(t_u_spsv);
+	size_t const	sz = subsz * p->ar_sz;
 	size_t			i;
 	t_s_uspsv (*	p_ret)[TAS];
 
-	sz = p->ar_sz * AR_SZ;
 	if (TAC - s->ar_allocs < sz)
 		return (MEM_CAP);
 	if (!(*ret = malloc(sz)))
@@ -34,6 +17,6 @@ int						pnv_deep_copy(
 	p_ret = (t_s_uspsv(*)[TAS])ret;
 	i = -1;
 	while (++i < p->ar_sz)
-		ft_memcpy(&p_ret[i], p->ar[i], AR_SZ);
+		ft_memcpy(&p_ret[i][0], p->ar[i], subsz);
 	return (SUCCESS);
 }
