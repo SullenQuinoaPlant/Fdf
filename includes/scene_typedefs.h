@@ -95,11 +95,13 @@ typedef struct				s_projection
 	void		*stuff;
 }							t_s_prj;
 
+/*
+**p_prj is a list of pointers to (t_s_prj) structures.
+*/
 typedef struct				s_scene_projections
 {
 	t_s_prj		nullproj;
-	t_s_prj		*ar;
-	size_t		ar_sz;
+	t_list		p_tsprj;
 }							t_s_sprj;
 
 typedef struct s_view		t_s_v;
@@ -110,10 +112,10 @@ struct						s_view
 	t_s_sv		*prv;
 	t_s_prj		*proj;
 	void		*state;
-	int (		*on_expose)(void*);
-	int (		*on_key)(int, void*);
-	int (		*on_mouse)(int, int, int, void*);
-	int (		*on_loop)(void*);
+	int			(*on_expose)(void*);
+	int			(*on_key)(int, void*);
+	int			(*on_mouse)(int, int, int, void*);
+	int			(*on_loop)(void*);
 };
 
 /*
