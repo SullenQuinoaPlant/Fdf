@@ -7,9 +7,9 @@ int					update_sv_one_ao(
 	t_s_s *s)
 {
 	t_s_sv *const	lim = s->views;
-	t_s_sao *const	ao = s->ao;
-	t_s_sv	*v;
-	int		r;
+	t_s_ao *const	ao = s->ao;
+	t_s_sv			*v;
+	int				r;
 
 	if (!(v = s->views))
 		return (SUCCESS);
@@ -21,12 +21,12 @@ int					update_sv_one_ao(
 
 int					clone_s_ao(
 	t_s_s *s,
-	t_s_sao **ret)
+	t_s_ao **ret)
 {
-	t_s_sao *const	lim = s->ao;
-	t_s_sao	*ao;
-	t_s_sao	*petri;
-	int		r;
+	t_s_ao *const	lim = s->ao;
+	t_s_ao			*ao;
+	t_s_ao			*petri;
+	int				r;
 
 	*ret = 0;
 	if (!lim)

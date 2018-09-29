@@ -300,12 +300,12 @@ typedef struct				s_scene_projections
 */
 # define SHOW_O 0x1
 # define HIGHLIGHT_O 0x2
-typedef struct				s_scene_objects
+typedef struct				s_active_object
 {
 	t_s_ring	ring;
-	t_tag	tag;
-	uint8_t	flags;
-}							t_s_so;
+	t_tag		tag;
+	uint8_t		flags;
+}							t_s_ao;
 
 /*
 **Views have their own set of the scene objects ring.
@@ -326,8 +326,8 @@ struct						s_view
 	t_s_ring		ring;
 	int			id;
 	t_s_prj		*proj;
-	t_s_sao		*ao;
-	t_s_sao		*ao_cursor;
+	t_s_ao		*ao;
+	t_s_ao		*ao_cursor;
 	MLX_WINDOW
 	MLX_IMAGE
 	int			(*on_expose)(void*);
@@ -348,7 +348,7 @@ typedef struct				s_scene
 	size_t		ar_allocs;
 	size_t		nxt_allocs;
 	t_s_se		es[e_eg_sz];
-	t_s_sao		*ao;
+	t_s_ao		*ao;
 	t_s_sprj	prjs;
 	t_s_sv		*views;
 }							t_s_s;
