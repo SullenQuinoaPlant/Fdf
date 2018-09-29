@@ -28,7 +28,7 @@ void					free_tsse(
 }
 
 int						get_nxt_se(
-	t_e_seg grp,
+	t_e_eg grp,
 	t_s_s *s,
 	t_tag *ret,
 	void **ret_addr)

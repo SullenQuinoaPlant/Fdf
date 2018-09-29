@@ -78,6 +78,10 @@ typedef enum				e_element_groups
 # define Y 1
 # define Z 2
 
+# define T 0
+# define P 1
+# define R 2
+
 typedef struct				s_point
 {
 	unsigned int	refs;
@@ -85,30 +89,22 @@ typedef struct				s_point
 	{
 		struct cart
 		{
-			double		x;
-			double		y;
-			double		z;
+			double	xyz[3];
 		};
 		struct
 		{
-			double		x;
-			double		y;
-			double		z;
+			double	xyz[3];
 		};
 	};
 	union
 	{
 		struct polr
 		{
-			double	t;
-			double	p;
-			double	r;
+			double	tpr[3];
 		};
 		struct
 		{
-			double	t;
-			double	p;
-			double	r;
+			double	tpr[3];
 		};
 	};
 }							t_s_p;
@@ -287,12 +283,12 @@ typedef struct				s_projection
 }							t_s_prj;
 
 /*
-**p_tsprj is a list of pointers to (t_s_prj) structures.
+**p_tsprj is a list of >pointers< to (t_s_prj) structures.
 */
 typedef struct				s_scene_projections
 {
 	t_s_prj		nullproj;
-	t_list		p_tsprj;
+	t_list		*p_tsprj;
 }							t_s_sprj;
 
 /*
@@ -323,7 +319,7 @@ typedef struct				s_active_object
 typedef struct s_view		t_s_v;
 struct						s_view
 {
-	t_s_ring		ring;
+	t_s_ring	ring;
 	int			id;
 	t_s_prj		*proj;
 	t_s_ao		*ao;

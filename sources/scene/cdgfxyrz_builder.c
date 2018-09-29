@@ -1,9 +1,5 @@
 #include "cdgfxyrz_builder.h"
 
-#define TAG_SZ sizeof(t_tag)
-#define TPM USPSV_TAG_POS_MASK
-#define TPS USPSV_TAG_POS_SHIFT
-
 static int					add_points(
 	t_s_cdgfxyrz *p,
 	t_s_s *s,
