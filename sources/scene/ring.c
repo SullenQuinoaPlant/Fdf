@@ -4,7 +4,7 @@
 int						ring_expand(
 	size_t container_sz,
 	void *content,
-	t_s_ring **p_ring)
+	void **p_ring)
 {
 	t_s_ring *const	prv = *p_ring;
 	t_s_ring			*p;
@@ -28,7 +28,7 @@ int						ring_expand(
 void					ring_free(
 	size_t container_sz,
 	void (*del)(void*, size_t),
-	t_s_ring **p_ring)
+	void **p_ring)
 {
 	t_s_ring	*p;
 	t_s_ring	*nxt;
@@ -48,7 +48,7 @@ void					ring_free(
 void					ring_shrink(
 	size_t container_sz,
 	void (*del)(void*, size_t),
-	t_s_ring **p_at)
+	void **p_at)
 {
 	t_s_ring *const	at = *p_at;
 
@@ -63,18 +63,19 @@ void					ring_shrink(
 
 int						ring_clone(
 	size_t c_sz,
-	t_s_ring *clonee,
-	t_s_ring **ret)
+	void *clonee,
+	void **ret)
 {
 	t_s_ring *const	lim = clonee;
+	t_s_ring			*p;
 	t_s_ring			*petri;
 	int				r;
 
 	*ret = 0;
-	if (!clonee)
+	if (!(p = clonee))
 		return (RING_SUCCESS);
-	while ((r = ring_expand(c_sz, clonee, &petri)) == RING_SUCCESS &&
-		(clonee = clonee->nxt) != lim)
+	while ((r = ring_expand(c_sz, p, &petri)) == RING_SUCCESS &&
+		(p = p->nxt) != lim)
 		;
 	if (r != RING_SUCCESS)
 		ring_free(c_sz, 0, &petri);
