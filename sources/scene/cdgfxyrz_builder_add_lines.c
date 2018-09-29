@@ -1,7 +1,8 @@
-#include "cdgfxyrz_builder.h"
+#include "parsed.h"
+#include "scene.h"
 
-#define TPM USPSV_TAG_POS_MASK
-#define TPS USPSV_TAG_POS_SHIFT
+#define I 0
+#define J 1
 
 static int				add_most_lines(
 	t_s_cdgfxyrz *p,
@@ -9,29 +10,28 @@ static int				add_most_lines(
 	t_s_s *s,
 	t_s_o *o)
 {
-	size_t	i;
-	size_t	j;
+	size_t	ij[2];
 	t_s_l	l;
 	t_tag	tag[2];
 	int		r;
 
 	i = 0;
+	l.refs = 1;
 	r = SUCCESS;
 	while (++i < p->x_sz && !(j = 0) && r == SUCCESS)
-		while (++j < p->y_sz && (r = get_nxt_uslsa(s, &tag[0])) == SUCCESS &&
-			(r = get_nxt_uslsa(s, &tag[1])) == SUCCESS)
+		while ((r = get_nxt_se(e_lnag, s, &tag[0], 0)) == SUCCESS &&
+			(r = get_nxt_se(e_lnag, s, &tag[1], 0)) == SUCESS && ++j < p->y_sz)
 		{
 			l.ends[0] = tags[i * p->y_sz + j];
 			l.argb[0] = p->ar[i * p->y_sz + j].col;
-			l.refct = 1;
 			l.ends[1] = tags[i * p->y_sz + j - 1];
 			l.argb[1] = p->ar[i * p->y_sz + j - 1].col;
 			(s->lnas.ar[tag[0] >> TPS])[tag[0] & TPM] = l;
-			o->lnas.ar[++o->lnas.count] = tag[0];
+			o->lnas.ar[o->lnas.count++] = tag[0];
 			l.ends[1] = tags[(i - 1) * p->y_sz + j];
 			l.argb[1] = p->ar[(i - 1) * p->y_sz + j].col;
 			(s->lnas.ar[tag[1] >> TPS])[tag[1] & TPM] = l;
-			o->lnas.ar[++o->lnas.count] = tag[1];
+			o->lnas.ar[o->lnas.count++] = tag[1];
 		}
 	return (r);
 }
@@ -49,15 +49,16 @@ static int				add_y0_edge_lines(
 	int		r;
 
 	r = SUCCESS;
-	l.refct = 1;
+	l.refs = 1;
 	i = -1;
-	while (++i < p->y_sz - 1 && (j = i + 1) &&
-		(r = get_nxt_uslsa(s, &tag) != SUCCESS))
+	while (++i < p->y_sz - 1 &&
+		(r = get_nxt_se(e_lnag, s, &tag, 0)) != SUCCESS))
 	{
-		l.ends = (t_tag[2]){tags[i], tags[j];
-		l.argb = (t_argb[2]){p->ar[i].col, p->ar[j]};
+		j = i + 1;
+		l.ends = (t_tag[2]){tags[i], tags[j]};
+		l.argb = (t_argb[2]){p->ar[i].col, p->ar[j].col};
 		(s->lnas.ar[tag[0] >> TPS])[tag[0] & TPM] = l;
-		o->lnas[++o->lnas.count] = tag;
+		o->lnas[o->lnas.count++] = tag;
 	}
 	return (r);
 }
@@ -74,16 +75,17 @@ static int				add_x0_edge_lines(
 	t_tag	tag;
 	int		r;
 
-	l.refct = 1;
+	l.refs = 1;
 	i = 0;
 	r = SUCCESS;
-	while (i < (p->x_sz - 1) * p->y_sz && (j = i + p->y_sz) &&
-		(r = get_nxt_uslsa(s, &tag) != SUCCESS))
+	while (i < (p->x_sz - 1) * p->y_sz &&
+		(r = get_nxt_uslsa(e_lnag, s, &tag, 0) != SUCCESS))
 	{
-		l.ends = (t_tag[2]){tags[i], tags[j];
-		l.argb = (t_argb[2]){p->ar[i].col, p->ar[j]};
+		j = i + p->y_sz;
+		l.ends = (t_tag[2]){tags[i], tags[j]};
+		l.argb = (t_argb[2]){p->ar[i].col, p->ar[j].col};
 		(s->lnas.ar[tag[0] >> TPS])[tag[0] & TPM] = l;
-		o->lnas[++o->lnas.count] = tag;
+		o->lnas[o->lnas.count++] = tag;
 	}
 	return (r);
 }
@@ -94,17 +96,11 @@ int						cdgfxyrz_add_lines(
 	t_s_s *s,
 	t_s_o *o)
 {
-	t_line_adder const	fs[3] =
-	{
-		add_most_lines,
-		add_y0_edge_lines,
-		add_x0_edge_lines
-	};
 	int		r;
-	int		i;
 
-	i = 0;
-	while ((r = *fs[i](p, tags, s, o)) == SUCCESS)
-		i++;
+	if ((r = add_most_lines(p, tags, s, o)) == SUCCESS &&
+		(r = add_x0_edge_lines(p, tags, s, o)) == SUCCESS &&
+		(r = add_y0_edge_lines(p, tags, s, o)) == SUCCESS)
+		;
 	return (r);
 }

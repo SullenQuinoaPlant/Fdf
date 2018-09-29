@@ -2,8 +2,7 @@
 # define CDGFXYRZ_BUILDER_H
 
 # include "scene.h"
-
-typedef int (*	t_line_adder)(t_s_cdgfxyrz*, t_tag*, t_s_s*, t_s_o*);
+# include "parsed.h"
 
 int							cdgfxyrz_add_lines(
 	t_s_cdgfxyrz	*p,

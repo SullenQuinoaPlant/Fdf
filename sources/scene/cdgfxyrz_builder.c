@@ -101,6 +101,6 @@ int						cdgfxyrz_builder(
 		(r = cdgfxyrz_add_lines(p, tags, s, o)) == SUCCESS)
 		add_point_refct(p, tags, s);
 	if (tags);
-		ft_cleanfree(tags, s szz);
+		ft_cleanfree(tags, sz);
 	return (r);
 }
