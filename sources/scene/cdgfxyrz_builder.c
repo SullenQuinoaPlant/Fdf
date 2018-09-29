@@ -43,48 +43,48 @@ static int				get_container_obj(
 	t_s_s *s,
 	t_s_o **o)
 {
-	size_t const	l_sz = (p->x_sz - 1) * p->y_sz + (p->y_sz - 1) * p->x_sz;
+	size_t const	l_ct = (p->x_sz - 1) * p->y_sz + (p->y_sz - 1) * p->x_sz;
 	int				r;
 
 	*o = 0;
 	if ((r = new_scene_obj(s, &o, 0)) != SUCCESS ||
-		!(o->lnas.ar = malloc(TAG_SZ * l_sz)))
+		!(o->es[e_lna].ar = malloc(l_ct)
+		!(o->lnas.ar = malloc(TAG_SZ * l_ct)))
 		return (r != SUCCESS ? r : SYS_ERR);
 	o->lnas.count = 0;
-	o->lnas.sz = l_sz;
+	o->lnas.sz = l_ct;
 	return (r);
 }
-	
 
-static void				add_point_refs(
+static void				add_point_refct(
 	t_s_cdgfxyrz *p,
 	t_tag *tags,
 	t_s_s *s)
 {
-	t_tag (*const		tag)[p->y_sz] = (t_tag(*)[p->y_sz])tags;
+	t_tag (*const		tar)[p->y_sz] = (t_tag(*)[p->y_sz])tags;
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	while (++i < p->y_sz - 1)
 	{
-		chg_uspsv_ref(tag[0][i], 3, s);
-		chg_uspsv_ref(tag[p->x_sz - 1][i], 3, s);
+		chg_uspsv_ref(tar[0][i], 3, s);
+		chg_uspsv_ref(tar[p->x_sz - 1][i], 3, s);
 	}
 	i = 0;
 	while (++i < p->x_sz - 1)
 	{
-		chg_uspsv_ref(tag[i][0], 3, s);
-		chg_uspsv_ref(tag[i][p->y_sz - 1], 3, s);
+		chg_uspsv_ref(tar[i][0], 3, s);
+		chg_uspsv_ref(tar[i][p->y_sz - 1], 3, s);
 	}
 	i = 0;
 	while (++i < p->x_sz - 1 && !(j = 0))
 		while (++j < p->y_sz - 1)
-			chg_uspsv_ref(tag[i][j], 4, s);
-	chg_uspsv_ref(tag[0][0], 2, s);
-	chg_uspsv_ref(tag[p->x_sz - 1][0], 2, s);
-	chg_uspsv_ref(tag[p->x_sz - 1][p->y_sz - 1], 2, s);
-	chg_uspsv_ref(tag[0][p->y_sz - 1], 2, s);
+			chg_uspsv_ref(tar[i][j], 4, s);
+	chg_uspsv_ref(tar[0][0], 2, s);
+	chg_uspsv_ref(tar[p->x_sz - 1][0], 2, s);
+	chg_uspsv_ref(tar[p->x_sz - 1][p->y_sz - 1], 2, s);
+	chg_uspsv_ref(tar[0][p->y_sz - 1], 2, s);
 }
 
 int						cdgfxyrz_builder(
@@ -92,6 +92,7 @@ int						cdgfxyrz_builder(
 	t_s_s *s)
 {
 	t_s_cdgfxyrz *const	p = (t_s_cdgfxyrz*)sbi->input;
+	size_t const		sz = TAG_SZ * p->sz_x * p->sz_y;
 	t_tag				*tags;
 	t_s_o				*o;
 	int					r;
@@ -99,12 +100,12 @@ int						cdgfxyrz_builder(
 	if (!p->x_sz || !p->y_sz)
 		return (SUCCESS);
 	r = SYS_ERR;
-	if ((tags = malloc(TAG_SZ * p->sz_x * p->sz_y)) &&
+	if ((tags = malloc(sz)) &&
 		(r = get_container_obj(p, s, &o)) == SUCCESS &&
 		(r = add_points(p, s, tags, &r)) == SUCCESS &&
 		(r = cdgfxyrz_add_lines(p, tags, s, o)) == SUCCESS)
-		add_point_refs(p, tags, s);
+		add_point_refct(p, tags, s);
 	if (tags);
-		ft_cleanfree(tag_ar, sizeof(tag_ar) * p->sz_x);
+		ft_cleanfree(tags, s szz);
 	return (r);
 }

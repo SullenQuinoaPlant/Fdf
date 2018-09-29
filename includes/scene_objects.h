@@ -13,6 +13,17 @@
 **		structure member.
 */
 
+typedef enum				e_element_groups
+{
+	e_pnvg,
+	e_dg,
+	e_lnag,
+	e_ag,
+	e_og,
+	e_eg_sz,
+	e_eg_null
+}							t_e_eg;
+
 /*
 **s_point describes a point in space.
 */
@@ -23,6 +34,7 @@
 
 typedef struct				s_point
 {
+	unsigned int	refs;
 	union
 	{
 		struct cart
@@ -53,11 +65,11 @@ typedef struct				s_point
 			double	r;
 		};
 	};
-	unsigned int	refs;
 }							t_s_p;
 
 typedef struct				s_vector
 {
+	unsigned int	refs;
 	union
 	{
 		struct cart
@@ -88,7 +100,6 @@ typedef struct				s_vector
 			double	r;
 		};
 	};
-	unsigned int	refs;
 }							t_s_v;
 
 typedef union				u_spsv
@@ -102,9 +113,9 @@ typedef union				u_spsv
 */
 typedef struct				s_dot
 {
-	t_tag	pos_p;
-	t_argb	argb;
 	unsigned int	refs;
+	t_tag			pos_p;
+	t_argb			argb;
 }							t_s_d;
 
 /*
@@ -115,9 +126,9 @@ typedef struct				s_dot
 # define L_END2 1
 typedef struct				s_line
 {
-	t_tag	end_p[2];
-	t_argb	argb[2];
 	unsigned int	refs;
+	t_tag			end_p[2];
+	t_argb			argb[2];
 }							t_s_l;
 /*
 **arrows are vectors positioned in space.
@@ -126,9 +137,9 @@ typedef struct				s_line
 # define A_VEC 1
 typedef struct				s_arrow
 {
-	t_tag	pnv[2];
-	t_argb	argb[2];
 	unsigned int	refs;
+	t_tag			pnv[2];
+	t_argb			argb[2];
 }							t_s_a;
 
 typedef union				u_slsa
@@ -150,10 +161,10 @@ typedef union				u_slsa
 # define V3 VERTEX3
 typedef struct				s_fill
 {
-	t_tag	vrt_p[3];
-	t_argb	argb[3];
-	t_tag	norm_v;
 	unsigned int	refs;
+	t_tag			vrt_p[3];
+	t_argb			argb[3];
+	t_tag			norm_v;
 }							t_s_f;
 
 /*
@@ -171,28 +182,18 @@ typedef struct				s_tag_array
 	size_t	sz;
 }							t_s_ta;
 
-/*
-**In t_s_o:
-** - pnvs: points 'n vectors (u_spsv)s
-** - dots: (t_s_d)s
-** - lnas: lines 'n arrows (u_slsa)s
-** - fills: (t_s_f)s
-** - subos: sub-objects (t_s_o)s
-**
-** - handle references a point in space meant to 
-**	facilitate object display and operations.
-*/
-typedef struct s_object	t_s_o;
-struct						s_object
+typedef struct				s_object_handle
 {
-	t_s_ta			pnvs;
-	t_s_ta			dots;
-	t_s_ta			lnas;
-	t_s_ta			fills;
-	t_s_ta			subos;
-	t_tag			handle;
-	t_argb			argb;
+	t_e_eg	type;
+	t_tag	tag;
+}							t_s_oh;
+
+typedef struct				s_object
+{
 	unsigned int	refs;
-};
+	t_s_ta			es[e_eg_sz]
+	t_handle		h;
+	t_argb			argb;
+}							t_s_o;
 
 #endif

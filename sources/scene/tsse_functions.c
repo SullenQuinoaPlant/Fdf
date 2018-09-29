@@ -30,10 +30,12 @@ void					free_tsse(
 int						get_nxt_se(
 	t_e_seg grp,
 	t_s_s *s,
-	t_tag *ret)
+	t_tag *ret,
+	void **ret_addr)
 {
 	t_s_se *const	p = s->es[grp];
 	t_s_ft			tags;
+	t_tag			tag;
 	int				r;
 
 	if (!p->nxt->next)
@@ -43,10 +45,13 @@ int						get_nxt_se(
 			(r = realloc_prjs_pnv(s)) != SUCCESS))
 			return (r);
 	tags = (t_s_ft*)p->nxt->content;
-	if ((*p_ret = tags->free++) == tags->last)
+	if ((tag = tags->free++) == tags->last)
 	{
 		ft_lstdelhead(&p->nxt);
 		s->nxt_allocs--;
 	}
+	*p_ret = tag;
+	if (ret_addr)
+		*ret_addr = (p->ar[tag >> TPS])[tag & TPM];
 	return (SUCCESS);
 }

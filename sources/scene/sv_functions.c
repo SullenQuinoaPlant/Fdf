@@ -1,31 +1,29 @@
 #include "scene.h"
 
-void					add_view(
-	t_s_v const *v,
-	t_s_s 		*s)
+static int				init_view(
+	t_s_s *s,
+	t_s_v *v)
 {
-	t_s_sv	*p;
-	t_s_sv	*pp;
 	int		r;
 
-	if (!(p = malloc(sizeof(t_s_sv))))
-		return (SYS_ERR);
-	if ((pp = s->views))
-	{
-		*p = (t_s_sv){v, pp->nxt, pp};
-		pp->nxt->prev = p;
-		pp->nxt = p;
-	}
-	else
-		s->views = (t_s_sv){v, p, p};
+	ft_bzero(v, sizeof(t_s_v));
+	v->id = v->nxt == (t_s_ring)
 }
 
 int						new_view(
+	t_s_s *s,
+	t_viewbuilder f,
 	t_s_v **ret)
 {
+	t_s_v	*v;
+	int		r;
 
-	if (!(*ret = malloc(sizeof(t_s_v))))
-		return (SYS_ERR);
-	ft_bzero(*ret, sizeof(t_s_v));
-	return (SUCCESS);
+	ret = 0;
+	r = SYS_ERR;
+	if (ring_expand(sizeof(t_s_v), 0, &s->views) == RING_SUCCESS ||
+		(r = init_view(s, v)) == SUCCESS ||
+		(r = (*f)(s, v)) == SUCCESS ||
+		(r = add_view_to_scene(v, s)) == SUCCESS)
+		*ret = v;
+	return (r);
 }

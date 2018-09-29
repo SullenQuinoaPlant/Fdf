@@ -6,14 +6,14 @@ int						chg_uspsv_ref(
 	t_s_s *s)
 {
 	int		r;
-	int		*refs;
+	int		*refct;
 
-	refs = &(s->pnvs.ar[tag >> TPS])[tag & TPM].refs;
-	if (chg > 0 && UINT_MAX - *refs <= (unsigned int)chg)
+	refct = &(s->pnvs.ar[tag >> TPS])[tag & TPM].refct;
+	if (chg > 0 && UINT_MAX - *refct <= (unsigned int)chg)
 		return (REF_COUNT_TOO_BIG);
-	else if (chg < 0 && *refs < (unsigned int)(-chg))
+	else if (chg < 0 && *refct < (unsigned int)(-chg))
 		return (NEGATIVE_REF_COUNT);
-	*refs += chg;
+	*refct += chg;
 	return (SUCCESS);
 }
 

@@ -23,7 +23,7 @@ static int				add_most_lines(
 		{
 			l.ends[0] = tags[i * p->y_sz + j];
 			l.argb[0] = p->ar[i * p->y_sz + j].col;
-			l.refs = 1;
+			l.refct = 1;
 			l.ends[1] = tags[i * p->y_sz + j - 1];
 			l.argb[1] = p->ar[i * p->y_sz + j - 1].col;
 			(s->lnas.ar[tag[0] >> TPS])[tag[0] & TPM] = l;
@@ -49,7 +49,7 @@ static int				add_y0_edge_lines(
 	int		r;
 
 	r = SUCCESS;
-	l.refs = 1;
+	l.refct = 1;
 	i = -1;
 	while (++i < p->y_sz - 1 && (j = i + 1) &&
 		(r = get_nxt_uslsa(s, &tag) != SUCCESS))
@@ -74,7 +74,7 @@ static int				add_x0_edge_lines(
 	t_tag	tag;
 	int		r;
 
-	l.refs = 1;
+	l.refct = 1;
 	i = 0;
 	r = SUCCESS;
 	while (i < (p->x_sz - 1) * p->y_sz && (j = i + p->y_sz) &&
