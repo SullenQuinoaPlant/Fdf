@@ -10,7 +10,7 @@ static int					add_points(
 	t_tag (*const		tags)[p->y_sz] = (t_tag(*)[p->y_sz])ts;
 	size_t				i;
 	size_t				j;
-	t_s_p				point;
+	t_s_p				*pt;
 
 	i = -1;
 	while (++i < p->x_sz)
@@ -18,13 +18,12 @@ static int					add_points(
 		j = -1;
 		while (++j < p->y_sz)
 		{
-			if ((*r = get_nxt_uspsv(s, &tags[i][j])) != SUCCESS)
+			if ((*r = get_nxt_se(s, e_pnvg, &tags[i][j])) != SUCCESS)
 				return (*r);
-			point = (t_s_p){p->at[X], p->at[Y], p->at[Z], 0};
-			point.x += i;
-			point.y += j;
-			point.z += par[i][j].z;
-			(s->pnvs.ar[tags[i][j] >> TPS])[tags[i][j] & TPM] = point;
+			pt = &(s->es[e_pnvg].ar[tags[i][j] >> TPS])[tags[i][j] & TPM];
+			pt.xyz[X] = i + p->at[X];
+			pt.xyz[Y] = j + p->at[Y];
+			pt.xyz[Z] = par->z + p->at[Z];
 		}
 	}
 	return ((*r = SUCCESS));
@@ -43,12 +42,11 @@ static int				get_container_obj(
 	int				r;
 
 	*o = 0;
-	if ((r = new_scene_obj(s, &o, 0)) != SUCCESS ||
-		!(o->es[e_lna].ar = malloc(l_ct)
-		!(o->lnas.ar = malloc(TAG_SZ * l_ct)))
+	if ((r = nxt_active_obj(s, o, 0)) != SUCCESS ||
+		!(o->es[e_lnag].ar = malloc(l_ct * TAG_SZ) ||
 		return (r != SUCCESS ? r : SYS_ERR);
-	o->lnas.count = 0;
-	o->lnas.sz = l_ct;
+	o->es[e_lnag].count = 0;
+	o->es[e_lnag].sz = l_ct;
 	return (r);
 }
 

@@ -212,7 +212,8 @@ typedef struct				s_fill
 /*
 **Array of tags that are part of an object.
 **count are used, from index 0.
-**sz is array size. May have trailing unused tag slots.
+**array size in bytes is : sz * TAG_SZ.
+**May have trailing unused tag slots.
 */
 typedef struct				s_tag_array
 {
