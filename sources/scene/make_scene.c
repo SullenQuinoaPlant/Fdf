@@ -13,7 +13,7 @@ static int				init_scene(
 	t_s_s **p_ret_scene)
 {
 	t_s_s	*s;
-	t_e_seg	i;
+	t_e_eg	i;
 	int		r;
 
 	*p_ret_scene = 0;

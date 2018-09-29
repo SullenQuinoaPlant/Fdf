@@ -4,7 +4,7 @@ void				scene_teardown(
 	t_s_s **s)
 {
 	t_s_s *const	scene = *s;
-	t_e_seg			i;
+	t_e_eg			i;
 
 	if (!scene)
 		return ;
