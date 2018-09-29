@@ -56,29 +56,30 @@ static void				add_point_refct(
 	t_s_s *s)
 {
 	t_tag (*const		tar)[p->y_sz] = (t_tag(*)[p->y_sz])tags;
-	size_t	i;
-	size_t	j;
+	t_s_se *const		grp = &s->es[e_pnvg]
+	size_t				i;
+	size_t				j;
 
 	i = 0;
 	while (++i < p->y_sz - 1)
 	{
-		chg_uspsv_ref(tar[0][i], 3, s);
-		chg_uspsv_ref(tar[p->x_sz - 1][i], 3, s);
+		chg_tag_refct(tar[0][i], 3, grp);
+		chg_tag_refct(tar[p->x_sz - 1][i], 3, grp);
 	}
 	i = 0;
 	while (++i < p->x_sz - 1)
 	{
-		chg_uspsv_ref(tar[i][0], 3, s);
-		chg_uspsv_ref(tar[i][p->y_sz - 1], 3, s);
+		chg_tag_refct(tar[i][0], 3, grp);
+		chg_tag_refct(tar[i][p->y_sz - 1], 3, grp);
 	}
 	i = 0;
 	while (++i < p->x_sz - 1 && !(j = 0))
 		while (++j < p->y_sz - 1)
-			chg_uspsv_ref(tar[i][j], 4, s);
-	chg_uspsv_ref(tar[0][0], 2, s);
-	chg_uspsv_ref(tar[p->x_sz - 1][0], 2, s);
-	chg_uspsv_ref(tar[p->x_sz - 1][p->y_sz - 1], 2, s);
-	chg_uspsv_ref(tar[0][p->y_sz - 1], 2, s);
+			chg_tag_refct(tar[i][j], 4, grp);
+	chg_tag_refct(tar[0][0], 2, grp);
+	chg_tag_refct(tar[p->x_sz - 1][0], 2, grp);
+	chg_tag_refct(tar[p->x_sz - 1][p->y_sz - 1], 2, grp);
+	chg_tag_refct(tar[0][p->y_sz - 1], 2, grp);
 }
 
 int						cdgfxyrz_builder(
