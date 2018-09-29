@@ -1,30 +1,34 @@
 #include "scene.h"
 
-static int				init_vars(
+static void				init_vars(
 	t_s_s *s)
 {
 	s->ar_allocs = 0;
 	s->nxt_allocs = 0;
-	s->nullproj = (t_s_prj){0, 0, 0, 0, 0, 0};
+	s->prjs.nullprj.pnv = (t_s_p**)s->es[e_spnv].ar;
 	s->views = 0;
-	return (SUCCESS);
 }
 
 static int				init_scene(
 	t_s_s **p_ret_scene)
 {
+	t_s_s	*s;
+	t_e_seg	i;
 	int		r;
-	t_s_s	*scene;
 
-	r = SYS_ERR;
 	*p_ret_scene = 0;
-	if (!(scene = malloc(sizeof(t_s_s))) ||
-		(r = init_vars(scene) != SUCCESS) ||
-		(r = init_tsspnv(scene)) != SUCCESS ||
-		(r = init_tsslna(scene)) != SUCCESS ||
-		(r = init_tsso(scene)) != SUCCESS)
+	if (!(scene = malloc(sizeof(t_s_s))))
+		return (SYS_ERR);
+	i = e_spnv;
+	while (i < e_seg_sz && r == SUCCESS)
+		r = init_tsse(&s->es[i])) != SUCCESS;
+	if (r != SUCCESS)
 		scene_teardown(&scene);
-	*p_ret_scene = scene;
+	else
+	{
+		init_vars(s);
+		*p_ret_scene = scene;
+	}
 	return (r);
 }
 
