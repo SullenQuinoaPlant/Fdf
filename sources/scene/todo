@@ -7,3 +7,7 @@ write free_ao and then use it in free_view and scene_teardown
 	in ao_functions
 
 maybe write ring iteration and use that in update_sv_one_ao
+
+
+change projection structure to coordinate_change structure.
+add view-specific structures for each element type. In whiche point shadows/projections specific to that view are store.
