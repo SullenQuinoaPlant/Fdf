@@ -13,7 +13,7 @@
 **	see TAG_AR_CAP
 **
 **TAG_POS_MASK used to retrieve intra-array position.
-**TAG_AR_SHIFT used to shift out intra-array position bits.
+**TAG_POS_SHIFT used to shift out intra-array position bits.
 **TAG_AR_SZ is determined by TAG_AR_SHIFT
 **
 **NOTE :
@@ -48,7 +48,6 @@ typedef unsigned int	t_tag;
 **0xALPHA;RED;GREEN;BLUE
 */
 typedef uint32_t	t_argb;
-
 
 /*
 **Different scene element types:
@@ -203,7 +202,7 @@ typedef struct				s_fill
 
 /*
 **Array of tags that are part of an object.
-**count are used, from index 0.
+**count are used.
 **array size in bytes is : sz * TAG_SZ.
 **May have trailing unused tag slots.
 */
@@ -256,30 +255,47 @@ typedef struct				s_scene_elements
 /*
 **t_pctr as in: point coordinate transform
 */
-typedef void	(*t_pctr)(void*, size_t, t_s_p**);
+typedef void	(*t_pctr)(void*, size_t, t_u_spsv const*, t_u_spsv**);
 
 /*
-**Scene projections own their own set of the scene points.
-**The coordinates of these points are modified.
-**Tags are used to identify points reliably accross point sets.
-**Projections points should not be modified;
+**(t_s_cs)s own their own set of the scene points.
+**The coordinates of these points are modified from the previous (t_s_c),
+**		with the (t_pctr) tr.
+**Tags are used to identify points reliably accross point coordinate sets.
+**A (t_s_cs)'s points should not be modified;
 **	instead, change scene points then update.
 */
 
-typedef struct				s_projection
+# define SET_UPDATED 0x1
+typedef struct s_point_coordinates	t_s_pc;
+struct						s_point_coordinates
 {
-	int			refs;
-	t_s_prj		*up;
+	t_s_ring	linked;
+	t_s_pc		*prv;
+	t_s_pc		*nxt;
+	uint8_t		flags;
 	t_pctr		tr;
+	void		*tr_arg;
 	t_u_spsv	**pnv;
-	void		*stuff;
-}							t_s_prj;
+}
+
+/*
+**Projections hold point shadows in the view space.
+*/
+typedef struct				s_view_projection
+{
+	t_s_pc		coords;
+	t_s_
+}							t_s_vp;
 
 /*
 **p_tsprj is a list of >pointers< to (t_s_prj) structures.
 */
-typedef struct				s_scene_projections
+typedef struct				s_scene_point_coordinates
 {
+	t_s_pc		canonical;
+	t_gbg		
+	t_s_pc		
 	t_s_prj		nullproj;
 	t_list		*p_tsprj;
 }							t_s_sprj;

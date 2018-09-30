@@ -35,13 +35,14 @@ static void				free_view_members(
 	void *view,
 	size_t unused)
 {
+	THIS NEEDS TO CHANGE
 	t_s_sv *const	v = (t_s_sv*)view;
-	t_s_prj *		prj;
+	t_s_pc			*coords;
 
 	(void)unused;
-	prj = v->proj;
-	while (prj)
+	while (coords)
 	{
+		DECREASE coords refs
 		prj->refs--;
 		prj = prj->up;
 	}
