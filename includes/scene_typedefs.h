@@ -50,6 +50,12 @@ typedef unsigned int	t_tag;
 typedef uint32_t	t_argb;
 
 /*
+**Negative reference counts assigned to an object
+**	indicate that we intend to release it.
+*/
+typedef int	t_refct;
+
+/*
 **Different scene element types:
 **
 **NOTE :
@@ -83,7 +89,7 @@ typedef enum				e_scene_element_groups
 
 typedef struct				s_point
 {
-	unsigned int	refs;
+	t_refct			refs;
 	union
 	{
 		struct cart
@@ -110,7 +116,7 @@ typedef struct				s_point
 
 typedef struct				s_vector
 {
-	unsigned int	refs;
+	t_refct			refs;
 	union
 	{
 		struct cart
@@ -146,7 +152,7 @@ typedef union				u_spsv
 */
 typedef struct				s_dot
 {
-	unsigned int	refs;
+	t_refct			refs;
 	t_tag			pos_p;
 	t_argb			argb;
 }							t_s_d;
@@ -170,7 +176,7 @@ typedef struct				s_line
 # define A_VEC 1
 typedef struct				s_arrow
 {
-	unsigned int	refs;
+	t_refct			refs;
 	t_tag			pnv[2];
 	t_argb			argb[2];
 }							t_s_a;
@@ -194,7 +200,7 @@ typedef union				u_slsa
 # define V3 VERTEX3
 typedef struct				s_fill
 {
-	unsigned int	refs;
+	t_refct			refs;
 	t_tag			vrt_p[3];
 	t_argb			argb[3];
 	t_tag			norm_v;
@@ -221,11 +227,10 @@ typedef struct				s_object_handle
 
 /*
 **(t_s_o)s are collections of basic elements.
-**They can be displayed.
 */
 typedef struct				s_object
 {
-	unsigned int	refs;
+	t_refct			refs;
 	t_s_ta			es[e_eg_sz]
 	t_s_oh			hdl;
 	t_argb			argb;
@@ -303,12 +308,12 @@ typedef enum				e_view_projections
 /*
 **A signed type at least as big as view height and width
 */
-typedef int	t_vint;
+typedef unsigned int	t_vuint;
 
 # define V_H 0
 # define V_W 1
 
-typedef t_vint	(t_vpos)[2]
+typedef t_vuint	(t_vpos)[2]
 
 typedef struct				s_dot_projection
 {
@@ -372,6 +377,17 @@ typedef void	(*t_fproj)(void*, t_s_s*, t_s_pc const*, t_s_fp *const);
 typedef struct s_active_object	t_s_ao;
 
 /*
+**Precendence typiccaly linked to depth, 
+**	unless object is highlighted, in which case use 
+**	negative values to indicate greater precedence.
+*/
+typedef struct				s_pixel
+{
+	t_argb	argb;
+	double	precedence;
+}							t_s_pxl;
+
+/*
 **View builders are responsible for initializing:
 ** - proj
 ** - all event functions
@@ -386,12 +402,15 @@ typedef struct s_view		t_s_v;
 struct						s_view
 {
 	t_s_ring	ring;
-	t_s_s		*scene;
 	int			id;
+	t_s_s		*scene;
+	t_s_ao		*ao_cursor;
 	t_s_pc		*points;
 	t_proj		prj;
 	t_s_vp		es[e_vp_sz];
-	t_s_ao		*ao_cursor;
+	t_vuint		h;
+	t_vuint		w;
+	t_s_pxl		**view;
 };
 
 /*
@@ -414,7 +433,6 @@ typedef struct				s_scene
 	size_t		nxt_allocs;
 	t_s_se		es[e_eg_sz];
 	t_s_ao		*ao;
-	t_s_sprj	prjs;
 	t_s_sv		*views;
 }							t_s_s;
 
