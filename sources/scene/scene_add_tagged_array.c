@@ -7,13 +7,13 @@ static int					downstream_allocs(
 	int		r;
 
 	if (g == e_spnv)
-		r = tspc_alloc(s);
+		r = tspc_tar_alloc(s);
 	else
 		r = tssv_alloc(s, g);
 	return (r);
 }
 
-int							add_tar(
+int							add_star(
 	t_s_s *s,
 	t_e_seg g)
 {
@@ -22,22 +22,9 @@ int							add_tar(
 	void			**ar;
 	t_list			*tl;
 
-	if ((r = downstream_allocs(s, g)) == SUCCESS &&
-		!(r = TAC - s->ar_allocs < sz ? MEM_CAP : 0) &&
-		(ar = malloc((se->ar_sz + 1) * sizeof(void*))) &&
-		(ar[se->ar_sz] = malloc(sz)) &&
-		(reg_freetags((t_tag)se->ar_sz << TPS, TPM, s, p)) == SUCCESS))
-	{
-		s->tar_allocs += sz;
-		ft_bzero(ar[se->ar_sz], sz);
-		ft_memcpy(ar, se->ar, (sz = se->ar_sz++ * sizeof(void*));
-		ft_cleanfree(se->ar, sz);
-		se->ar = ar;
+	if ((r = downstream_allocs(s, g, se->ar_sz + 1)) == SUCCESS &&
+		(r = alloc_tar(s, &se->ar_sz, se->e_sz, &se->ar)) == SUCCESS &&
+		(reg_freetags((t_tag)se->ar_sz << TPS, TPM, s, p)) == SUCCESS)
 		return (SUCCESS);
-	}
-	if (ar && ar[se->ar_sz])
-		free(ar[se->ar_sz]);
-	if (ar)
-		free(ar);
-	return (SYS_ERR);
+	return (r);
 }

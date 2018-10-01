@@ -206,19 +206,9 @@ typedef struct				s_fill
 	t_argb			argb[3];
 	t_tag			norm_v;
 }							t_s_f;
-
 /*
-**Array of tags that are part of an object.
-**count are used.
-**array size in bytes is : sz * TAG_SZ.
-**May have trailing unused tag slots.
+**End of scene elements
 */
-typedef struct				s_tag_array
-{
-	t_tag	*ar;
-	size_t	count;
-	size_t	sz;
-}							t_s_ta;
 
 typedef struct				s_object_handle
 {
@@ -226,13 +216,26 @@ typedef struct				s_object_handle
 	t_tag	tag;
 }							t_s_oh;
 
+typedef enum				e_object_element_groups
+{
+	e_op,
+	e_ov,
+	e_od,
+	e_ol,
+	e_oa,
+	e_of,
+	e_oo,
+	e_oeg_sz,
+	e_oeg_null
+}							t_e_oeg;
+
 /*
 **(t_s_o)s are collections of basic elements.
 */
 typedef struct				s_object
 {
 	t_refct			refs;
-	t_s_ta			es[e_eg_sz]
+	t_list			es[e_oeg_sz];
 	t_s_oh			hdl;
 	t_argb			argb;
 }							t_s_o;
@@ -261,6 +264,13 @@ typedef struct				s_scene_elements
 	t_list		*nxt;
 }							t_s_se;
 
+typedef struct				s_tagged_array
+{
+	void		**ar;
+	size_t		ar_sz;
+	size_t		e_sz;
+}							t_s_ta;
+
 /*
 **t_pctr as in: point coordinate transform
 */
@@ -276,18 +286,17 @@ typedef void	(*t_pctr)(void*, size_t, t_u_spsv const**, t_u_spsv**);
 **	For any other change, go through root scene structure.
 */
 
-# define IS_UPDATED 0x1
 typedef struct s_point_coordinates	t_s_pc;
 struct						s_points_coordinates
 {
 	t_s_ring	linked;
 	t_s_pc		*prv;
 	t_s_pc		*nxt;
-	int			refs;
-	uint8_t		flags;
 	t_pctr		tr;
 	void		*tr_arg;
-	t_u_spsv	**pnv;
+	size_t		tr_arg_sz;
+	t_s_ta		coords;
+	int			views;
 }
 
 /*
@@ -307,7 +316,7 @@ typedef enum				e_view_projections
 }							t_e_vp;
 
 /*
-**A signed type at least as big as view height and width
+**A type at least as big as view height and width
 */
 typedef unsigned int	t_vuint;
 
@@ -348,25 +357,13 @@ typedef struct				s_object_projection
 	uint8_t	flags;
 }							t_s_op;
 
-**(t_s_vp) : typedef struct view projections
-**Reuse projections are stored with tags in exactly the same way
-**	scene elements are:
-**All assignments are done through scene, t_s_sv has no need for:
-** - nxt
-** - ar_sz
-*/
-typedef struct				s_view_projected_elements
-{
-	void		**ar;
-	size_t		e_sz;
-}							t_s_vpe;
 
 /*
 **projection: takes point coordinates and element groups and
 **	spits out each group's projection.
 **Does not allocate (t_s_vp)s, stores stuff in them.
 /*
-typedef void	(*t_proj)(void*, t_s_s*, t_s_pc const*, t_s_vp const*const);
+typedef void	(*t_proj)(void*, t_s_s*, t_s_pc const*, t_s_ta const*const);
 typedef void	(*t_dproj)(void*, t_s_s*, t_s_pc const*, t_s_dp *const);
 typedef void	(*t_loaproj)(void*, t_s_s*, t_s_pc const*, t_s_loap *const);
 typedef void	(*t_fproj)(void*, t_s_s*, t_s_pc const*, t_s_fp *const);
@@ -378,14 +375,14 @@ typedef void	(*t_fproj)(void*, t_s_s*, t_s_pc const*, t_s_fp *const);
 typedef struct s_active_object	t_s_ao;
 
 /*
-**Precendence typiccaly linked to depth, 
+**Precendence 'prec' typically linked to depth, 
 **	unless object is highlighted, in which case use 
 **	negative values to indicate greater precedence.
 */
 typedef struct				s_pixel
 {
 	t_argb	argb;
-	double	precedence;
+	double	prec;
 }							t_s_pxl;
 
 /*
@@ -399,8 +396,8 @@ typedef struct				s_pixel
 ** - id
 ** - ao_cursor
 */
-typedef struct s_view		t_s_v;
-struct						s_view
+typedef struct s_view		t_s_sv;
+struct						s_scene_view
 {
 	t_s_ring	ring;
 	int			id;
@@ -408,7 +405,7 @@ struct						s_view
 	t_s_ao		*ao_cursor;
 	t_s_pc		*points;
 	t_proj		prj;
-	t_s_vp		es[e_vp_sz];
+	t_s_ta		es[e_vp_sz];
 	t_vuint		h;
 	t_vuint		w;
 	t_s_pxl		**view;
@@ -434,6 +431,7 @@ typedef struct				s_scene
 	size_t		nxt_allocs;
 	t_s_se		es[e_eg_sz];
 	t_s_ao		*ao;
+	t_s_pc		canonical;		
 	t_s_sv		*views;
 }							t_s_s;
 

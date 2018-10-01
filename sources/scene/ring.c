@@ -83,3 +83,19 @@ int						ring_clone(
 		*ret = petri;
 	return (r);
 }
+
+int						ring_apply(
+	t_ring	rg,
+	t_ringapply f,
+	void *f_arg)
+{
+	t_s_ring *const	strt = (t_s_ring*)rg;
+	t_s_ring		*p;
+
+	if (!(p = rg))
+		return (RING_SUCCESS);
+	while ((r = (*f)(f_arg, p)) == RING_SUCCESS)
+		if ((p = p->nxt) == strt)
+			break;
+	return (r);
+}
