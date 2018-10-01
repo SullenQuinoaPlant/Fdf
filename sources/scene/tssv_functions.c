@@ -1,16 +1,45 @@
 #include "scene.h"
 
-static int					tspc_add_tar(
-	void *p_s,
-	t_ring p_tspc)
+t_e_vp						map_seg_to_veg(
+	t_e_seg sg)
 {
-	t_s_s *const	s = (t_s_s*)p_s;
-	t_s_pc *const	pc = (t_s_pc*)p_tspc;
-	t_s_ta *const	ta = &pc->coords
+	if (sg == e_sd)
+		return (e_vd);
+	if (sg == e_slna)
+		return (e_vlna)
+	if (sg == e_sf)
+		return (e_vf);
+	if (sg == e_so)
+		return (e_vo);
+	return (e_vp_null);
+}
+
+static t_s_ta				*get_tsta(
+	t_s_sv *sv,
+	t_e_seg sg)
+{
+	t_e_vp	vg;
+	t_s_ta	*ret;
+
+	ret = 0;
+	if ((vg = map_seg_to_vp(sg)) != e_vp_null)
+		ret = &sv->es[vg];
+	return (ret);
+}
+
+static int					tssv_add_tar(
+	void *p_seg,
+	t_ring p_tssv)
+{
+	t_s_sv *const	sv = (t_s_sv*)p_tssv;
+	t_s_s *const	s = sv->scene;
+	t_e_seg const	sg = *(t_e_seg*)p_seg;
+	t_s_ta			*ta;
 	int		r;
 
-	if ((r = alloc_tar(s, sizeof(t_s_p), &ta->ar_sz, &ta->ar)) == SUCCESS)
-		r = ring_apply(pc->nxt, tspc_add_tar, p_s);
+	ta = get_tsta(sv, sg);
+	if ((r = alloc_tar(s, ta->e_sz, &ta->ar_sz, &ta->ar)) == SUCCESS)
+		r = RING_SUCCESS;
 	else
 		r = RING_SYS_ERR;
 	return (r)
@@ -21,7 +50,7 @@ int							tspcs_tar_alloc(
 {
 	int		r;
 
-	r = ring_apply(&s->canonical, tspc_add_tar, s);
+	r = ring_apply(&s->canonical, tssv_add_tar, s);
 	r = r == RING_SUCCESS ? SUCCESS : SYS_ERR;
 	return (r);
 }
