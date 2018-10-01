@@ -9,3 +9,5 @@ write free_ao and then use it in free_view and scene_teardown
 maybe write ring iteration and use that in update_sv_one_ao
 
 add view-specific structures for each element type. In whiche point shadows/projections specific to that view are store.
+
+t_s_vp for each object. keep active object options there; it's okay. Only one ring of active objects, 

@@ -58,16 +58,16 @@ typedef uint32_t	t_argb;
 **		structure member.
 */
 
-typedef enum				e_element_groups
+typedef enum				e_scene_element_groups
 {
-	e_pnvg,
-	e_dg,
-	e_lnag,
-	e_ag,
-	e_og,
-	e_eg_sz,
-	e_eg_null
-}							t_e_eg;
+	e_spnv,
+	e_sd,
+	e_slna,
+	e_sf,
+	e_so,
+	e_seg_sz,
+	e_seg_null
+}							t_e_seg;
 
 /*
 **s_point describes a point in space.
@@ -227,11 +227,11 @@ typedef struct				s_object
 {
 	unsigned int	refs;
 	t_s_ta			es[e_eg_sz]
-	t_handle		h;
+	t_s_oh			hdl;
 	t_argb			argb;
 }							t_s_o;
 /*
-**End visual elements.
+**End scene elements.
 */
 
 /*
@@ -244,6 +244,9 @@ typedef struct				s_free_tags
 	t_tag	last;
 }							t_s_ft;
 
+/*
+**The (t_list) nxt is a list of (t_s_ft) structures.
+*/
 typedef struct				s_scene_elements
 {
 	void		**ar;
@@ -255,24 +258,26 @@ typedef struct				s_scene_elements
 /*
 **t_pctr as in: point coordinate transform
 */
-typedef void	(*t_pctr)(void*, size_t, t_u_spsv const*, t_u_spsv**);
+typedef void	(*t_pctr)(void*, size_t, t_u_spsv const**, t_u_spsv**);
 
 /*
 **(t_s_cs)s own their own set of the scene points.
 **The coordinates of these points are modified from the previous (t_s_c),
 **		with the (t_pctr) tr.
 **Tags are used to identify points reliably accross point coordinate sets.
-**A (t_s_cs)'s points should not be modified;
-**	instead, change scene points then update.
+**A (t_s_cs)'s points should always be the result of applying a (t_s_pc)'s
+**	(t_pctr) transform to the previous set of point coordinates.
+**	For any other change, go through root scene structure.
 */
 
-# define SET_UPDATED 0x1
+# define IS_UPDATED 0x1
 typedef struct s_point_coordinates	t_s_pc;
-struct						s_point_coordinates
+struct						s_points_coordinates
 {
 	t_s_ring	linked;
 	t_s_pc		*prv;
 	t_s_pc		*nxt;
+	int			refs;
 	uint8_t		flags;
 	t_pctr		tr;
 	void		*tr_arg;
@@ -280,25 +285,65 @@ struct						s_point_coordinates
 }
 
 /*
-**Projections hold point shadows in the view space.
+**Projections hold the shadows of the points required
+**	to describe scene elements in space, on a 2d plane.
+**Points themselves are not represented, so points are
+**	not projected, and points have no shadows. (they are evil)
 */
-typedef struct				s_view_projection
+typedef enum				e_view_projections
 {
-	t_s_pc		coords;
-	t_s_
-}							t_s_vp;
+	e_vd,
+	e_vlna,
+	e_vf,
+	e_vp_sz,
+	e_vp_null
+}							t_e_vp;
 
 /*
-**p_tsprj is a list of >pointers< to (t_s_prj) structures.
+**A signed type at least as big as view height and width
 */
-typedef struct				s_scene_point_coordinates
+typedef int	t_vint;
+
+# define V_H 0
+# define V_W 1
+
+typedef t_vint	(t_pxl)[2]
+
+typedef struct				s_dot_projection
 {
-	t_s_pc		canonical;
-	t_gbg		
-	t_s_pc		
-	t_s_prj		nullproj;
-	t_list		*p_tsprj;
-}							t_s_sprj;
+	t_pxl	here;
+}							t_s_dp;
+
+typedef struct				s_line_or_arrow_projection
+{
+	t_pxl	between[2];
+}							t_sloap;
+
+/*
+**'count' gives the number of points used in 'inside'.
+**There is one less side to the polygon than the count.
+**'bar' : barycenter.
+*/
+typedef struct				s_fill_projection
+{
+	t_pxl	inside[6];
+	t_pxl	bar;
+	size_t	count;
+}
+
+/*
+**(t_s_vp) : typedef struct view projections
+**Reuse projections are stored with tags in exactly the same way
+**	scene elements are:
+**All assignments are done through scene, t_s_sv has no need for:
+** - nxt
+** - ar_sz
+*/
+typedef struct				s_view_projections
+{
+	void		**ar;
+	size_t		e_sz;
+}							t_s_vp;
 
 /*
 **t_s_so flags:
@@ -329,16 +374,11 @@ typedef struct s_view		t_s_v;
 struct						s_view
 {
 	t_s_ring	ring;
+	t_s_s		*scene;
 	int			id;
-	t_s_prj		*proj;
-	t_s_ao		*ao;
-	t_s_ao		*ao_cursor;
-	MLX_WINDOW
-	MLX_IMAGE
-	int			(*on_expose)(void*);
-	int			(*on_key)(int, void*);
-	int			(*on_mouse)(int, int, int, void*);
-	int			(*on_loop)(void*);
+	t_s_pc		*points;
+	t_proj		prjs[e_vp_sz];
+	t_s_vp		es[e_vp_sz];
 	void		*stuff;
 	size_t		stuff_sz;
 	void		(*stuff_del)(void*, size_t);

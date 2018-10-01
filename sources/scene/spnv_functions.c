@@ -4,7 +4,7 @@ int						pnvg_deep_copy(
 	t_s_s *s,
 	t_s_uspsv ***ret)
 {
-	t_s_se *const	p = &s->se[e_pnvg];
+	t_s_se *const	p = &s->se[e_spnv];
 	size_t const	subsz = TAS * sizeof(t_u_spsv);
 	size_t const	sz = subsz * p->ar_sz;
 	size_t			i;

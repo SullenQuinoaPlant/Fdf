@@ -19,8 +19,8 @@ static int				add_most_lines(
 	l.refs = 1;
 	r = SUCCESS;
 	while (++i < p->x_sz && !(j = 0) && r == SUCCESS)
-		while ((r = get_nxt_se(e_lnag, s, &tag[0], 0)) == SUCCESS &&
-			(r = get_nxt_se(e_lnag, s, &tag[1], 0)) == SUCESS && ++j < p->y_sz)
+		while ((r = get_nxt_se(e_slna, s, &tag[0], 0)) == SUCCESS &&
+			(r = get_nxt_se(e_slna, s, &tag[1], 0)) == SUCESS && ++j < p->y_sz)
 		{
 			l.ends[0] = tags[i * p->y_sz + j];
 			l.argb[0] = p->ar[i * p->y_sz + j].col;
@@ -52,7 +52,7 @@ static int				add_y0_edge_lines(
 	l.refs = 1;
 	i = -1;
 	while (++i < p->y_sz - 1 &&
-		(r = get_nxt_se(e_lnag, s, &tag, 0)) != SUCCESS))
+		(r = get_nxt_se(e_slna, s, &tag, 0)) != SUCCESS))
 	{
 		j = i + 1;
 		l.ends = (t_tag[2]){tags[i], tags[j]};
@@ -79,7 +79,7 @@ static int				add_x0_edge_lines(
 	i = 0;
 	r = SUCCESS;
 	while (i < (p->x_sz - 1) * p->y_sz &&
-		(r = get_nxt_uslsa(e_lnag, s, &tag, 0) != SUCCESS))
+		(r = get_nxt_uslsa(e_slna, s, &tag, 0) != SUCCESS))
 	{
 		j = i + p->y_sz;
 		l.ends = (t_tag[2]){tags[i], tags[j]};

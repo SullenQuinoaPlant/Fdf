@@ -18,9 +18,9 @@ static int					add_points(
 		j = -1;
 		while (++j < p->y_sz)
 		{
-			if ((*r = get_nxt_se(s, e_pnvg, &tags[i][j])) != SUCCESS)
+			if ((*r = get_nxt_se(s, e_spnv, &tags[i][j])) != SUCCESS)
 				return (*r);
-			pt = &(s->es[e_pnvg].ar[tags[i][j] >> TPS])[tags[i][j] & TPM];
+			pt = &(s->es[e_spnv].ar[tags[i][j] >> TPS])[tags[i][j] & TPM];
 			pt.xyz[X] = i + p->at[X];
 			pt.xyz[Y] = j + p->at[Y];
 			pt.xyz[Z] = par->z + p->at[Z];
@@ -43,10 +43,10 @@ static int				get_container_obj(
 
 	*o = 0;
 	if ((r = nxt_active_obj(s, o, 0)) != SUCCESS ||
-		!(o->es[e_lnag].ar = malloc(l_ct * TAG_SZ) ||
+		!(o->es[e_slna].ar = malloc(l_ct * TAG_SZ) ||
 		return (r != SUCCESS ? r : SYS_ERR);
-	o->es[e_lnag].count = 0;
-	o->es[e_lnag].sz = l_ct;
+	o->es[e_slna].count = 0;
+	o->es[e_slna].sz = l_ct;
 	return (r);
 }
 
@@ -56,7 +56,7 @@ static void				add_point_refct(
 	t_s_s *s)
 {
 	t_tag (*const		tar)[p->y_sz] = (t_tag(*)[p->y_sz])tags;
-	t_s_se *const		grp = &s->es[e_pnvg]
+	t_s_se *const		grp = &s->es[e_spnv]
 	size_t				i;
 	size_t				j;
 
