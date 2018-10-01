@@ -5,4 +5,8 @@
 # include "scene_typedefs.h"
 # include "scene_functions.h"
 
+# define RELEASING_TAG 1
+# define REFCOUNT_TOO_BIG 2
+# define REFCOUNT_INCOHERENT 3
+
 #endif

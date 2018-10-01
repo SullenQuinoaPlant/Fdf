@@ -32,7 +32,6 @@ int						nxt_active_obj(
 	{
 		o->refs = 1;
 		s->ao->flags |= SHOW_O;
-		udpate_view_aos(s);
 	}
 	return (r);
 }

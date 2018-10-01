@@ -28,7 +28,7 @@ void					free_tsse(
 }
 
 int						get_nxt_se(
-	t_e_eg grp,
+	t_e_seg grp,
 	t_s_s *s,
 	t_tag *ret,
 	void **ret_addr)
@@ -38,11 +38,8 @@ int						get_nxt_se(
 	t_tag			tag;
 	int				r;
 
-	if (!p->nxt->next)
-	{
-		if ((r = add_tar(p, s)) != SUCCESS ||
-			(grp == e_spnv &&
-			(r = realloc_prjs_pnv(s)) != SUCCESS))
+	if (!p->nxt->next &&
+		(r = add_tar(s, grp)) != SUCCESS)
 			return (r);
 	tags = (t_s_ft*)p->nxt->content;
 	if ((tag = tags->free++) == tags->last)

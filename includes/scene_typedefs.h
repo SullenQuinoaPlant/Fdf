@@ -54,6 +54,7 @@ typedef uint32_t	t_argb;
 **	indicate that we intend to release it.
 */
 typedef int	t_refct;
+# define MAX_REFS INT_MAX
 
 /*
 **Different scene element types:
