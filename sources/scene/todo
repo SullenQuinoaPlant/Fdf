@@ -3,11 +3,12 @@ view free
 
 check point deep copy.
 
-write free_ao and then use it in free_view and scene_teardown
-	in ao_functions
-
-maybe write ring iteration and use that in update_sv_one_ao
+when modifying t_s_se t_s_p update (t_s_pc)s.
+when modifying t_s_se that aren't t_s_p, update views.
 
 add view-specific structures for each element type. In whiche point shadows/projections specific to that view are store.
+write projections from t_s_se[grp] & t_s_pc to t_s_vp (one for each element type in each projection type);
 
 t_s_vp for each object. keep active object options there; it's okay. Only one ring of active objects, 
+
+when modifying the t_s_ao ring in t_s_s, reset view t_s_ao pointers if they were pointing to deleted element.

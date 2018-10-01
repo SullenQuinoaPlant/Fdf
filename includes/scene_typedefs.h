@@ -295,6 +295,7 @@ typedef enum				e_view_projections
 	e_vd,
 	e_vlna,
 	e_vf,
+	e_vo,
 	e_vp_sz,
 	e_vp_null
 }							t_e_vp;
@@ -307,17 +308,17 @@ typedef int	t_vint;
 # define V_H 0
 # define V_W 1
 
-typedef t_vint	(t_pxl)[2]
+typedef t_vint	(t_vpos)[2]
 
 typedef struct				s_dot_projection
 {
-	t_pxl	here;
+	t_vpos	here;
 }							t_s_dp;
 
 typedef struct				s_line_or_arrow_projection
 {
-	t_pxl	between[2];
-}							t_sloap;
+	t_vpos	between[2];
+}							t_s_loap;
 
 /*
 **'count' gives the number of points used in 'inside'.
@@ -326,12 +327,21 @@ typedef struct				s_line_or_arrow_projection
 */
 typedef struct				s_fill_projection
 {
-	t_pxl	inside[6];
-	t_pxl	bar;
+	t_vpos	inside[6];
+	t_vpos	bar;
 	size_t	count;
-}
+}							t_s_fp;
 
 /*
+**object flags:
+*/
+# define SHOW_O 0x1
+# define HIGHLIGHT_O 0x2
+typedef struct				s_object_projection
+{
+	uint8_t	flags;
+}							t_s_op;
+
 **(t_s_vp) : typedef struct view projections
 **Reuse projections are stored with tags in exactly the same way
 **	scene elements are:
@@ -339,26 +349,29 @@ typedef struct				s_fill_projection
 ** - nxt
 ** - ar_sz
 */
-typedef struct				s_view_projections
+typedef struct				s_view_projected_elements
 {
 	void		**ar;
 	size_t		e_sz;
-}							t_s_vp;
+}							t_s_vpe;
 
 /*
-**t_s_so flags:
+**projection: takes point coordinates and element groups and
+**	spits out each group's projection.
+**Does not allocate (t_s_vp)s, stores stuff in them.
+/*
+typedef void	(*t_proj)(void*, t_s_s*, t_s_pc const*, t_s_vp const*const);
+typedef void	(*t_dproj)(void*, t_s_s*, t_s_pc const*, t_s_dp *const);
+typedef void	(*t_loaproj)(void*, t_s_s*, t_s_pc const*, t_s_loap *const);
+typedef void	(*t_fproj)(void*, t_s_s*, t_s_pc const*, t_s_fp *const);
+
+/*
+**The active object ring lives in the scene structure.
+**But each view has a pointer to it.
 */
-# define SHOW_O 0x1
-# define HIGHLIGHT_O 0x2
-typedef struct				s_active_object
-{
-	t_s_ring	ring;
-	t_tag		tag;
-	uint8_t		flags;
-}							t_s_ao;
+typedef struct s_active_object	t_s_ao;
 
 /*
-**Views have their own set of the scene objects ring.
 **View builders are responsible for initializing:
 ** - proj
 ** - all event functions
@@ -367,7 +380,6 @@ typedef struct				s_active_object
 **The following fields are initialized by the scene:
 ** - ring
 ** - id
-** - ao
 ** - ao_cursor
 */
 typedef struct s_view		t_s_v;
@@ -377,16 +389,24 @@ struct						s_view
 	t_s_s		*scene;
 	int			id;
 	t_s_pc		*points;
-	t_proj		prjs[e_vp_sz];
+	t_proj		prj;
 	t_s_vp		es[e_vp_sz];
-	void		*stuff;
-	size_t		stuff_sz;
-	void		(*stuff_del)(void*, size_t);
+	t_s_ao		*ao_cursor;
 };
 
 /*
+**Scene:
+*/
+typedef struct				s_active_object
+{
+	t_s_ring	ring;
+	t_tag		tag;
+	uint8_t		flags;
+}							t_s_ao;
+
+/*
 ** - tar_allocs counts bytes allocated for tagged arrays.
-** - nxt_allocs counts individual allocs not bytes.
+** - nxt_allocs counts bytes allocated to t_list structures.
 */
 typedef struct				s_scene
 {

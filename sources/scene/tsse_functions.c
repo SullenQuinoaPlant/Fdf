@@ -48,7 +48,7 @@ int						get_nxt_se(
 	if ((tag = tags->free++) == tags->last)
 	{
 		ft_lstdelhead(&p->nxt);
-		s->nxt_allocs--;
+		s->nxt_allocs -= sizeof(t_list);
 	}
 	*p_ret = tag;
 	if (ret_addr)
@@ -71,7 +71,7 @@ int						reg_freetags(
 		return (SYS_ERR);
 	ft_lstadd(&group->nxt, tl);
 	r = SUCCESS;
-	if (++scene->nxt_allocs >= TAG_NXT_CAP)
+	if ((scene->nxt_allocs += sizeof(t_list)) >= TAG_NXT_CAP)
 		r = realloc_tars(s);//this is heavy. do it later.
 	return (r);
 }
