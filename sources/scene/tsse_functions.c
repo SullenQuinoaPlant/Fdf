@@ -55,3 +55,23 @@ int						get_nxt_se(
 		*ret_addr = (p->ar[tag >> TPS])[tag & TPM];
 	return (SUCCESS);
 }
+
+int						reg_freetags(
+	t_tag first,
+	t_tag diff_with_last,
+	t_s_s *scene,
+	t_s_se *group)
+{
+	t_tag const	last = first + diff_with_last;
+	t_list		*tl;
+	int			r;
+
+	
+	if (!(tl = ft_lstnew(&(t_s_ft){first, last}, sizeof(t_s_ft))))
+		return (SYS_ERR);
+	ft_lstadd(&group->nxt, tl);
+	r = SUCCESS;
+	if (++scene->nxt_allocs >= TAG_NXT_CAP)
+		r = realloc_tars(s);//this is heavy. do it later.
+	return (r);
+}

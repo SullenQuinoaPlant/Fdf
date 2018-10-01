@@ -20,8 +20,8 @@ static int				init_scene(
 	if (!(scene = malloc(sizeof(t_s_s))))
 		return (SYS_ERR);
 	i = e_spnv;
-	while (i < e_seg_sz && r == SUCCESS)
-		r = init_tsse(&s->es[i])) != SUCCESS;
+	while (i < e_seg_sz && (r = init_tsse(&s->es[i])) == SUCCESS))
+		i++;
 	if (r != SUCCESS)
 		scene_teardown(&scene);
 	else

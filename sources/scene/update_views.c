@@ -1,7 +1,7 @@
 #include "scene.h"
 
 /*
-**update all scene views one active objects
+**update all scene views one active object
 */
 int					update_sv_one_ao(
 	t_s_s *s)

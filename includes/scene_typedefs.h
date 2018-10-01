@@ -32,7 +32,7 @@ typedef unsigned int	t_tag;
 
 # define TAG_POS_MASK ((t_tag)0xff)
 # define TAG_POS_SHIFT 8 
-# define TAG_AR_SZ ((size_t)1 << DEF_TAG_POS_SHIFT)
+# define TAG_AR_SZ ((size_t)1 << TAG_POS_SHIFT)
 
 # define TPM TAG_POS_MASK 
 # define TPS TAG_POS_SHIFT
@@ -345,12 +345,12 @@ struct						s_view
 };
 
 /*
-** - ar_allocs counts bytes
+** - tar_allocs counts bytes allocated for tagged arrays.
 ** - nxt_allocs counts individual allocs not bytes.
 */
 typedef struct				s_scene
 {
-	size_t		ar_allocs;
+	size_t		tar_allocs;
 	size_t		nxt_allocs;
 	t_s_se		es[e_eg_sz];
 	t_s_ao		*ao;
