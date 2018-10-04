@@ -44,7 +44,7 @@ int						get_nxt_se(
 	t_tag *ret,
 	void **ret_addr)
 {
-	t_s_se *const	p = s->es[grp];
+	t_s_se *const	p = s->e[grp];
 	t_s_ft			tags;
 	t_tag			tag;
 	int				r;

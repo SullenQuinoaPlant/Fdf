@@ -1,21 +1,22 @@
 #include "scene.h"
 
 int						nxt_fresh_obj(
-	t_s_s *scene,
+	t_s_s *s,
 	t_s_o **ret,
 	t_tag *ret_tag)
 {
 	t_tag	tag;
-	t_s_o	*obj;
+	t_s_o	*o;
 	int		r;
 
 	*ret = 0;
-	if ((r = get_nxt_obj(scene, &tag, &obj)) != SUCCESS)
+	if ((r = get_nxt_se(e_so, s, &tag, &o)) != SUCCESS)
 		return (r);
 	ft_bzero(obj, sizeof(t_s_o));
-	obj->h.type = e_eg_null;
+	o->hdl.type = e_seg_null;
 	if (ret_tag)
 		*ret_tag = tag;
+	*ret = o;
 	return (r);
 }
 

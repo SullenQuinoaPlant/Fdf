@@ -1,34 +1,5 @@
 #include "cdgfxyrz_builder.h"
 
-static int					add_points(
-	t_s_cdgfxyrz *p,
-	t_s_s *s,
-	t_tag *ts,
-	int *r)
-{
-	t_s_cxyd (*const	par)[p->y_sz][1] = (t_s_cxyd(*)[p->y_sz][1])p->ar;
-	t_tag (*const		tags)[p->y_sz] = (t_tag(*)[p->y_sz])ts;
-	size_t				i;
-	size_t				j;
-	t_s_p				*pt;
-
-	i = -1;
-	while (++i < p->x_sz)
-	{
-		j = -1;
-		while (++j < p->y_sz)
-		{
-			if ((*r = get_nxt_se(s, e_spnv, &tags[i][j])) != SUCCESS)
-				return (*r);
-			pt = &(s->es[e_spnv].ar[tags[i][j] >> TPS])[tags[i][j] & TPM];
-			pt.xyz[X] = i + p->at[X];
-			pt.xyz[Y] = j + p->at[Y];
-			pt.xyz[Z] = par->z + p->at[Z];
-		}
-	}
-	return ((*r = SUCCESS));
-}
-
 /*
 **LINE_COUNT  is :
 **(x_sz - 1) * y_sz + (y_sz - 1) * x_sz
@@ -80,6 +51,35 @@ static void				add_point_refct(
 	chg_tag_refct(tar[p->x_sz - 1][0], 2, grp);
 	chg_tag_refct(tar[p->x_sz - 1][p->y_sz - 1], 2, grp);
 	chg_tag_refct(tar[0][p->y_sz - 1], 2, grp);
+}
+
+static int					add_points(
+	t_s_cdgfxyrz *p,
+	t_s_s *s,
+	t_tag *ts,
+	int *r)
+{
+	t_s_cxyd (*const	par)[p->y_sz][1] = (t_s_cxyd(*)[p->y_sz][1])p->ar;
+	t_tag (*const		tags)[p->y_sz] = (t_tag(*)[p->y_sz])ts;
+	size_t				i;
+	size_t				j;
+	t_s_p				*pt;
+
+	i = -1;
+	while (++i < p->x_sz)
+	{
+		j = -1;
+		while (++j < p->y_sz)
+		{
+			if ((*r = get_nxt_se(s, e_spnv, &tags[i][j])) != SUCCESS)
+				return (*r);
+			pt = &(s->es[e_spnv].ar[tags[i][j] >> TPS])[tags[i][j] & TPM];
+			pt.xyz[X] = i + p->at[X];
+			pt.xyz[Y] = j + p->at[Y];
+			pt.xyz[Z] = par->z + p->at[Z];
+		}
+	}
+	return ((*r = SUCCESS));
 }
 
 int						cdgfxyrz_builder(

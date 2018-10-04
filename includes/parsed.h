@@ -6,11 +6,11 @@
 /*
 **The following structure describes a cartesian grid wich:
 ** - is full in x and y dimensions: each x and y combination
-**	 within parse dimensions is assigned a value.
+**		within parse dimensions is assigned a value.
 ** - is "regular" in z dimension, by which we mean that at any
-**	(x, y) position, one and only one z-axis value is assigned.
+**		(x, y) position, one and only one z-axis value is assigned.
 ** - the parse is described in a 2-dimensional (t_cgfxyrz) array
-**	where the dimensions are assigned as follows : ar[x][y]
+**		where the dimensions are assigned as follows : ar[x][y]
 ** - the "at" array specifies where to place grid origin in scene, not optional.
 */
 typedef struct				s_cartesian_xy_dot

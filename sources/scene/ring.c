@@ -7,12 +7,14 @@ int						ring_expand(
 	void **p_ring)
 {
 	t_s_ring *const	prv = *p_ring;
-	t_s_ring			*p;
+	t_s_ring		*p;
 
 	if (!(p = malloc(container_sz)))
 		return (RING_SYS_ERR);
 	if (content)
 		ft_memcpy(p, content, container_sz);
+	else
+		ft_bzero(p, container_sz);
 	if (prv)
 	{
 		*p = (t_s_ring){prv, prv->nxt};
