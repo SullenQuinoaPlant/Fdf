@@ -1,6 +1,23 @@
 #include "scene.h"
 
+size_t					teseg_type_sz(
+	t_e_seg g)
+{
+	if (g == e_spnv)
+		return (sizeof(t_u_spsv));
+	if (g == e_sd)
+		return (sizeof(t_s_d));
+	if (g == e_slna)
+		return (sizeof(t_u_slsa));
+	if (g == e_sf)
+		return (sizeof(t_s_f));
+	if (g == e_so)
+		return (sizeof(t_s_o));
+	return (0);
+}
+
 int						init_tsse(
+	t_e_seg g,
 	t_s_se *se)
 {
 	t_s_ft const	last_link = (t_s_ft){0, 0};
@@ -10,6 +27,7 @@ int						init_tsse(
 		return (SYS_ERR);
 	se->nxt = tl;
 	se->ar_sz = 0;
+	se->e_sz = teseg_type_sz(g);
 	return (add_star(se, s));
 }
 

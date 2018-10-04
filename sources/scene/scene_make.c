@@ -23,7 +23,7 @@ static int				init_scene(
 		return (SYS_ERR);
 	init_vars(s);
 	i = e_spnv;
-	while (i < e_seg_sz && (r = init_tsse(&s->e[i])) == SUCCESS))
+	while (i < e_seg_sz && (r = init_tsse(i, &s->e[i])) == SUCCESS))
 		i++;
 	if (r != SUCCESS)
 		scene_teardown(&scene);
