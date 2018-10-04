@@ -30,35 +30,3 @@ int						new_view(
 		*ret = v;
 	return (r);
 }
-
-static void				free_view_members(
-	void *view,
-	size_t ttl_sz)
-{
-	t_s_sv *const	v = (t_s_sv*)view;
-	t_s_pc			*coords;
-
-	(void)unused;
-	while (coords)
-	{
-		DECREASE coords refs
-		prj->refs--;
-		prj = prj->up;
-	}
-	ring_free(sizeof(t_s_aq), free_ao, &v->ao);
-	if (stuff && stuff_del)
-		(*stuff_del)(stuff, stuff_sz);
-	ft_bzero(v, sizeof(t_s_sv));
-}
-
-static void				free_view(
-	t_s_sv *ring_bit)
-{
-	ring_shrink(sizeof(t_s_sv), free_view_members, &ring_bit);
-}
-
-void					free_views(
-	t_s_sv *ring)
-{
-	ring_free(sizeof(t_s_sv), free_view_members, &ring);
-}
