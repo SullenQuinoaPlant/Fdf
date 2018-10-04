@@ -10,9 +10,15 @@ static int				get_container_obj(
 	t_s_o **o)
 {
 	size_t const	l_ct = (p->x_sz - 1) * p->y_sz + (p->y_sz - 1) * p->x_sz;
+	t_list			*tl;
+	size_t			l_ct;
 	int				r;
 
 	*o = 0;
+	l_ct = (p->x_sz - 1) * p->y_sz + (p->y_sz - 1) * p->x_sz;
+	if ((r = nxt_active_obj(s, o, 0)) == SUCCESS) ||
+		while (l_ct-- && (tl = ft_lstnew()
+
 	if ((r = nxt_active_obj(s, o, 0)) != SUCCESS ||
 		!(o->es[e_slna].ar = malloc(l_ct * TAG_SZ) ||
 		return (r != SUCCESS ? r : SYS_ERR);
