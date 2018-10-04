@@ -24,14 +24,16 @@ static void				free_view_members(
 	size_t ttl_sz)
 {
 	t_s_sv *const	v = (t_s_sv*)view;
+	t_e_vpg			i;
 
 	onelessview(v->ct);
 	free_vpnvs(v->s->e[e_spnv].ar_sz, v->vpnv);
-	
-	ring_free(sizeof(t_s_aq), free_ao, &v->ao);
-	if (stuff && stuff_del)
-		(*stuff_del)(stuff, stuff_sz);
-	ft_bzero(v, sizeof(t_s_sv));
+	i = e_vpg;
+	while (i < e_vpg_sz)
+		free_tar(v->ve[i].ar, v->ve[i].ar_sz, v->ve[i++].e_sz);
+	if (view)
+		ft_cleanfree(*view, sizeof(t_s_pxl) * v->h * v->w)
+	ft_cleanfree(view, sizeof(t_s_sv));
 }
 
 static void				free_view(

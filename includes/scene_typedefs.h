@@ -436,7 +436,7 @@ typedef struct				s_scene_view
 	t_s_ta		ve[e_vpg_sz];
 	t_vuint		h;
 	t_vuint		w;
-	t_s_pxl		**view;
+	t_s_pxl		*view;
 }							t_s_sv;
 
 /*
