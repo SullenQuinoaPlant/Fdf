@@ -16,10 +16,6 @@
 **TAG_POS_SHIFT used to shift out intra-array position bits.
 **TAG_AR_SZ is determined by TAG_AR_SHIFT
 **
-**NOTE :
-**The TAG defines may be adjusted per element type.
-**See scene_objects.h (u_spsv TAGs, for example, differ from default)
-**
 **
 **Within element-specific structures:
 ** - **ar: pointer to array of arrays.
@@ -51,7 +47,7 @@ typedef uint32_t	t_argb;
 
 /*
 **Negative reference counts assigned to an object
-**	indicate that we intend to release it.
+**	indicate that we intend to release its tag.
 */
 typedef int	t_refct;
 # define MAX_REFS INT_MAX
@@ -84,6 +80,13 @@ typedef enum				e_scene_element_groups
 # define Y 1
 # define Z 2
 
+/*
+**T: θ, in (xOz) plane, from x
+**P: φ, from y to (xOz) plane.
+**Why choose θ and φ relative to y ?
+**	there is no beacause axis.
+**R: radius, from O.
+*/
 # define T 0
 # define P 1
 # define R 2
@@ -188,7 +191,6 @@ typedef union				u_slsa
 	t_s_a	a;
 }							t_u_slsa;
 
-
 /*
 **In s_fill:
 ** - norm_v (normal vector) points outwards from the filled surface.
@@ -207,9 +209,12 @@ typedef struct				s_fill
 	t_tag			norm_v;
 }							t_s_f;
 /*
-**End of scene elements
+**End of visible elements
 */
 
+/*
+**(t_s_o)s are collections of scene elements.
+*/
 typedef struct				s_object_handle
 {
 	t_e_seg	type;
@@ -229,9 +234,6 @@ typedef enum				e_object_element_groups
 	e_oeg_null
 }							t_e_oeg;
 
-/*
-**(t_s_o)s are collections of basic elements.
-*/
 typedef struct				s_object
 {
 	t_refct			refs;
@@ -239,9 +241,6 @@ typedef struct				s_object
 	t_s_oh			hdl;
 	t_argb			argb;
 }							t_s_o;
-/*
-**End scene elements.
-*/
 
 /*
 **Scene control structures:
@@ -265,6 +264,11 @@ typedef struct				s_scene_elements
 	t_list		*nxt;
 }							t_s_se;
 
+/*
+**(t_s_ta)s are used to find scene elements from tags,
+**	just like (t_s_se)s.
+**They aren't used to introduce elements to the scene
+**	so do not need the 'nxt' list.
 typedef struct				s_tagged_array
 {
 	void		**ar;
@@ -275,28 +279,35 @@ typedef struct				s_tagged_array
 /*
 **t_pctr as in: point coordinate transform
 **t_pctrm : point coordimante transform matrix
-*
-typedef	double	(t_pctrm_row)[4];
+*/
+# define DIMS 3
+# define D_1 0
+# define D_2 1
+# define D_3 2
+# define DIMS_N_TR 4
+# define TR 3
+typedef	double	(t_pctrm_row)[3];
 typedef t_pctr_row	(t_pctrm)[4];
-
-typedef void	(*t_pctr)(void*, size_t, t_u_spsv const**, t_u_spsv**);
 
 typedef struct s_point_coordinates_transform	t_s_pctr;
 struct						s_points_coordinates_transform
 {
-	t_s_ring	linked;
+	t_s_ring	ring;
 	t_s_pctr	*prv;
 	t_s_pctr	*nxt;
-	t_pctrm		own;
-	t_pctrm		stack;
+	t_pctrm		own_tr;
+	t_pctrm		mashed_tr;
 	int			view_ct;
 }
 
+typedef void	(*t_pctr)(void*, size_t, t_u_spsv const *const *, t_u_spsv**);
+
 /*
-**Projections hold the shadows of the points required
-**	to describe scene elements in space, on a 2d plane.
+**Projections hold the shadows in the view plane of the points required
+**	to describe scene elements.
 **Point projections set to {max t_vuint, max t_vuint} indicate
-**	the point may be out of the display array.
+**	the point may be out of the display array, and is expected to
+**	cast multiple shadows.
 */
 typedef enum				e_view_projection_groups
 {
@@ -316,8 +327,9 @@ typedef unsigned int	t_vuint;
 
 # define V_H 0
 # define V_W 1
+# define V_DIMS 2
 
-typedef t_vuint	(t_vpos)[2]
+typedef t_vuint	(t_vpos)[V_DIMS]
 
 typedef struct				s_point_projection
 {
@@ -331,11 +343,11 @@ typedef struct				s_dot_projection
 
 typedef struct				s_line_or_arrow_projection
 {
-	t_vpos	between[2];
+	t_vpos	ends[2];
 }							t_s_loap;
 
 /*
-**'count' gives the number of points used in 'tips'.
+**'tips_ct' gives the number of points used in 'tips'.
 **'bar' : barycenter.
 **There is one less side to the polygon than the count.
 **Tips are required to be sorted by rotation around (bar; view-axis).
@@ -343,20 +355,21 @@ typedef struct				s_line_or_arrow_projection
 typedef struct				s_fill_projection
 {
 	t_vpos	tips[6];
+	size_t	tips_ct;
 	t_vpos	bar;
-	size_t	count;
 }							t_s_fp;
 
 /*
+**Object projection structure holds properties the view
+**	may wish to give objects.
 **object flags:
 */
-# define SHOW_O 0x1
-# define HIGHLIGHT_O 0x2
+# define O_SHOW 0x1
+# define O_HIGHLIGHT 0x2
 typedef struct				s_object_projection
 {
 	uint8_t	flags;
 }							t_s_op;
-
 
 /*
 **Projections take point coordinates and an element. 
@@ -397,7 +410,7 @@ typedef struct				s_pixel
 **Abreviations:
 ** - id: view  identification number.
 ** - s: scene.
-** - ao_cursor: active object cursor.
+** - ao: cursor on the scene's active object ring.
 ** - ctr: coordinates transform.
 ** - vpnv: view points and vectors.
 ** - prj: projections. prj[i](prj_arg[i], ...) -> ve[i]
@@ -416,7 +429,7 @@ struct						s_scene_view
 	t_s_ring	ring;
 	int			id;
 	t_s_s		*s;
-	t_s_ao		*ao_cursor;
+	t_s_ao		*ao;
 	t_s_pctr	*ctr;
 	t_u_spsv	**vpnv;
 	t_proj		prj[e_vpg_sz];
@@ -430,11 +443,14 @@ struct						s_scene_view
 /*
 **Scene:
 */
+/*
+**'vflags', (view flags) are the same as (t_s_op) flags.
+*/
 typedef struct				s_active_object
 {
 	t_s_ring	ring;
 	t_tag		tag;
-	uint8_t		flags;
+	uint8_t		vlags;
 }							t_s_ao;
 
 /*
