@@ -3,12 +3,15 @@
 static void				free_tssbi(
 	t_s_sbi *tssbi)
 {
-	t_tssbi_freer	f[e_sit_sz] = {
+	t_tssbi_freer	far[e_sit_sz] = {
 		0,
 		free_tscpgfxyrz
 	};
+	t_ssbi_freer	f;
 
-	r = f[tssbi->type](tssbi);
+	r = SUCCESS;
+	if ((f = far[tssbi->type](tssbi))
+		r = f(tssbi);
 	ft_cleanfree(tssbi, sizeof(t_s_sbi));
 }
 
