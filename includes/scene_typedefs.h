@@ -159,8 +159,7 @@ typedef struct				s_dot
 }							t_s_d;
 
 /*
-**lines are represented by two extremities; they
-**	are finite segments (but letter 's' already used).
+**lines are represented by their two extremities.
 */
 # define L_END1 0
 # define L_END2 1
@@ -170,6 +169,7 @@ typedef struct				s_line
 	t_tag			end_p[2];
 	t_argb			argb[2];
 }							t_s_l;
+
 /*
 **arrows are vectors positioned in space.
 */
@@ -212,7 +212,7 @@ typedef struct				s_fill
 
 typedef struct				s_object_handle
 {
-	t_e_eg	type;
+	t_e_seg	type;
 	t_tag	tag;
 }							t_s_oh;
 
@@ -254,6 +254,7 @@ typedef struct				s_free_tags
 }							t_s_ft;
 
 /*
+**'nxt' as in: next free tags.
 **The (t_list) nxt is a list of (t_s_ft) structures.
 */
 typedef struct				s_scene_elements
@@ -273,47 +274,40 @@ typedef struct				s_tagged_array
 
 /*
 **t_pctr as in: point coordinate transform
-*/
+**t_pctrm : point coordimante transform matrix
+*
+typedef	double	(t_pctrm_row)[4];
+typedef t_pctr_row	(t_pctrm)[4];
+
 typedef void	(*t_pctr)(void*, size_t, t_u_spsv const**, t_u_spsv**);
 
-/*
-**(t_s_cs)s own their own set of the scene points.
-**The coordinates of these points are modified from the previous (t_s_c),
-**		with the (t_pctr) tr.
-**Tags are used to identify points reliably accross point coordinate sets.
-**A (t_s_cs)'s points should always be the result of applying a (t_s_pc)'s
-**	(t_pctr) transform to the previous set of point coordinates.
-**	For any other change, go through root scene structure.
-*/
-
-typedef struct s_point_coordinates	t_s_pc;
-struct						s_points_coordinates
+typedef struct s_point_coordinates_transform	t_s_pctr;
+struct						s_points_coordinates_transform
 {
 	t_s_ring	linked;
-	t_s_pc		*prv;
-	t_s_pc		*nxt;
-	t_pctr		tr;
-	void		*tr_arg;
-	size_t		tr_arg_sz;
-	t_s_ta		coords;
-	int			views;
+	t_s_pctr	*prv;
+	t_s_pctr	*nxt;
+	t_pctrm		own;
+	t_pctrm		stack;
+	int			view_ct;
 }
 
 /*
 **Projections hold the shadows of the points required
 **	to describe scene elements in space, on a 2d plane.
-**Points themselves are not represented, so points are
-**	not projected, and points have no shadows. (they are evil)
+**Point projections set to {max t_vuint, max t_vuint} indicate
+**	the point may be out of the display array.
 */
-typedef enum				e_view_projections
+typedef enum				e_view_projection_groups
 {
-	e_vd,
-	e_vlna,
-	e_vf,
-	e_vo,
-	e_vp_sz,
-	e_vp_null
-}							t_e_vp;
+	e_vpg,
+	e_vdg,
+	e_vlnag,
+	e_vfg,
+	e_vog,
+	e_vpg_sz,
+	e_vpg_null
+}							t_e_vpg;
 
 /*
 **A type at least as big as view height and width
@@ -324,6 +318,11 @@ typedef unsigned int	t_vuint;
 # define V_W 1
 
 typedef t_vuint	(t_vpos)[2]
+
+typedef struct				s_point_projection
+{
+	t_vpos	point;
+}							t_s_pp;
 
 typedef struct				s_dot_projection
 {
@@ -336,13 +335,14 @@ typedef struct				s_line_or_arrow_projection
 }							t_s_loap;
 
 /*
-**'count' gives the number of points used in 'inside'.
-**There is one less side to the polygon than the count.
+**'count' gives the number of points used in 'tips'.
 **'bar' : barycenter.
+**There is one less side to the polygon than the count.
+**Tips are required to be sorted by rotation around (bar; view-axis).
 */
 typedef struct				s_fill_projection
 {
-	t_vpos	inside[6];
+	t_vpos	tips[6];
 	t_vpos	bar;
 	size_t	count;
 }							t_s_fp;
@@ -359,14 +359,14 @@ typedef struct				s_object_projection
 
 
 /*
-**projection: takes point coordinates and element groups and
-**	spits out each group's projection.
-**Does not allocate (t_s_vp)s, stores stuff in them.
-/*
-typedef void	(*t_proj)(void*, t_s_s*, t_s_pc const*, t_s_ta const*const);
-typedef void	(*t_dproj)(void*, t_s_s*, t_s_pc const*, t_s_dp *const);
-typedef void	(*t_loaproj)(void*, t_s_s*, t_s_pc const*, t_s_loap *const);
-typedef void	(*t_fproj)(void*, t_s_s*, t_s_pc const*, t_s_fp *const);
+**Projections take point coordinates and an element. 
+**Fill that element's projection.
+**typedef void	(*t_pproj)(void*, t_u_spsv const *const, t_s_pp *);
+**typedef void	(*t_dproj)(void*, t_u_spsv const *const, t_s_dp *);
+**typedef void	(*t_loaproj)(void*, t_u_spsv const *const, t_s_loap *);
+**typedef void	(*t_fproj)(void*, t_u_spsv const *const, t_s_fp *);
+*/
+typedef void	(*t_proj)(void *, t_u_spsv const *const *, void *);
 
 /*
 **The active object ring lives in the scene structure.
@@ -388,24 +388,40 @@ typedef struct				s_pixel
 /*
 **View builders are responsible for initializing:
 ** - proj
-** - all event functions
-** - stuff, stuff_sz, stuff_del
 **
 **The following fields are initialized by the scene:
 ** - ring
 ** - id
 ** - ao_cursor
+**
+**Abreviations:
+** - id: view  identification number.
+** - s: scene.
+** - ao_cursor: active object cursor.
+** - ctr: coordinates transform.
+** - vpnv: view points and vectors.
+** - prj: projections. prj[i](prj_arg[i], ...) -> ve[i]
+** - ve: view elements.
+** - h: view height.
+** - w: view width.
+** - v: view[h][w] of (t_s_pxl) to display.
+**		v[0][0] : top left
+**		v[0][w - 1] : top right
+**		v[h - 1][0] : bottom left
+**		v[h - 1][w - 1] : bottom right
 */
 typedef struct s_view		t_s_sv;
 struct						s_scene_view
 {
 	t_s_ring	ring;
 	int			id;
-	t_s_s		*scene;
+	t_s_s		*s;
 	t_s_ao		*ao_cursor;
-	t_s_pc		*points;
-	t_proj		prj;
-	t_s_ta		es[e_vp_sz];
+	t_s_pctr	*ctr;
+	t_u_spsv	**vpnv;
+	t_proj		prj[e_vpg_sz];
+	void		*prj_arg[e_vpg_sz];
+	t_s_ta		ve[e_vpg_sz];
 	t_vuint		h;
 	t_vuint		w;
 	t_s_pxl		**view;
@@ -431,7 +447,7 @@ typedef struct				s_scene
 	size_t		nxt_allocs;
 	t_s_se		es[e_eg_sz];
 	t_s_ao		*ao;
-	t_s_pc		canonical;		
+	t_s_pctr	*coords;
 	t_s_sv		*views;
 }							t_s_s;
 
