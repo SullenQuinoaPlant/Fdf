@@ -237,7 +237,7 @@ typedef enum				e_object_element_groups
 typedef struct				s_object
 {
 	t_refct			refs;
-	t_list			es[e_oeg_sz];
+	t_list			*es[e_oeg_sz];
 	t_s_oh			hdl;
 	t_argb			argb;
 }							t_s_o;
