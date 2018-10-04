@@ -16,14 +16,7 @@ int						init_tsse(
 void					free_tsse(
 	t_s_se *se)
 {
-	size_t const	sz = TAS * se->e_sz;
-	void **const	lim = se->ar + se->ar_sz;
-	void			**p;
-
-	p = se->ar;
-	while (p < lim)
-		ft_cleanfree(*p++, sz);
-	ft_cleanfree(se->ar, sizeof(void*) * se->ar_sz);
+	free_tar(se->ar, se->ar_sz, se->e_sz);
 	ft_lstdel(&se->nxt, ft_cleanfree);
 }
 

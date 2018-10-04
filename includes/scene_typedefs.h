@@ -411,7 +411,7 @@ typedef struct				s_pixel
 ** - id: view  identification number.
 ** - s: scene.
 ** - ao: cursor on the scene's active object ring.
-** - ctr: coordinates transform.
+** - ct: coordinates transform.
 ** - vpnv: view points and vectors.
 ** - prj: projections. prj[i](prj_arg[i], ...) -> ve[i]
 ** - ve: view elements.
@@ -423,14 +423,13 @@ typedef struct				s_pixel
 **		v[h - 1][0] : bottom left
 **		v[h - 1][w - 1] : bottom right
 */
-typedef struct s_view		t_s_sv;
-struct						s_scene_view
+typedef struct				s_scene_view
 {
 	t_s_ring	ring;
 	int			id;
 	t_s_s		*s;
 	t_s_ao		*ao;
-	t_s_pctr	*ctr;
+	t_s_pctr	*ct;
 	t_u_spsv	**vpnv;
 	t_proj		prj[e_vpg_sz];
 	void		*prj_arg[e_vpg_sz];
@@ -438,7 +437,7 @@ struct						s_scene_view
 	t_vuint		h;
 	t_vuint		w;
 	t_s_pxl		**view;
-};
+}							t_s_sv;
 
 /*
 **Scene:
@@ -456,15 +455,19 @@ typedef struct				s_active_object
 /*
 ** - tar_allocs counts bytes allocated for tagged arrays.
 ** - nxt_allocs counts bytes allocated to t_list structures.
+** - e : scene elements
+** - ao : active objects
+** - ct : coordinate transforms
+** - v : views
 */
 typedef struct				s_scene
 {
 	size_t		tar_allocs;
 	size_t		nxt_allocs;
-	t_s_se		es[e_eg_sz];
+	t_s_se		e[e_seg_sz];
 	t_s_ao		*ao;
-	t_s_pctr	*coords;
-	t_s_sv		*views;
+	t_s_pctr	*ct;
+	t_s_sv		*v;
 }							t_s_s;
 
 typedef int		(*t_scene_builder)(t_s_sbi*, t_s_s*);

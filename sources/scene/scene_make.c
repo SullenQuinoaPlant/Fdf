@@ -5,30 +5,30 @@ static void				init_vars(
 {
 	s->ar_allocs = 0;
 	s->nxt_allocs = 0;
-	s->prjs.nullprj.pnv = (t_s_p**)s->es[e_spnv].ar;
-	s->views = 0;
+	ft_bzero(s->e, sizeof(s->es));
+	s->ao = 0;
+	s->ct = 0;
+	s->v = 0;
 }
 
 static int				init_scene(
 	t_s_s **p_ret_scene)
 {
 	t_s_s	*s;
-	t_e_eg	i;
+	t_e_seg	i;
 	int		r;
 
 	*p_ret_scene = 0;
 	if (!(scene = malloc(sizeof(t_s_s))))
 		return (SYS_ERR);
+	init_vars(s);
 	i = e_spnv;
-	while (i < e_seg_sz && (r = init_tsse(&s->es[i])) == SUCCESS))
+	while (i < e_seg_sz && (r = init_tsse(&s->e[i])) == SUCCESS))
 		i++;
 	if (r != SUCCESS)
 		scene_teardown(&scene);
 	else
-	{
-		init_vars(s);
 		*p_ret_scene = scene;
-	}
 	return (r);
 }
 

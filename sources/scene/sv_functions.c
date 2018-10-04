@@ -33,9 +33,8 @@ int						new_view(
 
 static void				free_view_members(
 	void *view,
-	size_t unused)
+	size_t ttl_sz)
 {
-	THIS NEEDS TO CHANGE
 	t_s_sv *const	v = (t_s_sv*)view;
 	t_s_pc			*coords;
 

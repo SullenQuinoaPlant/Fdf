@@ -1,14 +1,14 @@
 view init.
 view free
 
+check in make_scene.
+	scene_teardown
+		sv frees
 check point deep copy.
 
 when modifying t_s_se t_s_p update (t_s_pc)s.
 when modifying t_s_se that aren't t_s_p, update views.
 
-add view-specific structures for each element type. In whiche point shadows/projections specific to that view are store.
 write projections from t_s_se[grp] & t_s_pc to t_s_vp (one for each element type in each projection type);
-
-t_s_vp for each object. keep active object options there; it's okay. Only one ring of active objects, 
 
 when modifying the t_s_ao ring in t_s_s, reset view t_s_ao pointers if they were pointing to deleted element.
