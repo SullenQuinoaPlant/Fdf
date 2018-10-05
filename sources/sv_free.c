@@ -36,7 +36,7 @@ static void				free_view_members(
 	ft_cleanfree(view, sizeof(t_s_sv));
 }
 
-static void				free_view(
+void					free_view(
 	t_s_sv *ring_bit)
 {
 	ring_shrink(sizeof(t_s_sv), free_view_members, &ring_bit);

@@ -17,6 +17,10 @@ int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
 	t_s_s	*scene);
 
+int							clone_tar(
+	t_s_ta	*ta,
+	void	***p_ret);
+
 void						free_tar(
 	void	**ar,
 	size_t	ar_sz,
@@ -44,6 +48,10 @@ int							make_scene(
 
 t_e_vpg						map_seg_to_vpg(
 	t_e_seg	sg);
+
+int							new_view(
+	t_s_s	*s,
+	t_s_v	**ret);
 
 void						onelessview(
 	t_s_pctr	*p_coord_transform);

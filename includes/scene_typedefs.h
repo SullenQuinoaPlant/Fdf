@@ -253,18 +253,6 @@ typedef struct				s_free_tags
 }							t_s_ft;
 
 /*
-**'nxt' as in: next free tags.
-**The (t_list) nxt is a list of (t_s_ft) structures.
-*/
-typedef struct				s_scene_elements
-{
-	void		**ar;
-	size_t		ar_sz;
-	size_t		e_sz;
-	t_list		*nxt;
-}							t_s_se;
-
-/*
 **(t_s_ta)s are used to find scene elements from tags,
 **	just like (t_s_se)s.
 **They aren't used to introduce elements to the scene
@@ -275,6 +263,25 @@ typedef struct				s_tagged_array
 	size_t		ar_sz;
 	size_t		e_sz;
 }							t_s_ta;
+
+/*
+**'nxt' as in: next free tags.
+**The (t_list) nxt is a list of (t_s_ft) structures.
+*/
+typedef struct				s_scene_elements
+{
+	union
+	{
+		struct
+		{
+			void		**ar;
+			size_t		ar_sz;
+			size_t		e_sz;
+		};
+		t_s_ta	ta;
+	};
+	t_list		*nxt;
+}							t_s_se;
 
 /*
 **t_pctr as in: point coordinate transform
