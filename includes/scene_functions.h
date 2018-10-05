@@ -8,41 +8,58 @@
 ** (t_s_sbi) string array is freed by function call.
 ** Will fail if pointer to string is not properly initialized.
 */
-int							add_tssbis_to_scene(
-	t_s_sbi	*input_str,
-	t_s_s	*p_scene);
-
-void						free_slnas(
-	t_s_slna	*p);
-
-void						free_sobjs(
-	t_s_so		*p);
-
-void						free_spnvs(
-	t_s_spnv	*p);
-
-void						free_tssbi_str(
-	t_s_sbi	*str);
-
-int							init_tsslna(
-	t_s_slna	*p);
-
-int							init_tsso(
-	t_s_so		*p);
-
-int							init_tsspnv(
-	t_s_spnv	*p);
-
 /*
 **Allocates and initilizes a scene, with optional
 **initial elements passed through input_str.
 **If input_str is not null, make_scene always frees the contents.
 */
+int							add_tssbis_to_scene(
+	t_s_sbi	*input_str,
+	t_s_s	*scene);
+
+void						free_tar(
+	void	**ar,
+	size_t	ar_sz,
+	size_t	e_sz);
+
+void						free_tssbi_str(
+	t_s_sbi	*str);
+
+void						free_tsse(
+	t_s_se	*se);
+
+int							get_nxt_se(
+	t_e_seg	grp,
+	t_s_s	*s,
+	t_tag	*ret,
+	void	**ret_addr);
+
+int							init_tsse(
+	t_e_seg	g,
+	t_s_se	*se);
+
 int							make_scene(
 	t_s_sbi	*input_str,
 	t_s_s	**p_ret_scene);
 
-void						scene_teardown(
-	t_s_s	**scene);
+t_e_vpg						map_seg_to_vpg(
+	t_e_seg	sg);
+
+void						onelessview(
+	t_s_pctr	*p_coord_transform);
+
+int							reg_freetags(
+	t_tag	first,
+	t_tag	diff_with_last,
+	t_s_s	*s,
+	t_s_se	*grp);
+
+size_t						teseg_type_sz(
+	t_e_seg	g);
+
+int							tssv_tar_allocs(
+	t_e_vpg	grp,
+	t_s_s	*s);
+
 
 #endif

@@ -39,18 +39,18 @@ void					free_tsse(
 }
 
 int						get_nxt_se(
-	t_e_seg grp,
+	t_e_seg g,
 	t_s_s *s,
 	t_tag *ret,
 	void **ret_addr)
 {
-	t_s_se *const	p = s->e[grp];
+	t_s_se *const	p = s->e[g];
 	t_s_ft			tags;
 	t_tag			tag;
 	int				r;
 
 	if (!p->nxt->next &&
-		(r = add_tar(s, grp)) != SUCCESS)
+		(r = add_tar(s, g)) != SUCCESS)
 			return (r);
 	tags = (t_s_ft*)p->nxt->content;
 	if ((tag = tags->free++) == tags->last)
@@ -67,8 +67,8 @@ int						get_nxt_se(
 int						reg_freetags(
 	t_tag first,
 	t_tag diff_with_last,
-	t_s_s *scene,
-	t_s_se *group)
+	t_s_s *s,
+	t_s_se *g)
 {
 	t_tag const	last = first + diff_with_last;
 	t_list		*tl;
@@ -77,9 +77,9 @@ int						reg_freetags(
 	
 	if (!(tl = ft_lstnew(&(t_s_ft){first, last}, sizeof(t_s_ft))))
 		return (SYS_ERR);
-	ft_lstadd(&group->nxt, tl);
+	ft_lstadd(&g->nxt, tl);
 	r = SUCCESS;
-	if ((scene->nxt_allocs += sizeof(t_list)) >= TAG_NXT_CAP)
+	if ((s->nxt_allocs += sizeof(t_list)) >= TAG_NXT_CAP)
 		r = realloc_tars(s);//this is heavy. do it later.
 	return (r);
 }
