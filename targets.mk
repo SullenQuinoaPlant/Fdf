@@ -1,27 +1,24 @@
 TARGETS := \
-	slna_functions \
-	spnv_functions \
-	tspc_functions \
-	tsse_functions \
-	main \
-	sv_free \
-	tssbi_string_free \
-	se_refct_functions \
-	scene_make \
-	scene_add_tagged_array \
-	print_scene_points \
+	allocate_tagged_array \
+	cdgfxyrz_builder_add_lines \
+	cdgfxyrz_builder \
+	cdgfxyrz_parser \
 	isometric_view \
-	tssbi_string_add_to_scene \
+	main \
+	open \
+	print_scene_points \
+	ring \
+	scene_add_tagged_array \
+	scene_make \
+	scene_teardown \
+	se_functions \
+	se_refct_functions \
 	so_functions \
-	tssv_functions \
+	sv_free \
 	sv_functions \
 	tar_functions \
-	cdgfxyrz_parser \
-	open \
-	cdgfxyrz_builder_add_lines \
-	ring \
-	se_functions \
-	scene_teardown \
 	tspctr_functions \
-	allocate_tagged_array \
-	cdgfxyrz_builder
+	tssbi_string_add_to_scene \
+	tssbi_string_free \
+	tsse_functions \
+	tssv_functions

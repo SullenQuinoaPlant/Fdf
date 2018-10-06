@@ -13,9 +13,9 @@ AUX_DIR := $(TEST_DIR)/auxilliaries
 RELEASE_DIR := $(ROOT)/release
 
 include $(ROOT)/targets.mk
-SRCS = $(patsubst %,$(SRC_DIR)/%.c,$(TARGETS))
-OBJS = $(patsubst %,$(OBJ_DIR)/%.o,$(TARGETS))
-INCS = $(INC_DIR)/*.h
+SRCS := $(patsubst %,$(SRC_DIR)/%.c,$(TARGETS))
+OBJS := $(patsubst %,$(OBJ_DIR)/%.o,$(TARGETS))
+INCS := $(INC_DIR)/*.h
 
 DEPENDENCIES = libft
 

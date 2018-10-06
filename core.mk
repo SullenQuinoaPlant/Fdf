@@ -1,4 +1,4 @@
-all : $(NAME)
+all : $(OUT_DIR)/$(NAME)
 
 $(OUT_DIR)/$(NAME) : $(OBJS)
 	$(CC) -o $@ $^
