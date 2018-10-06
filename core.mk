@@ -1,18 +1,7 @@
-all : header library
+all : $(NAME)
 
-.PHONY : header
-header : $(OUT_DIR_H)/$(LIBNAME).h
-
-$(OUT_DIR_H)/$(LIBNAME).h :
-	sed -e'4s@\($(NAME).h\)   @lib\1@'\
-		-e'13,14s@M@LIB&@'\
-		$(INC_DIR)/$(NAME).h > $@
-
-.PHONY : library
-library : $(OUT_DIR_LIB)/$(LIBNAME).a
-
-$(OUT_DIR_LIB)/$(LIBNAME).a : $(OBJS)
-	-ar rcs $@ $^
+$(OUT_DIR)/$(NAME) : $(OBJS)
+	$(CC) -o $@ $^
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS)\
