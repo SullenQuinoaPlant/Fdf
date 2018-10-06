@@ -4,7 +4,7 @@
 #define BUF_CT 256
 #define BUF_SZ BUF_CT * sizeof(t_s_cxyd)
 
-int							new_buf(
+static int					new_buf(
 	t_list **prv,
 	size_t *count,
 	t_s_cxyd **p)
@@ -77,20 +77,9 @@ int							parse_cdgfxyrz_sncnl(
 	return (r);
 }
 
-int							open_sncnl_file(
-	char const *file,
-	int *ret_fd)
-{
-	int		r;
-
-	if ((*ret_fd = open(file, O_RDONLY)) < 0)
-		return (SYS_ERR);
-	return (SUCCESS);
-}
-
 #define USE 0
 #define SAVE 1
-int							fill_tscdgfxyrz(
+static int					fill_tscdgfxyrz(
 	size_t *dims,
 	t_list *bs,
 	t_s_cdgfxyrz *ret)
@@ -118,19 +107,25 @@ int							fill_tscdgfxyrz(
 	return (SUCCESS);
 }
 
-int							get_tscdgfxyrz(
+int							get_cdgfxyrz_sbi(
 	char const *file,
-	t_s_cdgfxyrz *ret)
+	t_s_sbi **ret)
 {
 	int				fd;
 	size_t			dims[2];
 	t_list			*bs;
 	t_s_cdgfxyrz	*p)
 
-	if ((r = open_sncnl_file(file, &fd)) == SUCCESS &&
+	*ret = 0;
+	p = 0;
+	if ((r = open_file(file, &fd)) == SUCCESS &&
 		(r = (parse_cdgfxyrz_sncnl(fd, dims, &bs))) == SUCCESS &&
-		(p = malloc(sizeof(t_s_cdgfxyrz))))
-		r = fill_tscdgfxyrz(dims, bs, ret);
+		(p = malloc(sizeof(t_s_cdgfxyrz))) &&
+		(r = fill_tscdgfxyrz(dims, bs, p)) == SUCCESS &&
+		(*ret = malloc(sizeof(t_s_sbi))))
+		*ret = (t_s_sbi){e_sit_cdgfxyrz, p);
+	else if (p)
+		free(p);
 	if (fd >= 0)
 		close(fd);
 	ft_lstdel(&bs, 0);

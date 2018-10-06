@@ -1,17 +1,13 @@
-#ifndef SCENE_FUNCTIONS_H
-# define SCENE_FUNCTIONS_H
+#ifndef FUNCTIONS_H
+# define FUNCTIONS_H
 
+# include "parse.h"
 # include "scene.h"
 
 /*
 **In add_tssbis_to_scene:
 ** (t_s_sbi) string array is freed by function call.
 ** Will fail if pointer to string is not properly initialized.
-*/
-/*
-**Allocates and initilizes a scene, with optional
-**initial elements passed through input_str.
-**If input_str is not null, make_scene always frees the contents.
 */
 int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
@@ -32,6 +28,10 @@ void						free_tssbi_str(
 void						free_tsse(
 	t_s_se	*se);
 
+int							get_cdgfxyrz_sbi(
+	char const	*file,
+	t_s_sbi		**ret);
+
 int							get_nxt_se(
 	t_e_seg	grp,
 	t_s_s	*s,
@@ -42,6 +42,11 @@ int							init_tsse(
 	t_e_seg	g,
 	t_s_se	*se);
 
+/*
+**Allocates and initilizes a scene, with optional
+**initial elements passed through input_str.
+**If input_str is not null, make_scene always frees the contents.
+*/
 int							make_scene(
 	t_s_sbi	*input_str,
 	t_s_s	**p_ret_scene);
@@ -56,11 +61,21 @@ int							new_view(
 void						onelessview(
 	t_s_pctr	*p_coord_transform);
 
+int							open_file(
+	char const	*file,
+	int			*ret_fd);
+
+void						prinrt_scene_points(
+	t_s_s	*s);
+
 int							reg_freetags(
 	t_tag	first,
 	t_tag	diff_with_last,
 	t_s_s	*s,
 	t_s_se	*grp);
+
+void						scene_teardown(
+	t_s_s	**s);
 
 size_t						teseg_type_sz(
 	t_e_seg	g);
