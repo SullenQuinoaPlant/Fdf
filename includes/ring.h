@@ -10,8 +10,8 @@
 
 typedef void	*t_ring;
 
-typedef struct s_ring	t_s_ring;
-typedef struct			s_ring_header
+typedef struct s_ring_header	t_s_ring;
+struct					s_ring_header
 {
 	t_s_ring	*prv;
 	t_s_ring	*nxt;

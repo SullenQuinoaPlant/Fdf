@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdint.h>
 # include "libft.h"
+# include "ring.h"
 
 # define SYS_ERR -1
 # define SUCCESS 0

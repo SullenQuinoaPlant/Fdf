@@ -295,7 +295,7 @@ typedef struct				s_scene_elements
 # define DIMS_N_TR 4
 # define TR 3
 typedef	double	(t_pctrm_row)[3];
-typedef t_pctr_row	(t_pctrm)[4];
+typedef t_pctrm_row	(t_pctrm)[4];
 
 typedef struct s_point_coordinates_transform	t_s_pctr;
 struct						s_points_coordinates_transform
@@ -306,7 +306,7 @@ struct						s_points_coordinates_transform
 	t_pctrm		own_tr;
 	t_pctrm		mashed_tr;
 	int			view_ct;
-}
+};
 
 typedef void	(*t_pctr)(void*, size_t, t_u_spsv const *const *, t_u_spsv**);
 
@@ -337,7 +337,7 @@ typedef unsigned int	t_vuint;
 # define V_W 1
 # define V_DIMS 2
 
-typedef t_vuint	(t_vpos)[V_DIMS]
+typedef t_vuint	(t_vpos)[V_DIMS];
 
 typedef struct				s_point_projection
 {
