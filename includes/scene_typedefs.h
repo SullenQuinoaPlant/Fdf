@@ -96,10 +96,10 @@ typedef struct				s_point
 	t_refct			refs;
 	union
 	{
-		struct cart
+		struct
 		{
 			double	xyz[3];
-		};
+		}			cart;
 		struct
 		{
 			double	xyz[3];
@@ -107,10 +107,10 @@ typedef struct				s_point
 	};
 	union
 	{
-		struct polr
+		struct
 		{
 			double	tpr[3];
-		};
+		}			polr;
 		struct
 		{
 			double	tpr[3];
@@ -123,10 +123,10 @@ typedef struct				s_vector
 	t_refct			refs;
 	union
 	{
-		struct cart
+		struct
 		{
 			double	xyz[3];
-		};
+		}			cart;
 		struct
 		{
 			double	xyz[3];
@@ -134,10 +134,10 @@ typedef struct				s_vector
 	};
 	union
 	{
-		struct polr
+		struct
 		{
 			double	tpr[3];
-		};
+		}			polr;
 		struct
 		{
 			double	tpr[3];
@@ -257,6 +257,7 @@ typedef struct				s_free_tags
 **	just like (t_s_se)s.
 **They aren't used to introduce elements to the scene
 **	so do not need the 'nxt' list.
+*/
 typedef struct				s_tagged_array
 {
 	void		**ar;

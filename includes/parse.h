@@ -1,7 +1,7 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "outer.h"
+# include "scene.h"
 
 /*
 **The following structure describes a cartesian grid wich:
@@ -38,7 +38,7 @@ typedef enum				e_scene_input_types
 
 typedef struct				s_scene_builder_input
 {
-	t_e_sit	type,
+	t_e_sit	type;
 	void	*input;
 }							t_s_sbi;
 #endif

@@ -3,7 +3,7 @@
 
 # include "outer.h"
 # include "scene_typedefs.h"
-# include "scene_functions.h"
+# include "functions.h"
 
 # define RELEASING_TAG 1
 # define REFCOUNT_TOO_BIG 2

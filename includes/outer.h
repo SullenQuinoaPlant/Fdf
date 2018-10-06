@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdint.h>
+# include "libft.h"
 
 # define SYS_ERR -1
 # define SUCCESS 0
