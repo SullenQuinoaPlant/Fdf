@@ -19,9 +19,20 @@ INCS := $(INC_DIR)/*.h
 
 DEPENDENCIES = libft
 
+ifndef TOOLS
+	TOOLS := mac
+endif
+
 CC := gcc
-CFLAGS_MORE =
+
+ifeq ($(TOOLS), mac)
+	CC_TEST := gcc-8.2.0
+else
+	CC_TEST := $(CC)
+endif
+
 ifndef CFLAGS
 	CFLAGS := -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBS_I)
 endif
+CFLAGS_MORE =
 CFLAGS += $(CFLAGS_MORE)

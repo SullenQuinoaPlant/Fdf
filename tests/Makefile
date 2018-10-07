@@ -15,6 +15,7 @@ TEST_DEPENDENCIES = libaux libcmocka_shared
 
 .PHONY : tests_all
 tests_all :\
+$(TOOLS)_ld\
 build_test_dependencies\
 clean-tests\
 build_tests\
@@ -46,7 +47,7 @@ test_prerequisites : cmocka
 
 .PHONY : cmocka
 cmocka : 
-	@if $(CC) $(CFLAGS_TEST)\
+	@if $(CC_TEST) $(CFLAGS_TEST)\
 		-I $(LIBS_I) -L $(LIBS_L)\
 	 	$(TEST_DIR)/cmocka/check_install.c\
 		-lcmocka -o test.o\
@@ -64,7 +65,7 @@ $(TEST_DIR)/%.test.o\
 :\
 $(TEST_DIR)/%.test.c\
 $(LIBS_L)/$(LIBNAME).a
-	$(CC) $(CFLAGS_TEST)\
+	$(CC_TEST) $(CFLAGS_TEST)\
 		-I $(LIBS_I) -I $(SRC_DIR) -I $(INC_DIR)\
 		$<\
 		-L $(LIBS_L)\
@@ -81,7 +82,7 @@ $(TEST_DIR)/main.test.o\
 :\
 $(TEST_DIR)/main.test.c\
 $(LIBS_L)/$(LIBNAME).a
-	$(CC) $(CFLAGS_TEST)\
+	$(CC_TEST) $(CFLAGS_TEST)\
 		-I $(LIBS_I) -I $(SRC_DIR) -I $(INC_DIR)\
 		$<\
 		-L $(LIBS_L)\
@@ -120,8 +121,8 @@ list_tests :
 	@echo "list of test objects:"
 	@echo $(TEST_OBJS)
 
-.PHONY : osx_ld
-osx_ld :
+.PHONY : mac_ld
+mac_ld :
 	sed -i "" -e's@-Wl,-rpath=@-Wl,-rpath,@' $(TEST_DIR)/Makefile
 
 .PHONY : gnu_ld
