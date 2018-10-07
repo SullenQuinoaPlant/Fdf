@@ -38,7 +38,7 @@ struct						s_cartesian_dot_grid_fullxy_regularz
 	size_t			x_sz;
 	size_t			y_sz;
 	double			at[3];
-	t_s_cxyd		ar[];
+	t_s_cxyd		*ar;
 };
 
 enum						e_scene_input_types

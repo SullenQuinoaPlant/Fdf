@@ -231,7 +231,7 @@ enum						e_object_element_groups
 struct						s_object
 {
 	t_refct			refs;
-	t_list			*es[e_oeg_sz];
+	t_list			*e[e_oeg_sz];
 	t_s_oh			hdl;
 	t_argb			argb;
 };
@@ -392,14 +392,14 @@ struct						s_pixel
 ** - id
 ** - ao_cursor
 **
-**Abreviations:
+**Abbreviations:
 ** - id: view  identification number.
 ** - s: scene.
 ** - ao: cursor on the scene's active object ring.
 ** - ct: coordinates transform.
 ** - vpnv: view points and vectors.
 ** - prj: projections. prj[i](prj_arg[i], ...) -> ve[i]
-** - ve: view elements.
+** - e: view elements.
 ** - h: view height.
 ** - w: view width.
 ** - v: view[h][w] of (t_s_pxl) to display.
@@ -418,7 +418,7 @@ struct						s_scene_view
 	t_u_spsv	**vpnv;
 	t_proj		prj[e_vpg_sz];
 	void		*prj_arg[e_vpg_sz];
-	t_s_ta		ve[e_vpg_sz];
+	t_s_ta		e[e_vpg_sz];
 	t_vuint		h;
 	t_vuint		w;
 	t_s_pxl		*view;

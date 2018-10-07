@@ -30,7 +30,7 @@ static int				get_container_obj(
 	l_ct = (p->x_sz - 1) * p->y_sz + (p->y_sz - 1) * p->x_sz;
 	lines = 0;
 	if ((r = nxt_active_obj(s, o, 0)) == SUCCESS)
-		while (l_ct && (tl = ft_lstnew(THIS NEEDS TO CHANGE, sizeof(t_tag))
+		while (l_ct && (tl = ft_lstnew(&((t_tag[1]){0}), sizeof(t_tag))
 		{
 			ft_lstadd(&lines, tl);
 			l_ct--;
@@ -41,13 +41,13 @@ static int				get_container_obj(
 		ft_lstdel(&lines, 0);
 	}
 	else
-		(**o).es[e_ol] = lines;
+		(**o).e[e_ol] = lines;
 	return (r);
 }
 
 /*
 **Put int *r in the argument list because of 5 var limit and an aversion
-**	to ij[2] arrays and SZ * i + j arithmetic.
+**	to ij[2] arrays and SZ * ij[I] + ij[J] arithmetic.
 */
 static int					add_points(
 	t_s_cdgfxyrz *p,
@@ -70,9 +70,9 @@ static int					add_points(
 			if ((*r = get_nxt_se(s, e_spnv, &tags[i][j])) != SUCCESS)
 				return (*r);
 			pt = &(s->es[e_spnv].ar[tags[i][j] >> TPS])[tags[i][j] & TPM];
-			pt.xyz[X] = i + p->at[X];
-			pt.xyz[Y] = j + p->at[Y];
-			pt.xyz[Z] = par->z + p->at[Z];
+			pt->xyz[X] = i + p->at[X];
+			pt->xyz[Y] = j + p->at[Y];
+			pt->xyz[Z] = par[i][j].z + p->at[Z];
 		}
 	}
 	return ((*r = SUCCESS));

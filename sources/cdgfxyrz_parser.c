@@ -3,26 +3,29 @@
 
 #define BUF_CT 256
 #define BUF_SZ BUF_CT * sizeof(t_s_cxyd)
-
+#define E_CT 0
+#define E_CT_ALLOCS 1
 static int					new_buf(
 	t_list **prv,
-	size_t *count,
+	size_t *counters,
 	t_s_cxyd **p)
 {
 	t_list		*new;
+	t_s_cxyd	*ar;
 
-
-	if ((new = ft_lstnew(0, 0)) &&
-		(*p = malloc(BUF_SZ))
+	if ((ar = malloc(BUF_SZ)) &&
+		(new = ft_lstnew(0, 0)))
 	{
+		*p = ar;
 		new->content = ar;
 		new->content_size = BUF_SZ;
 		ft_lstadd(prv, new);
-		*count = BUF_CT;
+		counters[E_CT] = BUF_CT;
+		counters[E_CT_ALLOCS]++;
 	}
-	else if (new)
-		free(new);
-	return (p_ar ? SUCCESS : SYS_ERR);
+	else if (ar)
+		free(ar);
+	return (ar ? SUCCESS : SYS_ERR);
 }
 
 #define NOT_DONE 1
@@ -45,8 +48,6 @@ static int					parse_sncnl_like_really
 
 #define DIM_L 0
 #define DIM_C 1
-#define E_CT 0
-#define E_LEFT 1
 int							parse_cdgfxyrz_sncnl(
 	int fd,
 	size_t *dims,
@@ -61,48 +62,49 @@ int							parse_cdgfxyrz_sncnl(
 	*bs = 0;
 	l_ct = 0;
 	ft_memset(e_ct, 0, 2);
-	while ((r = get_next_line(fd, &l[0]) > 0 ? SUCCESS : SYS_ERR) == SUCCESS) 
+	r = 0;
+	while ((r = get_next_line(fd, &l[0])) > 0)
 	{
 		l[1] = l[0];
 		l_ct++;
-		while ((e_ct || (r = new_buff(bs, &e_ct, &p)) == SUCCESS) &&
+		while ((e_ct[E_CT] || (r = new_buff(bs, e_ct, &p)) == SUCCESS) &&
 			(r = parse_sncnl_like_really(&l[1], &p) == SUCCESS))
-			e_ct--;
+			e_ct[E_CT]--;
 		free(l[0]);
 		if (r != SUCCESS)
-			break ;
+			return (r);
 	}
 	dims[DIM_L] = l_ct;
-	dims[DIM_C] = e_ct[E_CT] * BUF_CT - e_ct[E_LEFT];
-	return (r);
+	dims[DIM_C] = (e_ct[E_CT_ALLOCS] * BUF_CT - e_ct[E_CT]) / l_ct;
+	return (r == 0 ? SUCCESS : SYS_ERR);
 }
 
 #define USE 0
-#define SAVE 1
-static int					fill_tscdgfxyrz(
+#define SAVE 1 static int					fill_tscdgfxyrz(
 	size_t *dims,
 	t_list *bs,
 	t_s_cdgfxyrz *ret)
 {
 	size_t		ct_all;
 	size_t		sz;
-	t_s_cxyd	*ar[2];
+	t_s_cxyd	ar;
+	t_s_cxyd	p_ar;
 
 	ct_all = dims[DIM_L] * dims[DIM_C];
-	if (!(ar[USE] = malloc(sizeof(t_s_cxyd) * ct_all)))
+	if (!(ar = malloc(sizeof(t_s_cxyd) * ct_all)))
 		return (SYS_ERR);
-	ar[SAVE] = ar[USE];
-	ft_memcpy(*ar, bs->content, (sz = (ct_all % BUF_CT) * sizeof(t_s_cxyd)));
-	ar[USE] += sz;
+	p_ar = ar + ct_all;
+	if ((sz = ct_all % BUF_CT))
+		ft_memcpy((p_ar -= sz), bs->content, sz * sizeof(t_s_cxyd));
 	sz = BUF_CT * sizeof(t_s_cxyd);
-	while (ct_all >= BUF_CT)
+	while (p_ar != ar)
 	{
 		bs = bs->next;
-		ft_memcpy(*ar, bs->content, sz);
-		*ar += sz;
+		ft_memcpy((p_ar -= BUF_CT), bs->content, sz);
 	}
 	ret->x_sz = dims[DIM_C];
 	ret->y_sz = dims[DIM_L];
+	ret->ar = ar;
 	ft_memcpy(ret->at, &(double[3]){0, 0, 0};
 	return (SUCCESS);
 }
