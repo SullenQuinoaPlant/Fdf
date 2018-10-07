@@ -6,14 +6,15 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 03:29:07 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/07 03:30:34 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "scene.h"
+# include "outer.h"
+# include "scene_typedefs.h"
 
 /*
 **The following structure describes a cartesian grid wich:
