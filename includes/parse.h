@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
+/*   Updated: 2018/10/07 03:29:07 by nmauvari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_H
 # define PARSE_H
 
@@ -13,32 +25,35 @@
 **		where the dimensions are assigned as follows : ar[x][y]
 ** - the "at" array specifies where to place grid origin in scene, not optional.
 */
-typedef struct				s_cartesian_xy_dot
+struct						s_cartesian_xy_dot
 {
 	int		z;
 	t_argb	col;
-}							t_s_cxyd;
+};
 
-typedef t_s_cxyd	(*t_cdgfxyrz)[][1];
-
-typedef struct				s_cartesian_dot_grid_fullxy_regularz
+struct						s_cartesian_dot_grid_fullxy_regularz
 {
 	size_t			x_sz;
 	size_t			y_sz;
 	t_cdgfxyrz		ar;
 	double			at[3];
-}							t_s_cdgfxyrz;
+};
 
-typedef enum				e_scene_input_types
+enum						e_scene_input_types
 {
 	e_sit_empty,
 	e_sit_cdgfxyrz,
 	e_sit_sz
-}							t_e_sit;
+};
 
-typedef struct				s_scene_builder_input
+/*
+**Scene builders, (*t_scene_builder)s, add elements to the scene,
+**They take the following struct as an argument
+*/
+struct						s_scene_builder_input
 {
 	t_e_sit	type;
 	void	*input;
-}							t_s_sbi;
+};
+
 #endif

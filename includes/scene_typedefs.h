@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 03:06:56 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/07 03:16:25 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ typedef struct s_point_projection	t_s_pp;
 
 typedef struct s_pixel	t_s_pxl;
 
+typedef struct s_scene	t_s_s;
+
 typedef struct s_scene_elements	t_s_se;
+
+typedef struct s_scene_view	t_s_sv;
 
 typedef struct s_tagged_array	t_s_ta;
 

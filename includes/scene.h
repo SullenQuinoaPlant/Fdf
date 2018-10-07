@@ -411,8 +411,7 @@ struct						s_pixel
 **		v[h - 1][0] : bottom left
 **		v[h - 1][w - 1] : bottom right
 */
-typedef struct s_scene	t_s_s;
-typedef struct				s_scene_view
+struct						s_scene_view
 {
 	t_s_ring	ring;
 	int			id;
@@ -426,7 +425,7 @@ typedef struct				s_scene_view
 	t_vuint		h;
 	t_vuint		w;
 	t_s_pxl		*view;
-}							t_s_sv;
+};
 
 /*
 **Scene:
@@ -434,16 +433,16 @@ typedef struct				s_scene_view
 /*
 **'vflags', (view flags) are the same as (t_s_op) flags.
 */
-typedef struct				s_active_object
+struct						s_active_object
 {
 	t_s_ring	ring;
 	t_tag		tag;
 	uint8_t		vlags;
-}							t_s_ao;
+};
 
 /*
 ** - tar_allocs counts bytes allocated for tagged arrays.
-** - nxt_allocs counts bytes allocated to t_list structures.
+** - nxt_allocs counts bytes allocated to t_list structures in (t_s_se)s.
 ** - e : scene elements
 ** - ao : active objects
 ** - ct : coordinate transforms
@@ -457,11 +456,7 @@ struct						s_scene
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
 	t_s_sv		*v;
-}							t_s_s;
-
-typedef int		(*t_scene_builder)(t_s_sbi*, t_s_s*);
-typedef int		(*t_tssbi_freer)(t_s_sbi*);
-
+};
 
 # define RELEASING_TAG 1
 # define REFCOUNT_TOO_BIG 2
