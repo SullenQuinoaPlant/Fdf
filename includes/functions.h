@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 03:31:09 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/07 03:33:21 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,5 @@ size_t						teseg_type_sz(
 int							tssv_tar_allocs(
 	t_e_vpg	grp,
 	t_s_s	*s);
-
 
 #endif

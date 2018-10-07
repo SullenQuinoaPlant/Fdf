@@ -6,12 +6,14 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 03:16:25 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/07 03:41:32 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_TYPEDEFS_H
 # define SCENE_TYPEDEFS_H
+
+# include "outer.h"
 
 typedef uint32_t	t_argb;
 
@@ -21,14 +23,18 @@ typedef enum e_object_element_groups	t_e_oeg;
 
 typedef enum e_view_projection_groups	t_e_vpg;
 
-typedef void	(*t_pctr)(
+typedef union u_spsv	t_u_spsv;
+
+typedef void	(*t_pctr)(\
 	void *arg,
 	t_u_spsv const *const *tuspsv_ar,
 	size_t tuspsv_ar_sz,
 	t_u_spsv *const *ret);
 
+# define DIMS 3
 typedef double	(t_pctrmr)[DIMS];
 
+# define DIMS_N_TR 4
 typedef t_pctrmr	(t_pctrm)[DIMS_N_TR];
 
 typedef void	(*t_proj)(void *, t_u_spsv const *const *, void *);
@@ -81,10 +87,16 @@ typedef unsigned int	t_tag;
 
 typedef union u_slsa	t_u_sls;
 
-typedef union u_spsv	t_u_spsv;
+/*
+**typedef union u_spsv	t_u_spsv;
+*/
+typedef unsigned int	t_vuint;
 
+# define V_DIMS 2
 typedef t_vuint	(t_vpos)[V_DIMS];
 
-typedef unsigned int	t_vuint;
+/*
+**typedef unsigned int	t_vuint;
+*/
 
 #endif

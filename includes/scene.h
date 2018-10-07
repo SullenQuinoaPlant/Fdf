@@ -284,8 +284,6 @@ struct						s_scene_elements
 **(t_s_pctr) : wraps the above in a struct, enables linking and chaining
 **(t_pctr) as in: point coordinate transform, first arg most likely a (t_pctrm*)
 */
-# define DIMS 3
-# define DIMS_N_TR 4
 
 struct						s_points_coordinates_transform
 {
@@ -321,7 +319,6 @@ enum						e_view_projection_groups
 */
 # define V_H 0
 # define V_W 1
-# define V_DIMS 2
 /*
 **(t_vuint)s are grouped by two in (t_vpos)s
 */
