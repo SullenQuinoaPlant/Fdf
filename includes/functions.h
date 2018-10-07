@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 03:33:21 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/07 04:53:48 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ t_e_vpg						map_seg_to_vpg(
 int							new_view(
 	t_s_s	*s,
 	t_s_v	**ret);
+
+int							nxt_active_obj(
+	t_s_s	*s,
+	t_s_o	**ret,
+	t_tag	*ret_tag);
 
 void						onelessview(
 	t_s_pctr	*p_coord_transform);

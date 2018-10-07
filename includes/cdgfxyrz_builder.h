@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:32:05 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 03:32:06 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/07 04:55:40 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define CDGFXYRZ_BUILDER_H
 
 # include "scene.h"
-# include "parsed.h"
+# include "parse.h"
+# include "functions.h"
 
 int							cdgfxyrz_add_lines(
 	t_s_cdgfxyrz	*p,

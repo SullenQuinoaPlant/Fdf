@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 03:30:34 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/07 04:51:30 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "outer.h"
 # include "scene_typedefs.h"
+# include "parse_typedefs.h"
 
 /*
 **The following structure describes a cartesian grid wich:
@@ -36,8 +37,8 @@ struct						s_cartesian_dot_grid_fullxy_regularz
 {
 	size_t			x_sz;
 	size_t			y_sz;
-	t_cdgfxyrz		ar;
 	double			at[3];
+	t_s_cxyd		ar[];
 };
 
 enum						e_scene_input_types

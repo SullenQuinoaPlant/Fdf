@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cdgfxyrz_builder.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/07 04:54:31 by nmauvari          #+#    #+#             */
+/*   Updated: 2018/10/07 05:03:34 by nmauvari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cdgfxyrz_builder.h"
 
 /*
@@ -18,7 +30,7 @@ static int				get_container_obj(
 	l_ct = (p->x_sz - 1) * p->y_sz + (p->y_sz - 1) * p->x_sz;
 	lines = 0;
 	if ((r = nxt_active_obj(s, o, 0)) == SUCCESS)
-		while (l_ct && (tl = ft_lstnew(&(t_tag)0, sizeof(t_tag))
+		while (l_ct && (tl = ft_lstnew(THIS NEEDS TO CHANGE, sizeof(t_tag))
 		{
 			ft_lstadd(&lines, tl);
 			l_ct--;
