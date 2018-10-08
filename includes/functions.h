@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 04:53:48 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/08 04:47:46 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,18 @@
 
 /*
 **In add_tssbis_to_scene:
-** (t_s_sbi) string array is freed by function call.
-** Will fail if pointer to string is not properly initialized.
+
+
 */
 int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
 	t_s_s	*scene);
+
+int							chg_tag_refct(
+	t_tag	tag,
+	int		chg,
+	t_s_s	*s,
+	t_s_se	*grp);
 
 int							clone_tar(
 	t_s_ta	*ta,

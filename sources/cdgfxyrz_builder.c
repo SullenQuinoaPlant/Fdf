@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 04:54:31 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 05:03:34 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/08 04:51:40 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int				get_container_obj(
 	l_ct = (p->x_sz - 1) * p->y_sz + (p->y_sz - 1) * p->x_sz;
 	lines = 0;
 	if ((r = nxt_active_obj(s, o, 0)) == SUCCESS)
-		while (l_ct && (tl = ft_lstnew(&((t_tag[1]){0}), sizeof(t_tag))
+		while (l_ct && (tl = ft_lstnew(&((t_tag[1]){0}), sizeof(t_tag))))
 		{
 			ft_lstadd(&lines, tl);
 			l_ct--;
@@ -55,7 +55,7 @@ static int					add_points(
 	t_tag *ts,
 	int *r)
 {
-	t_s_cxyd (*const	par)[p->y_sz][1] = (t_s_cxyd(*)[p->y_sz][1])p->ar;
+	t_s_cxyd (*const	par)[p->y_sz] = (t_s_cxyd(*)[p->y_sz])p->ar;
 	t_tag (*const		tags)[p->y_sz] = (t_tag(*)[p->y_sz])ts;
 	size_t				i;
 	size_t				j;
@@ -67,9 +67,9 @@ static int					add_points(
 		j = -1;
 		while (++j < p->y_sz)
 		{
-			if ((*r = get_nxt_se(s, e_spnv, &tags[i][j])) != SUCCESS)
+			if ((*r = get_nxt_se(e_spnv, s, &tags[i][j], 0)) != SUCCESS)
 				return (*r);
-			pt = &(s->es[e_spnv].ar[tags[i][j] >> TPS])[tags[i][j] & TPM];
+			pt = &(s->e[e_spnv].ar[tags[i][j] >> TPS])[tags[i][j] & TPM];
 			pt->xyz[X] = i + p->at[X];
 			pt->xyz[Y] = j + p->at[Y];
 			pt->xyz[Z] = par[i][j].z + p->at[Z];
@@ -91,23 +91,23 @@ static void				add_point_refct(
 	i = 0;
 	while (++i < p->y_sz - 1)
 	{
-		chg_tag_refct(tar[0][i], 3, grp);
-		chg_tag_refct(tar[p->x_sz - 1][i], 3, grp);
+		chg_tag_refct(tar[0][i], 3, s, grp);
+		chg_tag_refct(tar[p->x_sz - 1][i], 3, s, grp);
 	}
 	i = 0;
 	while (++i < p->x_sz - 1)
 	{
-		chg_tag_refct(tar[i][0], 3, grp);
-		chg_tag_refct(tar[i][p->y_sz - 1], 3, grp);
+		chg_tag_refct(tar[i][0], 3, s, grp);
+		chg_tag_refct(tar[i][p->y_sz - 1], 3, s, grp);
 	}
 	i = 0;
 	while (++i < p->x_sz - 1 && !(j = 0))
 		while (++j < p->y_sz - 1)
-			chg_tag_refct(tar[i][j], 4, grp);
-	chg_tag_refct(tar[0][0], 2, grp);
-	chg_tag_refct(tar[p->x_sz - 1][0], 2, grp);
-	chg_tag_refct(tar[p->x_sz - 1][p->y_sz - 1], 2, grp);
-	chg_tag_refct(tar[0][p->y_sz - 1], 2, grp);
+			chg_tag_refct(tar[i][j], 4, s, grp);
+	chg_tag_refct(tar[0][0], 2, s, grp);
+	chg_tag_refct(tar[p->x_sz - 1][0], 2, s, grp);
+	chg_tag_refct(tar[p->x_sz - 1][p->y_sz - 1], 2, s, grp);
+	chg_tag_refct(tar[0][p->y_sz - 1], 2, s, grp);
 }
 
 int						cdgfxyrz_builder(
@@ -115,7 +115,7 @@ int						cdgfxyrz_builder(
 	t_s_s *s)
 {
 	t_s_cdgfxyrz *const	p = (t_s_cdgfxyrz*)sbi->input;
-	size_t const		sz = TAG_SZ * p->sz_x * p->sz_y;
+	size_t const		sz = sizeof(t_tag) * p->x_sz * p->y_sz;
 	t_tag				*tags;
 	t_s_o				*o;
 	int					r;
@@ -128,7 +128,7 @@ int						cdgfxyrz_builder(
 		(r = add_points(p, s, tags, &r)) == SUCCESS &&
 		(r = cdgfxyrz_add_lines(p, tags, s, o)) == SUCCESS)
 		add_point_refct(p, tags, s);
-	if (tags);
+	if (tags)
 		ft_cleanfree(tags, sz);
 	return (r);
 }
