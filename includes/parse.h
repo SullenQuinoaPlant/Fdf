@@ -26,6 +26,8 @@
 ** - the parse is described in a 2-dimensional (t_cgfxyrz) array
 **		where the dimensions are assigned as follows : ar[x][y]
 ** - the "at" array specifies where to place grid origin in scene, not optional.
+**
+**Grid rows are along the y axis, grid columns are along the x axis.
 */
 struct						s_cartesian_xy_dot
 {

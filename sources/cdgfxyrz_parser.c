@@ -47,7 +47,10 @@ static int					parse_sncnl_like_really
 	return (NOT_DONE);
 }
 
-#define DIM_L 0
+/*
+**Constants to access rows and columns:
+*/
+#define DIM_R 0
 #define DIM_C 1
 int							parse_cdgfxyrz_sncnl(
 	int fd,
@@ -75,7 +78,7 @@ int							parse_cdgfxyrz_sncnl(
 		if (r != SUCCESS)
 			return (r);
 	}
-	dims[DIM_L] = l_ct;
+	dims[DIM_R] = l_ct;
 	dims[DIM_C] = (e_ct[E_CT_ALLOCS] * BUF_CT - e_ct[E_CT]) / l_ct;
 	return (r == 0 ? SUCCESS : SYS_ERR);
 }
@@ -91,7 +94,7 @@ int							parse_cdgfxyrz_sncnl(
 	t_s_cxyd	*ar;
 	t_s_cxyd	*p_ar;
 
-	ct_all = dims[DIM_L] * dims[DIM_C];
+	ct_all = dims[DIM_R] * dims[DIM_C];
 	if (!(ar = malloc(sizeof(t_s_cxyd) * ct_all)))
 		return (SYS_ERR);
 	p_ar = ar + ct_all;
@@ -103,8 +106,8 @@ int							parse_cdgfxyrz_sncnl(
 		bs = bs->next;
 		ft_memcpy((p_ar -= BUF_CT), bs->content, sz);
 	}
-	ret->x_sz = dims[DIM_C];
-	ret->y_sz = dims[DIM_L];
+	ret->y_sz = dims[DIM_C];
+	ret->x_sz = dims[DIM_R];
 	ret->ar = ar;
 	ft_memcpy(ret->at, &(double[3]){0, 0, 0};
 	return (SUCCESS);
