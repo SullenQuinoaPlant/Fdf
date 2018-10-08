@@ -39,8 +39,9 @@ static int					parse_sncnl_like_really
 	col = 0;
 	if (!*s)
 		return (SUCCESS);
-	if (*s++ != ' ' || ft_atoierr(s, &z, &s) ||
-		(*s == ',' && ft_axtoierr(++s, &col, &s))
+	if (ft_atoierr(s, &z, &s) ||
+		(*s == ',' && ft_axtoierr(++s, &col, &s) ||
+		(*s && *s++ != ' ')
 		return (BAD_INFILE);
 	*((*p)++) = (t_s_cxyd){z, col};
 	return (NOT_DONE);
@@ -87,8 +88,8 @@ int							parse_cdgfxyrz_sncnl(
 {
 	size_t		ct_all;
 	size_t		sz;
-	t_s_cxyd	ar;
-	t_s_cxyd	p_ar;
+	t_s_cxyd	*ar;
+	t_s_cxyd	*p_ar;
 
 	ct_all = dims[DIM_L] * dims[DIM_C];
 	if (!(ar = malloc(sizeof(t_s_cxyd) * ct_all)))

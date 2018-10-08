@@ -67,9 +67,8 @@ static int					add_points(
 		j = -1;
 		while (++j < p->y_sz)
 		{
-			if ((*r = get_nxt_se(e_spnv, s, &tags[i][j], 0)) != SUCCESS)
+			if ((*r = get_nxt_se(e_spnv, s, &tags[i][j], &pt)) != SUCCESS)
 				return (*r);
-			pt = &(s->e[e_spnv].ar[tags[i][j] >> TPS])[tags[i][j] & TPM];
 			pt->xyz[X] = i + p->at[X];
 			pt->xyz[Y] = j + p->at[Y];
 			pt->xyz[Z] = par[i][j].z + p->at[Z];

@@ -18,76 +18,63 @@
 
 static int				add_x_lines(
 	t_s_cdgfxyrz *p,
-	t_tag *pt_tags,
+	t_tag *tags,
 	t_s_s *s,
-	t_s_o *o)
+	t_list **p_list)
 {
-	size_t	ij[2];
+	size_t	i;
+	size_t	j;
 	t_s_l	l;
-	t_tag	tag;
 	t_s_se	*p_e;
 	t_list	*p_l;
 
+	l = (t_s_l){1, {tags[0], 0}, {p->ar[0], 0}};
+	p_l = *p_list;
 	i = -1;
-	l.refs = 1;
-	p_l = o->e[e_ol];
-	while (++i < p->x_sz)
-	{
-		j = 
-		while (++j < p->y_sz && (p_l[0] = p_l[1]->next) &&
-			(p[1] = p[0]->next))
-			if ((get_nxt_se(e_slna, s, &tag[0], &p_e[0])) == SUCCESS &&
-			(get_nxt_se(e_slna, s, &tag[1], &p_e[1])) == SUCESS)
-			{
-				l.ends[0] = pt_tags[i * p->y_sz + j];
-				l.argb[0] = p->ar[i * p->y_sz + j].col;
-				l.ends[1] = pt_tags[i * p->y_sz + j - 1];
-				l.argb[1] = p->ar[i * p->y_sz + j - 1].col;
-				*p_e[0] = l;
-				ft_memcpy(p_l[0]->content, &tag[0], sizeof(t_tag));
-				l.ends[1] = pt_tags[(i - 1) * p->y_sz + j];
-				l.argb[1] = p->ar[(i - 1) * p->y_sz + j].col;
-				*p_e[1] = l;
-				ft_memcpu((p = p->next)->content, &tag[1], sizeof(t_tag));
-			}
-			else
+	while (++i < p->x_sz && !(p = 0))
+		while (++j < p->y_sz)
+		{
+			if ((get_nxt_se(e_slna, s, p_l->content, &p_e)) != SUCCESS)
 				return (SYS_ERR);
+			l.ends[0] = l.ends[1];
+			l.argb[0] = l.argb[1];
+			l.ends[1] = pt_tags[i * p->y_sz + j];
+			l.argb[1] = p->ar[i * p->y_sz + j].col;
+			*p_e = l;
+			p_l = p_l->next;
+		}
+	*p_list = p_l;
 	return (SUCCESS);
 }
-static int				add_most_lines(
-	t_s_cdgfxyrz *p,
-	t_tag *pt_tags,
-	t_s_s *s,
-	t_s_o *o)
-{
-	size_t	ij[2];
-	t_s_l	l;
-	t_tag	tag[2];
-	t_s_se	*p_e[2];
-	t_list	*p_l[2];
 
-	i = 0;
-	l.refs = 1;
-	p_l[1] = o->e[e_ol];
+static int				add_y_lines(
+	t_s_cdgfxyrz *p,
+	t_tag *tags,
+	t_s_s *s,
+	t_list **p_list)
+{
+	size_t	i;
+	size_t	j;
+	t_s_l	l;
+	t_s_se	*p_e;
+	t_list	*p_l;
+
+	l = (t_s_l){1, {tags[0], 0}, {p->ar[0], 0}};
+	p_l = *p_list;
+	i = -1;
 	while (++i < p->x_sz && !(j = 0))
-		while (++j < p->y_sz && (p_l[0] = p_l[1]->next) &&
-			(p[1] = p[0]->next))
-			if ((get_nxt_se(e_slna, s, &tag[0], &p_e[0])) == SUCCESS &&
-			(get_nxt_se(e_slna, s, &tag[1], &p_e[1])) == SUCESS)
-			{
-				l.ends[0] = pt_tags[i * p->y_sz + j];
-				l.argb[0] = p->ar[i * p->y_sz + j].col;
-				l.ends[1] = pt_tags[i * p->y_sz + j - 1];
-				l.argb[1] = p->ar[i * p->y_sz + j - 1].col;
-				*p_e[0] = l;
-				ft_memcpy(p_l[0]->content, &tag[0], sizeof(t_tag));
-				l.ends[1] = pt_tags[(i - 1) * p->y_sz + j];
-				l.argb[1] = p->ar[(i - 1) * p->y_sz + j].col;
-				*p_e[1] = l;
-				ft_memcpu((p = p->next)->content, &tag[1], sizeof(t_tag));
-			}
-			else
+		while (++j < p->y_sz)
+		
+			if ((get_nxt_se(e_slna, s, p_l->content, &p_e)) != SUCCESS)
 				return (SYS_ERR);
+			l.ends[0] = l.ends[1];
+			l.argb[0] = l.argb[1];
+			l.ends[1] = pt_tags[i * p->y_sz + j];
+			l.argb[1] = p->ar[i * p->y_sz + j].col;
+			*p_e = l;
+			p_l = p_l->next;
+		}
+	*p_list = p_l;
 	return (SUCCESS);
 }
 
