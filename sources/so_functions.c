@@ -37,14 +37,13 @@ int						nxt_active_obj(
 	t_s_o **ret,
 	t_tag *ret_tag)
 {
-	t_s_o	*o;
 	int		r;
 
 	if ((r = nxt_fresh_obj(s, ret, ret_tag)) == SUCCESS &&
-		(r = ring_expand(sizeof(t_s_ao), 0, &s->ao) == RING_SUCCESS))
+		(r = ring_expand(sizeof(t_s_ao), 0, (void**)&s->ao) == RING_SUCCESS))
 	{
-		o->refs = 1;
-		s->ao->flags |= SHOW_O;
+		(**ret).refs = 1;
+		s->ao->flags |= O_SHOW;
 	}
 	return (r);
 }

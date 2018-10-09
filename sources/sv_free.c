@@ -32,19 +32,19 @@ static void				free_view_members(
 	free_vpnvs(v->s->e[e_spnv].ar_sz, v->vpnv);
 	i = -1;
 	while (++i < e_vpg_sz)
-		free_tar(v->ve[i].ar, v->ve[i].ar_sz, v->ve[i].e_sz);
-	ft_cleanfree(*view, sizeof(t_s_pxl) * v->h * v->w)
-	ft_cleanfree(view, sizeof(t_s_sv));
+		free_tar(v->e[i].ar, v->e[i].ar_sz, v->e[i].e_sz);
+	ft_cleanfree(v->view, sizeof(t_s_pxl) * v->h * v->w);
+	ft_cleanfree(view, ttl_sz);
 }
 
 void					free_view(
 	t_s_sv *ring_bit)
 {
-	ring_shrink(sizeof(t_s_sv), free_view_members, &ring_bit);
+	ring_shrink(sizeof(t_s_sv), free_view_members, (void**)&ring_bit);
 }
 
 void					free_views(
 	t_s_sv *ring)
 {
-	ring_free(sizeof(t_s_sv), free_view_members, &ring);
+	ring_free(sizeof(t_s_sv), free_view_members, (void**)&ring);
 }

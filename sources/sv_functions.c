@@ -2,7 +2,7 @@
 
 static int				init_view(
 	t_s_s *s,
-	t_s_v *v)
+	t_s_sv *v)
 {
 	int		r;
 
@@ -16,7 +16,7 @@ static int				init_view(
 
 int						new_view(
 	t_s_s *s,
-	t_s_v **ret)
+	t_s_sv **ret)
 {
 	t_s_v	*v;
 	int		r;
