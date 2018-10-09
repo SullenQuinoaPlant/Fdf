@@ -175,7 +175,7 @@ struct						s_dot
 struct						s_line
 {
 	unsigned int	refs;
-	t_tag			end_p[2];
+	t_tag			ends[2];
 	t_argb			argb[2];
 };
 

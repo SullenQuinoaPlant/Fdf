@@ -1,7 +1,7 @@
 TARGETS := \
 	allocate_tagged_array \
-	cdgfxyrz_builder \
 	cdgfxyrz_builder_add_lines \
+	cdgfxyrz_builder \
 	cdgfxyrz_parser \
 	isometric_view \
 	main \

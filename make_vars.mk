@@ -17,7 +17,7 @@ SRCS := $(patsubst %,$(SRC_DIR)/%.c,$(TARGETS))
 OBJS := $(patsubst %,$(OBJ_DIR)/%.o,$(TARGETS))
 INCS := $(INC_DIR)/*.h
 
-DEPENDENCIES = libft
+DEPENDENCIES = libft libgetnextline
 
 ifndef TOOLS
 	TOOLS := mac

@@ -1,11 +1,10 @@
-#include "parsed.h"
-#include "parse.h"
+#include "functions.h"
 
 #define BUF_CT 256
 #define BUF_SZ BUF_CT * sizeof(t_s_cxyd)
 #define E_CT 0
 #define E_CT_ALLOCS 1
-static int					new_buf(
+static int					new_buff(
 	t_list **prv,
 	size_t *counters,
 	t_s_cxyd **p)
@@ -29,19 +28,20 @@ static int					new_buf(
 }
 
 #define NOT_DONE 1
-static int					parse_sncnl_like_really
+static int					parse_sncnl_like_really(
 	char const **str,
 	t_s_cxyd **p)
 {
 	char const	*s = *str;
 	t_argb		col;
+	int			z;
 
 	col = 0;
 	if (!*s)
 		return (SUCCESS);
-	if (ft_atoierr(s, &z, &s) ||
-		(*s == ',' && ft_axtoierr(++s, &col, &s) ||
-		(*s && *s++ != ' ')
+	if (ft_atoierr(s, &z, (char**)&s) ||
+		(*s == ',' && ft_axtoierr(++s, (int*)&col, (char**)&s)) ||
+		(*s && *s++ != ' '))
 		return (BAD_INFILE);
 	*((*p)++) = (t_s_cxyd){z, col};
 	return (NOT_DONE);
@@ -57,8 +57,8 @@ int							parse_cdgfxyrz_sncnl(
 	size_t *dims,
 	t_list **bs)
 {
-	char		*l[2];
-	size_t		l_ct
+	char const	*l[2];
+	size_t		l_ct;
 	size_t		e_ct[2];
 	t_s_cxyd	*p;
 	int			r;
@@ -67,14 +67,14 @@ int							parse_cdgfxyrz_sncnl(
 	l_ct = 0;
 	ft_memset(e_ct, 0, 2);
 	r = 0;
-	while ((r = get_next_line(fd, &l[0])) > 0)
+	while ((r = get_next_line(fd, (char**)&l[0])) > 0)
 	{
 		l[1] = l[0];
 		l_ct++;
 		while ((e_ct[E_CT] || (r = new_buff(bs, e_ct, &p)) == SUCCESS) &&
 			(r = parse_sncnl_like_really(&l[1], &p) == SUCCESS))
 			e_ct[E_CT]--;
-		free(l[0]);
+		free((void*)l[0]);
 		if (r != SUCCESS)
 			return (r);
 	}
@@ -84,7 +84,8 @@ int							parse_cdgfxyrz_sncnl(
 }
 
 #define USE 0
-#define SAVE 1 static int					fill_tscdgfxyrz(
+#define SAVE 1
+static int					fill_tscdgfxyrz(
 	size_t *dims,
 	t_list *bs,
 	t_s_cdgfxyrz *ret)
@@ -109,7 +110,7 @@ int							parse_cdgfxyrz_sncnl(
 	ret->y_sz = dims[DIM_C];
 	ret->x_sz = dims[DIM_R];
 	ret->ar = ar;
-	ft_memcpy(ret->at, &(double[3]){0, 0, 0};
+	ft_memcpy(ret->at, &(double[3]){0, 0, 0}, sizeof(double[3]));
 	return (SUCCESS);
 }
 
@@ -120,7 +121,8 @@ int							get_cdgfxyrz_sbi(
 	int				fd;
 	size_t			dims[2];
 	t_list			*bs;
-	t_s_cdgfxyrz	*p)
+	t_s_cdgfxyrz	*p;
+	int				r;
 
 	*ret = 0;
 	p = 0;
@@ -129,11 +131,16 @@ int							get_cdgfxyrz_sbi(
 		(p = malloc(sizeof(t_s_cdgfxyrz))) &&
 		(r = fill_tscdgfxyrz(dims, bs, p)) == SUCCESS &&
 		(*ret = malloc(sizeof(t_s_sbi))))
-		*ret = (t_s_sbi){e_sit_cdgfxyrz, p);
-	else if (p)
-		free(p);
+		**ret = (t_s_sbi){e_sit_cdgfxyrz, p};
+	else
+	{
+		if (r == SUCCESS)
+			r = SYS_ERR;
+		if (p)
+			free(p);
+	}
 	if (fd >= 0)
 		close(fd);
 	ft_lstdel(&bs, 0);
-	return (r)
+	return (r);
 }
