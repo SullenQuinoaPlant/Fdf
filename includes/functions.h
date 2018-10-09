@@ -93,7 +93,7 @@ t_e_vpg						map_seg_to_vpg(
 
 int							new_view(
 	t_s_s	*s,
-	t_s_v	**ret);
+	t_s_sv	**ret);
 
 int							nxt_active_obj(
 	t_s_s	*s,
