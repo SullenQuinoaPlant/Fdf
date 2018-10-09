@@ -14,6 +14,7 @@
 # define RING_H
 
 # include <stddef.h>
+# include "libft.h"
 
 /*
 **Ring headers must be the initial member

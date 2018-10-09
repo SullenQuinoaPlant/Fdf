@@ -25,6 +25,12 @@ int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
 	t_s_s	*scene);
 
+int							alloc_tar(
+	t_s_s	*s,
+	size_t	type_sz,
+	size_t	*ar_sz,
+	void	***p_ar);
+
 int							chg_tag_refct(
 	t_tag	tag,
 	int		chg,
@@ -95,7 +101,7 @@ int							reg_freetags(
 	t_tag	first,
 	t_tag	diff_with_last,
 	t_s_s	*s,
-	t_s_se	*grp);
+	t_e_seg	group);
 
 void						scene_teardown(
 	t_s_s	**s);

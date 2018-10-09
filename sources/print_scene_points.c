@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "scene.h"
 
 void				print_scene_points(

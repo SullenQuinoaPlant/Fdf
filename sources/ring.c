@@ -18,7 +18,7 @@ int						ring_expand(
 	if (prv)
 	{
 		*p = (t_s_ring){prv, prv->nxt};
-		p->nxt->prev = p;
+		p->nxt->prv = p;
 		prv->nxt = p;
 	}
 	else
@@ -76,11 +76,11 @@ int						ring_clone(
 	*ret = 0;
 	if (!(p = clonee))
 		return (RING_SUCCESS);
-	while ((r = ring_expand(c_sz, p, &petri)) == RING_SUCCESS &&
+	while ((r = ring_expand(c_sz, p, (void**)&petri)) == RING_SUCCESS &&
 		(p = p->nxt) != lim)
 		;
 	if (r != RING_SUCCESS)
-		ring_free(c_sz, 0, &petri);
+		ring_free(c_sz, 0, (void**)&petri);
 	else
 		*ret = petri;
 	return (r);
@@ -93,8 +93,9 @@ int						ring_apply(
 {
 	t_s_ring *const	strt = (t_s_ring*)rg;
 	t_s_ring		*p;
+	int				r;
 
-	if (!*(p = rg))
+	if (!(p = rg))
 		return (RING_SUCCESS);
 	while ((r = (*f)(f_arg, p)) == RING_SUCCESS)
 		if ((p = p->nxt) == strt)

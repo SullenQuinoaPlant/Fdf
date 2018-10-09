@@ -124,13 +124,13 @@ int							get_cdgfxyrz_sbi(
 	t_s_cdgfxyrz	*p;
 	int				r;
 
-	*ret = 0;
 	p = 0;
+	*ret = 0;
 	if ((r = open_file(file, &fd)) == SUCCESS &&
 		(r = (parse_cdgfxyrz_sncnl(fd, dims, &bs))) == SUCCESS &&
 		(p = malloc(sizeof(t_s_cdgfxyrz))) &&
 		(r = fill_tscdgfxyrz(dims, bs, p)) == SUCCESS &&
-		(*ret = malloc(sizeof(t_s_sbi))))
+		(*ret = malloc(sizeof(t_s_cdgfxyrz))))
 		**ret = (t_s_sbi){e_sit_cdgfxyrz, p};
 	else
 	{
