@@ -18,8 +18,7 @@
 
 /*
 **In add_tssbis_to_scene:
-
-
+**	string is freed no matter what.
 */
 int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
@@ -32,7 +31,7 @@ int							alloc_tar(
 	void	***p_ar);
 
 int							chg_tag_refct(
-	t_s_seg	g,
+	t_e_seg	g,
 	t_tag	t,
 	int		chg,
 	t_s_s	*s);
@@ -76,6 +75,9 @@ void						*get_se(
 int							init_tsse(
 	t_e_seg	g,
 	t_s_se	*se);
+
+int							initiate_se_release(
+	void	*se);
 
 /*
 **Allocates and initilizes a scene, with optional

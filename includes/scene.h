@@ -13,6 +13,8 @@
 #ifndef SCENE_H
 # define SCENE_H
 
+# include <limits.h>
+
 # include "outer.h"
 # include "scene_typedefs.h"
 
@@ -446,7 +448,7 @@ struct						s_active_object
 {
 	t_s_ring	ring;
 	t_tag		tag;
-	uint8_t		vlags;
+	uint8_t		flags;
 };
 
 /*

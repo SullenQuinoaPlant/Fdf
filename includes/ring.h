@@ -32,6 +32,35 @@ struct					s_ring_header
 
 typedef int	(*t_ringapply)(void*, t_ring);
 
+/*
+**Ring functions:
+*/
+
+int						ring_apply(
+	t_ring		ring,
+	t_ringapply	f,
+	void		*f_arg);
+
+int						ring_clone(
+	size_t	container_sz,
+	void	*clonee,
+	void	**ret);
+
+int						ring_expand(
+	size_t	container_sz,
+	void	*content,
+	void	**p_ring);
+
+void					ring_free(
+	size_t	container_sz,
+	void	(*del)(void*, size_t),
+	void	**p_ring);
+
+void					ring_shrink(
+	size_t	container_sz,
+	void	(*del)(void*, size_t),
+	void	**p_at);
+
 # define RING_SYS_ERR -1
 # define RING_SUCCESS 0
 

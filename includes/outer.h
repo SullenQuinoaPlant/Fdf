@@ -19,6 +19,8 @@
 # include "ring.h"
 # include "libgetnextline.h"
 
+# include "functions.h"
+
 # define SYS_ERR -1
 # define SUCCESS 0
 # define BAD_ARGS 1

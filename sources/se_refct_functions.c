@@ -10,22 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
+#include "functions.h"
 
 int							cgh_tag_refct(
-	t_s_seg g,
+	t_e_seg g,
 	t_tag t,
 	int chg,
 	t_s_s *s)
 {
-	t_s_se			grp;
-	t_refct			*refct;
+	t_refct	*refct;
+	int		sign;
 
 	refct = (t_refct*)get_se(s, g, t);
 	sign = *refct < 0 ? -1 : 1;
 	if (chg > 0)
 	{
-		if (refct < 0)
+		if (*refct < 0)
 			return (RELEASING_TAG);
 		if (MAX_REFS - *refct < chg)
 			return (REFCOUNT_TOO_BIG);
@@ -33,20 +33,6 @@ int							cgh_tag_refct(
 	else if (chg < 0 && chg > -1 * sign * *refct)
 			return (REFCOUNT_INCOHERENT);
 	if (!(*refct += chg * sign))
-		return (reg_freetags(tag, 0, s, grp));
+		return (reg_freetags(t, 0, s, g));
 	return (SUCCESS);
-}
-
-int							initiate_tag_release(
-	t_tag tag,
-	void *se)
-{
-	t_refct *const	refct = (int*)se;
-
-	if (*refct > 0)
-	{
-		*refct *= -1;
-		return (SUCCESS);
-	}
-	return (REFCOUNT_INCOHERENT);
 }
