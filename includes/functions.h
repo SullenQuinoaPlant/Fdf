@@ -32,10 +32,10 @@ int							alloc_tar(
 	void	***p_ar);
 
 int							chg_tag_refct(
-	t_tag	tag,
+	t_s_seg	g,
+	t_tag	t,
 	int		chg,
-	t_s_s	*s,
-	t_s_se	*grp);
+	t_s_s	*s);
 
 int							clone_tar(
 	t_s_ta	*ta,
@@ -52,6 +52,12 @@ void						free_tssbi_str(
 void						free_tsse(
 	t_s_se	*se);
 
+void						free_view(
+	t_s_sv	*ring);
+
+void						free_views(
+	t_s_sv	*ring);
+
 int							get_cdgfxyrz_sbi(
 	char const	*file,
 	t_s_sbi		**ret);
@@ -61,6 +67,11 @@ int							get_nxt_se(
 	t_s_s	*s,
 	t_tag	*ret,
 	void	**ret_addr);
+
+void						*get_se(
+	t_s_s const	*s,
+	t_e_seg		g,
+	t_tag		t);
 
 int							init_tsse(
 	t_e_seg	g,

@@ -26,13 +26,14 @@ static void				free_view_members(
 	t_s_sv *const	v = (t_s_sv*)view;
 	t_e_vpg			i;
 
+	if (!view)
+		return ;
 	onelessview(v->ct);
 	free_vpnvs(v->s->e[e_spnv].ar_sz, v->vpnv);
-	i = e_vpg;
-	while (i < e_vpg_sz)
-		free_tar(v->ve[i].ar, v->ve[i].ar_sz, v->ve[i++].e_sz);
-	if (view)
-		ft_cleanfree(*view, sizeof(t_s_pxl) * v->h * v->w)
+	i = -1;
+	while (++i < e_vpg_sz)
+		free_tar(v->ve[i].ar, v->ve[i].ar_sz, v->ve[i].e_sz);
+	ft_cleanfree(*view, sizeof(t_s_pxl) * v->h * v->w)
 	ft_cleanfree(view, sizeof(t_s_sv));
 }
 

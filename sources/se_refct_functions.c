@@ -12,15 +12,17 @@
 
 #include "scene.h"
 
-int							chg_tag_refct(
-	t_tag tag,
+int							cgh_tag_refct(
+	t_s_seg g,
+	t_tag t,
 	int chg,
-	t_s_s *s,
-	t_s_se *grp)
+	t_s_s *s)
 {
-	t_refct *const	refct = (int*)grp->ar[tag >> TPS][tag & TPM];
-	int const		sign = *refct < 0 ? -1 : 1;
+	t_s_se			grp;
+	t_refct			*refct;
 
+	refct = (t_refct*)get_se(s, g, t);
+	sign = *refct < 0 ? -1 : 1;
 	if (chg > 0)
 	{
 		if (refct < 0)

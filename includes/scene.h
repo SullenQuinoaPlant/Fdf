@@ -297,7 +297,7 @@ struct						s_scene_elements
 **(t_pctr) as in: point coordinate transform, first arg most likely a (t_pctrm*)
 */
 
-struct						s_points_coordinates_transform
+struct						s_point_coordinates_transform
 {
 	t_s_ring	ring;
 	t_s_pctr	*prv;
