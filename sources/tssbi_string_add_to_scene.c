@@ -28,7 +28,7 @@ int						add_tssbis_to_scene(
 	int		r;
 
 	while (input_str)
-		if ((r = use_input(input_str++, scene) != SUCCESS)
+		if ((r = use_input(input_str++, scene) != SUCCESS))
 			break;
 	return (r);
 }

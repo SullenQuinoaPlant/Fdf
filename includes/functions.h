@@ -36,6 +36,10 @@ int							chg_tag_refct(
 	int		chg,
 	t_s_s	*s);
 
+int							cdgfxyrz_builder(
+	t_s_sbi	*sbi,
+	t_s_s	*s);
+
 int							clone_tar(
 	t_s_ta	*ta,
 	void	***p_ret);
