@@ -13,7 +13,7 @@
 #include "functions.h"
 #include "scene.h"
 
-int							cgh_setag_refct(
+int							chg_setag_refct(
 	t_s_se *grp,
 	t_tag t,
 	int chg,
