@@ -18,7 +18,7 @@
 
 int							add_star(
 	t_e_seg group,
-	t_s_s	*scene)
+	t_s_s	*scene);
 
 /*
 **In add_tssbis_to_scene:
@@ -126,6 +126,9 @@ int							open_file(
 	int			*ret_fd);
 
 void						prinrt_scene_points(
+	t_s_s	*s);
+
+int							realloc_tars(
 	t_s_s	*s);
 
 int							reg_tesegfreetags(

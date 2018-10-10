@@ -57,7 +57,7 @@ int						get_nxt_se(
 	tags = (t_s_ft*)p->nxt->content;
 	if ((tag = tags->free++) == tags->last)
 	{
-		ft_lstdelhead(&p->nxt);
+		ft_lstdelhead(&p->nxt, ft_cleanfree);
 		s->nxt_allocs -= sizeof(t_list);
 	}
 	*ret = tag;

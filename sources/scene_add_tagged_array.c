@@ -10,7 +10,7 @@ int							add_star(
 
 	if ((r = tssv_tar_allocs(map_seg_to_vpg(g), s)) == SUCCESS &&
 		(r = alloc_tar(s, se->e_sz, &se->ar_sz, &se->ar)) == SUCCESS &&
-		(reg_freetags(((t_tag)se->ar_sz) << TPS, TPM, s, g)) == SUCCESS)
+		(reg_tesegfreetags(((t_tag)se->ar_sz) << TPS, TPM, s, g)) == SUCCESS)
 		return (SUCCESS);
 	return (r);
 }
