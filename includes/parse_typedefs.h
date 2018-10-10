@@ -13,6 +13,8 @@
 #ifndef PARSE_TYPEDEFS_H
 # define PARSE_TYPEDEFS_H
 
+# include "scene_typedefs.h"
+
 typedef struct s_cartesian_xy_dot	t_s_cxyd;
 
 typedef enum e_scene_input_types	t_e_sit;

@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "parse.h"
 
 #define BUF_CT 256
 #define BUF_SZ BUF_CT * sizeof(t_s_cxyd)

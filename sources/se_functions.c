@@ -1,6 +1,7 @@
 #include "functions.h"
+#include "scene.h"
 
-void					*get_se(
+void						*get_se(
 	t_s_s const *s,
 	t_e_seg g,
 	t_tag t)

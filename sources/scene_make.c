@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "scene.h"
 
 static void				init_vars(
 	t_s_s *s)

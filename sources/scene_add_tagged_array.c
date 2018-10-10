@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "scene.h"
 
 int							add_star(
 	t_s_s *s,
