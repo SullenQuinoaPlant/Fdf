@@ -52,7 +52,7 @@ int						get_nxt_se(
 	int				r;
 
 	if (!p->nxt->next &&
-		(r = add_tar(s, g)) != SUCCESS)
+		(r = add_star(g, s)) != SUCCESS)
 			return (r);
 	tags = (t_s_ft*)p->nxt->content;
 	if ((tag = tags->free++) == tags->last)
@@ -60,18 +60,17 @@ int						get_nxt_se(
 		ft_lstdelhead(&p->nxt);
 		s->nxt_allocs -= sizeof(t_list);
 	}
-	*p_ret = tag;
+	*ret = tag;
 	if (ret_addr)
 		*ret_addr = (p->ar[tag >> TPS]) + (tag & TPM) * teseg_type_sz(g);
 	return (SUCCESS);
 }
 
-
 int						reg_tssefreetags(
 	t_tag first,
 	t_tag diff_with_last,
 	t_s_s *s,
-	t_e_se *g)
+	t_s_se *g)
 {
 	t_tag const	last = first + diff_with_last;
 	t_list		*tl;
