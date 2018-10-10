@@ -1,3 +1,4 @@
+#include "functions.h"
 #include "scene.h"
 
 size_t					teseg_type_sz(
@@ -18,17 +19,18 @@ size_t					teseg_type_sz(
 
 int						init_tsse(
 	t_e_seg g,
-	t_s_se *se)
+	t_s_se *se,
+	t_s_s *s)
 {
 	t_s_ft const	last_link = (t_s_ft){0, 0};
 	t_list			*tl;
 
-	if (!(tl = ft_lstnew(&last_link, FT_SZ)))
+	if (!(tl = ft_lstnew(&last_link, sizeof(t_s_ft))))
 		return (SYS_ERR);
 	se->nxt = tl;
 	se->ar_sz = 0;
 	se->e_sz = teseg_type_sz(g);
-	return (add_star(se, s));
+	return (add_star(g, s));
 }
 
 void					free_tsse(
@@ -44,8 +46,8 @@ int						get_nxt_se(
 	t_tag *ret,
 	void **ret_addr)
 {
-	t_s_se *const	p = s->e[g];
-	t_s_ft			tags;
+	t_s_se *const	p = &s->e[g];
+	t_s_ft			*tags;
 	t_tag			tag;
 	int				r;
 
@@ -60,7 +62,7 @@ int						get_nxt_se(
 	}
 	*p_ret = tag;
 	if (ret_addr)
-		*ret_addr = (p->ar[tag >> TPS])[tag & TPM];
+		*ret_addr = (p->ar[tag >> TPS]) + (tag & TPM) * teseg_type_sz(g);
 	return (SUCCESS);
 }
 

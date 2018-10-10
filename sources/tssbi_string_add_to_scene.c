@@ -1,3 +1,5 @@
+#include "functions.h"
+#include "parse.h"
 #include "scene.h"
 
 static int				no_scene_builder(

@@ -2,8 +2,8 @@
 #include "scene.h"
 
 int							add_star(
-	t_s_s *s,
-	t_e_seg g)
+	t_e_seg g,
+	t_s_s *s)
 {
 	t_s_se *const	se = &s->e[g];
 	int				r;

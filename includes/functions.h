@@ -16,6 +16,10 @@
 # include "parse_typedefs.h"
 # include "scene_typedefs.h"
 
+int							add_star(
+	t_e_seg group,
+	t_s_s	*scene)
+
 /*
 **In add_tssbis_to_scene:
 **	string is freed no matter what.
@@ -55,6 +59,9 @@ void						free_tar(
 	size_t	ar_sz,
 	size_t	e_sz);
 
+void						free_tscdgfxyrz(
+	t_s_sbi	*p);
+
 void						free_tssbi_str(
 	t_s_sbi	*str);
 
@@ -84,7 +91,8 @@ void						*get_se(
 
 int							init_tsse(
 	t_e_seg	g,
-	t_s_se	*se);
+	t_s_se	*se,
+	t_s_s	*s);
 
 int							initiate_se_release(
 	void	*se);

@@ -85,7 +85,7 @@ typedef struct s_vector	t_s_v;
 
 typedef unsigned int	t_tag;
 
-typedef union u_slsa	t_u_sls;
+typedef union u_slsa	t_u_slsa;
 
 /*
 **typedef union u_spsv	t_u_spsv;

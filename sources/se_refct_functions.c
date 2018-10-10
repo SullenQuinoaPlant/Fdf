@@ -33,7 +33,7 @@ int							cgh_setag_refct(
 	else if (chg < 0 && chg > -1 * sign * *refct)
 			return (REFCOUNT_INCOHERENT);
 	if (!(*refct += chg * sign))
-		return (reg_freetags(t, 0, s, grp));
+		return (reg_tssefreetags(t, 0, s, grp));
 	return (SUCCESS);
 }
 
@@ -46,5 +46,5 @@ int							cgh_grptag_refct(
 	t_s_se	*grp;
 
 	grp = get_se(s, g, t);
-	return (chg_setag_refct(grp, t, chg, s);
+	return (chg_setag_refct(grp, t, chg, s));
 }
