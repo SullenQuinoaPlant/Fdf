@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "functions.h"
+#include "scene.h"
+#include "parse.h"
 
 #define I 0
 #define J 1

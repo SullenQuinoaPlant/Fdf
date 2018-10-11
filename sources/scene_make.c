@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "scene.h"
 
 static void				init_vars(
 	t_s_s *s)
@@ -23,7 +24,7 @@ static int				init_scene(
 		return (SYS_ERR);
 	init_vars(s);
 	i = e_spnv;
-	while (i < e_seg_sz && (r = init_tsse(i, &s->e[i])) == SUCCESS)
+	while (i < e_seg_sz && (r = init_tsse(i, &s->e[i], s)) == SUCCESS)
 		i++;
 	if (r != SUCCESS)
 		scene_teardown(&s);

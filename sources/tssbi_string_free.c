@@ -1,3 +1,4 @@
+#include "functions.h"
 #include "scene.h"
 #include "parse.h"
 
@@ -8,19 +9,16 @@ static void				free_tssbi(
 		0,
 		free_tscdgfxyrz
 	};
-	t_ssbi_freer	f;
+	t_tssbi_freer	f;
 
-	r = SUCCESS;
 	if ((f = far[tssbi->type]))
-		r = f(tssbi);
+		f(tssbi);
 	ft_cleanfree(tssbi, sizeof(t_s_sbi));
 }
 
 void					free_tssbi_str(
 	t_s_sbi *str)
 {
-	t_s_sbi *const	strt = str;
-
 	while (str)
 		free_tssbi(str++);
 }

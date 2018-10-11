@@ -13,8 +13,12 @@
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
-# include "parse.h"
-# include "scene.h"
+# include "parse_typedefs.h"
+# include "scene_typedefs.h"
+
+int							add_star(
+	t_e_seg group,
+	t_s_s	*scene);
 
 /*
 **In add_tssbis_to_scene:
@@ -30,8 +34,14 @@ int							alloc_tar(
 	size_t	*ar_sz,
 	void	***p_ar);
 
-int							chg_tag_refct(
+int							chg_grptag_refct(
 	t_e_seg	g,
+	t_tag	t,
+	int		chg,
+	t_s_s	*s);
+
+int							chg_setag_refct(
+	t_s_se	*se,
 	t_tag	t,
 	int		chg,
 	t_s_s	*s);
@@ -48,6 +58,9 @@ void						free_tar(
 	void	**ar,
 	size_t	ar_sz,
 	size_t	e_sz);
+
+void						free_tscdgfxyrz(
+	t_s_sbi	*p);
 
 void						free_tssbi_str(
 	t_s_sbi	*str);
@@ -78,7 +91,8 @@ void						*get_se(
 
 int							init_tsse(
 	t_e_seg	g,
-	t_s_se	*se);
+	t_s_se	*se,
+	t_s_s	*s);
 
 int							initiate_se_release(
 	void	*se);
@@ -114,11 +128,20 @@ int							open_file(
 void						prinrt_scene_points(
 	t_s_s	*s);
 
-int							reg_freetags(
+int							realloc_tars(
+	t_s_s	*s);
+
+int							reg_tesegfreetags(
 	t_tag	first,
 	t_tag	diff_with_last,
 	t_s_s	*s,
 	t_e_seg	group);
+
+int							reg_tssefreetags(
+	t_tag	first,
+	t_tag	diff_with_last,
+	t_s_s	*s,
+	t_s_se	*tsse);
 
 void						scene_teardown(
 	t_s_s	**s);

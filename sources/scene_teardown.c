@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "scene.h"
 
 void				scene_teardown(
 	t_s_s **s)

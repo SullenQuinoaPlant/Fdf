@@ -38,18 +38,17 @@
 ** - nxt: list of next positions where to store new elements.
 **		These list allocations are capped by TAG_NXT_CAP
 */
-
-# define TAG_AR_CAP ((size_t)1 << 30)
-# define TAG_NXT_CAP (DEF_TAG_AR_SZ / 4)
-# define TAC TAG_AR_CAP
-# define TNC TAG_NXT_CAP
-
 # define TAG_POS_MASK ((t_tag)0xff)
 # define TAG_POS_SHIFT 8 
 # define TAG_AR_SZ ((size_t)1 << TAG_POS_SHIFT)
 # define TPM TAG_POS_MASK 
 # define TPS TAG_POS_SHIFT
 # define TAS TAG_AR_SZ 
+
+# define TAG_AR_CAP ((size_t)1 << 30)
+# define TAG_NXT_CAP (TAG_AR_SZ / 4)
+# define TAC TAG_AR_CAP
+# define TNC TAG_NXT_CAP
 
 /*
 **Scene elements hold a reference count in a (t_refct).

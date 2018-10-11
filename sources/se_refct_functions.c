@@ -11,17 +11,17 @@
 /* ************************************************************************** */
 
 #include "functions.h"
+#include "scene.h"
 
-int							cgh_tag_refct(
-	t_e_seg g,
+int							chg_setag_refct(
+	t_s_se *grp,
 	t_tag t,
 	int chg,
 	t_s_s *s)
 {
-	t_refct	*refct;
+	t_refct *const	refct = (int*)grp;
 	int		sign;
 
-	refct = (t_refct*)get_se(s, g, t);
 	sign = *refct < 0 ? -1 : 1;
 	if (chg > 0)
 	{
@@ -33,6 +33,18 @@ int							cgh_tag_refct(
 	else if (chg < 0 && chg > -1 * sign * *refct)
 			return (REFCOUNT_INCOHERENT);
 	if (!(*refct += chg * sign))
-		return (reg_freetags(t, 0, s, g));
+		return (reg_tssefreetags(t, 0, s, grp));
 	return (SUCCESS);
+}
+
+int							cgh_grptag_refct(
+	t_e_seg g,
+	t_tag t,
+	int chg,
+	t_s_s *s)
+{
+	t_s_se	*grp;
+
+	grp = get_se(s, g, t);
+	return (chg_setag_refct(grp, t, chg, s));
 }

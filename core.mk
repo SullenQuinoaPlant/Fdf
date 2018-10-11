@@ -1,7 +1,9 @@
 all : $(OUT_DIR)/$(NAME)
 
 $(OUT_DIR)/$(NAME) : $(OBJS)
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^\
+		-L $(LIBS_L)\
+		$(patsubst lib%,-l%,$(DEPENDENCIES))
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS)\

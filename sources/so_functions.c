@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "outer.h"
+#include "functions.h"
+#include "scene.h"
 
 int						nxt_fresh_obj(
 	t_s_s *s,
