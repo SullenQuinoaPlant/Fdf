@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 23:33:51 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/11 23:34:54 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 01:14:40 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int						get_intersections(
 	t_u_spsv const *const *pts,
 	double *ret)
 {
-	double	dlt[DIMS];
+	double	isect[ISEC_CT][DIMS + 1];
 	t_tag	t;
 	double	*p;
 	int		i;
@@ -78,17 +78,18 @@ static int						get_intersections(
 	p = (pts[(t = loa->ends[1]) >> TPS])[t & TPM].xyz;
 	i = -1;
 	while (++i < DIMS)
-		dlt[i] -= d[i];
+		dlt[i] -= p[i];
 	i = 0;
 	if (dlt[X])
 	{
 		set_and_multiply(p, -(p[X] / dlt[X]), &ret[i++]);
-		set_and_multiply(p, ((double)(v->h - 1) - p[X]) / dlt[X]), &ret[i++]);
+		set_and_multiply(p, ((double)(v->w - 1) - p[X]) / dlt[X]), &ret[i++]);
 	}
 	if (dlt[Y])
 	{
 		set_and_multiply(p, -(p[Y] / dlt[Y]), &ret[i++]);
-		set_and_multiply(p, ((double)(v->w - 1) - p[Y]) / dlt[Y]), &ret[i++]);
+		set_and_multiply(p, ((double)(v->h - 1) - p[Y]) / dlt[Y]), &ret[i++]);
 	}
-	return (i);
+	filter_visible(v, ret);
+	filter_valid(ends, ret);
 }

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/11 21:56:30 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 01:20:20 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "outer.h"
 
+# define ARGBS 4
 typedef uint32_t	t_argb;
 
 typedef enum e_scene_element_groups	t_e_seg;

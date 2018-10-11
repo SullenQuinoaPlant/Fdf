@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/11 23:36:00 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 01:18:11 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,21 @@
 #include "scene.h"
 
 /*
-** A line may cross the rectangular views' boundaries four times when we extend
-** these to infinity. Therefore isect[4].
-*/
-#define ISEC_CT 4
+** If there is only one visible point, that point must be placed at position
+** 0 in the returned array.
+*/ 
+static int						visible_points(
+	t_s_sv *v,
+	t_u_slsa *loa,
+	double (*ret)[DIMS])
+{
+}
 
+/*
+ * The 'pnd' array holds the coordinates, and the color values of,
+ * P1, P2 and the delta vector (P2 - P1).
+ * See .h for indexes.
+*/
 void							loa_proj(
 	t_s_sv *v,
 	void *line_or_arrow,
@@ -27,11 +37,14 @@ void							loa_proj(
 {
 	t_u_slsa *const	loa = (t_u_slsa*)line_or_arrow;
 	t_s_loap *const	ret = (t_s_loap*)tsloap;
-	double			isect[4][DIMS];
+	double			pnv[DIMS + 1]
 	int				count;
 
-	count = valid_points(v, loa, pts, ret->ends);
-	if (count < 2)
-		count = get_intersections(v, loa, pts, isect);
-	filter_intersections(v, isect, count, ret->ends);
+	count = visible_points(v, loa, pts, );
+	if (count != 2)
+	{
+		get_intersections(
+	}
+		count = get_intersections(v, loa, pts, ret->ends);
+	filter_zaxis(v, ret);
 }
