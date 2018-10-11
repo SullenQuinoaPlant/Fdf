@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 03:41:32 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/11 21:39:52 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ typedef double	(t_pctrmr)[DIMS];
 # define DIMS_N_TR 4
 typedef t_pctrmr	(t_pctrm)[DIMS_N_TR];
 
-typedef void	(*t_proj)(void *, t_u_spsv const *const *, void *);
+typedef void	(*t_proj)(
+	t_s_sv *,
+	void *,
+	t_u_spsv const *const *,
+	void *);
 
 typedef int	t_refct;
 
@@ -86,7 +90,6 @@ typedef struct s_vector	t_s_v;
 typedef unsigned int	t_tag;
 
 typedef union u_slsa	t_u_slsa;
-
 /*
 **typedef union u_spsv	t_u_spsv;
 */
@@ -94,7 +97,6 @@ typedef unsigned int	t_vuint;
 
 # define V_DIMS 2
 typedef t_vuint	(t_vpos)[V_DIMS];
-
 /*
 **typedef unsigned int	t_vuint;
 */

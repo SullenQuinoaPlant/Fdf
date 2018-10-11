@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/08 04:35:48 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/11 21:33:13 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,16 +379,18 @@ struct						s_object_projection
 /*
 **Projections, (t_proj)s, take point coordinates and an element,
 **	and fill that element's projection structure in a scene.
-**typedef void	(*t_pproj)(void*, t_u_spsv const *const, t_s_pp *);
-**typedef void	(*t_dproj)(void*, t_u_spsv const *const, t_s_dp *);
-**typedef void	(*t_loaproj)(void*, t_u_spsv const *const, t_s_loap *);
-**typedef void	(*t_fproj)(void*, t_u_spsv const *const, t_s_fp *);
+**typedef void	(*t_pproj)(t_s_sv*, void*, t_u_spsv const *const *, t_s_pp *);
+**typedef void	(*t_dproj)(t_s_sv*, t_s_d*, t_u_spsv const *const *, t_s_dp *);
+**typedef void	(*t_loaproj)(
+**	t_s_sv*, t_u_slsa*, t_u_spsv const *const *, t_s_loap *);
+**typedef void	(*t_fproj)(
+**	t_s_sv*, t_s_f*, t_u_spsv const *const *, t_s_fp *);
 */
 
 /*
 **Precendence 'prec' typically linked to depth, 
-**	unless object is highlighted, in which case use 
-**	negative values to indicate greater precedence.
+**	unless object is highlighted, (in which case maybe use 
+**	negative values to indicate greater precedence?)
 */
 struct						s_pixel
 {
