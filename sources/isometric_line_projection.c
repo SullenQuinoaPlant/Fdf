@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 23:11:06 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 00:43:40 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static int						count_visible(
 	t_s_sv *v,
-	double (*r)[DIMS + ARGBS])
+	double (*pnd)[DIMS + ARGBS])
 {
 	if (is_visible(v->w, v->h, r[P1]))
 	{
@@ -73,7 +73,7 @@ stati void						set_ret(
  * P1, P2 and the delta vector (P2 - P1).
  * See .h for indexes.
 */
-void							loa_proj(
+void							isometric_loa_proj(
 	t_s_sv *v,
 	void *line_or_arrow,
 	t_u_spsv const *const *pts,
@@ -82,15 +82,14 @@ void							loa_proj(
 	t_u_slsa *const	loa = (t_u_slsa*)line_or_arrow;
 	t_s_loap *const	ret = (t_s_loap*)ret_tsloap;
 	double			pnd[3][DIMS + ARGBS]
-	int				count;
 
 	set_someof_pnd(loa, pts, pnd);
-	if ((count = count_visible(v, loa, pts, ret)))
+	if (count_visible(v, loa, pts, ret) == 2)
+	else
 	{
 		set_somemoreof_pnd(loa, pnd);
-		isometric_line_isect(v, pnd, ret.ends);
-		set_ret(pnd, ret);
+		if (isometric_line_xy_isect(v, pnd, ret.ends))
+			isometric_line_z_isect(pnd);
 	}
-	else
-		ft_memcpy(ret.ends, &(t_vpos[2]){V_NOPOS, V_NOPOS}, sizeof(t_vpos[2]));
+	set_ret(pnd, ret);
 }
