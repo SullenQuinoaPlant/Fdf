@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 23:53:24 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 01:05:20 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 01:17:07 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,16 @@ static void						filter_xy_visible(
 	double isect[ISEC_CT][DIMS],
 	int valid[ISEC_CT])
 {
-	double			d;
-	double			(*p)[DIMS];
-	int				i;
-	int				j;
-
 	while (pt_ct--)
-		if (((d = isect[pt_ct][X]) >= 0 || (t_vuint)d == 0) && d < v->w &&
-			((d = isect[pt_ct][Y]) >= 0 || (t_vuint)d == 0) && d < v->h)
+		if (is_iso_xy_visible(v, isect[pt_ct]))
 			valid[pt_ct] = 1;
 }
 
 static void						filter_p1p2_dir(
+	int pt_ct,
+	double isect[ISEC_CT][DIMS + ARGBS],
+	double pnd[ISEC_CT][DIMS + ARGBS],
+	int valid[ISEC_CT])
 
 static void						filter_isects(
 	t_s_sv *v,

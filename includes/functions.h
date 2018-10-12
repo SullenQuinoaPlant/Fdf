@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 01:08:13 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 01:15:14 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,15 @@ int							init_tsse(
 int							initiate_se_release(
 	void	*se);
 
-static int					is_visible(
+int							is_iso_visible(
+	t_s_sv *v,
+	double pt[DIMS]);
+
+int							is_iso_xy_visible(
+	t_s_sv *v,
+	double pt[DIMS]);
+
+int							is_iso_z_visible(
 	t_s_sv *v,
 	double pt[DIMS]);
 

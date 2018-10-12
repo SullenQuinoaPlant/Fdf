@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 01:09:03 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 01:10:01 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ stati void						set_ret(
 }
 
 /*
- * The 'pnd' array holds the coordinates, and the color values of,
- * P1, P2 and the delta vector (P2 - P1).
- * See .h for indexes.
+** The 'pnd' array holds the coordinates, and the color values of
+** P1, P2 and the delta vector (P2 - P1).
+** See .h for indexes.
 */
 void							isometric_loa_proj(
 	t_s_sv *v,
