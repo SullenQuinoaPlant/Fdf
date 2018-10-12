@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isometric_view_line_frame_isect.c                  :+:      :+:    :+:   */
+/*   isometric_view_line_frame_xy_isect.c               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 23:33:51 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 23:52:12 by nmauvari         ###   ########.fr       */
+/*   Created: 2018/10/12 23:53:24 by nmauvari          #+#    #+#             */
+/*   Updated: 2018/10/12 23:59:00 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ static void						filter_xy_visible(
 	}
 }
 
-static void						filter_z_visible(
-
-	double (*isecs)[DIMS])
+static void						filter_p1p2_dir(
 
 static void						filter_isects(
 	t_s_sv *v,
@@ -67,6 +65,8 @@ static void						filter_isects(
 **	frame, that point must be at position P1.
 **
 **Abbreviations:
+** - valid : number of valid points, either 1 or 0
+**		if 1, the valid point is in position P1 of 'pnd'.
 ** - pnd : points and delta. see .h.
 ** - isect : intersections
 ** - d : delta
@@ -74,10 +74,9 @@ static void						filter_isects(
 ** - r : ratio
 */
 void							isometric_line_xy_isect(
-static int						isometric_intersections(
 	t_s_sv *v,
-	double pnd[3][DIMS + ARGBS],
-	t_vpos *ret)
+	int valid,
+	double pnd[3][DIMS + ARGBS])
 {
 	double	isect[ISEC_CT][DIMS + ARGBS];
 	double	d;
@@ -101,5 +100,4 @@ static int						isometric_intersections(
 		set_and_multiply(pnd, pnd[DT], r, isect[i++]);
 	}
 	i = filter_isects(v, pnd, i, isect);
-	stuff_res(pnd, isect, i, res);
 }
