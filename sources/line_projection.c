@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 03:20:18 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 03:42:48 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ static void						set_somemoreof_pnd(
 	i = -1;
 	while (++i < DIMS + ARGBS)
 		r[DT][i] = r[P2][i] - r[P1][i];
+}
+
+stati void						set_ret(
+	double (*pnd)[DIMS + ARGBS],
+	t_s_loap *ret)
+{
+	doubles_to_tvpos(pnd, &ret->ends[0]);
+	doubles_to_tvpos(&pnd[P2], &ret->ends[1]);
+	doubles_to_targb(&pnd[P1][ARGB_OFFSET], &ret->argb[0]);
+	doubles_to_targb(&pnd[P2][ARGB_OFFSET], &ret->argb[1]);
+	ret->prec[0] = pnd[P1][Z];
+	ret->prec[1] = pnd[P2][Z];
 }
 
 /*

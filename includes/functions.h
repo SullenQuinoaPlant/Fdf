@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 02:48:43 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 03:40:15 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ int							clone_tar(
 void						doubles_to_targb(
 	double	argb[ARGBS],
 	t_argb	*ret);
+
+void							doubles_to_tvpos(
+	double	coords[DIMS],
+	t_vpos	*ret);
 
 void						free_tar(
 	void	**ar,

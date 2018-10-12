@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 02:38:04 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 03:33:57 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,29 +332,35 @@ enum						e_view_projection_groups
 */
 # define V_H 0
 # define V_W 1
-# define V_DIMS 2
 /*
 **(t_vuint)s are grouped by two in (t_vpos)s
 */
 
 /*
 **Unused, probably won't use.
-**struct						s_point_projection
-**{
-**	t_vpos	point;
-**};
 */
+struct						s_point_projection
+{
+	t_vpos	point;
+};
 
+/*
+**Precendence 'prec' typically linked to depth, 
+**	unless object is highlighted, (in which case maybe use 
+**	negative values to indicate greater precedence?)
+*/
 struct						s_dot_projection
 {
 	t_vpos	here;
 	t_argb	argb;
+	double	prec;
 };
 
 struct						s_line_or_arrow_projection
 {
 	t_vpos	ends[2];
 	t_argb	argb[2];
+	double	prec[2];
 };
 
 /*
@@ -394,11 +400,6 @@ struct						s_object_projection
 **	t_s_sv*, t_s_f*, t_u_spsv const *const *, t_s_fp *);
 */
 
-/*
-**Precendence 'prec' typically linked to depth, 
-**	unless object is highlighted, (in which case maybe use 
-**	negative values to indicate greater precedence?)
-*/
 struct						s_pixel
 {
 	t_argb	argb;
