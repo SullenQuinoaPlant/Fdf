@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 23:31:45 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 01:08:13 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,7 @@ int							initiate_se_release(
 	void	*se);
 
 static int					is_visible(
-	t_vuint w,
-	t_vuint h,
+	t_s_sv *v,
 	double pt[DIMS]);
 
 /*

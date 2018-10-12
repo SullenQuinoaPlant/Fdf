@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 00:43:40 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 01:09:03 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int						count_visible(
 	t_s_sv *v,
 	double (*pnd)[DIMS + ARGBS])
 {
-	if (is_visible(v->w, v->h, r[P1]))
+	if (is_visible(v, pnd[P1]))
 	{
-		if (is_visible(v->w, v->h, r[P2]))
+		if (is_visible(v, pnd[P2]))
 			return (2);
 		else
 		{

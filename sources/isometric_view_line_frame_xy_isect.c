@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 23:53:24 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 23:59:00 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 01:05:20 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,19 @@
 
 static void						filter_xy_visible(
 	t_s_sv *v,
-	double (*isect)[DIMS],
+	int pt_ct,
+	double isect[ISEC_CT][DIMS],
+	int valid[ISEC_CT])
 {
-	double const	h = (double)v->h;
-	double const	w = (double)v->w;
+	double			d;
 	double			(*p)[DIMS];
 	int				i;
 	int				j;
 
-	j = 0;
-	i = -1;
-	while (i--)
-	{
-		p = isect[isec_count];
-		if (p[X] <= h && p[Y]
-	}
+	while (pt_ct--)
+		if (((d = isect[pt_ct][X]) >= 0 || (t_vuint)d == 0) && d < v->w &&
+			((d = isect[pt_ct][Y]) >= 0 || (t_vuint)d == 0) && d < v->h)
+			valid[pt_ct] = 1;
 }
 
 static void						filter_p1p2_dir(
@@ -52,12 +50,19 @@ static void						filter_isects(
 	doube isect[ISEC_CT][DIMS + ARGBS])
 {
 	int		valid[ISEC_CT];
+	int		i;
 
 	ft_bzero(valid, sizeof(valid));
 	filter_xy_visible(v, isect, valid);
 	filter_p1p2_dir(pnd, isect, valid);
-	filter
-
+	while (pt_ct--)
+	ft_memcpy
+	i = -1;
+	ct = 0;
+	while (++i < ISEC_CT)
+		if (valid[i])
+			ct++;
+	return (ct);
 }
 
 /*
@@ -73,7 +78,7 @@ static void						filter_isects(
 ** - p : point
 ** - r : ratio
 */
-void							isometric_line_xy_isect(
+int								isometric_line_xy_isect(
 	t_s_sv *v,
 	int valid,
 	double pnd[3][DIMS + ARGBS])
@@ -82,22 +87,23 @@ void							isometric_line_xy_isect(
 	double	d;
 	double	p;
 	double	r;
-	int		i;
+	int		pt_ct;
 
-	i = 0;
+	pt_ct = 0;
 	if ((d = pnd[DT][X]))
 	{
 		p = pnd[P1][X];
-		set_mult_dims_arbg(pnd[P1], pnd[DT], (r = -p / d), isect[i++]);
+		set_mult_dims_arbg(pnd[P1], pnd[DT], (r = -p / d), isect[pt_ct++]);
 		r = ((double)(v->w - 1) - p) / d;
-		set_and_multiply(pnd, pnd[DT], r, isect[i++]);
+		set_and_multiply(pnd, pnd[DT], r, isect[pt_ct++]);
 	}
 	if ((d = pnd[DT][Y]))
 	{
 		p = pnd[P1][Y];
-		set_and_multiply(pnd, pnd[DT], (r = -p / d)), isect[i++]);
+		set_and_multiply(pnd, pnd[DT], (r = -p / d)), isect[pt_ct++]);
 		r = ((double)(v->h - 1) - p) / d;
-		set_and_multiply(pnd, pnd[DT], r, isect[i++]);
+		set_and_multiply(pnd, pnd[DT], r, isect[pt_ct++]);
 	}
-	i = filter_isects(v, pnd, i, isect);
+	pt_ct = filter_isects(v, pnd, pt_ct, isect);
+	return (pt_ct);
 }
