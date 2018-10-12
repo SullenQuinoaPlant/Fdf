@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_projection.c                                  :+:      :+:    :+:   */
+/*   isometric_line_projection.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,14 +12,20 @@
 
 #include "scene_typedefs.h"
 #include "scene.h"
+#include "line_isometric_view_intersections.h"
 
 
 static int						all_visible(
 	t_s_sv *v,
 	double (*r)[DIMS + ARGBS])
 {
-	if (is_visible(v->w, v->h, r[P1]) && is_visible(v->w, v->h, r[P1]))
-		return (1);
+	if (is_visible(v->w, v->h, r[P1]))
+	{
+		if (is_visible(v->w, v->h, r[P2]))
+			return (1);
+		else
+			ft_memswap(&r[P1], &r[P2], &r[DT]);
+	}
 	return (0);
 }
 
@@ -68,10 +74,10 @@ void							loa_proj(
 	t_s_sv *v,
 	void *line_or_arrow,
 	t_u_spsv const *const *pts,
-	void *tsloap)
+	void *ret_tsloap)
 {
 	t_u_slsa *const	loa = (t_u_slsa*)line_or_arrow;
-	t_s_loap *const	ret = (t_s_loap*)tsloap;
+	t_s_loap *const	ret = (t_s_loap*)ret_tsloap;
 	double			pnd[3][DIMS + ARGBS]
 	int				count;
 

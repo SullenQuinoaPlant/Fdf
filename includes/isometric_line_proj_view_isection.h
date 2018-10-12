@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_projections.h                                 :+:      :+:    :+:   */
+/*   isometric_line_proj_view_isection.h                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_PROJECTIONS_H
-# define LINE_PROJECTIONS_H
+#ifndef LINE_ISOMETRIC_VIEW_INTERSECTIONS.H
+# define LINE_ISOMETRIC_VIEW_INTERSECTIONS.H
 
 # include "outer.h"
 
@@ -33,7 +33,7 @@
 # define DT DELTA
 # define P2 2
 
-# define DBL_DIMS_SZ sizeof(double) * DIMS
+# define DBL_DIMS_SZ (sizeof(double) * DIMS)
 
 #define ARGB_OFFSET DIMS
 
