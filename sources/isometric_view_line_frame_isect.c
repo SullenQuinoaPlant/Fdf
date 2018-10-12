@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isometric_line_proj_view_isection.c                :+:      :+:    :+:   */
+/*   isometric_view_line_frame_isect.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -63,28 +63,44 @@ static void						filter_isections_zaxis(
 
 	double (*isecs)[DIMS])
 
+/*
+**If onyl one of the two 'pnd' points is within the view
+**	frame, that point must be at position P1.
+**
+**Abbreviations:
+** - pnd : points and delta. see .h.
+** - isect : intersections
+** - d : delta
+** - p : point
+** - r : ratio
+*/
+void							isometric_line_isect(
 static int						get_intersections(
 	t_s_sv *v,
-	t_u_slsa *const loa,
-	t_u_spsv const *const *pts,
-	double *ret)
+	double pnd[3][DIMS + ARGBS],
+	t_vpos *ret)
 {
-	double	isect[ISEC_CT][DIMS + 1];
-	t_tag	t;
-	double	*p;
+	double	isect[ISEC_CT][DIMS + ARGBS];
+	double	d;
+	double	p;
+	double	r;
 	int		i;
 
-	if (dlt[X])
+	i = 0;
+	if ((d = pnd[DT][X]))
 	{
-		set_and_multiply(p, -(p[X] / dlt[X]), &ret[i++]);
-		set_and_multiply(p, ((double)(v->w - 1) - p[X]) / dlt[X]), &ret[i++]);
+		p = pnd[P1][X];
+		set_and_multiply(pnd, pnd[DT], (r = -p / d), isect[i++]);
+		r = ((double)(v->w - 1) - p) / d;
+		set_and_multiply(pnd, pnd[DT], r, isect[i++]);
 	}
-	if (dlt[Y])
+	if ((d = pnd[DT][Y]))
 	{
-		set_and_multiply(p, -(p[Y] / dlt[Y]), &ret[i++]);
-		set_and_multiply(p, ((double)(v->h - 1) - p[Y]) / dlt[Y]), &ret[i++]);
+		p = pnd[P1][Y];
+		set_and_multiply(pnd, pnd[DT], (r = -p / d)), isect[i++]);
+		r = ((double)(v->h - 1) - p) / d;
+		set_and_multiply(pnd, pnd[DT], r, isect[i++]);
 	}
-	filter_xy_visible(v, ret);
-	filter_dir_p1p2(ends, ret);
-	filter_z_visible(v, ret);
+	i = filter_isects(v, pnd, isect);
+	stuff_res(pnd, isect, i, res);
 }
