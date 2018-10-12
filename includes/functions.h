@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 03:40:15 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 23:25:33 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void						doubles_to_targb(
 	double	argb[ARGBS],
 	t_argb	*ret);
 
-void							doubles_to_tvpos(
+void						doubles_to_tvpos(
 	double	coords[DIMS],
 	t_vpos	*ret);
 
@@ -158,6 +158,12 @@ int							reg_tssefreetags(
 
 void						scene_teardown(
 	t_s_s	**s);
+
+void						set_and_mult_dims_ar(
+	double src[DIMS],
+	double deltas[DIMS],
+	double ratio,
+	double dest[DIMS]);
 
 void						targb_to_doubles(
 	t_argb	argb,

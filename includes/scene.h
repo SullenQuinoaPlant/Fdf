@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 03:33:57 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 23:18:09 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,9 +332,12 @@ enum						e_view_projection_groups
 */
 # define V_H 0
 # define V_W 1
+# define V_DIMS VIEW_DIMS
+# define V_NULL_COORD (t_vuint)(-1)
 /*
 **(t_vuint)s are grouped by two in (t_vpos)s
 */
+# define V_NOPOS ((t_vpos){V_NULL_COORD; V_NULL_COORD})
 
 /*
 **Unused, probably won't use.

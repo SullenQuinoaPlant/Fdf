@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 03:42:48 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 23:11:06 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 #include "line_isometric_view_intersections.h"
 
 
-static int						all_visible(
+static int						count_visible(
 	t_s_sv *v,
 	double (*r)[DIMS + ARGBS])
 {
 	if (is_visible(v->w, v->h, r[P1]))
 	{
 		if (is_visible(v->w, v->h, r[P2]))
-			return (1);
+			return (2);
 		else
+		{
 			ft_memswap(&r[P1], &r[P2], &r[DT]);
+			return (1);
+		}
 	}
 	return (0);
 }
@@ -82,10 +85,12 @@ void							loa_proj(
 	int				count;
 
 	set_someof_pnd(loa, pts, pnd);
-	if (!all_visible(v, loa, pts, ret))
+	if ((count = count_visible(v, loa, pts, ret)))
 	{
 		set_somemoreof_pnd(loa, pnd);
-		get_intersections(v, pnd);
+		isometric_line_isect(v, pnd, ret.ends);
+		set_ret(pnd, ret);
 	}
-	set_ret(pnd, ret);
+	else
+		ft_memcpy(ret.ends, &(t_vpos[2]){V_NOPOS, V_NOPOS}, sizeof(t_vpos[2]));
 }
