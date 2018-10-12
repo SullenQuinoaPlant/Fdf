@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/11 23:21:47 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 02:02:38 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,23 +332,29 @@ enum						e_view_projection_groups
 */
 # define V_H 0
 # define V_W 1
+# define V_DIMS 2
 /*
 **(t_vuint)s are grouped by two in (t_vpos)s
 */
 
-struct						s_point_projection
-{
-	t_vpos	point;
-};
+/*
+**Unused, probably won't use.
+**struct						s_point_projection
+**{
+**	t_vpos	point;
+**};
+*/
 
 struct						s_dot_projection
 {
 	t_vpos	here;
+	t_argb	argb;
 };
 
 struct						s_line_or_arrow_projection
 {
 	t_vpos	ends[2];
+	t_argb	argb[2];
 };
 
 /*
@@ -360,6 +366,7 @@ struct						s_line_or_arrow_projection
 struct						s_fill_projection
 {
 	t_vpos	tips[6];
+	t_argb	argb[6];
 	size_t	tips_ct;
 	t_vpos	bar;
 };

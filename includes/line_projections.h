@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 00:41:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 01:19:56 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 01:55:20 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@
 # define ISEC_CT 4
 
 /*
- * Indexes of:
- * - first point, 
- * - delta between first point and second point, 
- * - second point
- * in the stupid mash-up array
+** Indexes of:
+** - first point, 
+** - delta between first point and second point, 
+** - second point
+** in the stupid mash-up array
 */
 # define P1 0
 # define DELTA 1
 # define P2 2
+
+# define DBL_DIMS_SZ sizeof(double) * DIMS
 
 #endif

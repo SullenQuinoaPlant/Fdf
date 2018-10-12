@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/08 04:47:46 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 02:23:07 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ int							cdgfxyrz_builder(
 int							clone_tar(
 	t_s_ta	*ta,
 	void	***p_ret);
+
+void						doubles_to_targb(
+	double	argb[ARGBS],
+	t_argb	*ret);
 
 void						free_tar(
 	void	**ar,
@@ -145,6 +149,10 @@ int							reg_tssefreetags(
 
 void						scene_teardown(
 	t_s_s	**s);
+
+void						targb_to_doubles(
+	t_argb	argb,
+	double	ret[ARGBS]);
 
 size_t						teseg_type_sz(
 	t_e_seg	g);
