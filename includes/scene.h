@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 02:02:38 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 02:38:04 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,9 +412,9 @@ struct						s_pixel
 **	The z axis is in the away direction from the viewpoint.
 **	This system's origin is the view center.
 **		If view height or width are even integers, the center is shifted
-**			towards top left so that the coordinates of a point (x, y)
-**			can be obtained by subtracting as so:
-**				((t_vuint)x - w / 2, (t_vuint)y - h / 2).
+**			towards bottom right so that the coordinates of a point (x, y)
+**			can be obtained by adding as so:
+**				((t_vuint)(x + (double)(w / 2)), (t_vuint)(y + (double)(h / 2)))
 **View builders are responsible for initializing:
 ** - proj
 **

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 01:07:39 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 03:39:58 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 03:08:59 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,8 @@
 # define BAD_ARGS 1
 # define MEM_CAP 2
 # define BAD_INFILE 3
+
+# define DIMS 3
+# define DIMS_N_TR 4
 
 #endif

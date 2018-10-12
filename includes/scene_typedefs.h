@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 02:14:37 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 03:09:02 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ typedef void	(*t_pctr)(\
 	size_t tuspsv_ar_sz,
 	t_u_spsv *const *ret);
 
-# define DIMS 3
 typedef double	(t_pctrmr)[DIMS];
 
-# define DIMS_N_TR 4
 typedef t_pctrmr	(t_pctrm)[DIMS_N_TR];
 
 typedef void	(*t_proj)(

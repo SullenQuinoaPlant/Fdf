@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 02:23:07 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 02:48:43 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,11 @@ int							init_tsse(
 
 int							initiate_se_release(
 	void	*se);
+
+static int					is_visible(
+	t_vuint w,
+	t_vuint h,
+	double pt[DIMS]);
 
 /*
 **Allocates and initilizes a scene, with optional

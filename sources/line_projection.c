@@ -6,51 +6,46 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 01:56:21 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/12 03:20:18 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene_typedefs.h"
 #include "scene.h"
 
-static int						is_visible(
-	t_vuint w,
-	t_vuint h,
 
 static int						all_visible(
 	t_s_sv *v,
-	t_u_slsa *loa,
-	t_u_spsv const *pts,
-	double (*ret)[DIMS + ARGBS];
-	t_s_loap *ret)
+	double (*r)[DIMS + ARGBS])
 {
-	double	(*coords)[DIMS];
-	t_tag	t;
-
-	ft_memcpy(ret, &(pts[(t = loa->ends[0]) >> TPS])[t & TPM], DBL_DIMS_SZ);
-	ft_memcpy(ret, &(pts[(t = loa->ends[1]) >> TPS])[t & TPM], DBL_DIMS_SZ);
-	if (
-
+	if (is_visible(v->w, v->h, r[P1]) && is_visible(v->w, v->h, r[P1]))
+		return (1);
+	return (0);
 }
 
-static void					 	set_pnv_count_visible(
-	t_s_sv *v,
+static void					 	set_someof_pnd(
 	t_u_slsa *loa,
 	t_u_spsv const *const *pts,
-	double (*ret)[DIMS + ARGBS])
+	double (*r)[DIMS + ARGBS])
 {
 	t_tag	t;
 
-	if (is_visible(pts[(t = loa->ends[1]) >> TPS] 
-	ft_memcpy(ret, (pts[(t = loa->ends[1]) >> TPS])[t & TPM].xyz, sizeof());
-	p = (pts[(t = loa->ends[1]) >> TPS])[t & TPM].xyz;
-	i = -1;
-	while (++i < DIMS)
-		dlt[i] -= p[i];
-	i = 0;
+	ft_memcpy(&r[P1], &(pts[(t = loa->ends[0]) >> TPS])[t & TPM], DBL_DIMS_SZ);
+	ft_memcpy(&r[P2], &(pts[(t = loa->ends[1]) >> TPS])[t & TPM], DBL_DIMS_SZ);
 }
 
-static void
+static void						set_somemoreof_pnd(
+	t_u_slsa *loa,
+	double (*r)[DIMS + ARGBS])
+{
+	int		i;
+
+	targb_to_doubles(loa->argb[0], r[P1] + ARGB_OFFSET);
+	targb_to_doubles(loa->argb[1], r[P2] + ARGB_OFFSET);
+	i = -1;
+	while (++i < DIMS + ARGBS)
+		r[DT][i] = r[P2][i] - r[P1][i];
+}
 
 /*
  * The 'pnd' array holds the coordinates, and the color values of,
@@ -68,9 +63,10 @@ void							loa_proj(
 	double			pnd[3][DIMS + ARGBS]
 	int				count;
 
-	if (!all_visible(loa, ret)
+	set_someof_pnd(loa, pts, pnd);
+	if (!all_visible(v, loa, pts, ret))
 	{
-		fill_pnd(v, loa, pts, pnd);
+		set_somemoreof_pnd(loa, pnd);
 		get_intersections(v, pnd);
 	}
 	set_ret(pnd, ret);
