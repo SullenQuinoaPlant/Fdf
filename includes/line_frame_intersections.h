@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 00:41:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 05:05:08 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 05:11:21 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@
 # define ISEC_CT 4
 
 /*
+** (t_pnd) stands for 'points and delta'
 ** Indexes of:
-** - first point, 
-** - delta between first point and second point, 
-** - second point
-** in the stupid mash-up array
+** - first point, (index P1)
+** - delta between first point and second point (P2 - P1), (index DT)
+** - second point (index P2)
 */
 # define P1 0
-# define DELTA 1
-# define DT DELTA
+# define DT 1
 # define P2 2
+# define PND_SZ 3
+typedef double	t_pnd[PND_SZ][DIMS + ARGBS];
 
 # define DBL_DIMS_SZ (sizeof(double) * DIMS)
 # define DBL_ARGBS_SZ (sizeof(double) * ARGBS)
