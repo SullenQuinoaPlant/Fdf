@@ -335,12 +335,9 @@ enum						e_view_projection_groups
 **Flag:
 **	- visibility
 */
-/*
-**Unused, probably won't use.
-*/
 struct						s_point_projection
 {
-	t_vpos	point;
+	t_u_spsv	pov;
 };
 
 # define F_V_VISIBLE 0x01
@@ -446,9 +443,9 @@ struct						s_scene_view
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
 	t_u_spsv	**vpnv;
-	t_proj		prj[e_vpg_sz];
-	void		*prj_arg[e_vpg_sz];
-	t_s_ta		e[e_vpg_sz];
+	t_proj		prj[e_seg_sz];
+	void		*prj_arg[e_seg_sz];
+	t_s_ta		e[e_seg_sz];
 	t_vuint		h;
 	t_vuint		w;
 	t_s_pxl		*view;
