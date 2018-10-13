@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 03:09:02 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 03:40:08 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef union u_slsa	t_u_slsa;
 /*
 **typedef union u_spsv	t_u_spsv;
 */
+#define TVUINT_MAX UINT_MAX
 typedef unsigned int	t_vuint;
 
 # define VIEW_DIMS 2

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 01:07:39 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 03:08:59 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 03:40:22 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdint.h>
+# include <limits.h>
 # include "libft.h"
 # include "ring.h"
 # include "libgetnextline.h"

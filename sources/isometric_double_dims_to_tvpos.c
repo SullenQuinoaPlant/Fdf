@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 02:57:30 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 02:58:59 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 03:10:12 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ void							iso_dbl_dims_to_tvpos(
 	double pos[DIMS],
 	t_vpos *ret)
 {
-	wh
+
 }
