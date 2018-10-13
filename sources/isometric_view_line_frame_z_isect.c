@@ -6,11 +6,12 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 00:20:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 05:14:45 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 06:13:34 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "outer.h"
+#include "line_frame_intersections.h"
 
 #define NOT_IN_VIEW -1
 
@@ -27,14 +28,29 @@ int								has_isect(
 	return (1);
 }
 
+void							move_point(
+	int pt,
+	t_pnd pnd)
+{
+	double const	ratio = -(pnd[pt][Z] / pnd[DT][Z]);
+	int				i;
+
+	i = -1;
+	while (++i < DIMS + ARGBS)
+	{
+		pnd[pt][i] += ratio * pnd[DT][i];
+		pnd[DT][i] = pnd[P2][i] - pnd[P1][i];
+	}
+}
+
 void							isometric_line_z_isect(
-	double pnd[3][DIMS + ARGBS])
+	t_pnd pwd)
 {
 	int		isect;
-	t_pnd
 	double	
 
-	if ((isect = has_isect(pnd)) == NOT_VISIBLE)
+	if ((isect = has_isect(pnd)) == NOT_IN_VIEW)
 		return (OUT_OF_VIEW);
-	
+	if (isect)
+		move_point(p1 ? P1 : P2, pnd);
 }

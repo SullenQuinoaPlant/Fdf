@@ -6,13 +6,13 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 23:53:24 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 04:57:31 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 05:59:29 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene_typedefs.h"
 #include "scene.h"
-#include "isometric_view_line_frame_isect.h"
+#include "line_frame_intersections.h"
 
 /*
 **Get intersection points between the lines that prolong the viewing frame
@@ -98,7 +98,7 @@ int
 */
 int								isometric_line_xy_isect(
 	t_s_sv *v,
-	double pnd[3][DIMS + ARGBS])
+	t_pnd pnd)
 {
 	double	isect[ISEC_CT][DIMS + ARGBS];
 	double	d;
@@ -110,16 +110,16 @@ int								isometric_line_xy_isect(
 	if ((d = pnd[DT][X]))
 	{
 		p = pnd[P1][X];
-		set_mult_dims_arbg(pnd[P1], pnd[DT], (r = -p / d), isect[pt_ct++]);
+		set_mult_dims_arbgs(pnd[P1], pnd[DT], (r = -p / d), isect[pt_ct++]);
 		r = ((double)(v->w - 1) - p) / d;
-		set_and_multiply(pnd, pnd[DT], r, isect[pt_ct++]);
+		set_mult_dims_arbgs(pnd[P1], pnd[DT], r, isect[pt_ct++]);
 	}
 	if ((d = pnd[DT][Y]))
 	{
 		p = pnd[P1][Y];
-		set_and_multiply(pnd, pnd[DT], (r = -p / d)), isect[pt_ct++]);
+		set_mult_dims_arbgs(pnd[P1], pnd[DT], (r = -p / d)), isect[pt_ct++]);
 		r = ((double)(v->h - 1) - p) / d;
-		set_and_multiply(pnd, pnd[DT], r, isect[pt_ct++]);
+		set_mult_dims_arbgs(pnd[P1], pnd[DT], r, isect[pt_ct++]);
 	}
 	return (filter_isects(v, pnd, pt_ct, isect));
 }
