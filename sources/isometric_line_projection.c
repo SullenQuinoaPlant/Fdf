@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 02:18:06 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 04:56:11 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ static void						set_somemoreof_pnd(
 }
 
 stati void						set_ret(
+	t_s_sv *v,
 	double (*pnd)[DIMS + ARGBS],
 	t_s_loap *ret)
 {
-	doubles_to_tvpos(pnd, &ret->ends[0]);
-	doubles_to_tvpos(&pnd[P2], &ret->ends[1]);
+	iso_dbl_dims_to_tvpos(v, pnd, ret->ends[0]);
+	iso_dbl_dims_to_tvpos(v, pnd[P2], ret->ends[1]);
 	doubles_to_targb(&pnd[P1][ARGB_OFFSET], &ret->argb[0]);
 	doubles_to_targb(&pnd[P2][ARGB_OFFSET], &ret->argb[1]);
 	ret->prec[0] = pnd[P1][Z];
@@ -82,14 +83,17 @@ void							isometric_loa_proj(
 	t_u_slsa *const	loa = (t_u_slsa*)line_or_arrow;
 	t_s_loap *const	ret = (t_s_loap*)ret_tsloap;
 	double			pnd[3][DIMS + ARGBS]
+	int				count;
 
 	set_someof_pnd(loa, pts, pnd);
-	if (count_visible(v, loa, pts, ret) == 2)
-	else
+	if (!(count = count_visible(v, loa, pts, ret)))
+		loa->flgs &= ~F_V_VISIBLE;
+	else if (count < 2)
 	{
 		set_somemoreof_pnd(loa, pnd);
-		if (isometric_line_xy_isect(v, pnd, ret.ends))
-			isometric_line_z_isect(pnd);
+		if (isometric_line_xy_isect(v, pnd) == OUT_OF_VIEW ||
+			isometric_line_z_isect(pnd) == OUT_OF_VIEW)
+			loa->flgs &= ~F_V_VISIBLE;
 	}
 	set_ret(pnd, ret);
 }

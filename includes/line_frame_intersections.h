@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isometric_view_line_frame_isect.h                  :+:      :+:    :+:   */
+/*   line_frame_intersections.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 00:41:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 02:03:25 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 05:05:08 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_ISOMETRIC_VIEW_INTERSECTIONS.H
-# define LINE_ISOMETRIC_VIEW_INTERSECTIONS.H
+#ifndef LINE_FRAME_INTERSECTIONS_H
+# define LINE_FRAME_INTERSECTIONS_H
 
 # include "outer.h"
 

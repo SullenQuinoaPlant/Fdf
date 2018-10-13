@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 23:53:24 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 02:51:32 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 04:57:31 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void						filter_isects(
 {
 	int		valid[ISEC_CT];
 	int		i;
+	int		j;
 
 	ft_bzero(valid, sizeof(valid));
 	filter_xy_visible(v, pt_ct, isect, valid);
@@ -80,7 +81,7 @@ static void						filter_isects(
 			ft_memcpy(pnd[j], isect[i], sizeof(pnd[P1]));
 			j = P1;
 		}
-	return (j != P2);
+	return (j != P2 ? SUCCES : OUT_OF_VIEW);
 }
 
 int	

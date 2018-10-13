@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 23:18:09 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 04:51:56 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,9 +311,6 @@ struct						s_point_coordinates_transform
 /*
 **Projections hold the shadows in the view plane of the points required
 **	to describe scene elements.
-**Point projections set to {max t_vuint, max t_vuint} indicate
-**	the point may be out of the display array, and is expected to
-**	cast multiple shadows.
 */
 enum						e_view_projection_groups
 {
@@ -333,12 +330,13 @@ enum						e_view_projection_groups
 # define V_H 0
 # define V_W 1
 # define V_DIMS VIEW_DIMS
-# define V_NULL_COORD (t_vuint)(-1)
-/*
-**(t_vuint)s are grouped by two in (t_vpos)s
-*/
-# define V_NOPOS ((t_vpos){V_NULL_COORD; V_NULL_COORD})
 
+/*
+**In projection objects :
+**Precendence 'prec' typically linked to depth,
+**Flag:
+**	- visibility
+*/
 /*
 **Unused, probably won't use.
 */
@@ -347,23 +345,21 @@ struct						s_point_projection
 	t_vpos	point;
 };
 
-/*
-**Precendence 'prec' typically linked to depth, 
-**	unless object is highlighted, (in which case maybe use 
-**	negative values to indicate greater precedence?)
-*/
+# define F_V_VISIBLE 0x01
 struct						s_dot_projection
 {
-	t_vpos	here;
-	t_argb	argb;
-	double	prec;
+	uint32_t	flgs
+	t_vpos		here;
+	t_argb		argb;
+	double		prec;
 };
 
 struct						s_line_or_arrow_projection
 {
-	t_vpos	ends[2];
-	t_argb	argb[2];
-	double	prec[2];
+	uint32_t	flgs;
+	t_vpos		ends[2];
+	t_argb		argb[2];
+	double		prec[2];
 };
 
 /*
@@ -374,10 +370,11 @@ struct						s_line_or_arrow_projection
 */
 struct						s_fill_projection
 {
-	t_vpos	tips[6];
-	t_argb	argb[6];
-	size_t	tips_ct;
-	t_vpos	bar;
+	uint32_t	flgs;
+	t_vpos		tips[6];
+	t_argb		argb[6];
+	size_t		tips_ct;
+	t_vpos		bar;
 };
 
 /*
