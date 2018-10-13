@@ -86,10 +86,8 @@ enum						e_scene_element_groups
 # define Y 1
 # define Z 2
 /*
-**T: θ, in (xOz) plane, from x
-**P: φ, from y to (xOz) plane.
-**Why choose θ and φ relative to y ?
-**	there is no beacause axis.
+**T: θ, in (xOy) plane, from x
+**P: φ, from z to (xOy) plane.
 **R: radius, from O.
 */
 # define T 0
