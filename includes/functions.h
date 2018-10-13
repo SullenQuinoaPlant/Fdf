@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 01:15:14 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 02:14:10 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,10 +167,13 @@ void						scene_teardown(
 	t_s_s	**s);
 
 void						set_mult_dims_argb(
-	double src[DIMS],
-	double deltas[DIMS],
-	double ratio,
-	double dest[DIMS]);
+	double	src[DIMS],
+	double	deltas[DIMS],
+	double	ratio,
+	double	dest[DIMS]);
+
+int							sign(
+	doube	d);
 
 void						targb_to_doubles(
 	t_argb	argb,

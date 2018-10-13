@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 23:53:24 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 01:17:07 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 02:51:32 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,55 @@ static void						filter_p1p2_dir(
 	double isect[ISEC_CT][DIMS + ARGBS],
 	double pnd[ISEC_CT][DIMS + ARGBS],
 	int valid[ISEC_CT])
+{
+	int		j;
 
+	while (pt_ct--)
+	{
+		if (!valid[pt_ct])
+			continue ;
+		j = 0;
+		while (j < DIMS &&
+			sign(pnd[DT][j]) == sign(isect[pt_ct][j] - pnd[P1][j]))
+			j++;
+		if (j != DIMS)
+			valid[pt_ct] = 0;
+	}
+}
+
+/*
+** If P1 is valid, then there is only one valid intersection point
+** that remains after filtering.
+*/
 static void						filter_isects(
 	t_s_sv *v,
-	double pnd[3][DIMS + ARGBS],
 	int pt_ct,
-	doube isect[ISEC_CT][DIMS + ARGBS])
+	doube isect[ISEC_CT][DIMS + ARGBS],
+	double pnd[3][DIMS + ARGBS])
 {
 	int		valid[ISEC_CT];
 	int		i;
 
 	ft_bzero(valid, sizeof(valid));
-	filter_xy_visible(v, isect, valid);
-	filter_p1p2_dir(pnd, isect, valid);
-	while (pt_ct--)
-	ft_memcpy
+	filter_xy_visible(v, pt_ct, isect, valid);
+	filter_p1p2_dir(pnd, pt_ct, isect, valid);
 	i = -1;
-	ct = 0;
-	while (++i < ISEC_CT)
+	j = P2;
+	while (++i < pt_ct)
 		if (valid[i])
-			ct++;
-	return (ct);
+		{
+			ft_memcpy(pnd[j], isect[i], sizeof(pnd[P1]));
+			j = P1;
+		}
+	return (j != P2);
 }
 
+int	
 /*
 **If onyl one of the two 'pnd' points is within the view
 **	frame, that point must be at position P1.
 **
 **Abbreviations:
-** - valid : number of valid points, either 1 or 0
-**		if 1, the valid point is in position P1 of 'pnd'.
 ** - pnd : points and delta. see .h.
 ** - isect : intersections
 ** - d : delta
@@ -78,7 +97,6 @@ static void						filter_isects(
 */
 int								isometric_line_xy_isect(
 	t_s_sv *v,
-	int valid,
 	double pnd[3][DIMS + ARGBS])
 {
 	double	isect[ISEC_CT][DIMS + ARGBS];
@@ -102,6 +120,5 @@ int								isometric_line_xy_isect(
 		r = ((double)(v->h - 1) - p) / d;
 		set_and_multiply(pnd, pnd[DT], r, isect[pt_ct++]);
 	}
-	pt_ct = filter_isects(v, pnd, pt_ct, isect);
-	return (pt_ct);
+	return (filter_isects(v, pnd, pt_ct, isect));
 }

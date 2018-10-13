@@ -6,13 +6,13 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 01:10:01 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 02:18:06 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene_typedefs.h"
 #include "scene.h"
-#include "line_isometric_view_intersections.h"
+#include "isometric_view_line_isect.h"
 
 
 static int						count_visible(

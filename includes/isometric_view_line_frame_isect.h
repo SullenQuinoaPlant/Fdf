@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 00:41:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 03:09:15 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 02:03:25 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define P2 2
 
 # define DBL_DIMS_SZ (sizeof(double) * DIMS)
+# define DBL_ARGBS_SZ (sizeof(double) * ARGBS)
+# define DBL_DIMS_ARGBS_SZ DBL_DIMS_SZ + DBL_ARGBS_SZ
 
 #define ARGB_OFFSET DIMS
 
