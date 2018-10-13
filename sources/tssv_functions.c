@@ -6,13 +6,15 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/11 21:14:16 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/13 07:00:32 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
 
-t_e_vpg						map_seg_to_vpg(
+/*
+Don't use this, it's stupid
+t_e_vpg						seg_to_vpg(
 	t_e_seg sg)
 {
 	if (sg == e_slna)
@@ -27,6 +29,7 @@ t_e_vpg						map_seg_to_vpg(
 		return (e_vog);
 	return (e_vpg_null);
 }
+*/
 
 static int					tssv_add_tar(
 	void *p_vpg,
@@ -54,4 +57,25 @@ int							tssv_tar_allocs(
 	r = ring_apply(&s->v, tssv_add_tar, &grp);
 	r = r == RING_SUCCESS ? SUCCESS : SYS_ERR;
 	return (r);
+}
+
+void						tssv_apply_proj(
+	t_s_sv *v,
+	t_e_vpg g)
+{
+	t_proj const	proj = v->prj[g];
+	t_s_ta *const	grp = v->e[g];
+	void			*p;
+	void			*lim;
+	size_t			i;
+
+	i = -1;
+	while (++i < grp->ar_sz)
+	{
+		p = *grp->ar[i]
+		lim = p + TAS * grp->e_sz;
+		while (p < lim)
+			(*proj)(v, get_se(v->s, 
+
+
 }

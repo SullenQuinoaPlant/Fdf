@@ -1,7 +1,7 @@
 #include "functions.h"
 #include "scene.h"
 
-void						*get_se(
+void						*get_se_tag(
 	t_s_s const *s,
 	t_e_seg g,
 	t_tag t)
@@ -13,6 +13,17 @@ void						*get_se(
 
 	p = tsse->ar[ar_tag] + tsse->e_sz * e_tag;
 	return (p);
+}
+
+void						*get_se_ij(
+	t_s_s const *s,
+	t_e_seg g,
+	size_t i,
+	size_t j)
+{
+	t_s_se const *const	tsse = s->e[g];
+
+	return (tsse->ar[i] + tsse->e_sz * j);
 }
 
 int							initiate_se_release(
