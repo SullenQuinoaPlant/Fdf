@@ -26,34 +26,6 @@ void					free_tar(
 	s->tar_allocs -= ar_sz * sz;
 }
 
-int						clone_tar(
-	t_s_ta *ta,
-	void ***ret,
-	t_s_s *s)
-{
-	size_t const	sz = ta->e_sz * TAS;
-	size_t const	ttl_sz = sz * ta->ar_sz;
-	void			**p;
-	size_t			i;
-
-	*ret = 0;
-	if ((r = TAC - s->tar_allocs < ttl_sz ? MEM_CAP : 0) ||
-		!(p = malloc(sizeof(void*) * ta->ar_sz)))
-		return (r ? r : SYS_ERR);
-	i = -1;
-	while (++i < ta->ar_sz)
-		if (!(p[i] = malloc(sz)))
-		{
-			free_free_tar(p, i, ta->e_sz);
-			return (SYS_ERR);
-		}
-		else
-			ft_memcpy(p[i], ta->ar[i], sz);
-	*ret = p;
-	s->tar_allocs += ttl_sz;
-	return (SUCCESS);
-}
-
 int							tar_alloc(
 	t_s_s *s,
 	size_t type_sz,

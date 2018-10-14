@@ -28,7 +28,8 @@ static int				init_view(
 	v->id = (v->ring.prv == (t_ring)v) ? 0 : ((t_s_sv*)v->ring.prv)->id + 1;
 	v->s = s;
 	v->ao = s->ao;
-	r = clone_tar(&s->e[e_spnv].ta, (void***)&v->vpnv);
+	if ((r = mirorr_tsses(s, v)) == SUCCESS)
+		copy_tsta(s->e[e_spnv].ta, v->e[e_spnv].ar);
 	return (r);
 }
 
