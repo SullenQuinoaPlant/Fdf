@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/14 05:27:52 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 08:29:03 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@
 # define ARGB_BYTE 0xff
 
 /*
-**Different scene element types:
-**
-**NOTE :
-**	- the reference count changing functions
-**		rely on "refs" being the first 
-**		structure member.
-*/
+ **Different scene element types:
+ **
+ **NOTE :
+ **	- the reference count changing functions
+ **		rely on "refs" being the first 
+ **		structure member.
+ */
 enum						e_scene_element_groups
 {
 	e_spnv,
@@ -91,10 +91,10 @@ enum						e_scene_element_groups
 # define Y 1
 # define Z 2
 /*
-**T: θ, in (xOy) plane, from x
-**P: φ, from z to (xOy) plane.
-**R: radius, from O.
-*/
+ **T: θ, in (xOy) plane, from x
+ **P: φ, from z to (xOy) plane.
+ **R: radius, from O.
+ */
 # define T 0
 # define P 1
 # define R 2
@@ -153,8 +153,8 @@ struct						s_vector
 };
 
 /*
-** points and vectors look the same in storage:
-*/
+ ** points and vectors look the same in storage:
+ */
 union						u_spsv
 {
 	t_s_p	p;
@@ -162,8 +162,8 @@ union						u_spsv
 };
 
 /*
-**Visible objects:
-*/
+ **Visible objects:
+ */
 struct						s_dot
 {
 	t_refct			refs;
@@ -172,8 +172,8 @@ struct						s_dot
 };
 
 /*
-**lines are represented by their two extremities.
-*/
+ **lines are represented by their two extremities.
+ */
 # define L_END1 0
 # define L_END2 1
 struct						s_line
@@ -184,8 +184,8 @@ struct						s_line
 };
 
 /*
-**arrows are vectors positioned in space.
-*/
+ **arrows are vectors positioned in space.
+ */
 # define A_POS 0
 # define A_VEC 1
 struct						s_arrow
@@ -202,9 +202,9 @@ union						u_slsa
 };
 
 /*
-**In s_fill:
-** - norm_v (normal vector) points outwards from the filled surface.
-*/
+ **In s_fill:
+ ** - norm_v (normal vector) points outwards from the filled surface.
+ */
 # define VERTEX1 0
 # define V1 VERTEX1
 # define VERTEX2 1
@@ -219,12 +219,12 @@ struct						s_fill
 	t_tag			norm_v;
 };
 /*
-**End of visible elements
-*/
+ **End of visible elements
+ */
 
 /*
-**(t_s_o)s are collections of scene elements.
-*/
+ **(t_s_o)s are collections of scene elements.
+ */
 struct						s_object_handle
 {
 	t_e_seg	type;
@@ -253,8 +253,8 @@ struct						s_object
 };
 
 /*
-**Scene control structures:
-*/
+ **Scene control structures:
+ */
 struct						s_free_tags
 {
 	t_tag	free;
@@ -262,11 +262,11 @@ struct						s_free_tags
 };
 
 /*
-**(t_s_ta)s are used to find scene elements from tags,
-**	just like (t_s_se)s.
-**They aren't used to introduce elements to the scene
-**	so do not need the 'nxt' list.
-*/
+ **(t_s_ta)s are used to find scene elements from tags,
+ **	just like (t_s_se)s.
+ **They aren't used to introduce elements to the scene
+ **	so do not need the 'nxt' list.
+ */
 struct						s_tagged_array
 {
 	void		**ar;
@@ -275,9 +275,9 @@ struct						s_tagged_array
 };
 
 /*
-**'nxt' as in: next free tags.
-**The (t_list) nxt is a list of (t_s_ft) structures.
-*/
+ **'nxt' as in: next free tags.
+ **The (t_list) nxt is a list of (t_s_ft) structures.
+ */
 struct						s_scene_elements
 {
 	union
@@ -294,13 +294,13 @@ struct						s_scene_elements
 };
 
 /*
-**Coordinate transformation matrices are typedefed to:
-**(t_pctrm) : point coordimante transform matrix
-**	these matrix have DIMS_N_TR rows (one per axis and one for translations)
-**(t_pctrmr) : point coordimante transform matrix row
-**(t_s_pctr) : wraps the above in a struct, enables linking and chaining
-**(t_pctr) as in: point coordinate transform, first arg most likely a (t_pctrm*)
-*/
+ **Coordinate transformation matrices are typedefed to:
+ **(t_pctrm) : point coordimante transform matrix
+ **	these matrix have DIMS_N_TR rows (one per axis and one for translations)
+ **(t_pctrmr) : point coordimante transform matrix row
+ **(t_s_pctr) : wraps the above in a struct, enables linking and chaining
+ **(t_pctr) as in: point coordinate transform, first arg most likely a (t_pctrm*)
+ */
 # define DIMS_N_TR 4
 
 struct						s_point_coordinates_transform
@@ -314,9 +314,9 @@ struct						s_point_coordinates_transform
 };
 
 /*
-**Projections hold the shadows in the view plane of the points required
-**	to describe scene elements.
-*/
+ **Projections hold the shadows in the view plane of the points required
+ **	to describe scene elements.
+ */
 enum						e_view_projection_groups
 {
 	e_vpg,
@@ -329,20 +329,20 @@ enum						e_view_projection_groups
 };
 
 /*
-**Display coordinates are held in (t_vuint)s;
-**	a type at least as big as view height and width
-*/
+ **Display coordinates are held in (t_vuint)s;
+ **	a type at least as big as view height and width
+ */
 # define TVUINT_MAX UINT_MAX
 # define V_H 0
 # define V_W 1
 # define V_DIMS VIEW_DIMS
 
 /*
-**In projection objects :
-**Precendence 'prec' typically linked to depth,
-**Flag:
-**	- visibility
-*/
+ **In projection objects :
+ **Precendence 'prec' typically linked to depth,
+ **Flag:
+ **	- visibility
+ */
 struct						s_point_projection
 {
 	t_u_spsv	pov;
@@ -352,7 +352,7 @@ struct						s_point_projection
 struct						s_dot_projection
 {
 	uint32_t	flgs
-	t_vpos		here;
+		t_vpos		here;
 	t_argb		argb;
 	double		prec;
 };
@@ -366,11 +366,11 @@ struct						s_line_or_arrow_projection
 };
 
 /*
-**'tips_ct' gives the number of points used in 'tips'.
-**'bar' : barycenter.
-**There is one less side to the polygon than the count.
-**Tips are required to be sorted by rotation around (bar; view-axis).
-*/
+ **'tips_ct' gives the number of points used in 'tips'.
+ **'bar' : barycenter.
+ **There is one less side to the polygon than the count.
+ **Tips are required to be sorted by rotation around (bar; view-axis).
+ */
 struct						s_fill_projection
 {
 	uint32_t	flgs;
@@ -381,10 +381,10 @@ struct						s_fill_projection
 };
 
 /*
-**Object projection structures hold properties that may be set or unset
-**	in each view.
-**object flags:
-*/
+ **Object projection structures hold properties that may be set or unset
+ **	in each view.
+ **object flags:
+ */
 # define O_SHOW 0x1
 # define O_HIGHLIGHT 0x2
 struct						s_object_projection
@@ -393,15 +393,15 @@ struct						s_object_projection
 };
 
 /*
-**Projections, (t_proj)s, take point coordinates and an element,
-**	and fill that element's projection structure in a scene.
-**typedef void	(*t_pproj)(t_s_sv*, void*, t_u_spsv const *const *, t_s_pp *);
-**typedef void	(*t_dproj)(t_s_sv*, t_s_d*, t_u_spsv const *const *, t_s_dp *);
-**typedef void	(*t_loaproj)(
-**	t_s_sv*, t_u_slsa*, t_u_spsv const *const *, t_s_loap *);
-**typedef void	(*t_fproj)(
-**	t_s_sv*, t_s_f*, t_u_spsv const *const *, t_s_fp *);
-*/
+ **Projections, (t_proj)s, take point coordinates and an element,
+ **	and fill that element's projection structure in a scene.
+ **typedef void	(*t_pproj)(t_s_sv*, void*, t_u_spsv const *const *, t_s_pp *);
+ **typedef void	(*t_dproj)(t_s_sv*, t_s_d*, t_u_spsv const *const *, t_s_dp *);
+ **typedef void	(*t_loaproj)(
+ **	t_s_sv*, t_u_slsa*, t_u_spsv const *const *, t_s_loap *);
+ **typedef void	(*t_fproj)(
+ **	t_s_sv*, t_s_f*, t_u_spsv const *const *, t_s_fp *);
+ */
 
 struct						s_pixel
 {
@@ -410,39 +410,41 @@ struct						s_pixel
 };
 
 /*
-**Each view has its coordinates system.
-**	The x axis is taken along the view width, from left to right.
-**	The y axis is taken along the view height, from top to bottom.
-**	The z axis is in the away direction from the viewpoint.
-**	This system's origin is the view center.
-**		If view height or width are even integers, the center is shifted
-**			towards bottom right so that the coordinates of a point (x, y)
-**			can be obtained by adding as so:
-**				((t_vuint)(x + (double)(w / 2)), (t_vuint)(y + (double)(h / 2)))
-**View builders are responsible for initializing:
-** - proj
-**
-**The following fields are initialized by the scene:
-** - ring
-** - id
-** - ao_cursor
-**
-**Abbreviations:
-** - id: view  identification number.
-** - s: scene.
-** - ao: cursor on the scene's active object ring.
-** - ct: coordinates transform.
-** - vpnv: view points and vectors.
-** - prj: projections. prj[i](prj_arg[i], ...) -> ve[i]
-** - e: view elements.
-** - h: view height.
-** - w: view width.
-** - v: view[h][w] of (t_s_pxl) to display.
-**		v[0][0] : top left
-**		v[0][w - 1] : top right
-**		v[h - 1][0] : bottom left
-**		v[h - 1][w - 1] : bottom right
-*/
+ **Each view has its coordinates system.
+ **	The x axis is taken along the view width, from left to right.
+ **	The y axis is taken along the view height, from top to bottom.
+ **	The z axis is in the away direction from the viewpoint.
+ **	This system's origin is the view center.
+ **		If view height or width are even integers, the center is shifted
+ **			towards bottom right so that the coordinates of a point (x, y)
+ **			can be obtained by adding as so:
+ **				((t_vuint)(x + (double)(w / 2)), (t_vuint)(y + (double)(h / 2)))
+ **
+ **The position of the 'id' field, first after the t_s_ring header, is relied upon
+ **	for initialization purposes.
+ **
+ **The following fields are initialized by the scene:
+ ** - ring
+ ** - id
+ ** - ao_cursor
+ ** - (t_s_ta) array e (not the tar content)
+ **
+ **Abbreviations:
+ ** - id: view  identification number.
+ ** - s: scene.
+ ** - ao: cursor on the scene's active object ring.
+ ** - ct: coordinates transform.
+ ** - vpnv: view points and vectors.
+ ** - prj: projections. prj[i](prj_arg[i], ...) -> ve[i]
+ ** - e: view elements.
+ ** - h: view height.
+ ** - w: view width.
+ ** - v: view[h][w] of (t_s_pxl) to display.
+ **		v[0][0] : top left
+ **		v[0][w - 1] : top right
+ **		v[h - 1][0] : bottom left
+ **		v[h - 1][w - 1] : bottom right
+ */
 struct						s_scene_view
 {
 	t_s_ring	ring;

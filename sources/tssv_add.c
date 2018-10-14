@@ -1,5 +1,23 @@
 #include "scene.h"
 
+static int				mirror_tsses(
+	t_s_s *s,
+	t_s_sv *v)
+{
+	int		i;
+	size_t	e_sz;
+	int		r;
+
+	i = -1;
+	while (++i < e_seg_sz)
+	{
+		e_sz = get_ve_size(i);
+		if ((r = mirror_tsta(s, &s->e[i], e_sz, &v->e[i])) != SUCCESS)
+			break ;
+	}
+	return (r);
+}
+
 static int				init_view(
 	t_s_s *s,
 	t_s_sv *v)
@@ -12,31 +30,6 @@ static int				init_view(
 	v->ao = s->ao;
 	r = clone_tar(&s->e[e_spnv].ta, (void***)&v->vpnv);
 	return (r);
-}
-
-int						mirror_tsse_allocs(
-	t_s_s *s
-	t_s_se *se,
-	t_s_ta *ret)
-{
-
-}
-
-int						mirror_tsses(
-	t_s_s *s,
-	t_s_sv *v)
-{
-	int		i;
-	t_s_ta	*ta;
-	size_t	e_sz;
-
-	i = -1;
-	while (++i < e_seg_sz)
-	{
-		ta = &v->e[i];
-		ta->e_sz = get_ve_size(i);
-		if (r = alloc_tar(s, ta->e_sz, s->e[i].ar_sz, &ta->ar)) != SUCCESS)
-	}
 }
 
 int						add_view(
@@ -53,6 +46,6 @@ int						add_view(
 		(r = init_view(s, v)) == SUCCESS)
 		*ret = s->v;
 	else if (s->v != v)
-		ring_shrink(sizeof(t_s_v), ft_cleanfree, (void**)&s->v);
+		ring_shrink(sizeof(t_s_v), free_view_members, (void**)&s->v);
 	return (r);
 }
