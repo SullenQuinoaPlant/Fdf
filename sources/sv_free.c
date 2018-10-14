@@ -1,24 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sv_free.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/14 05:35:37 by nmauvari          #+#    #+#             */
+/*   Updated: 2018/10/14 05:35:39 by nmauvari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scene.h"
-
-/*
-**This ought to be a copy, modulo the types,
-**	of free_tar()
-**Which is why we're getting rid of it.
-static void				free_vpnvs(
-	size_t ar_sz,
-	t_u_spsv **vpnv)
-{
-	size_t const		sz = TAS * sizeof(t_u_spsv);
-	t_u_spsv **const	lim = vpnv + ar_sz;
-	t_u_spsv			**p;
-
-	if (!*(p = vpnv))
-		return ;
-	while (p < lim)
-		ft_cleanfree(*p++, sz);
-	ft_cleanfree(vpnv, ar_sz * sizeof(t_u_spsv*));
-}
-*/
 
 static void				free_view_members(
 	void *view,

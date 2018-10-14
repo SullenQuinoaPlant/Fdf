@@ -6,38 +6,19 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 07:00:32 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 05:33:49 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
 
-/*
-Don't use this, it's stupid
-t_e_vpg						seg_to_vpg(
-	t_e_seg sg)
-{
-	if (sg == e_slna)
-		return (e_vpg);
-	if (sg == e_sd)
-		return (e_vdg);
-	if (sg == e_slna)
-		return (e_vlnag);
-	if (sg == e_sf)
-		return (e_vfg);
-	if (sg == e_so)
-		return (e_vog);
-	return (e_vpg_null);
-}
-*/
-
 static int					tssv_add_tar(
-	void *p_vpg,
+	void *p_seg,
 	t_ring p_tssv)
 {
 	t_s_sv *const	v = (t_s_sv*)p_tssv;
 	t_s_s *const	s = v->s;
-	t_e_vpg const	g = *(t_e_vpg*)p_vpg;
+	t_e_seg const	g = *(t_e_seg*)p_seg;
 	t_s_ta *const	ta = &v->e[g];
 	int		r;
 
@@ -49,7 +30,7 @@ static int					tssv_add_tar(
 }
 
 int							tssv_tar_allocs(
-	t_e_vpg grp,
+	t_e_seg grp,
 	t_s_s *s)
 {
 	int		r;
@@ -61,21 +42,34 @@ int							tssv_tar_allocs(
 
 void						tssv_apply_proj(
 	t_s_sv *v,
-	t_e_vpg g)
+	t_proj proj,
+	t_s_se *s_grp,
+	t_s_ta *v_grp)
 {
-	t_proj const	proj = v->prj[g];
-	t_s_ta *const	grp = v->e[g];
-	void			*p;
-	void			*lim;
-	size_t			i;
+	t_u_spsv const *const *const	pnv = v->e[e_spnv].ar;
+	void							*p_ve;
+	void							*p_se;
+	void							*lim_ve;
+	size_t							i;
 
 	i = -1;
-	while (++i < grp->ar_sz)
+	while (++i < v_grp->ar_sz)
 	{
-		p = *grp->ar[i]
-		lim = p + TAS * grp->e_sz;
-		while (p < lim)
-			(*proj)(v, get_se(v->s, 
+		p_ve = v_grp->ar[i]
+		p_se = s_grp->ar[i]
+		lim_ve = p_ve + TAS * v_grp->e_sz;
+		while (p_ve < lim_ve)
+		{
+			(*proj)(v, p_se, pnv, p_ve);
+			p_se += s_grp->e_sz;
+			p_ve += v_grp->e_sz;
+		}
+	}
+}
 
-
+void						tssv_apply_grp_proj(
+	t_s_sv *v,
+	t_e_seg g)
+{
+	tssv_apply_proj(v, v->prj[g], &v->s->e[g], &v->e[g]);
 }

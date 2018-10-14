@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/14 05:05:23 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 05:27:52 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,9 +450,7 @@ struct						s_scene_view
 	t_s_s		*s;
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
-	t_u_spsv	**vpnv;
 	t_proj		prj[e_seg_sz];
-	void		*prj_arg[e_seg_sz];
 	t_s_ta		e[e_seg_sz];
 	t_vuint		h;
 	t_vuint		w;
