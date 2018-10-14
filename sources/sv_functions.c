@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:55:22 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/11 20:55:24 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 06:08:30 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int				init_view(
 	return (r);
 }
 
-int						new_view(
+int						add_view(
 	t_s_s *s,
 	t_s_sv **ret)
 {
@@ -43,3 +43,6 @@ int						new_view(
 		ring_shrink(sizeof(t_s_v), ft_cleanfree, (void**)&s->v);
 	return (r);
 }
+
+int						mirror_scene_tars(
+	t_s_sv *v)
