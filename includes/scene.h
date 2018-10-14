@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/14 08:29:03 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 09:34:30 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,23 +294,23 @@ struct						s_scene_elements
 };
 
 /*
- **Coordinate transformation matrices are typedefed to:
- **(t_pctrm) : point coordimante transform matrix
- **	these matrix have DIMS_N_TR rows (one per axis and one for translations)
- **(t_pctrmr) : point coordimante transform matrix row
- **(t_s_pctr) : wraps the above in a struct, enables linking and chaining
- **(t_pctr) as in: point coordinate transform, first arg most likely a (t_pctrm*)
- */
+**Coordinate transformation matrices are typedefed to:
+**(t_pctrm) : point coordimante transform matrix
+**	these matrix have DIMS_N_TR rows (one per axis and one for translations)
+**(t_pctrmr) : point coordimante transform matrix row
+**(t_s_pctr) : wraps the above in a struct, enables linking and chaining
+**(t_pctr) as in: point coordinate transform, first arg most likely a (t_pctrm*)
+*/
 # define DIMS_N_TR 4
 
 struct						s_point_coordinates_transform
 {
 	t_s_ring	ring;
+	int			refs;
 	t_s_pctr	*prv;
 	t_s_pctr	*nxt;
-	t_pctrm		own_tr;
-	t_pctrm		mashed_tr;
-	int			view_ct;
+	t_pctrm		own;
+	t_pctrm		mashed;
 };
 
 /*

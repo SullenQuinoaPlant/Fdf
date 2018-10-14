@@ -5,9 +5,9 @@ void						onelessview(
 {
 	if (!ct)
 		return ;
-	if (ct->nxt && ct->nxt->view_ct == 1)
+	if (ct->nxt && ct->nxt->refs == 1)
 		ct->nxt = (t_s_pctr*)ct->nxt->ring.nxt;
 	onelessview(ct->prv);
-	if (!(--ct->view_ct))
+	if (!(--ct->refs))
 		ring_shrink(sizeof(t_s_pctr), 0, (void**)&ct);
 }
