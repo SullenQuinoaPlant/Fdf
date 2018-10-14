@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 04:51:56 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 05:05:23 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <limits.h>
 
-# include "outer.h"
 # include "scene_typedefs.h"
 
 /*
@@ -61,6 +60,13 @@
 **We use (t_argb)s to store color information on 4 bytes:
 **0xALPHA;RED;GREEN;BLUE
 */
+# define ARGBS 4
+# define A 0
+# define R 1
+# define G 2
+# define B 3
+# define ARGB_MASK 0xff
+# define ARGB_BYTE 0xff
 
 /*
 **Different scene element types:
@@ -70,7 +76,6 @@
 **		rely on "refs" being the first 
 **		structure member.
 */
-
 enum						e_scene_element_groups
 {
 	e_spnv,
@@ -291,10 +296,12 @@ struct						s_scene_elements
 /*
 **Coordinate transformation matrices are typedefed to:
 **(t_pctrm) : point coordimante transform matrix
+**	these matrix have DIMS_N_TR rows (one per axis and one for translations)
 **(t_pctrmr) : point coordimante transform matrix row
 **(t_s_pctr) : wraps the above in a struct, enables linking and chaining
 **(t_pctr) as in: point coordinate transform, first arg most likely a (t_pctrm*)
 */
+# define DIMS_N_TR 4
 
 struct						s_point_coordinates_transform
 {
@@ -325,6 +332,7 @@ enum						e_view_projection_groups
 **Display coordinates are held in (t_vuint)s;
 **	a type at least as big as view height and width
 */
+# define TVUINT_MAX UINT_MAX
 # define V_H 0
 # define V_W 1
 # define V_DIMS VIEW_DIMS

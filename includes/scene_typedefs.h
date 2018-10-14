@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 04:25:46 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 05:04:58 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 # include "outer.h"
 
-# define ARGBS 4
-# define A 0
-# define R 1
-# define G 2
-# define B 3
-# define ARGB_MASK 0xff
-# define ARGB_BYTE 0xff
 typedef uint32_t	t_argb;
 
 typedef enum e_scene_element_groups	t_e_seg;
@@ -40,14 +33,13 @@ typedef void	(*t_pctr)(\
 
 typedef double	(t_pctrmr)[DIMS];
 
-# define DIMS_N_TR 4
-typedef t_pctrmr	(t_pctrm)[DIMS_N_TR];
+typedef t_pctrmr	(t_pctrm)[DIMS + 1];
 
 typedef void	(*t_proj)(
-	t_s_sv *,
-	void *,
-	t_u_spsv const *const *,
-	void *);
+	t_s_sv *scene_view,
+	void *project_this,
+	t_u_spsv const *const *using_these,
+	void *store_here);
 
 typedef int	t_refct;
 
@@ -97,10 +89,8 @@ typedef unsigned int	t_tag;
 
 typedef union u_slsa	t_u_slsa;
 
-# define TVUINT_MAX UINT_MAX
 typedef unsigned int	t_vuint;
 
-# define VIEW_DIMS 2
 typedef t_vuint	(t_vpos)[VIEW_DIMS];
 
 #endif

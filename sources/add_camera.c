@@ -16,7 +16,7 @@ t_s_pctr				*add_camera(
 	dummy.view_ct = 0;
 	while (ct--)
 	{
-		ft_memcpy(&dummy.own_tr, trs++, sizeof(t_pctrm));
+		ft_memcpy(&dummy.own_tr, trs, sizeof(t_pctrm));
 		tic = ct & 1 ? 0 : 1;
 		tpctrm_mult(mash + (tic = ct & 1 ? 0 : 1), trs, mash + !tic);
 		ft_memcpy(dummy.mashed_tr, mash + !tic, sizeof(t_pctrm)); 
@@ -24,6 +24,7 @@ t_s_pctr				*add_camera(
 			return (0);
 		dummy.prv = *prv;
 		dummy.prv->view_ct = 1;
+		trs++;
 	}
 	return (dummy.prv);
 }

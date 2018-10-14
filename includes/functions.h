@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 02:14:10 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 05:06:14 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "parse_typedefs.h"
 # include "scene_typedefs.h"
+# include "libgetnextline.h"
 
 int							add_star(
 	t_e_seg group,

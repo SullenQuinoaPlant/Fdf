@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 01:07:39 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 04:24:01 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 05:05:43 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <limits.h>
 # include "libft.h"
 # include "ring.h"
-# include "libgetnextline.h"
 
 # define SYS_ERR -1
 # define SUCCESS 0
@@ -28,5 +27,6 @@
 # define OUT_OF_VIEW 4
 
 # define DIMS 3
+# define VIEW_DIMS 2
 
 #endif
