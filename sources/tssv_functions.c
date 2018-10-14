@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/14 05:33:49 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 06:37:30 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int					tssv_add_tar(
 	return (r);
 }
 
-int							tssv_tar_allocs(
+int							tssvs_tar_allocs(
 	t_e_seg grp,
 	t_s_s *s)
 {
@@ -67,9 +67,25 @@ void						tssv_apply_proj(
 	}
 }
 
-void						tssv_apply_grp_proj(
-	t_s_sv *v,
-	t_e_seg g)
+void						tssv_seg_apply_proj(
+	void *p_seg,
+	t_ring p_tssv)
 {
-	tssv_apply_proj(v, v->prj[g], &v->s->e[g], &v->e[g]);
+	t_s_sv *const	v = (t_s_sv*)p_tssv;
+	t_s_s *const	s = v->s;
+	t_e_seg const	g = *(t_e_seg*)p_seg;
+	t_s_ta *const	ta = &v->e[g];
+
+	tssv_grp_apply_proj(v, v->prj[g], &s->e[g], &v->e[g]);
+}
+
+int							tssvs_seg_apply_proj(
+	t_e_seg grp,
+	t_s_s *s)
+{
+	int		r;
+
+	r = ring_apply(&s->v, tssv_seg_apply_proj, &grp);
+	r = r == RING_SUCCESS ? SUCCESS : SYS_ERR;
+	return (r);
 }
