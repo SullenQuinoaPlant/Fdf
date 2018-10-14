@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/14 06:37:30 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 07:25:19 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static int					tssv_add_tar(
 	t_s_ta *const	ta = &v->e[g];
 	int		r;
 
-	if ((r = alloc_tar(s, ta->e_sz, &ta->ar_sz, &ta->ar)) == SUCCESS)
+	if ((r = inc_tar_alloc(s, ta->e_sz, &ta->ar_sz, &ta->ar)) == SUCCESS)
 		r = RING_SUCCESS;
 	else
 		r = RING_SYS_ERR;
 	return (r);
 }
 
-int							tssvs_tar_allocs(
+int							tssvs_add_tar(
 	t_e_seg grp,
 	t_s_s *s)
 {

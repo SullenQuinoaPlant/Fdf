@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:08:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/11 21:08:10 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/14 07:25:29 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int							add_star(
 	t_s_se *const	se = &s->e[g];
 	int				r;
 
-	if ((r = tssv_tar_allocs(map_seg_to_vpg(g), s)) == SUCCESS &&
-		(r = alloc_tar(s, se->e_sz, &se->ar_sz, &se->ar)) == SUCCESS &&
-		(reg_tesegfreetags(((t_tag)se->ar_sz) << TPS, TPM, s, g)) == SUCCESS)
+	if ((r = tssvs_add_tar(g, s)) == SUCCESS &&
+		(r = inc_tar_alloc(s, se->e_sz, &se->ar_sz, &se->ar)) == SUCCESS &&
+		(reg_teseg_freetags(((t_tag)se->ar_sz) << TPS, TPM, s, g)) == SUCCESS)
 		return (SUCCESS);
 	return (r);
 }
