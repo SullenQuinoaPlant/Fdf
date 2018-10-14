@@ -22,7 +22,7 @@ int						mirror_tsse_allocs(
 
 }
 
-int						mirror_tsses_allocs(
+int						mirror_tsses(
 	t_s_s *s,
 	t_s_sv *v)
 {
