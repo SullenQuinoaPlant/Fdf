@@ -1,0 +1,17 @@
+void						isometric_dot_proj(
+	t_s_sv *v,
+	void *dot,
+	t_u_spsv const *const *points,
+	void *projection)
+{
+	t_s_d *const	d = (t_s_d*)dot;
+	t_s_dp *const	dp = (t_s_dp*)projection;
+	t_tag const		t = d->pos;
+	t_s_p *const	p = (v->s->e[e_spsv][t >> TPS])[t & TPM];
+	t_pos			pos;
+
+	dp->flgs = F_V_VISIBLE;
+	iso_dbl_dims_to_tvpos(v, p->xyz, dp->here);
+	dp->argb = d->argb;
+	dp->prec = p->xyz[Z];
+}

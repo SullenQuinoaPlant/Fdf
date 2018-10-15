@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 03:15:35 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 05:03:54 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ union						u_spsv
 struct						s_dot
 {
 	t_refct			refs;
-	t_tag			pos_p;
+	t_tag			pos;
 	t_argb			argb;
 };
 
@@ -410,7 +410,7 @@ struct						s_fill_projection
 # define O_HIGHLIGHT 0x2
 struct						s_object_projection
 {
-	uint8_t	flags;
+	uint8_t	flgs;
 };
 
 /*
@@ -490,7 +490,7 @@ struct						s_active_object
 {
 	t_s_ring	ring;
 	t_tag		tag;
-	uint8_t		flags;
+	uint8_t		flgs;
 };
 
 /*
