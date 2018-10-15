@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 05:50:26 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 06:43:06 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,15 @@ int							tssv_add_pxl_ars(
 	if (p1)
 		free(p1);
 	return (SYS_ERR);
+}
+
+void						tssv_set_out_fd(
+	int fd,
+	t_s_sv *v)
+{
+	int		fd;
+
+	if ((fd = v->out_fd) > 2)
+		close(fd);
+	v->out_fd = fd;
 }

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 06:10:08 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 06:26:06 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,6 +484,8 @@ struct						s_scene_view
 	t_vuint		w;
 	t_argb		*pxl;
 	double		*pxl_prec;
+	int			out_fd;
+	void		*out_wdw;
 };
 
 /*

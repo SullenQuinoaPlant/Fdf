@@ -29,6 +29,8 @@ static int				init_view(
 	v->s = s;
 	v->ao = s->ao;
 	r = mirorr_tsses(s, v);
+	v->out_fd = -1;
+	v->out_wdw = 0;
 	return (r);
 }
 
