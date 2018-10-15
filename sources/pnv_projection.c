@@ -1,4 +1,4 @@
-void						point_projection(
+void						pnv_projection(
 	t_s_sv *v,
 	void *point,
 	t_u_spsv const *const *points,
