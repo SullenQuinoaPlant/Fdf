@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 07:59:12 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 10:02:22 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,9 +332,11 @@ enum						e_view_projection_groups
 };
 
 /*
- **Display coordinates are held in (t_vuint)s;
- **	a type at least as big as view height and width
- */
+**Display coordinates are held in (t_vuint)s;
+**	a type at least as big as view height and width
+**->This type is fed to the ratio tracking functions.
+**	Values greater than holf the tracking type are best avoided.
+*/
 # define TVUINT_MAX UINT_MAX
 # define V_H 0
 # define V_W 1
