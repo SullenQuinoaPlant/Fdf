@@ -6,14 +6,13 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 04:56:11 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 08:44:32 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene_typedefs.h"
 #include "scene.h"
 #include "isometric_view_line_isect.h"
-
 
 static int						count_visible(
 	t_s_sv *v,
@@ -37,10 +36,11 @@ static void					 	set_someof_pnd(
 	t_u_spsv const *const *pts,
 	double (*r)[DIMS + ARGBS])
 {
+	size_t const	dims_sz = sizeof(double) * DIMS;
 	t_tag	t;
 
-	ft_memcpy(&r[P1], &(pts[(t = loa->ends[0]) >> TPS])[t & TPM], DBL_DIMS_SZ);
-	ft_memcpy(&r[P2], &(pts[(t = loa->ends[1]) >> TPS])[t & TPM], DBL_DIMS_SZ);
+	ft_memcpy(&r[P1], &(pts[(t = loa->ends[0]) >> TPS])[t & TPM], dims_sz);
+	ft_memcpy(&r[P2], &(pts[(t = loa->ends[1]) >> TPS])[t & TPM], dims_sz);
 }
 
 static void						set_somemoreof_pnd(

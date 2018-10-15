@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 00:41:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 05:11:21 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 08:45:38 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@
 # define PND_SZ 3
 typedef double	t_pnd[PND_SZ][DIMS + ARGBS];
 
-# define DBL_DIMS_SZ (sizeof(double) * DIMS)
-# define DBL_ARGBS_SZ (sizeof(double) * ARGBS)
-# define DBL_DIMS_ARGBS_SZ DBL_DIMS_SZ + DBL_ARGBS_SZ
-
-#define ARGB_OFFSET DIMS
+# define ARGB_OFFSET DIMS
 
 #endif
