@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 05:03:54 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 05:21:50 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -460,11 +460,13 @@ struct						s_pixel
  ** - e: view elements.
  ** - h: view height.
  ** - w: view width.
- ** - v: view[h][w] of (t_s_pxl) to display.
- **		v[0][0] : top left
- **		v[0][w - 1] : top right
- **		v[h - 1][0] : bottom left
- **		v[h - 1][w - 1] : bottom right
+ ** - pxl : pointer to array of t_argbs to display
+ ** - pxl_prec : pointer to array of same dimensions as 'pxl' holds each pixel's
+ **	current precedence.
+ **		pxl[0][0] : top left
+ **		pxl[0][w - 1] : top right
+ **		pxl[h - 1][0] : bottom left
+ **		pxl[h - 1][w - 1] : bottom right
  */
 struct						s_scene_view
 {
@@ -477,7 +479,8 @@ struct						s_scene_view
 	t_s_ta		e[e_seg_sz];
 	t_vuint		h;
 	t_vuint		w;
-	t_s_pxl		*view;
+	t_argb		*pxl;
+	double		*pxl_prec;
 };
 
 /*

@@ -6,11 +6,20 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/14 05:35:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/14 08:34:57 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 05:27:50 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
+
+void					free_pxl_stuff(
+	t_s_sv *v)
+{
+	if (v->pxl)
+		ft_cleanfree(v->pxl, v->h * v->w * sizeof(t_argb));
+	if (v->pxl_prec)
+		free(v->pxl_prec);
+}
 
 static void				free_view_members(
 	void *view,
@@ -25,7 +34,7 @@ static void				free_view_members(
 	i = -1;
 	while (++i < e_seg_sz)
 		free_tar(v->e[i].ar, v->e[i].ar_sz, v->e[i].e_sz, v->s);
-	ft_cleanfree(v->view, sizeof(t_s_pxl) * v->h * v->w);
+	free_pxl_stuff(v);
 	ft_cleanfree(view, ttl_sz);
 }
 

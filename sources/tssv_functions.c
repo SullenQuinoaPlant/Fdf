@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/14 07:25:19 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 05:25:42 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,27 @@ int							tssvs_seg_apply_proj(
 	r = ring_apply(&s->v, tssv_seg_apply_proj, &grp);
 	r = r == RING_SUCCESS ? SUCCESS : SYS_ERR;
 	return (r);
+}
+
+int							tssv_add_pixel_frame(
+	t_vuint h,
+	t_vuint w,
+	t_s_sv *v)
+{
+	t_argb	*p1;
+	double	*p2;
+	int		r;
+
+	if ((p1 = malloc(h * w * sizeof(t_argb))) &&
+		(p2 = malloc(h * w * sizeof(double))))
+	{
+		v->h = h;
+		v->w = w;
+		v->pxl = p1;
+		v->pxl_prec = p2;
+		return (SUCCESS);
+	}
+	if (p1)
+		free(p1);
+	return (SYS_ERR);
 }
