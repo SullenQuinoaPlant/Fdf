@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/14 09:34:30 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 03:15:35 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,14 +345,35 @@ enum						e_view_projection_groups
  */
 struct						s_point_projection
 {
-	t_u_spsv	pov;
+	union
+	{
+		struct
+		{
+			double	xyz[3];
+		}			cart;
+		struct
+		{
+			double	xyz[3];
+		};
+	};
+	union
+	{
+		struct
+		{
+			double	tpr[3];
+		}			polr;
+		struct
+		{
+			double	tpr[3];
+		};
+	};
 };
 
 # define F_V_VISIBLE 0x01
 struct						s_dot_projection
 {
 	uint32_t	flgs
-		t_vpos		here;
+	t_vpos		here;
 	t_argb		argb;
 	double		prec;
 };
