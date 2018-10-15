@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 06:43:06 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 07:27:51 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,10 @@ int							tssv_add_pxl_ars(
 		(p2 = malloc(sz * sizeof(double))))
 	{
 		while (sz--)
+		{
 			p2[sz] = nan;
+			p1[sz] = COL_BLACK;
+		}
 		v->h = h;
 		v->w = w;
 		v->pxl = p1;

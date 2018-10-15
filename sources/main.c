@@ -7,13 +7,18 @@ int				main(
 {
 	t_s_sbi	*input[2];
 	t_s_s	*scene;
+	t_s_sv	*view;
 
 	if (ac == 1)
 		return (0);
-	get_cdgfxyrz_sbi(av[1], input);
 	input[2] = 0;
-	make_scene(input[0], &scene);
-	print_scene_points(scene);
+	if (get_cdgfxyrz_sbi(av[1], input) == SUCCESS &&
+		make_scene(input, &scene) == SUCCESS &&
+		add_isometric_v(scene, 110, 510) == SUCCESS)
+	{
+		print_scene_points(scene);
+		print_scene(scene);
+	}
 	scene_teardown(&scene);	
 	return (0);
 }

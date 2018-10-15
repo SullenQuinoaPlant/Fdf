@@ -16,6 +16,9 @@ void				print_scene_points(
 		p = pts->ar[i];
 		j = -1;
 		while (++j < TAS)
+		{
 			printf("xyz: %f %f %f\t", p->xyz[X], p->xyz[Y], p->xyz[Z]);
+			p++;
+		}
 	}
 }

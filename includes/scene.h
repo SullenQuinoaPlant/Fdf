@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 06:26:06 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 07:59:12 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,12 +244,15 @@ enum						e_object_element_groups
 	e_oeg_null
 };
 
+# define O_SHOW 0x1
+# define O_HIGHLIGHT 0x2
 struct						s_object
 {
 	t_refct			refs;
 	t_list			*e[e_oeg_sz];
 	t_s_oh			hdl;
 	t_argb			argb;
+	uint8_t			flgs;
 };
 
 /*
@@ -491,13 +494,10 @@ struct						s_scene_view
 /*
 **Scene:
 */
-# define O_SHOW 0x1
-# define O_HIGHLIGHT 0x2
 struct						s_active_object
 {
 	t_s_ring	ring;
 	t_tag		tag;
-	uint8_t		flgs;
 };
 
 /*

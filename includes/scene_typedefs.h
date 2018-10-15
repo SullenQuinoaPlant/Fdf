@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 03:19:49 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 08:17:30 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ typedef void	(*t_pctr)(\
 	t_u_spsv *const *ret);
 
 typedef double	(t_pctrmr)[DIMS];
+
+typedef void	(*t_printer)(
+	t_s_sv *view,
+	t_tag tag);
 
 typedef double	(t_pos)[DIMS];
 
