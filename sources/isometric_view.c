@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 06:16:07 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 03:35:44 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 03:36:42 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int						add_isometric_v(
 
 	if ((r = add_view(s, &new)) == SUCCESS &&
 		(new->ct = add_isometric_camera) &&
-		)
+		(new->view = malloc(h * w * sizeof(pxl))))
 	{
 		set_prj(new);
 		new->h = h;
