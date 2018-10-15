@@ -6,13 +6,13 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 06:16:07 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 05:09:45 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 05:51:28 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
 
-static int				set_prj(
+static void				set_prj(
 	t_s_sv *v)
 {
 	t_proj const	ar[e_seg_sz] = {
@@ -36,11 +36,9 @@ int						add_isometric_v(
 
 	if ((r = add_view(s, &new)) == SUCCESS &&
 		(new->ct = add_isometric_camera) &&
-		(new->view = malloc(h * w * sizeof(pxl))))
+		(r = tssv_add_pixel_ars(h, w, v)) == SUCCESS)
 	{
 		set_prj(new);
-		new->h = h;
-		new->v = w;
 		return (SUCCESS);
 	}
 	if (r == SUCCESS)

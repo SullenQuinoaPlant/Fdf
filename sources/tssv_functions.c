@@ -6,10 +6,11 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 05:25:42 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 05:50:26 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "scene.h"
 
 static int					tssv_add_tar(
@@ -90,18 +91,22 @@ int							tssvs_seg_apply_proj(
 	return (r);
 }
 
-int							tssv_add_pixel_frame(
+int							tssv_add_pxl_ars(
 	t_vuint h,
 	t_vuint w,
 	t_s_sv *v)
 {
-	t_argb	*p1;
-	double	*p2;
-	int		r;
+	double const	nan = nan();
+	t_argb			*p1;
+	double			*p2;
+	size_t			sz;
+	int				r;
 
-	if ((p1 = malloc(h * w * sizeof(t_argb))) &&
-		(p2 = malloc(h * w * sizeof(double))))
+	if ((p1 = malloc((sz = h * w) * sizeof(t_argb))) &&
+		(p2 = malloc(sz * sizeof(double))))
 	{
+		while (sz--)
+			p2[sz] = nan;
 		v->h = h;
 		v->w = w;
 		v->pxl = p1;

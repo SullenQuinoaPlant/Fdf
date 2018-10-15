@@ -6,13 +6,13 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/14 05:35:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 05:27:50 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 05:50:39 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
 
-void					free_pxl_stuff(
+void					free_pxl_ars(
 	t_s_sv *v)
 {
 	if (v->pxl)
@@ -34,7 +34,7 @@ static void				free_view_members(
 	i = -1;
 	while (++i < e_seg_sz)
 		free_tar(v->e[i].ar, v->e[i].ar_sz, v->e[i].e_sz, v->s);
-	free_pxl_stuff(v);
+	free_pxl_ars(v);
 	ft_cleanfree(view, ttl_sz);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 05:21:50 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/15 06:10:08 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,15 +402,18 @@ struct						s_fill_projection
 };
 
 /*
- **Object projection structures hold properties that may be set or unset
- **	in each view.
- **object flags:
- */
-# define O_SHOW 0x1
-# define O_HIGHLIGHT 0x2
+**Object projection structures hold properties that may be set or unset
+**	in each view.
+**
+**'set_flgs' and 'un_flgs' can be used to force flag values, otherwise
+**	compied from (t_s_o). The values are used as so:
+**		flags |= set_flgs
+**		flags &= un_flgs
+*/
 struct						s_object_projection
 {
-	uint8_t	flgs;
+	uint8_t	set_flgs;
+	uint8_t	un_flgs;
 };
 
 /*
@@ -486,9 +489,8 @@ struct						s_scene_view
 /*
 **Scene:
 */
-/*
-**'vflags', (view flags) are the same as (t_s_op) flags.
-*/
+# define O_SHOW 0x1
+# define O_HIGHLIGHT 0x2
 struct						s_active_object
 {
 	t_s_ring	ring;
