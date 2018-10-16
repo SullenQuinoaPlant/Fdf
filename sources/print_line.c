@@ -5,23 +5,23 @@ static int					characterize_slope(
 	t_vpos ends[2],
 	t_ruint *dt)
 {
-	t_vuint	dt_x;
-	t_vuint	dt_y;
-	char	is_x_slope;
+	t_vuint	dt_w;
+	t_vuint	dt_h;
+	char	is_w_slope;
 
-	if (ends[1][X] > ends[0][X])
-		dt_x = ends[1][X] - ends[0][X];
+	if (ends[1][V_W] > ends[0][V_W])
+		dt_w = ends[1][V_W] - ends[0][V_W];
 	else
-		dt_x = ends[0][X] - ends[1][X];
-	if (ends[1][Y] > ends[0][Y])
-		dt_x = ends[1][Y] - ends[0][Y];
+		dt_w = ends[0][V_W] - ends[1][V_W];
+	if (ends[1][V_H] > ends[0][V_H])
+		dt_h = ends[1][V_H] - ends[0][V_H];
 	else
-		dt_x = ends[0][Y] - ends[1][Y];
-	if ((is_x_slope = dt_x >= dt_y ? 1 : 0))
-		*dt = dt_x;
+		dt_w = ends[0][V_H] - ends[1][V_H];
+	if ((is_w_slope = dt_w >= dt_h ? 1 : 0))
+		*dt = dt_w;
 	else
-		*dt = dt_y;
-	return (is_x_slope ? X : Y);
+		*dt = dt_h;
+	return (is_w_slope ? V_W : V_H);
 }
 
 #define DIM_OFST ARGBS
@@ -41,32 +41,49 @@ static int					get_truint_decomposition(
 	return (r);
 }
 
-int							print_line_like_really_really(
-	t_s_lp *const l,
-	int along,
-	t_ruint *dec,
-	t_s_sv *v)
+static double				*set_precendences(
+	t_s_sv const *const v,
+	t_s_lp const *const l,
+	t_ruint const (*const dec)[ARGBS + 1],
+	int const along)
+{
+	double (*const	pxl_prec)[v->w] = v->pxl_prec;
+	double			*p;
+	int				r;
+
+	if ((p = malloc(
+}
+
+int							print_line_like_really(
+	t_s_lp const *const l,
+	int const along,
+	t_ruint const (*const dec)[ARGBS + 1],
+	t_s_sv *const v)
 {
 	int const		sign = l->ends[1][along] > l->ends[0][along] ? 1 : -1;
-	t_argb *const	pxl = v->pxl;
+	t_argb (*const	pxl)[v->w] = v->pxl;
 	double			*prec;
 	t_vuint			dt;
-	t_vuint			strt;
+	t_vuint			cursor;
 
-	if (get_precendences(l, along, &prec) != SUCCESS)
+	if (set_precendences(v, l, along, &prec) != SUCCESS)
 		return (SYS_ERR);
-	strt = l->ends[0][along];
+	cursor = l->ends[0][along] - 1;
 	dt = l->ends[1][along] - strt + 1;
-	if (along == X)
+	if (along == V_W)
 		while (dt--)
 		{
-			pxl[j][
+			cursor += sign;
+			if (prec[dt] )
+			if (prec[dt] != 0) //CHANGE THIS TO SOMETHING SENSIBLE
+				continue ;
+			pxl[cursor + dt][dec[dt][DIM_OFST]] = recomp_targb(dec[dt]);
 		}
 }
 
 /*
 ** - 'along' : slope along this axis.
-**	If along == X, delta-x is greater than delta-y.
+**	If along == V_W, delta-x is greater than delta-y.
 */
 int							print_line(
 	t_s_sv *v,
