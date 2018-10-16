@@ -12,20 +12,22 @@ static void					track_ratio(
 	t_ruint start_v,
 	t_ruint *ar)
 {
-	t_ruint	err_sum;
-	t_ruint	track;
-	int		i;
+	int const		sign = dt_v > dt ? -1 : 1;
+	t_ruint			err_sum;
+	t_ruint			track;
+	int				i;
 
 	track = start_v;
 	ar[0] = track;
+	dt_v *= sign;
 	i = 0;
 	err_sum = dt / 2;
 	while (++i < dt)
 	{
 		if ((err_sum += dt_v) >= dt)
 		{
-			err_sum -= dt;
-			track++;
+			err_sum -= dt_v;
+			track += sign;
 		}
 		ar[i] = track;
 	}

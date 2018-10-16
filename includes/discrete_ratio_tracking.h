@@ -13,11 +13,4 @@ typedef t_ruint (t_delta_n_init)[DNI_SZ];
 # define TRUINT_MAX UINT_MAX
 typedef unsigned int	t_ruint;
 
-# define DT 0
-# define E1 1
-# define E2 2
-# define DNE_SZ 3
-
-typedef t_ruint	(t_delta_n_ends)[DNE_SZ];
-
 #endif
