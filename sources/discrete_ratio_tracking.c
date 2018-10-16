@@ -1,63 +1,54 @@
 /*
-**Don't use if (delta-x plus delta-y minus one) is more than INTMAX
+**Don't use if (2 * (delta-x minus one)) is more than max value for t_ruint
 **Be careful or be sorry.
 **
 **Abbreviations:
 **
 */
 
-static void					init_ars(
-	t_ruint ar_len,
-	int ar_ct,
-	t_delta_n_first *p_init,
-	t_ruint *p_ars)
+static void					track_ratio(
+	t_ruint const dt,
+	t_ruint const dt_v,
+	t_ruint start_v,
+	t_ruint *ar)
 {
-	t_ruint	init;
+	t_ruint	err_sum;
+	t_ruint	track;
 	int		i;
-	int		j;
 
-	i = -1;
-	while (++i < ar_ct)
+	track = start_v;
+	ar[0] = track;
+	i = 0;
+	err_sum = dt / 2;
+	while (++i < dt)
 	{
-		init = p_init[i][INIT];
-		j = -1;
-		while (++j < ar_len)
-			p_ars[i][j] = init;
+		if ((err_sum += dt_v) >= dt)
+		{
+			err_sum -= dt;
+			track++;
+		}
+		ar[i] = track;
 	}
-	i = -1;
-	while (++i < ar_ct)
-		p_init[FIRST] = ar_len / 2;
 }
 
 int							track_ratios(
-	t_ruint			dt,
-	t_delta_n_first	*vals,
-	int const		v_ct,
-	t_ruint			**ret)
+	t_ruint const dt,
+	t_delta_n_init *vals,
+	int const v_ct,
+	t_ruint **ret)
 {
 	size_t const	len = dt + 1;
 	int				i;
-	int				j;
 	t_ruint			(*p_ret)[len];
-	t_ruint			*track;
 
-	if ((*ret = malloc(sizeof(t_ruint) * len * v_ct)) &&
-		(track = malloc(sizeof(t_ruint) * v_ct)))
+	*ret = 0;
+	if ((p_ret = malloc(sizeof(t_ruint) * len * v_ct)))
 	{
-		init_ars(vals, len, v_ct, (p_ret = *ret)) 
 		i = -1;
 		while (++i < v_ct)
-		{
-			j = -1;
-			while (++j < dt)
-			{
-				p_ret[i][j] += vals[i][DT];
-				if (p_ret[i][j] >= dt)
-				{
-					p_ret[i][j + 1] = 
-		}
+			track_ratio(dt, vals[i][DT], vals[i][INIT], p_ret[i]);
+		*ret = p_ret;
+		return (SUCCESS);
 	}
-	if (*ret && track)
-		free(track);
 	return (SYS_ERR);
 }

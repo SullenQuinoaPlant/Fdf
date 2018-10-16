@@ -10,6 +10,7 @@ typedef t_ruint (t_delta_n_init)[DNI_SZ];
 /*
 **Ratio unsigned integer :
 */
+# define TRUINT_MAX UINT_MAX
 typedef unsigned int	t_ruint;
 
 # define DT 0
