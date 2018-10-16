@@ -1,6 +1,8 @@
 #ifndef DISCRETE_RATIO_TRACKING
 # define DISCRETE_RATIO_TRACKING
 
+# include "outer.h"
+
 /*
 **Ratio unsigned integer :
 */
@@ -12,5 +14,11 @@ typedef unsigned int	t_ruint;
 # define DNI_SZ 2
 
 typedef t_ruint (t_delta_n_init)[DNI_SZ];
+
+/*
+**Specific to pixel decompositions:
+*/
+# define PXL_DEC_SZ ARGBS + DIMS
+# define PXL_DEC_DIM_OFST ARGBS
 
 #endif

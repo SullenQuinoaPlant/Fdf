@@ -1,9 +1,8 @@
+#include "discrete_ratio_tracking.h"
+
 /*
 **Don't use if (2 * (delta-x minus one)) is more than max value for t_ruint
 **Be careful or be sorry.
-**
-**Abbreviations:
-**
 */
 
 static void					track_ratio(
