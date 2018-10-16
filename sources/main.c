@@ -17,7 +17,7 @@ int				main(
 		add_isometric_v(scene, 110, 510) == SUCCESS)
 	{
 		print_scene_points(scene);
-		print_scene(scene);
+		print_scene(view);
 	}
 	scene_teardown(&scene);	
 	return (0);
