@@ -56,3 +56,12 @@ int							track_ratios(
 	}
 	return (SYS_ERR);
 }
+
+int							track_pixel_line(
+	t_s_lp const *const l,
+	t_ruint **ret)
+{
+	t_delta_n_init pxl_dec[ARGBS + V_DIMS];
+
+	targb_pair_to_tdni(l->argb, pxl_dec);
+	tvpos_pair_to_tdni(l->ends, pxl_dec + ARGBS]

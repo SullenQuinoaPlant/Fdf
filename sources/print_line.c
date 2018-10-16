@@ -74,7 +74,7 @@ int							print_line_like_really(
 		while (dt--)
 		{
 			cursor += sign;
-			if (prec[dt] )
+			if (prec[dt] < v->pxl_prec[(cursor + dt)  + dec[dt][DIM_OFST] * v->w])
 			if (prec[dt] != 0) //CHANGE THIS TO SOMETHING SENSIBLE
 				continue ;
 			pxl[cursor + dt][dec[dt][DIM_OFST]] = recomp_targb(dec[dt]);
