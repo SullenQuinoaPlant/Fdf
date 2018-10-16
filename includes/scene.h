@@ -378,7 +378,7 @@ struct						s_point_projection
 # define F_V_VISIBLE 0x01
 struct						s_dot_projection
 {
-	uint32_t	flgs
+	uint32_t	flgs;
 	t_vpos		here;
 	t_argb		argb;
 	double		prec;

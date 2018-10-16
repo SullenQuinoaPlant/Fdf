@@ -1,8 +1,8 @@
-#include "scene_typedefs.h"
+include "scene_typedefs.h"
 
 void					tpctrm_mult(
-	t_pctrm a,
-	t_pctrm b,
+	t_pctrm const a,
+	t_pctrm const b,
 	t_pctrm c)
 {
 	int		i;

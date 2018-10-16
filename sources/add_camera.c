@@ -1,3 +1,4 @@
+#include "functions.h"
 #include "scene.h"
 
 /*
@@ -16,19 +17,21 @@ t_s_pctr				*add_camera(
 	t_s_pctr	dummy;
 	t_pctrm		mash[2];
 	t_s_pctr	*prv;
+	int			tic;
+	int			r;
 
 	prv = s->ct;
-	ft_bzero(mash, sizeof(mash));
-	dummy.prv = 0;
-	dummy.nxt = 0;
+	ft_memcpy(mash[0], cts, sizeof(t_pctrm));
+	ft_bzero(&dummy, sizeof(t_s_pctr));
 	dummy.refs = 1;
+	tic = 0;
 	while (ct_ct--)
 	{
 		ft_memcpy(&dummy.own, cts, sizeof(t_pctrm));
-		tic = ct_ct & 1 ? 0 : 1;
-		tpctrm_mult(mash + tic, cts, mash + !tic);
+		tpctrm_mult(*(mash + (tic = !tic), cts, *(mash + !tic));//THIS IS BAD
 		ft_memcpy(dummy.mashed, mash + !tic, sizeof(t_pctrm)); 
-		if (ring_expand(sizeof(t_s_pctr), &dummy, &prv)) != RING_SUCCESS)
+		r = ring_expand(sizeof(t_s_pctr), &dummy, &prv);
+		if (r != RING_SUCCESS)
 			return (0);
 		dummy.prv = prv;
 		cts++;

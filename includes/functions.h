@@ -174,7 +174,7 @@ void						set_mult_dims_argb(
 	double	dest[DIMS]);
 
 int							sign(
-	doube	d);
+	double	d);
 
 void						targb_to_doubles(
 	t_argb	argb,
@@ -182,6 +182,11 @@ void						targb_to_doubles(
 
 size_t						teseg_type_sz(
 	t_e_seg	g);
+
+void						tpctrm_mult(
+	t_pctrm const	a,
+	t_pctrm const	b,
+	t_pctrm 		c);
 
 int							tssv_tar_allocs(
 	t_e_vpg	grp,

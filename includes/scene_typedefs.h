@@ -33,6 +33,10 @@ typedef void	(*t_pctr)(\
 
 typedef double	(t_pctrmr)[DIMS];
 
+typedef struct s_scene_view	t_s_sv;
+
+typedef unsigned int	t_tag;
+
 typedef void	(*t_printer)(
 	t_s_sv *view,
 	t_tag tag);
@@ -85,13 +89,9 @@ typedef struct s_scene	t_s_s;
 
 typedef struct s_scene_elements	t_s_se;
 
-typedef struct s_scene_view	t_s_sv;
-
 typedef struct s_tagged_array	t_s_ta;
 
 typedef struct s_vector	t_s_v;
-
-typedef unsigned int	t_tag;
 
 typedef union u_slsa	t_u_slsa;
 
