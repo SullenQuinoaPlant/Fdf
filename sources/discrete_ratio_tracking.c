@@ -29,7 +29,7 @@ static void					track_ratio(
 			err_sum -= dt_v;
 			track += sign;
 		}
-		ar[i] = track;
+		ar[i * dt] = track;
 	}
 }
 
@@ -41,6 +41,7 @@ int							track_ratios(
 {
 	size_t const	len = dt + 1;
 	int				i;
+	t_ruint			*ret;
 	t_ruint			(*p_ret)[len];
 
 	*ret = 0;

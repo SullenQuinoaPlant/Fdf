@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 10:02:22 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/16 07:16:24 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@
 **0xALPHA;RED;GREEN;BLUE
 */
 # define ARGBS 4
-# define A 0
-# define R 1
-# define G 2
-# define B 3
+# define A 3
+# define R 2
+# define G 1
+# define B 0
 # define ARGB_MASK 0xff
 # define ARGB_BYTE 0xff
+# define ARGB_SHIFT 8
 
 /*
  **Different scene element types:
