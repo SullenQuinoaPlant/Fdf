@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/16 07:16:24 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/16 08:59:13 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,43 +440,43 @@ struct						s_pixel
 };
 
 /*
- **Each view has its coordinates system.
- **	The x axis is taken along the view width, from left to right.
- **	The y axis is taken along the view height, from top to bottom.
- **	The z axis is in the away direction from the viewpoint.
- **	This system's origin is the view center.
- **		If view height or width are even integers, the center is shifted
- **			towards bottom right so that the coordinates of a point (x, y)
- **			can be obtained by adding as so:
- **				((t_vuint)(x + (double)(w / 2)), (t_vuint)(y + (double)(h / 2)))
- **
- **The position of the 'id' field, first after the t_s_ring header, is relied upon
- **	for initialization purposes.
- **
- **The following fields are initialized by the scene:
- ** - ring
- ** - id
- ** - ao_cursor
- ** - (t_s_ta) array e (not the tar content)
- **
- **Abbreviations:
- ** - id: view  identification number.
- ** - s: scene.
- ** - ao: cursor on the scene's active object ring.
- ** - ct: coordinates transform.
- ** - vpnv: view points and vectors.
- ** - prj: projections. prj[i](prj_arg[i], ...) -> ve[i]
- ** - e: view elements.
- ** - h: view height.
- ** - w: view width.
- ** - pxl : pointer to array of t_argbs to display
- ** - pxl_prec : pointer to array of same dimensions as 'pxl' holds each pixel's
- **	current precedence.
- **		pxl[0][0] : top left
- **		pxl[0][w - 1] : top right
- **		pxl[h - 1][0] : bottom left
- **		pxl[h - 1][w - 1] : bottom right
- */
+**Each view has its coordinates system.
+**	The x axis is taken along the view width, from left to right.
+**	The y axis is taken along the view height, from top to bottom.
+**	The z axis is in the away direction from the viewpoint.
+**	This system's origin is the view center.
+**		If view height or width are even integers, the center is shifted
+**			towards bottom right so that the coordinates of a point (x, y)
+**			can be obtained by adding as so:
+**				((t_vuint)(x + (double)(w / 2)), (t_vuint)(y + (double)(h / 2)))
+**
+**The position of the 'id' field, first after the t_s_ring header, is relied upon
+**	for initialization purposes.
+**
+**The following fields are initialized by the scene:
+** - ring
+** - id
+** - ao_cursor
+** - (t_s_ta) array e (not the tar content)
+**
+**Abbreviations:
+** - id: view  identification number.
+** - s: scene.
+** - ao: cursor on the scene's active object ring.
+** - ct: coordinates transform.
+** - vpnv: view points and vectors.
+** - prj: projections. prj[i](prj_arg[i], ...) -> ve[i]
+** - e: view elements.
+** - h: view height.
+** - w: view width.
+** - pxl : pointer to array of t_argbs to display
+** - pxl_prec : pointer to array of same dimensions as 'pxl' holds each pixel's
+**	current precedence.
+**		pxl[0][0] : top left
+**		pxl[0][w - 1] : top right
+**		pxl[h - 1][0] : bottom left
+**		pxl[h - 1][w - 1] : bottom right
+*/
 struct						s_scene_view
 {
 	t_s_ring	ring;

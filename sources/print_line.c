@@ -48,19 +48,20 @@ int							print_line_like_really_really(
 	t_s_sv *v)
 {
 	int const		sign = l->ends[1][along] > l->ends[0][along] ? 1 : -1;
-	t_argb *const	canvas = v->pxl;
-	double			*precedences;
+	t_argb *const	pxl = v->pxl;
+	double			*prec;
 	t_vuint			dt;
 	t_vuint			strt;
 
-	if (get_precendences(l, along, &precedences) != SUCCESS)
+	if (get_precendences(l, along, &prec) != SUCCESS)
 		return (SYS_ERR);
 	strt = l->ends[0][along];
 	dt = l->ends[1][along] - strt + 1;
-	while (dt--)
-	{
-		canvas[
-	}
+	if (along == X)
+		while (dt--)
+		{
+			pxl[j][
+		}
 }
 
 /*
