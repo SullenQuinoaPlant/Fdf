@@ -66,7 +66,7 @@ int							print_line_like_really(
 	t_vuint			dt;
 	t_vuint			cursor;
 
-	if (set_precendences(v, l, along, &prec) != SUCCESS)
+	if (set_precendences(v, l, along, &prec) != SUCCESS) //NOT DONE
 		return (SYS_ERR);
 	cursor = l->ends[0][along] - 1;
 	dt = l->ends[1][along] - strt + 1;
