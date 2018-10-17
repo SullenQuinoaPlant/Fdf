@@ -39,9 +39,19 @@
 
 /*
 **Pixel decomposition:
+**Where a pixel is understood to be a set of coordinates,
+**	associated with the color to put at these coordinates.
 */
 # define PXL_DEC_SZ ARGBS + DIMS
-# define PXL_DEC_DIM_OFST ARGBS
-# define PXL_DEC_ARBGS ARGBS
+/*
+**Sometimes we put the coordinates first:
+*/
+# define PXL_DEC_DIM_OFFSET ARGBS
+# define PDDO PXL_DEC_DIM_OFFSET
+/*
+**Sometimes not:
+*/
+# define PXL_DEC_ARGB_OFFSET DIMS
+# define PDAO PXL_DEC_ARBG_OFFSET
 
 #endif

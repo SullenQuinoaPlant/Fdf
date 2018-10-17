@@ -35,7 +35,7 @@ static void					track_ratio(
 
 int							track_ratios(
 	t_ruint const dt,
-	t_delta_n_init *vals,
+	t_dni *vals,
 	int const v_ct,
 	t_ruint **ret)
 {

@@ -38,9 +38,10 @@ void							doubles_to_targb(
 	t_argb	argb;
 
 	i = -1;
+	argb = 0;
 	while (++i < ARGBS)
 	{
-		argb << ARGB_BYTE;
+		argb <<= ARGB_BYTE;
 		argb |= ((t_argb)*argb++) & ARGB_MASK;
 	}
 	*ret = argb;

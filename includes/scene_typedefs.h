@@ -55,6 +55,8 @@ typedef int	t_refct;
 
 typedef struct s_arrow	t_s_a;
 
+typedef struct s_arrow_projection	t_s_ap;
+
 typedef struct s_active_object	t_s_ao;
 
 typedef struct s_dot	t_s_d;
@@ -69,7 +71,7 @@ typedef struct s_free_tags	t_s_ft;
 
 typedef t_s_a	t_s_l;
 
-typedef struct s_line_or_arrow_projection	t_s_loap;
+typedef struct s_line_projection	t_s_lp;
 
 typedef struct s_object	t_s_o;
 

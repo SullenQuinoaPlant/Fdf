@@ -22,19 +22,17 @@
 # define ISEC_CT 4
 
 /*
-** (t_pnd) stands for 'points and delta'
+** (t_pdp) stands for 'point, delta, point'
 ** Indexes of:
 ** - first point, (index P1)
 ** - delta between first point and second point (P2 - P1), (index DT)
 ** - second point (index P2)
 */
-# define PND_P1 0
-# define PND_DT 1
-# define PND_P2 2
-# define PND_SZ 3
+# define PDP_P1 0
+# define PDP_DT 1
+# define PDP_P2 2
+# define PDP_SZ 3
 
-typedef double	t_pnd[PND_SZ];
-
-# define ARGB_OFFSET DIMS
+typedef double	t_pdp[PDP_SZ][PXL_DEC_SZ];
 
 #endif

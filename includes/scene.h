@@ -344,10 +344,18 @@ struct						s_dot_projection
 	double		prec;
 };
 
-struct						s_line_or_arrow_projection
+struct						s_line_projection
 {
 	uint32_t	flgs;
 	t_vpos		ends[2];
+	t_argb		argb[2];
+	double		prec[2];
+};
+
+struct						s_arrow_projection
+{
+	uint32_t	flgs;
+	t_vpos		pnv[2];
 	t_argb		argb[2];
 	double		prec[2];
 };

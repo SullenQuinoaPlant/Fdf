@@ -14,88 +14,88 @@
 #include "scene.h"
 #include "line_frame_intersections.h"
 
-static int						count_visible(
+static int						count_visibles(
 	t_s_sv *v,
-	double (*pnd)[DIMS + ARGBS])
+	t_pdp pdp)
 {
-	if (is_iso_visible(v, pnd[P1]))
+	double	tmp[PXL_DEC_SZ];
+
+	if (is_iso_visible(v, pdp[PDP_P1]))
 	{
-		if (is_iso_visible(v, pnd[P2]))
+		if (is_iso_visible(v, pdp[PDP_P2]))
 			return (2);
 		else
 		{
-			ft_memswap(&r[P1], &r[P2], &r[DT]);
+			ft_memswap(&pdp[PDP_P1], &pdp[PDP_P2], tmp);
 			return (1);
 		}
 	}
 	return (0);
 }
 
-static void					 	set_someof_pnd(
-	t_u_slsa *loa,
-	t_u_spsv const *const *pts,
-	double (*r)[DIMS + ARGBS])
+static void					 	set_someof_pdp(
+	t_s_l *l,
+	t_s_p const *const *pts,
+	t_pdp pdp)
 {
 	size_t const	dims_sz = sizeof(double) * DIMS;
-	t_tag	t;
+	t_tag			t;
 
-	ft_memcpy(&r[P1], &(pts[(t = loa->ends[0]) >> TPS])[t & TPM], dims_sz);
-	ft_memcpy(&r[P2], &(pts[(t = loa->ends[1]) >> TPS])[t & TPM], dims_sz);
+	t = l->ends[0];
+	ft_memcpy(pdp[PDP_P1], &(pts[t >> TPS])[t & TPM], dims_sz);
+	t = l->ends[1];
+	ft_memcpy(pdp[PDP_P2], &(pts[t >> TPS])[t & TPM], dims_sz);
 }
 
-static void						set_somemoreof_pnd(
-	t_u_slsa *loa,
-	double (*r)[DIMS + ARGBS])
+static void						set_somemoreof_pdp(
+	t_s_l *l,
+	t_pdp pdp)
 {
 	int		i;
 
-	targb_to_doubles(loa->argb[0], r[P1] + ARGB_OFFSET);
-	targb_to_doubles(loa->argb[1], r[P2] + ARGB_OFFSET);
+	targb_to_doubles(l->argb[0], pdp[PDP_P1] + PDAO);
+	targb_to_doubles(l->argb[1], pdp[PDP_P2] + PDAO);
 	i = -1;
-	while (++i < DIMS + ARGBS)
-		r[DT][i] = r[P2][i] - r[P1][i];
+	while (++i < PXL_DEC_SZ)
+		pdp[PDP_DT][i] = pdp[PDP_P2][i] - pdp[PDP_P1][i];
 }
 
 stati void						set_ret(
 	t_s_sv *v,
-	double (*pnd)[DIMS + ARGBS],
-	t_s_loap *ret)
+	t_dpd pdp,
+	t_s_lp *ret)
 {
-	iso_dbl_dims_to_tvpos(v, pnd, ret->ends[0]);
-	iso_dbl_dims_to_tvpos(v, pnd[P2], ret->ends[1]);
-	doubles_to_targb(&pnd[P1][ARGB_OFFSET], &ret->argb[0]);
-	doubles_to_targb(&pnd[P2][ARGB_OFFSET], &ret->argb[1]);
-	ret->prec[0] = pnd[P1][Z];
-	ret->prec[1] = pnd[P2][Z];
+	iso_dbl_dims_to_tvpos(v, pdp[PDP_P1], ret->ends[0]);
+	iso_dbl_dims_to_tvpos(v, pdn[PDP_P2], ret->ends[1]);
+	doubles_to_targb(&pdp[PDP_P1][PDAO], &ret->argb[0]);
+	doubles_to_targb(&pdp[PDP_P2][PDAO], &ret->argb[1]);
+	ret->prec[0] = pdp[PDP_P1][Z];
+	ret->prec[1] = pdp[PDP_P2][Z];
 }
 
 /*
-** The 'pnd' array holds the coordinates, and the color values of
+** The 'pdp' array holds the coordinates, and the color values of
 ** P1, P2 and the delta vector (P2 - P1).
 ** See .h for indexes.
 */
-void							isometric_loa_proj(
+void							isometric_line_proj(
 	t_s_sv *v,
-	void *line_or_arrow,
-	t_u_spsv const *const *pts,
-	void *ret_tsloap)
+	void *line,
+	t_s_p const *const *pts,
+	void *ret_tslp)
 {
-	t_u_slsa *const	loa = (t_u_slsa*)line_or_arrow;
-	t_s_loap *const	ret = (t_s_loap*)ret_tsloap;
-	t_pnd			pnd;
-	int				count;
+	t_s_l *const	l = (t_s_l*)line;
+	t_s_lp *const	ret = (t_s_lp*)ret_tslp;
+	t_pdp			pdp;
 
-	set_someof_pnd(loa, pts, pnd);
-	if (!(count = count_visible(v, loa, pts, ret)))
-		loa->flgs &= ~F_V_VISIBLE;
-	else if (count < 2)
+	set_someof_pdp(l, pts, pdp);
+	l->flgs |= F_V_VISIBLE;
+	if (count_visibles(v, l, pts, ret) < 2)
 	{
-		set_somemoreof_pnd(loa, pnd);
-		if (isometric_line_xy_isect(v, pnd) == OUT_OF_VIEW ||
-			isometric_line_z_isect(pnd) == OUT_OF_VIEW)
+		set_somemoreof_pdp(l, pdp);
+		if (isometric_line_xy_isect(v, pdp) == OUT_OF_VIEW ||
+			isometric_line_z_isect(pdp) == OUT_OF_VIEW)
 			loa->flgs &= ~F_V_VISIBLE;
-		else
-			loa->flgs |= F_V_VISIBLE;
 	}
-	set_ret(pnd, ret);
+	set_ret(pdp, ret);
 }
