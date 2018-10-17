@@ -13,8 +13,8 @@
 #include "scene_typedefs.h"
 
 int								iso_dbl_dims_to_tvpos(
-	t_s_sv *v,
-	double pos[DIMS],
+	t_s_sv const *v,
+	double const pos[DIMS],
 	t_vpos ret)
 {
 	int		r;

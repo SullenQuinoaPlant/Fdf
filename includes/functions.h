@@ -119,6 +119,11 @@ int							is_iso_z_visible(
 	t_s_sv *v,
 	double pt[DIMS]);
 
+int							iso_dbl_dims_to_tvpos(
+	t_s_sv const	*v,
+	double const	pos[DIMS],
+	t_vpos			ret);
+
 /*
 **Allocates and initilizes a scene, with optional
 **initial elements passed through input_str.
