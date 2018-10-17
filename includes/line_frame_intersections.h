@@ -28,11 +28,12 @@
 ** - delta between first point and second point (P2 - P1), (index DT)
 ** - second point (index P2)
 */
-# define P1 0
-# define DT 1
-# define P2 2
+# define PND_P1 0
+# define PND_DT 1
+# define PND_P2 2
 # define PND_SZ 3
-typedef double	t_pnd[PND_SZ][DIMS + ARGBS];
+
+typedef double	t_pnd[PND_SZ];
 
 # define ARGB_OFFSET DIMS
 

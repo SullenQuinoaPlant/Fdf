@@ -6,9 +6,9 @@ TARGETS := \
 	cdgfxyrz_parser \
 	discrete_ratio_tracking \
 	discrete_ratio_tracking_pixel_line \
-	dot_projection \
 	double_dims_ar_set_and_multiply \
 	double_sign \
+	isometric_dot_projection \
 	isometric_double_dims_to_tvpos \
 	isometric_line_projection \
 	isometric_view \

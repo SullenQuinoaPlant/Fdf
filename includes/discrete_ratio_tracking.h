@@ -13,12 +13,9 @@ typedef unsigned int	t_ruint;
 # define INIT 1
 # define DNI_SZ 2
 
-typedef t_ruint (t_delta_n_init)[DNI_SZ];
-
 /*
-**Specific to pixel decompositions:
+**typedef t_ruint (t_delta_n_init)[DNI_SZ];
 */
-# define PXL_DEC_SZ ARGBS + DIMS
-# define PXL_DEC_DIM_OFST ARGBS
+typedef t_ruint	(t_dni)[DNI_SZ];
 
 #endif

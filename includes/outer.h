@@ -37,4 +37,11 @@
 */
 # define ARGBS 4
 
+/*
+**Pixel decomposition:
+*/
+# define PXL_DEC_SZ ARGBS + DIMS
+# define PXL_DEC_DIM_OFST ARGBS
+# define PXL_DEC_ARBGS ARGBS
+
 #endif

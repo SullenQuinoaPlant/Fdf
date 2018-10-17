@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene_typedefs.h"
+#include "functions.h"
 #include "scene.h"
 #include "line_frame_intersections.h"
 
@@ -18,9 +18,9 @@ static int						count_visible(
 	t_s_sv *v,
 	double (*pnd)[DIMS + ARGBS])
 {
-	if (is_visible(v, pnd[P1]))
+	if (is_iso_visible(v, pnd[P1]))
 	{
-		if (is_visible(v, pnd[P2]))
+		if (is_iso_visible(v, pnd[P2]))
 			return (2);
 		else
 		{

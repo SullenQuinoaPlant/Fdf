@@ -110,7 +110,7 @@ int								isometric_line_xy_isect(
 	if ((d = pnd[DT][X]))
 	{
 		p = pnd[P1][X];
-		set_mult_dims_arbgs(pnd[P1], pnd[DT], (r = -p / d), isect[pt_ct++]);
+		set_mult_pxl_dec(pnd[PND_P1], pnd[PND_DT], (r = -p / d), isect[pt_ct++]);
 		r = ((double)(v->w - 1) - p) / d;
 		set_mult_dims_arbgs(pnd[P1], pnd[DT], r, isect[pt_ct++]);
 	}
