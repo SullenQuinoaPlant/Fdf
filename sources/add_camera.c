@@ -21,15 +21,15 @@ t_s_pctr				*add_camera(
 	int			r;
 
 	prv = s->ct;
-	set_tpctrm_identity(*(mash + (tic = 0));
+	set_tpctrm_identity(*(mash + (tic = 0)));
 	ft_bzero(&dummy, sizeof(t_s_pctr));
 	dummy.refs = 1;
 	while (ct_ct--)
 	{
 		ft_memcpy(dummy.own, *cts, sizeof(t_pctrm));
-		tpctrm_mult(*(mash + tic), *cts, *(mash + (tic = !tic)));
-		ft_memcpy(dummy.mashed, *(mash + tic), sizeof(t_pctrm)); 
-		r = ring_expand(sizeof(t_s_pctr), &dummy, &prv);
+		tpctrm_mult(*(mash + tic), *cts, *(mash + !tic));
+		ft_memcpy(dummy.mashed, *(mash + (tic = !tic)), sizeof(t_pctrm));
+		r = ring_expand(sizeof(t_s_pctr), &dummy, (void**)&prv);
 		if (r != RING_SUCCESS)
 			return (0);
 		dummy.prv = prv;

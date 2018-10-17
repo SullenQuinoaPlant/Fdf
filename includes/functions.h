@@ -173,6 +173,9 @@ void						set_mult_dims_argb(
 	double	ratio,
 	double	dest[DIMS]);
 
+void						set_tpctrm_identity(
+	t_pctrm	ret);
+
 int							sign(
 	double	d);
 
