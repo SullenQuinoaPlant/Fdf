@@ -67,7 +67,7 @@ static int					add_points(
 		j = -1;
 		while (++j < p->y_sz)
 		{
-			*r = get_nxt_se(e_spnv, s, &tags[i][j], (void**)&pt);
+			*r = get_nxt_se(e_p, s, &tags[i][j], (void**)&pt);
 			if (*r != SUCCESS)
 				return (*r);
 			pt->xyz[X] = i + p->at[X];
@@ -84,7 +84,7 @@ static void				add_point_refct(
 	t_s_s *s)
 {
 	t_tag (*const		tar)[p->y_sz] = (t_tag(*)[p->y_sz])tags;
-	t_s_se *const		grp = &s->e[e_spnv];
+	t_s_se *const		grp = &s->e[e_p];
 	size_t				i;
 	size_t				j;
 

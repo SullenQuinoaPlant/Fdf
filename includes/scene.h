@@ -52,7 +52,7 @@
 /*
 **Scene elements hold a reference count in a (t_refct).
 **Negative reference counts assigned to an object
-**	indicate that we intend to release its tag.
+*	indicate that we intend to release its tag.
 */
 # define MAX_REFS INT_MAX
 
@@ -79,13 +79,13 @@
  */
 enum						e_scene_element_groups
 {
-	e_sep,
-	e_sev,
-	e_sed,
-	e_sel,
-	e_sea,
-	e_sef,
-	e_seo,
+	e_p,
+	e_v,
+	e_d,
+	e_l,
+	e_a,
+	e_f,
+	e_o,
 	e_seg_sz,
 	e_seg_null
 };
@@ -128,41 +128,9 @@ struct						s_point
 	};
 };
 
-union						u_spsv
-{
-	t_s_p	p;
-	t_s_v	v;
-	struct
-	{
-		t_refct			refs;
-		union
-		{
-			struct
-			{
-				double	xyz[3];
-			}			cart;
-			struct
-			{
-				double	xyz[3];
-			};
-		};
-		union
-		{
-			struct
-			{
-				double	tpr[3];
-			}			polr;
-			struct
-			{
-				double	tpr[3];
-			};
-		};
-	};
-};
-
 /*
- **Visible objects:
- */
+**Visible objects:
+*/
 struct						s_dot
 {
 	t_refct			refs;

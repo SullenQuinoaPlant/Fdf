@@ -9,7 +9,7 @@ void				scene_teardown(
 
 	if (!scene)
 		return ;
-	i = e_spnv;
+	i = e_p;
 	while (i < e_seg_sz)
 		free_tsse(&scene->e[i]);
 	free_views(scene->v);

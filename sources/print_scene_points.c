@@ -9,7 +9,7 @@ void				print_scene_points(
 	size_t	i;
 	size_t	j;
 
-	pts = &s->e[e_spnv];
+	pts = &s->e[e_p];
 	i = -1;
 	while (++i < pts->ar_sz)
 	{
