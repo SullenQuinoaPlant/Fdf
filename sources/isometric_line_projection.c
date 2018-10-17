@@ -19,8 +19,6 @@ static int						count_visibles(
 	t_pdp pdp,
 	int *p1_is_visible)
 {
-	double	tmp[PXL_DEC_SZ];
-
 	if (is_iso_visible(v, pdp[PDP_P1]))
 	{
 		*p1_is_visible = 1;
@@ -97,12 +95,12 @@ int								isometric_line_proj(
 
 	set_someof_pdp(l, pts, pdp);
 	ret->flgs |= F_V_VISIBLE;
-	if ((count = count_visibles(v, pdp, p1_vis)) < 2)
+	if ((count = count_visibles(v, pdp, p1_is_vis)) < 2)
 	{
 		set_somemoreof_pdp(l, pdp);
 		if (!p1_is_vis)
 		{
-			ft_memswap(pdp[PDP_P1], pdp[PDP_P2], sizeof(t_pxl_dbl_dec));
+			ft_memswap(pdp[PDP_P1], pdp[PDP_P2], sizeof(t_pdd));
 			mult_dbl_ar(pdp[PDP_DT], -1, PXL_DEC_SZ];
 		}
 		if (isometric_line_xy_isect(v, pdp) == OUT_OF_VIEW ||

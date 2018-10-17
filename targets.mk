@@ -18,6 +18,7 @@ TARGETS := \
 	isometric_view_line_frame_z_isect \
 	isometric_view_visible_point \
 	main \
+	multiply_double_array \
 	object_projection \
 	open \
 	pnv_projection \
