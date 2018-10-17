@@ -300,7 +300,7 @@ struct						s_scene_elements
 /*
 **Coordinate transformation matrices are typedefed to:
 **(t_pctrm) : point coordimante transform matrix
-**	these matrix have DIMS_N_TR rows (one per axis and one for translations)
+**	these matrices have DIMS_N_TR rows (one per axis and one for translations)
 **(t_pctrmr) : point coordimante transform matrix row
 **(t_s_pctr) : wraps the above in a struct, enables linking and chaining
 **(t_pctr) as in: point coordinate transform, first arg most likely a (t_pctrm*)

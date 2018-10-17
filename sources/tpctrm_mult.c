@@ -1,5 +1,17 @@
 include "scene_typedefs.h"
 
+void					set_tpctrm_identity(
+	t_pctrm ret)
+{
+	t_pctrm const	id = {
+		{1, 0, 0},
+		{0, 1, 0},
+		{0, 0, 1},
+		{0, 0, 0}};
+
+	ft_memcpy(ret, id, sizeof(t_pctrm));
+}
+
 void					tpctrm_mult(
 	t_pctrm const a,
 	t_pctrm const b,
