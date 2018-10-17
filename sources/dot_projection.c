@@ -14,9 +14,9 @@ void						isometric_dot_proj(
 
 	(void)points;
 	if (iso_dbl_dims_to_tvpos(v, p->xyz, dp->here) == SUCCESS)
-		dp->flags |= F_V_VISIBLE;
+		dp->flgs |= F_V_VISIBLE;
 	else
-		dp->flags &= ~F_V_VISIBLE;
+		dp->flgs &= ~F_V_VISIBLE;
 	dp->argb = d->argb;
 	dp->prec = p->xyz[Z];
 }

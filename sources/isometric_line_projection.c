@@ -12,7 +12,7 @@
 
 #include "scene_typedefs.h"
 #include "scene.h"
-#include "isometric_view_line_isect.h"
+#include "line_frame_intersections.h"
 
 static int						count_visible(
 	t_s_sv *v,
@@ -82,7 +82,7 @@ void							isometric_loa_proj(
 {
 	t_u_slsa *const	loa = (t_u_slsa*)line_or_arrow;
 	t_s_loap *const	ret = (t_s_loap*)ret_tsloap;
-	double			pnd[3][DIMS + ARGBS]
+	t_pnd			pnd;
 	int				count;
 
 	set_someof_pnd(loa, pts, pnd);

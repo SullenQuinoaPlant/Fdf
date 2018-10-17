@@ -67,7 +67,7 @@ typedef struct s_fill_projection	t_s_fp;
 
 typedef struct s_free_tags	t_s_ft;
 
-typedef struct s_line	t_s_l;
+typedef t_s_a	t_s_l;
 
 typedef struct s_line_or_arrow_projection	t_s_loap;
 
@@ -91,9 +91,7 @@ typedef struct s_scene_elements	t_s_se;
 
 typedef struct s_tagged_array	t_s_ta;
 
-typedef struct s_vector	t_s_v;
-
-typedef union u_slsa	t_u_slsa;
+typedef t_s_p	t_s_v;
 
 typedef unsigned int	t_vuint;
 

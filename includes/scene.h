@@ -79,11 +79,13 @@
  */
 enum						e_scene_element_groups
 {
-	e_spnv,
-	e_sd,
-	e_slna,
-	e_sf,
-	e_so,
+	e_sep,
+	e_sev,
+	e_sed,
+	e_sel,
+	e_sea,
+	e_sef,
+	e_seo,
 	e_seg_sz,
 	e_seg_null
 };
@@ -126,40 +128,36 @@ struct						s_point
 	};
 };
 
-struct						s_vector
-{
-	t_refct			refs;
-	union
-	{
-		struct
-		{
-			double	xyz[3];
-		}			cart;
-		struct
-		{
-			double	xyz[3];
-		};
-	};
-	union
-	{
-		struct
-		{
-			double	tpr[3];
-		}			polr;
-		struct
-		{
-			double	tpr[3];
-		};
-	};
-};
-
-/*
- ** points and vectors look the same in storage:
- */
 union						u_spsv
 {
 	t_s_p	p;
 	t_s_v	v;
+	struct
+	{
+		t_refct			refs;
+		union
+		{
+			struct
+			{
+				double	xyz[3];
+			}			cart;
+			struct
+			{
+				double	xyz[3];
+			};
+		};
+		union
+		{
+			struct
+			{
+				double	tpr[3];
+			}			polr;
+			struct
+			{
+				double	tpr[3];
+			};
+		};
+	};
 };
 
 /*
@@ -173,10 +171,10 @@ struct						s_dot
 };
 
 /*
- **lines are represented by their two extremities.
- */
-# define L_END1 0
-# define L_END2 1
+**lines are represented by their two extremities.
+*/
+# define END1 0
+# define END2 1
 struct						s_line
 {
 	unsigned int	refs;
@@ -185,8 +183,8 @@ struct						s_line
 };
 
 /*
- **arrows are vectors positioned in space.
- */
+**arrows are vectors positioned in space.
+*/
 # define A_POS 0
 # define A_VEC 1
 struct						s_arrow
@@ -196,16 +194,10 @@ struct						s_arrow
 	t_argb			argb[2];
 };
 
-union						u_slsa
-{
-	t_s_l	l;
-	t_s_a	a;
-};
-
 /*
- **In s_fill:
- ** - norm_v (normal vector) points outwards from the filled surface.
- */
+**In s_fill:
+** - norm_v (normal vector) points outwards from the filled surface.
+*/
 # define VERTEX1 0
 # define V1 VERTEX1
 # define VERTEX2 1
