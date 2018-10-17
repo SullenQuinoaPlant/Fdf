@@ -191,6 +191,12 @@ void						tpctrm_mult(
 	t_pctrm const	b,
 	t_pctrm 		c);
 
+int							track_ratios(
+	t_ruint const	dt,
+	t_delta_n_init	*vals,
+	int const		v_ct,
+	t_ruint			**ret);
+
 int							tssv_tar_allocs(
 	t_e_vpg	grp,
 	t_s_s	*s);

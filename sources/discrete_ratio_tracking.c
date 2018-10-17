@@ -7,7 +7,7 @@
 
 static void					track_ratio(
 	t_ruint const dt,
-	t_ruint const dt_v,
+	t_ruint dt_v,
 	t_ruint start_v,
 	t_ruint *ar)
 {
@@ -15,7 +15,7 @@ static void					track_ratio(
 	int const		sign = dt_v > dt ? -1 : 1;
 	t_ruint			err_sum;
 	t_ruint			track;
-	int				i;
+	unsigned int	i;
 
 	track = start_v;
 	ar[0] = track;
@@ -41,7 +41,6 @@ int							track_ratios(
 {
 	size_t const	len = dt + 1;
 	int				i;
-	t_ruint			*ret;
 	t_ruint			(*p_ret)[len];
 
 	*ret = 0;
@@ -50,7 +49,7 @@ int							track_ratios(
 		i = -1;
 		while (++i < v_ct)
 			track_ratio(dt, vals[i][DT], vals[i][INIT], p_ret[i]);
-		*ret = p_ret;
+		*ret = &p_ret[0][0];
 		return (SUCCESS);
 	}
 	return (SYS_ERR);
