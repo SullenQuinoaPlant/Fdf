@@ -69,7 +69,7 @@ typedef struct s_fill_projection	t_s_fp;
 
 typedef struct s_free_tags	t_s_ft;
 
-typedef t_s_a	t_s_l;
+typedef struct s_line	t_s_l;
 
 typedef struct s_line_projection	t_s_lp;
 

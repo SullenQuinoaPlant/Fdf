@@ -52,6 +52,6 @@
 **Sometimes not:
 */
 # define PXL_DEC_ARGB_OFFSET DIMS
-# define PDAO PXL_DEC_ARBG_OFFSET
+# define PDAO PXL_DEC_ARGB_OFFSET
 
 #endif

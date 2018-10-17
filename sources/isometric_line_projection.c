@@ -16,20 +16,20 @@
 
 static int						count_visibles(
 	t_s_sv *v,
-	t_pdp pdp)
+	t_pdp pdp,
+	int *p1_is_visible)
 {
 	double	tmp[PXL_DEC_SZ];
 
 	if (is_iso_visible(v, pdp[PDP_P1]))
 	{
-		if (is_iso_visible(v, pdp[PDP_P2]))
+		*p1_is_visible = 1;
+		if (is_iso_visible(v, pdp[PDP_P1]))
 			return (2);
 		else
-		{
-			ft_memswap(&pdp[PDP_P1], &pdp[PDP_P2], tmp);
 			return (1);
-		}
 	}
+	*p1_is_visible = 0;
 	return (0);
 }
 
@@ -60,15 +60,20 @@ static void						set_somemoreof_pdp(
 		pdp[PDP_DT][i] = pdp[PDP_P2][i] - pdp[PDP_P1][i];
 }
 
-stati void						set_ret(
+static void						set_ret(
 	t_s_sv *v,
 	t_dpd pdp,
+	int count,
 	t_s_lp *ret)
 {
 	iso_dbl_dims_to_tvpos(v, pdp[PDP_P1], ret->ends[0]);
 	iso_dbl_dims_to_tvpos(v, pdn[PDP_P2], ret->ends[1]);
-	doubles_to_targb(&pdp[PDP_P1][PDAO], &ret->argb[0]);
-	doubles_to_targb(&pdp[PDP_P2][PDAO], &ret->argb[1]);
+	if (count < 2)
+	{
+		doubles_to_targb(&pdp[PDP_P2][PDAO], &ret->argb[1]);
+		if (!count)
+			doubles_to_targb(&pdp[PDP_P1][PDAO], &ret->argb[0]);
+	}
 	ret->prec[0] = pdp[PDP_P1][Z];
 	ret->prec[1] = pdp[PDP_P2][Z];
 }
@@ -78,7 +83,7 @@ stati void						set_ret(
 ** P1, P2 and the delta vector (P2 - P1).
 ** See .h for indexes.
 */
-void							isometric_line_proj(
+int								isometric_line_proj(
 	t_s_sv *v,
 	void *line,
 	t_s_p const *const *pts,
@@ -87,15 +92,24 @@ void							isometric_line_proj(
 	t_s_l *const	l = (t_s_l*)line;
 	t_s_lp *const	ret = (t_s_lp*)ret_tslp;
 	t_pdp			pdp;
+	int				count;
+	int				p1_is_vis;
 
 	set_someof_pdp(l, pts, pdp);
-	l->flgs |= F_V_VISIBLE;
-	if (count_visibles(v, l, pts, ret) < 2)
+	ret->flgs |= F_V_VISIBLE;
+	if ((count = count_visibles(v, pdp, p1_vis)) < 2)
 	{
 		set_somemoreof_pdp(l, pdp);
+		if (!p1_is_vis)
+		{
+			ft_memswap(pdp[PDP_P1], pdp[PDP_P2], sizeof(t_pxl_dbl_dec));
+			mult_dbl_ar(pdp[PDP_DT], -1, PXL_DEC_SZ];
+		}
 		if (isometric_line_xy_isect(v, pdp) == OUT_OF_VIEW ||
 			isometric_line_z_isect(pdp) == OUT_OF_VIEW)
-			loa->flgs &= ~F_V_VISIBLE;
+			ret->flgs &= ~F_V_VISIBLE;
 	}
-	set_ret(pdp, ret);
+	else
+		ft_memcpy(ret->argb, l->arg, sizeof(t_argb[2]));
+	set_ret(v, pdp, count, ret);
 }
