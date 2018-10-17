@@ -124,6 +124,11 @@ int							iso_dbl_dims_to_tvpos(
 	double const	pos[DIMS],
 	t_vpos			ret);
 
+int							iso_dbl_to_tvuint(
+	t_vuint const	dim_sz,
+	double const	d,
+	t_vuint			*ret);
+
 /*
 **Allocates and initilizes a scene, with optional
 **initial elements passed through input_str.

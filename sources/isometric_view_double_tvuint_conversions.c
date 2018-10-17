@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int							dbl_to_tvuint(
-	t_vuint dim_sz,
-	double d
+int							iso_dbl_to_tvuint(
+	t_vuint const dim_sz,
+	double const d,
 	t_vuint *ret)
 {
 	int const		sign = d > 0 ? 1 : -1;
@@ -27,9 +27,9 @@ int							dbl_to_tvuint(
 	return (SUCCESS);
 }
 
-int							dbl_within_dimsz(
-	t_vuint dim_sz,
-	double d)
+int							iso_dbl_within_dimsz(
+	t_vuint const dim_sz,
+	double const d)
 {
 	t_vuint const	half = dim_sz / 2;
 	int const		sign = d > 0 ? 1 : -1;

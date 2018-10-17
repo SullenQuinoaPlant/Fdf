@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene_typedefs.h"
+#include "functions.h"
+#include "scene.h"
 
 int								iso_dbl_dims_to_tvpos(
 	t_s_sv const *v,
@@ -19,7 +20,7 @@ int								iso_dbl_dims_to_tvpos(
 {
 	int		r;
 
-	r = dbl_to_tvuint(v->w, pos[X], ret[V_W]);
-	r |= dbl_to_tvuint(v->h, pos[Y], ret[V_H]);
+	r = iso_dbl_to_tvuint(v->w, pos[X], &ret[V_W]);
+	r |= iso_dbl_to_tvuint(v->h, pos[Y], &ret[V_H]);
 	return (r);
 }

@@ -13,7 +13,10 @@ void						isometric_dot_proj(
 	t_s_p *const	p = &((t_s_p*)(v->s->e[e_spnv].ar[t >> TPS]))[t & TPM];
 
 	(void)points;
-	iso_dbl_dims_to_tvpos(v, p->xyz, dp->here);
+	if (iso_dbl_dims_to_tvpos(v, p->xyz, dp->here) == SUCCESS)
+		dp->flags |= F_V_VISIBLE;
+	else
+		dp->flags &= ~F_V_VISIBLE;
 	dp->argb = d->argb;
 	dp->prec = p->xyz[Z];
 }

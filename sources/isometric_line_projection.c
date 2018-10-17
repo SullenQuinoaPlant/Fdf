@@ -94,6 +94,8 @@ void							isometric_loa_proj(
 		if (isometric_line_xy_isect(v, pnd) == OUT_OF_VIEW ||
 			isometric_line_z_isect(pnd) == OUT_OF_VIEW)
 			loa->flgs &= ~F_V_VISIBLE;
+		else
+			loa->flgs |= F_V_VISIBLE;
 	}
 	set_ret(pnd, ret);
 }
