@@ -13,15 +13,15 @@
 #include "outer.h"
 
 void						set_mult_dims_argbs(
-	double src[DIMS],
-	double deltas[DIMS],
+	double src[DIMS + ARGBS],
+	double deltas[DIMS + ARGBS],
 	double ratio,
-	double dest[DIMS])
+	double dest[DIMS + ARGBS])
 {
 	int		i;
 
-	ft_memcpy(dest, src, sizeof(double) * DIMS);
-	int = -1;
+	ft_memcpy(dest, src, sizeof(double) * (DIMS + ARGBS));
+	i = -1;
 	while (++i < DIMS + ARGBS)
 		dest[i] += ratio * deltas[i];
 }
@@ -35,7 +35,7 @@ void						set_mult_dims(
 	int		i;
 
 	ft_memcpy(dest, src, sizeof(double) * DIMS);
-	int = -1;
+	i = -1;
 	while (++i < DIMS)
 		dest[i] += ratio * deltas[i];;
 }
