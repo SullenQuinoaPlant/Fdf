@@ -15,6 +15,7 @@
 
 # include "parse_typedefs.h"
 # include "scene_typedefs.h"
+# include "discrete_ratio_tracking.h"
 # include "libgetnextline.h"
 
 int							add_star(

@@ -1,3 +1,4 @@
+#include "functions.h"
 #include "scene.h"
 #include "discrete_ratio_tracking.h"
 
