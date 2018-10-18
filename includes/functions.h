@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 14:26:16 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:27:52 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,10 @@ int							iso_dbl_to_tvuint(
 
 int							isometric_line_xy_isect(
 	t_s_sv	*v,
-	t_pnd	pnd);
+	t_pdp	pnd);
 
 int							isometric_line_z_isect(
-	t_pnd	pnd);
+	t_pdp	pnd);
 
 /*
 **Allocates and initilizes a scene, with optional

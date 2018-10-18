@@ -6,11 +6,11 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 07:27:51 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:58:58 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
+#include "functions.h"
 #include "scene.h"
 
 static int					tssv_add_tar(
@@ -77,7 +77,7 @@ void						tssv_seg_apply_proj(
 	t_e_seg const	g = *(t_e_seg*)p_seg;
 	t_s_ta *const	ta = &v->e[g];
 
-	tssv_grp_apply_proj(v, v->prj[g], &s->e[g], &v->e[g]);
+	tssv_apply_proj(v, v->prj[g], &s->e[g], &v->e[g]);
 }
 
 int							tssvs_seg_apply_proj(
