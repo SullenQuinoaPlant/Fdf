@@ -30,18 +30,18 @@ static void					print_line_like_really(
 	double *prec,
 	t_ruint dt)
 {
-	t_rgba (*cnst	canvas)[v->w] = v->pxl;
-	t_ruint (*const	dec)[ARGBS + V_DIMS] = decomposed;
-	t_vuint		h;
-	t_vuint		w;
+	t_rgba (*const	canvas)[v->w] = v->pxl;
+	t_ruint (*const	dec)[PXL_DEC_SZ] = decomposed;
+	t_vuint			h;
+	t_vuint			w;
 
 	dt++;
 	while (dt--)
 	{
-		h = dec[dt][DIM_OFST + V_H];
-		w = dec[dt][DIM_OFST + V_W];
+		h = dec[dt][V_H];
+		w = dec[dt][V_W];
 		if (prec[dt] < v->pxl_prec[h][w])
-			canvas[h][w] = recompose_truint_targb(
+			canvas[h][w] = truint_dec_to_targb(&dec[dt][PXDAO]);
 	}
 }
 
