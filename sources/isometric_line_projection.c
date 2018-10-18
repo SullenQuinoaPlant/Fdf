@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 12:53:57 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:17:19 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void						set_somemoreof_pdp(
 {
 	int		i;
 
-	targb_to_doubles(l->argb[0], pdp[PDP_P1] + PDAO);
-	targb_to_doubles(l->argb[1], pdp[PDP_P2] + PDAO);
+	targb_to_doubles(l->argb[0], pdp[PDP_P1] + PTDAO);
+	targb_to_doubles(l->argb[1], pdp[PDP_P2] + PTDAO);
 	i = -1;
 	while (++i < PNT_DEC_SZ)
 		pdp[PDP_DT][i] = pdp[PDP_P2][i] - pdp[PDP_P1][i];
@@ -60,17 +60,17 @@ static void						set_somemoreof_pdp(
 
 static void						set_ret(
 	t_s_sv *v,
-	t_dpd pdp,
+	t_pdp pdp,
 	int count,
 	t_s_lp *ret)
 {
 	iso_dbl_dims_to_tvpos(v, pdp[PDP_P1], ret->ends[0]);
-	iso_dbl_dims_to_tvpos(v, pdn[PDP_P2], ret->ends[1]);
+	iso_dbl_dims_to_tvpos(v, pdp[PDP_P2], ret->ends[1]);
 	if (count < 2)
 	{
-		doubles_to_targb(&pdp[PDP_P2][PDAO], &ret->argb[1]);
+		doubles_to_targb(&pdp[PDP_P2][PTDAO], &ret->argb[1]);
 		if (!count)
-			doubles_to_targb(&pdp[PDP_P1][PDAO], &ret->argb[0]);
+			doubles_to_targb(&pdp[PDP_P1][PTDAO], &ret->argb[0]);
 	}
 	ret->prec[0] = pdp[PDP_P1][Z];
 	ret->prec[1] = pdp[PDP_P2][Z];
@@ -95,13 +95,13 @@ int								isometric_line_proj(
 
 	set_someof_pdp(l, pts, pdp);
 	ret->flgs |= F_V_VISIBLE;
-	if ((count = count_visibles(v, pdp, p1_is_vis)) < 2)
+	if ((count = count_visibles(v, pdp, &p1_is_vis)) < 2)
 	{
 		set_somemoreof_pdp(l, pdp);
 		if (!p1_is_vis)
 		{
 			ft_memswap(pdp[PDP_P1], pdp[PDP_P2], sizeof(t_pdd));
-			mult_dbl_ar(pdp[PDP_DT], -1, PNT_DEC_SZ];
+			mult_dbl_ar(pdp[PDP_DT], -1, PNT_DEC_SZ]);
 		}
 		if (isometric_line_xy_isect(v, pdp) == OUT_OF_VIEW ||
 			isometric_line_z_isect(pdp) == OUT_OF_VIEW)

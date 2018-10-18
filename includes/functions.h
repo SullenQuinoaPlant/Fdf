@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 13:24:01 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:26:16 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "parse_typedefs.h"
 # include "scene_typedefs.h"
 # include "discrete_ratio_tracking.h"
-# include "libgetnextline.h"
+# include "line_frame_intersections.h"
 
 int							add_star(
 	t_e_seg group,
@@ -135,6 +135,13 @@ int							iso_dbl_to_tvuint(
 	double const	d,
 	t_vuint			*ret);
 
+int							isometric_line_xy_isect(
+	t_s_sv	*v,
+	t_pnd	pnd);
+
+int							isometric_line_z_isect(
+	t_pnd	pnd);
+
 /*
 **Allocates and initilizes a scene, with optional
 **initial elements passed through input_str.
@@ -146,6 +153,11 @@ int							make_scene(
 
 t_e_vpg						map_seg_to_vpg(
 	t_e_seg	sg);
+
+void						mult_dbl_ar(
+	double mult,
+	size_t sz,
+	double *ar);
 
 int							new_view(
 	t_s_s	*s,

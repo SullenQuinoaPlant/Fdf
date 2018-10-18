@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 00:20:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 12:58:12 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:25:16 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void						move_point(
 	}
 }
 
-void							isometric_line_z_isect(
-	t_pnd pwd)
+int								isometric_line_z_isect(
+	t_pnd pnd)
 {
 	int		isect;
 	double	
@@ -53,4 +53,5 @@ void							isometric_line_z_isect(
 		return (OUT_OF_VIEW);
 	if (isect)
 		move_point(p1 ? P1 : P2, pnd);
+	return (SUCCESS);
 }
