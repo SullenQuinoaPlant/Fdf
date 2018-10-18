@@ -40,12 +40,12 @@ void						track_ratios(
 	t_ruint *ret)
 {
 	size_t const	len = dt + 1;
-	t_ruint (*const	p_ret)[len] = ret;
+	t_ruint (*const	p_ret)[len] = (t_ruint(*)[len])ret;
 	int				i;
 
 	i = -1;
 	while (++i < v_ct)
-		track_ratio(dt, vals[i][DT], vals[i][INIT], p_ret[i]);
+		track_ratio(dt, vals[i][DNI_DT], vals[i][DNI_INI], p_ret[i]);
 }
 
 int							track_ratios_alloc(

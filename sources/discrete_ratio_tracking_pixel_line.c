@@ -30,14 +30,14 @@ void							tvpos_pair_to_tdni(
 {
 	t_ruint		val;
 
-	ret[PXL_DEC_DIM_OFST + V_H][DNI_DT] = ends[1][V_H];
-	ret[PXL_DEC_DIM_OFST + V_W][DNI_DT] = ends[1][V_W];
+	ret[V_H][DNI_DT] = ends[1][V_H];
+	ret[V_W][DNI_DT] = ends[1][V_W];
 	val = ends[0][V_H];
-	ret[PXL_DEC_DIM_OFST + V_H][DNI_DT] -= val;
-	ret[PXL_DEC_DIM_OFST + V_H][DNI_INI] = val;
+	ret[V_H][DNI_DT] -= val;
+	ret[V_H][DNI_INI] = val;
 	val = ends[0][V_W];
-	ret[PXL_DEC_DIM_OFST + V_W][DNI_DT] -= val;
-	ret[PXL_DEC_DIM_OFST + V_W][DNI_INI] = val;
+	ret[V_W][DNI_DT] -= val;
+	ret[V_W][DNI_INI] = val;
 }
 
 static int					characterize_slope(
@@ -55,7 +55,7 @@ static int					characterize_slope(
 	if (ends[1][V_H] > ends[0][V_H])
 		dt_h = ends[1][V_H] - ends[0][V_H];
 	else
-		dt_w = ends[0][V_H] - ends[1][V_H];
+		dt_h = ends[0][V_H] - ends[1][V_H];
 	if ((is_w_slope = dt_w >= dt_h ? 1 : 0))
 		*dt = dt_w;
 	else
@@ -77,7 +77,7 @@ static void					set_along(
 }
 
 int							track_pixel_line(
-	t_s_loap const *const l,
+	t_s_lp const *const lp,
 	t_ruint *ret_dt,
 	int *ret_along,
 	t_ruint **ret)
@@ -86,20 +86,20 @@ int							track_pixel_line(
 	t_ruint			dt;
 	int				along;
 	t_ruint			*ar;
-	int				r;
 
-	targb_pair_to_tdni(l->argb, tdni);
-	tvpos_pair_to_tdni(l->ends, tdni + PXL_DEC_DIM_OFST);
-	along = characterize_slope(l->ends, &dt);
+	targb_pair_to_tdni(lp->argb, tdni + PXDAO);
+	tvpos_pair_to_tdni(lp->ends, tdni);
+	along = characterize_slope(lp->ends, &dt);
 	if (!(ar = malloc(sizeof(t_ruint) * (dt + 1) * PXL_DEC_SZ)))
 		return (SYS_ERR);
+	set_along(dt, tdni[along], ar);
 	track_ratios(dt, tdni, along, ar);
-	track_ratios(dt, &tdni[along + 1], &ar[(along + 1) * (dt + 1)]);
-	set_along(dt, tdni[along], ret);
+	along++;
+	track_ratios(dt, tdni + along, PXL_DEC_SZ - along, &ar[along * (dt + 1)]);
 	*ret = ar;
 	if (ret_dt)
 		*ret_dt = dt;
 	if (ret_along)
-		*ret_along = along;
+		*ret_along = --along;
 	return (SUCCESS);
 }

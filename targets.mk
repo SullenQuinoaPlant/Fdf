@@ -39,6 +39,7 @@ TARGETS := \
 	tar_functions \
 	targb_to_doubles \
 	tpctrm_mult \
+	truint_dec_to_targb \
 	tspctr_functions \
 	tssbi_string_add_to_scene \
 	tssbi_string_free \
