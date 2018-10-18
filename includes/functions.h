@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 15:15:52 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 17:04:13 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,25 +219,34 @@ void						targb_to_doubles(
 	double	ret[ARGBS]);
 
 size_t						teseg_type_sz(
-	t_e_seg	g);
+	t_e_seg	group);
+
+void						tpctrm_apply(
+	t_pctrm	apply_this,
+	t_xyz	to_this,
+	t_xyz	store_here);
 
 void						tpctrm_mult(
-	t_pctrm const	a,
-	t_pctrm const	b,
-	t_pctrm 		c);
+	t_pctrm const	this_a,
+	t_pctrm const	times_this_b,
+	t_pctrm 		equals_this_c);
 
 void						track_ratios(
-	t_ruint const	dt,
-	t_dni			*vals,
-	int const		v_ct,
+	t_ruint const	over_delta__dt,
+	t_dni			*these__vals,
+	int const		of_which_there_are__v_ct,
 	t_ruint			*ret);
 
 void						truint_dec_to_targb(
-	t_ruint	*dec,
+	t_ruint	*decomposed_targb__dec,
 	t_argb	*ret);
 
 int							tssv_tar_allocs(
 	t_e_vpg	grp,
 	t_s_s	*s);
+
+void						txyz_to_ttpr(
+	t_xyz const	in,
+	t_tpr		out);
 
 #endif
