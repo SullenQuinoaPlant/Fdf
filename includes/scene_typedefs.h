@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 08:17:30 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 11:16:38 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 typedef uint32_t	t_argb;
 
 typedef enum e_scene_element_groups	t_e_seg;
-
-typedef enum e_object_element_groups	t_e_oeg;
 
 typedef enum e_view_projection_groups	t_e_vpg;
 

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/14 05:06:14 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 11:41:51 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void						doubles_to_tvpos(
 	double	coords[DIMS],
 	t_vpos	*ret);
 
+void						free_object_lists(
+	t_s_o	*object);
+
 void						free_tar(
 	void	**ar,
 	size_t	ar_sz,
@@ -71,6 +74,9 @@ void						free_tar(
 
 void						free_tscdgfxyrz(
 	t_s_sbi	*p);
+
+void						free_tso_tsse_content(
+	t_s_se	*tso_tsse);
 
 void						free_tssbi_str(
 	t_s_sbi	*str);

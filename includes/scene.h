@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/16 08:59:13 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 11:16:51 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,19 +190,6 @@ struct						s_object_handle
 {
 	t_e_seg	type;
 	t_tag	tag;
-};
-
-enum						e_object_element_groups
-{
-	e_op,
-	e_ov,
-	e_od,
-	e_ol,
-	e_oa,
-	e_of,
-	e_oo,
-	e_oeg_sz,
-	e_oeg_null
 };
 
 # define O_SHOW 0x1

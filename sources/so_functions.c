@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 04:52:56 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 08:00:41 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 11:25:43 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,14 @@ int						nxt_active_obj(
 		(**ret).flgs |= O_SHOW;
 	}
 	return (r);
+}
+
+void					free_object_lists(
+	t_s_o *o)
+{
+	t_e_seg		i;
+
+	i = e_p;
+	while (i < e_seg_sz)
+		ft_lstdel(&o->e[i++], 0);
 }

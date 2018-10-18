@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:53:58 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 10:58:30 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 11:03:33 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int				add_y_lines(
 		while (++j < p->y_sz)
 		{
 			if (get_nxt_se(e_l, s, p_l->content, (void**)&p_e) != SUCCESS ||
-				ft_lstaddnew(p_list, &(t_tag)0, sizeof(t_tag)))
+				ft_lstaddnew(p_list, (t_tag[1]){0}, sizeof(t_tag)))
 				return (SYS_ERR);
 			l.ends[0] = l.ends[1];
 			l.argb[0] = l.argb[1];
