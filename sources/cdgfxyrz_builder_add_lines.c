@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:53:58 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/08 05:34:11 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 08:55:39 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int				add_x_lines(
 		l = (t_s_l){1, {tags[i * p->y_sz], 0}, {p->ar[i * p->y_sz].col, 0}};
 		while (++j < p->y_sz)
 		{
-			if ((get_nxt_se(e_slna, s, p_l->content, (void**)&p_e)) != SUCCESS)
+			if ((get_nxt_se(e_l, s, p_l->content, (void**)&p_e)) != SUCCESS)
 				return (SYS_ERR);
 			l.ends[0] = l.ends[1];
 			l.argb[0] = l.argb[1];

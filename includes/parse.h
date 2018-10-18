@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/07 04:51:30 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 09:04:12 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,17 @@ struct						s_scene_builder_input
 	t_e_sit	type;
 	void	*input;
 };
+
+/*
+**Builder auxilliary functions:
+*/
+/*
+**cdgfxyrz :
+*/
+int							cdgfxyrz_add_lines(
+	t_s_cdgfxyrz	*p,
+	t_tag			*tags,
+	t_s_s			*scene,
+	t_s_o			*object);
 
 #endif
