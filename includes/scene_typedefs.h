@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 15:11:22 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:30:13 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ typedef void	(*t_printer)(
 	t_s_sv *view,
 	t_tag tag);
 
-typedef double	(t_pos)[DIMS];
+typedef double	(t_xyz)[DIMS];
 
-typedef t_pctrmr	(t_pctrm)[DIMS + 1];
+typedef double	(t_tpr)[DIMS];
+
+typedef t_xyz	(t_pctrm)[DIMS + 1];
 
 typedef void	(*t_proj)(
 	t_s_sv *scene_view,
 	void *project_this,
-	t_u_spsv const *const *using_these,
+	t_s_pp const *const *using_these,
 	void *store_here);
 
 typedef int	t_refct;

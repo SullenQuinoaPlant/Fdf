@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 14:27:52 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:15:52 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,12 @@ void						onelessview(
 int							open_file(
 	char const	*file,
 	int			*ret_fd);
+
+void						point_projection(
+	t_s_sv	*v,
+	void	*scene_point,
+	t_s_pp const *const *invalid,
+	void	*view_point);
 
 void						prinrt_scene_points(
 	t_s_s	*s);
