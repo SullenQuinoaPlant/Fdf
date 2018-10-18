@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 15:10:53 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:56:00 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,12 +245,14 @@ struct						s_scene_elements
 
 /*
 **Coordinate transformation matrices are typedefed to:
-**(t_pctrm) : point coordimante transform matrix
+**(t_pctrm) : point coordinates transform matrix
 **	these matrices have DIMS_N_TR rows (one per axis and one for translations)
 **(t_pctrmr) : point coordimante transform matrix row
 **(t_s_pctr) : wraps the above in a struct, enables linking and chaining
 **(t_pctr) as in: point coordinate transform, first arg most likely a (t_pctrm*)
 */
+# define TPCTRM_TRANSLATION_ROW DIMS
+# define TPCTRM_TR TPCTRM_TRANSLATION_ROW
 # define DIMS_N_TR 4
 
 struct						s_point_coordinates_transform
