@@ -10,26 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int							iso_dbl_to_tvuint(
-	t_vuint const dim_sz,
-	double const d,
-	t_vuint *ret)
-{
-	int const		sign = d > 0 ? 1 : -1;
-	t_vuint cost	offset = dim_sz / 2;
-
-	if (!dbl_within_dimsz(dim_sz, d))
-		return (OUT_OF_VIEW);
-	if (sign == 1)
-		*ret = (t_vuint)d + offset;
-	else
-		*ret = offset - (t_vuint)(sign * d);
-	return (SUCCESS);
-}
+#include "scene.h"
 
 int							iso_dbl_within_dimsz(
 	t_vuint const dim_sz,
-	double const d)
+	double d)
 {
 	t_vuint const	half = dim_sz / 2;
 	int const		sign = d > 0 ? 1 : -1;
@@ -45,4 +30,21 @@ int							iso_dbl_within_dimsz(
 	else
 		ret = cast > half ? 0 : 1;
 	return (ret);
+}
+
+int							iso_dbl_to_tvuint(
+	t_vuint const dim_sz,
+	double const d,
+	t_vuint *ret)
+{
+	int const		sign = d > 0 ? 1 : -1;
+	t_vuint const	offset = dim_sz / 2;
+
+	if (!iso_dbl_within_dimsz(dim_sz, d))
+		return (OUT_OF_VIEW);
+	if (sign == 1)
+		*ret = (t_vuint)d + offset;
+	else
+		*ret = offset - (t_vuint)(sign * d);
+	return (SUCCESS);
 }
