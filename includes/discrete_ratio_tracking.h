@@ -9,8 +9,8 @@
 # define TRUINT_MAX UINT_MAX
 typedef unsigned int	t_ruint;
 
-# define DT 0
-# define INIT 1
+# define DNI_DT 0
+# define DNI_INI 1
 # define DNI_SZ 2
 
 /*

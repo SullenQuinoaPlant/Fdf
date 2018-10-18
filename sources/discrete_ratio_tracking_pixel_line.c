@@ -2,23 +2,6 @@
 #include "scene.h"
 #include "discrete_ratio_tracking.h"
 
-void							recompose_truint_targb(
-	t_ruint *dec,
-	t_argb *ret)
-{
-	t_argb	col;
-	int		i;
-
-	i = -1;
-	col = 0;
-	while (++i < ARGBS)
-	{
-		col <<= ARGB_SHIFT;
-		col |= dec[i];
-	}
-	*ret = col;
-}
-
 void							targb_pair_to_tdni(
 	t_argb const argbs[2],
 	t_dni *ret)
@@ -34,8 +17,8 @@ void							targb_pair_to_tdni(
 	while (++i < ARGBS)
 	{
 		c = argb1 & ARGB_MASK;
-		ret[i][INIT] = c;
-		ret[i][DT] = (argb2 & ARGB_MASK) - c;
+		ret[i][DNI_INI] = c;
+		ret[i][DNI_DT] = (argb2 & ARGB_MASK) - c;
 		argb1 >>= ARGB_SHIFT;
 		argb2 >>= ARGB_SHIFT;
 	}
@@ -47,14 +30,14 @@ void							tvpos_pair_to_tdni(
 {
 	t_ruint		val;
 
-	ret[PXL_DEC_DIM_OFST + V_H][DT] = ends[1][V_H];
-	ret[PXL_DEC_DIM_OFST + V_W][DT] = ends[1][V_W];
+	ret[PXL_DEC_DIM_OFST + V_H][DNI_DT] = ends[1][V_H];
+	ret[PXL_DEC_DIM_OFST + V_W][DNI_DT] = ends[1][V_W];
 	val = ends[0][V_H];
-	ret[PXL_DEC_DIM_OFST + V_H][DT] -= val;
-	ret[PXL_DEC_DIM_OFST + V_H][INIT] = val;
+	ret[PXL_DEC_DIM_OFST + V_H][DNI_DT] -= val;
+	ret[PXL_DEC_DIM_OFST + V_H][DNI_INI] = val;
 	val = ends[0][V_W];
-	ret[PXL_DEC_DIM_OFST + V_W][DT] -= val;
-	ret[PXL_DEC_DIM_OFST + V_W][INIT] = val;
+	ret[PXL_DEC_DIM_OFST + V_W][DNI_DT] -= val;
+	ret[PXL_DEC_DIM_OFST + V_W][DNI_INI] = val;
 }
 
 static int					characterize_slope(
@@ -80,6 +63,19 @@ static int					characterize_slope(
 	return (is_w_slope ? V_W : V_H);
 }
 
+static void					set_along(
+	t_ruint dt,
+	t_dni along,
+	t_ruint *ar)
+{
+	t_ruint *const	lim = ar + dt + 1;
+	t_ruint	v;
+
+	v = along[DNI_INI];
+	while (ar < lim)
+		*ar++ = v++;
+}
+
 int							track_pixel_line(
 	t_s_loap const *const l,
 	t_ruint *ret_dt,
@@ -89,21 +85,21 @@ int							track_pixel_line(
 	t_dni			tdni[PXL_DEC_SZ];
 	t_ruint			dt;
 	int				along;
+	t_ruint			*ar;
 	int				r;
 
 	targb_pair_to_tdni(l->argb, tdni);
 	tvpos_pair_to_tdni(l->ends, tdni + PXL_DEC_DIM_OFST);
 	along = characterize_slope(l->ends, &dt);
-	if (!(ret = malloc(sizeof(t_ruint) * (dt + 1) * PXL_DEC_SZ)))
+	if (!(ar = malloc(sizeof(t_ruint) * (dt + 1) * PXL_DEC_SZ)))
 		return (SYS_ERR);
-	track_ratios(dt, tdni, along, ret);
-	track_ratios(dt, tdni, ARGBS + along, ret[(ARGBS + along) * (dt + 1)]
-	if ((r = track_ratios(dt, tdni, PXL_DEC_SZ, ret)) == SUCCESS)
-	{
-		if (ret_dt)
-			*ret_dt = dt;
-		if (ret_along)
-			*ret_along = along;
-	}
+	track_ratios(dt, tdni, along, ar);
+	track_ratios(dt, &tdni[along + 1], &ar[(along + 1) * (dt + 1)]);
+	set_along(dt, tdni[along], ret);
+	*ret = ar;
+	if (ret_dt)
+		*ret_dt = dt;
+	if (ret_along)
+		*ret_along = along;
 	return (SUCCESS);
 }
