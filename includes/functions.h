@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 11:41:51 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 13:09:45 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,11 +208,11 @@ void						tpctrm_mult(
 	t_pctrm const	b,
 	t_pctrm 		c);
 
-int							track_ratios(
+void						track_ratios(
 	t_ruint const	dt,
 	t_dni			*vals,
 	int const		v_ct,
-	t_ruint			**ret);
+	t_ruint			*ret);
 
 int							tssv_tar_allocs(
 	t_e_vpg	grp,

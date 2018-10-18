@@ -64,4 +64,5 @@ int							print_line(
 		free(prec);
 	if (dec)
 		free(dec);
+	return (r);
 }

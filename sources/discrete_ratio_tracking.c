@@ -33,23 +33,32 @@ static void					track_ratio(
 	}
 }
 
-int							track_ratios(
+void						track_ratios(
+	t_ruint const dt,
+	t_dni *vals,
+	int const v_ct,
+	t_ruint *ret)
+{
+	size_t const	len = dt + 1;
+	t_ruint (*const	p_ret)[len] = ret;
+	int				i;
+
+	i = -1;
+	while (++i < v_ct)
+		track_ratio(dt, vals[i][DT], vals[i][INIT], p_ret[i]);
+}
+
+int							track_ratios_alloc(
 	t_ruint const dt,
 	t_dni *vals,
 	int const v_ct,
 	t_ruint **ret)
 {
 	size_t const	len = dt + 1;
-	int				i;
-	t_ruint			(*p_ret)[len];
 
-	*ret = 0;
-	if ((p_ret = malloc(sizeof(t_ruint) * len * v_ct)))
+	if ((*ret = malloc(sizeof(t_ruint) * len * v_ct)))
 	{
-		i = -1;
-		while (++i < v_ct)
-			track_ratio(dt, vals[i][DT], vals[i][INIT], p_ret[i]);
-		*ret = &p_ret[0][0];
+		track_ratios(dt, vals, v_ct, *ret);
 		return (SUCCESS);
 	}
 	return (SYS_ERR);

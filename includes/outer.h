@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 01:07:39 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 08:40:51 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 12:40:10 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,28 @@
 /*
 **Pixel decomposition:
 **Where a pixel is understood to be a set of coordinates,
+**	in 2-dimensional view frame,
+**	associated with the color to put at these coordinates.
+**
+**Point decomposition
+**Where a point is understood to be a set of coordinates,
+**	in 3-dimensional scene space,
 **	associated with the color to put at these coordinates.
 */
-# define PXL_DEC_SZ ARGBS + DIMS
+# define PXL_DEC_SZ ARGBS + VIEW_DIMS
+# define PNT_DEC_SZ ARGBS + DIMS
 /*
-**Sometimes we put the coordinates first:
+**Sometimes we put the coordinates last:
 */
 # define PXL_DEC_DIM_OFFSET ARGBS
+# define PNT_DEC_DIM_OFFSET ARGBS
 # define PDDO PXL_DEC_DIM_OFFSET
 /*
 **Sometimes not:
 */
 # define PXL_DEC_ARGB_OFFSET DIMS
-# define PDAO PXL_DEC_ARGB_OFFSET
+# define PXDAO PXL_DEC_ARGB_OFFSET
+# define PNT_DEC_ARGB_OFFSET VIEW_DIMS
+# define PTDAO PNT_DEC_ARGB_OFFSET
 
 #endif

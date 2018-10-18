@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 11:16:51 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 12:11:37 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ struct						s_object_handle
 struct						s_object
 {
 	t_refct			refs;
-	t_list			*e[e_oeg_sz];
+	t_list			*e[e_seg_sz];
 	t_s_oh			hdl;
 	t_argb			argb;
 	uint8_t			flgs;

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 08:44:32 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 12:53:57 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void						set_somemoreof_pdp(
 	targb_to_doubles(l->argb[0], pdp[PDP_P1] + PDAO);
 	targb_to_doubles(l->argb[1], pdp[PDP_P2] + PDAO);
 	i = -1;
-	while (++i < PXL_DEC_SZ)
+	while (++i < PNT_DEC_SZ)
 		pdp[PDP_DT][i] = pdp[PDP_P2][i] - pdp[PDP_P1][i];
 }
 
@@ -101,7 +101,7 @@ int								isometric_line_proj(
 		if (!p1_is_vis)
 		{
 			ft_memswap(pdp[PDP_P1], pdp[PDP_P2], sizeof(t_pdd));
-			mult_dbl_ar(pdp[PDP_DT], -1, PXL_DEC_SZ];
+			mult_dbl_ar(pdp[PDP_DT], -1, PNT_DEC_SZ];
 		}
 		if (isometric_line_xy_isect(v, pdp) == OUT_OF_VIEW ||
 			isometric_line_z_isect(pdp) == OUT_OF_VIEW)

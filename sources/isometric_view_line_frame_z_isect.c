@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 00:20:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 06:13:34 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 12:58:12 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int								has_isect(
 	return (1);
 }
 
-void							move_point(
+static void						move_point(
 	int pt,
 	t_pnd pnd)
 {
@@ -36,7 +36,7 @@ void							move_point(
 	int				i;
 
 	i = -1;
-	while (++i < DIMS + ARGBS)
+	while (++i < PNT_DEC_SZ)
 	{
 		pnd[pt][i] += ratio * pnd[DT][i];
 		pnd[DT][i] = pnd[P2][i] - pnd[P1][i];

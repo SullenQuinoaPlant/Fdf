@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 23:53:24 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/13 05:59:29 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 12:56:34 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void						filter_xy_visible(
 
 static void						filter_p1p2_dir(
 	int pt_ct,
-	double isect[ISEC_CT][DIMS + ARGBS],
-	double pnd[ISEC_CT][DIMS + ARGBS],
+	double isect[ISEC_CT][PNT_DEC_SZ],
+	double pnd[ISEC_CT][PNT_DEC_SZ],
 	int valid[ISEC_CT])
 {
 	int		j;
@@ -63,8 +63,8 @@ static void						filter_p1p2_dir(
 static void						filter_isects(
 	t_s_sv *v,
 	int pt_ct,
-	doube isect[ISEC_CT][DIMS + ARGBS],
-	double pnd[3][DIMS + ARGBS])
+	doube isect[ISEC_CT][PNT_DEC_SZ],
+	double pnd[3][PNT_DEC_SZ])
 {
 	int		valid[ISEC_CT];
 	int		i;
@@ -100,7 +100,7 @@ int								isometric_line_xy_isect(
 	t_s_sv *v,
 	t_pnd pnd)
 {
-	double	isect[ISEC_CT][DIMS + ARGBS];
+	double	isect[ISEC_CT][PNT_DEC_SZ];
 	double	d;
 	double	p;
 	double	r;

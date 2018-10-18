@@ -34,6 +34,7 @@ TARGETS := \
 	se_functions \
 	se_refct_functions \
 	so_functions \
+	so_tsse_functions \
 	sv_free \
 	tar_functions \
 	targb_to_doubles \

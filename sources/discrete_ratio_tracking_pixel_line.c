@@ -21,7 +21,7 @@ void							recompose_truint_targb(
 
 void							targb_pair_to_tdni(
 	t_argb const argbs[2],
-	t_delta_n_init *ret)
+	t_dni *ret)
 {
 	t_argb argb1;
 	t_argb argb2;
@@ -43,7 +43,7 @@ void							targb_pair_to_tdni(
 
 void							tvpos_pair_to_tdni(
 	t_vpos const ends[2],
-	t_delta_n_init *ret)
+	t_dni *ret)
 {
 	t_ruint		val;
 
@@ -86,7 +86,7 @@ int							track_pixel_line(
 	int *ret_along,
 	t_ruint **ret)
 {
-	t_delta_n_init	tdni[PXL_DEC_SZ];
+	t_dni			tdni[PXL_DEC_SZ];
 	t_ruint			dt;
 	int				along;
 	int				r;
@@ -94,6 +94,10 @@ int							track_pixel_line(
 	targb_pair_to_tdni(l->argb, tdni);
 	tvpos_pair_to_tdni(l->ends, tdni + PXL_DEC_DIM_OFST);
 	along = characterize_slope(l->ends, &dt);
+	if (!(ret = malloc(sizeof(t_ruint) * (dt + 1) * PXL_DEC_SZ)))
+		return (SYS_ERR);
+	track_ratios(dt, tdni, along, ret);
+	track_ratios(dt, tdni, ARGBS + along, ret[(ARGBS + along) * (dt + 1)]
 	if ((r = track_ratios(dt, tdni, PXL_DEC_SZ, ret)) == SUCCESS)
 	{
 		if (ret_dt)
@@ -101,5 +105,5 @@ int							track_pixel_line(
 		if (ret_along)
 			*ret_along = along;
 	}
-	return (r);
+	return (SUCCESS);
 }
