@@ -13,6 +13,7 @@ static int					new_buff(
 	t_list		*new;
 	t_s_cxyd	*ar;
 
+	new = 0;
 	if ((ar = malloc(BUF_SZ)) &&
 		(new = ft_lstnew(0, 0)))
 	{
@@ -25,7 +26,7 @@ static int					new_buff(
 	}
 	else if (ar)
 		free(ar);
-	return (ar ? SUCCESS : SYS_ERR);
+	return (new ? SUCCESS : SYS_ERR);
 }
 
 #define NOT_DONE 1
@@ -103,13 +104,10 @@ static int					fill_tscdgfxyrz(
 	if ((sz = ct_all % BUF_CT))
 		ft_memcpy((p_ar -= sz), bs->content, sz * sizeof(t_s_cxyd));
 	sz = BUF_CT * sizeof(t_s_cxyd);
-	while (p_ar != ar)
-	{
-		bs = bs->next;
+	while ((bs = bs->next))
 		ft_memcpy((p_ar -= BUF_CT), bs->content, sz);
-	}
-	ret->y_sz = dims[DIM_C];
 	ret->x_sz = dims[DIM_R];
+	ret->y_sz = dims[DIM_C];
 	ret->ar = ar;
 	ft_memcpy(ret->at, &(double[3]){0, 0, 0}, sizeof(double[3]));
 	return (SUCCESS);
@@ -123,25 +121,19 @@ int							get_cdgfxyrz_sbi(
 	size_t			dims[2];
 	t_list			*bs;
 	t_s_cdgfxyrz	*p;
-	int				r;
 
 	p = 0;
 	*ret = 0;
-	if ((r = open_file(file, &fd)) == SUCCESS &&
-		(r = (parse_cdgfxyrz_sncnl(fd, dims, &bs))) == SUCCESS &&
+	if (open_file(file, &fd) == SUCCESS &&
+		parse_cdgfxyrz_sncnl(fd, dims, &bs) == SUCCESS &&
 		(p = malloc(sizeof(t_s_cdgfxyrz))) &&
-		(r = fill_tscdgfxyrz(dims, bs, p)) == SUCCESS &&
-		(*ret = malloc(sizeof(t_s_cdgfxyrz))))
+		fill_tscdgfxyrz(dims, bs, p) == SUCCESS &&
+		(*ret = malloc(sizeof(t_s_sbi))))
 		**ret = (t_s_sbi){e_sit_cdgfxyrz, p};
-	else
-	{
-		if (r == SUCCESS)
-			r = SYS_ERR;
-		if (p)
+	else if (p)
 			free(p);
-	}
 	if (fd >= 0)
 		close(fd);
 	ft_lstdel(&bs, 0);
-	return (r);
+	return (*ret ? SUCCESS : SYS_ERR);
 }
