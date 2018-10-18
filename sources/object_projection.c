@@ -1,7 +1,9 @@
-void						obj_proj
+#include "scene.h"
+
+void						obj_projection(
 	t_s_sv *v,
 	void *obj,
-	t_u_spsv const *const *points,
+	t_s_pp const *const *points,
 	void *projection)
 {
 	t_s_o *const	o = (t_s_o*)obj;

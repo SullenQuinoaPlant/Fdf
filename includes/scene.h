@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 15:56:00 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 17:52:26 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@
 *	indicate that we intend to release its tag.
 */
 # define MAX_REFS INT_MAX
+# define RELEASING_TAG 1
+# define REFCOUNT_TOO_BIG 2
+# define REFCOUNT_INCOHERENT 3
 
 /*
 **We use (t_argb)s to store color information on 4 bytes:
@@ -481,8 +484,12 @@ struct						s_scene
 	t_s_sv		*v;
 };
 
-# define RELEASING_TAG 1
-# define REFCOUNT_TOO_BIG 2
-# define REFCOUNT_INCOHERENT 3
+/*
+**Cameras :
+*/
+# define CAMERA_YAW_ROLL_PITCH_ZOOMTRANSLATION 4
+# define CYRPZ CAMERA_YAW_ROLL_PITCH_ZOOMTRANSLATION
+# define ZTR_Z 0
+# define ZTR_TR 1
 
 #endif

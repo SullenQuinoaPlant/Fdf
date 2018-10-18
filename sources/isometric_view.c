@@ -6,10 +6,11 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 06:16:07 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 15:09:33 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:15:13 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "functions.h"
 #include "scene.h"
 
 static void				set_prj(
@@ -21,36 +22,31 @@ static void				set_prj(
 		isometric_line_proj,
 		0,
 		0,
-		obj_proj};
+		obj_projection};
 
 	ft_memcpy(v->prj, ar, sizeof(ar));
 }
 
 int						add_isometric_v(
-	t_s_s *s
-	t_vuint h,
-	t_vuint w)
+	t_vpos hw,
+	t_zntr cam_pos,
+	t_s_s *s)
 {
-	t_s_sv		*new;
-	t_s_pctr	*ct;
+	t_s_sv		*new_v;
 	int			i;
 	int			r;
 
-	if ((r = add_view(s, &new)) == SUCCESS &&
-		(new->ct = add_isometric_camera) &&
-		(r = tssv_add_pxl_ars(h, w, v)) == SUCCESS)
+	if ((r = add_view(s, &new_v)) == SUCCESS &&
+		(new_v->ct = add_isometric_camera(cam_pos, s)) &&
+		(r = tssv_add_pxl_ars(hw[V_H], hw[V_W], new_v)) == SUCCESS)
 	{
-		set_prj(new);
+		set_prj(new_v);
 		i = -1;
 		while (++i < e_seg_sz)
-			tssv_seg_apply_proj(&i, v);
+			tssv_seg_apply_proj(&i, new_v);
 		return (SUCCESS);
 	}
 	if (r == SUCCESS)
-	{
-		if (new->ct)
-			onelessview(new->ct);
-		ring_shrink(sizeof(t_s_v), free_view_members, (void**)&new);
-	}
+		free_view(s->v);
 	return (SYS_ERR);
 }

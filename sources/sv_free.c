@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/14 05:35:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 05:50:39 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:08:48 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void				free_view_members(
 
 	if (!view)
 		return ;
-	onelessview(v->ct);
+	tspctr_onelessview(v->ct);
 	i = -1;
 	while (++i < e_seg_sz)
 		free_tar(v->e[i].ar, v->e[i].ar_sz, v->e[i].e_sz, v->s);

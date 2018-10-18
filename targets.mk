@@ -38,6 +38,7 @@ TARGETS := \
 	sv_free \
 	tar_functions \
 	targb_to_doubles \
+	tpctrm_apply \
 	tpctrm_mult \
 	truint_dec_to_targb \
 	tspctr_functions \
@@ -45,7 +46,9 @@ TARGETS := \
 	tssbi_string_free \
 	tsse_functions \
 	tssv_add \
+	tssv_apply_proj \
 	tssv_functions \
 	tssv_print_scene_ascii \
 	tsta_functions \
+	txyz_to_ttpr \
 	ve_functions

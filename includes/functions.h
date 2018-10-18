@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 17:04:13 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:14:36 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 # include "scene_typedefs.h"
 # include "discrete_ratio_tracking.h"
 # include "line_frame_intersections.h"
+
+t_s_pctr					*add_camera(
+	t_pctrm	*coordinate_transforms__cts,
+	int		coordinate_transforms_count__ct_ct,
+	t_s_s	*s);
+
+t_s_pctr					*add_isometric_camera(
+	t_zntr	zoom_and_translation__zntr,
+	t_s_s	*s);
 
 int							add_star(
 	t_e_seg group,
@@ -29,6 +38,10 @@ int							add_star(
 int							add_tssbis_to_scene(
 	t_s_sbi	*input_str,
 	t_s_s	*scene);
+
+int							add_view(
+	t_s_s	*s,
+	t_s_sv	**ret);
 
 int							alloc_tar(
 	t_s_s	*s,
@@ -135,6 +148,18 @@ int							iso_dbl_to_tvuint(
 	double const	d,
 	t_vuint			*ret);
 
+void						isometric_dot_proj(
+	t_s_sv				*v,
+	void				*dot,
+	t_s_pp const *const	*points,
+	void				*ret_proj);
+
+void						isometric_line_proj(
+	t_s_sv				*v,
+	void				*line,
+	t_s_pp const *const	*points,
+	void				*ret_proj);
+
 int							isometric_line_xy_isect(
 	t_s_sv	*v,
 	t_pdp	pnd);
@@ -168,8 +193,11 @@ int							nxt_active_obj(
 	t_s_o	**ret,
 	t_tag	*ret_tag);
 
-void						onelessview(
-	t_s_pctr	*p_coord_transform);
+void						obj_projection(
+	t_s_sv				*v,
+	void				*obj,
+	t_s_pp const *const	*points,
+	void				*ret);
 
 int							open_file(
 	char const	*file,
@@ -240,6 +268,18 @@ void						track_ratios(
 void						truint_dec_to_targb(
 	t_ruint	*decomposed_targb__dec,
 	t_argb	*ret);
+
+void						tspctr_onelessview(
+	t_s_pctr	*p_coord_transform);
+
+int							tssv_add_pxl_ars(
+	t_vuint	h,
+	t_vuint	w,
+	t_s_sv	*v);
+
+void						tssv_seg_apply_proj(
+	void	*p_seg,
+	t_ring	p_tssv);
 
 int							tssv_tar_allocs(
 	t_e_vpg	grp,

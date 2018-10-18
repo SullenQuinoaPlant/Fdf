@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 02:35:29 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 15:30:13 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 17:42:30 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef double	(t_xyz)[DIMS];
 typedef double	(t_tpr)[DIMS];
 
 typedef t_xyz	(t_pctrm)[DIMS + 1];
+
+typedef struct s_point_projection	t_s_pp;
 
 typedef void	(*t_proj)(
 	t_s_sv *scene_view,
@@ -83,8 +85,6 @@ typedef struct s_point	t_s_p;
 
 typedef struct s_point_coordinates_transform	t_s_pctr;
 
-typedef struct s_point_projection	t_s_pp;
-
 typedef struct s_pixel	t_s_pxl;
 
 typedef struct s_scene	t_s_s;
@@ -94,6 +94,8 @@ typedef struct s_scene_elements	t_s_se;
 typedef struct s_tagged_array	t_s_ta;
 
 typedef t_s_p	t_s_v;
+
+typedef double	t_zntr[DIMS + 1];
 
 typedef unsigned int	t_vuint;
 

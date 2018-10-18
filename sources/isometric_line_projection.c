@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 14:39:27 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 17:20:17 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int						count_visibles(
 
 static void					 	set_someof_pdp(
 	t_s_l *l,
-	t_s_p const *const *pts,
+	t_s_pp const *const *pts,
 	t_pdp pdp)
 {
 	size_t const	dims_sz = sizeof(double) * DIMS;
@@ -84,7 +84,7 @@ static void						set_ret(
 void							isometric_line_proj(
 	t_s_sv *v,
 	void *line,
-	t_s_p const *const *pts,
+	t_s_pp const *const *pts,
 	void *ret_tslp)
 {
 	t_s_l *const	l = (t_s_l*)line;

@@ -4,7 +4,7 @@
 void						isometric_dot_proj(
 	t_s_sv *v,
 	void *dot,
-	t_u_spsv const *const *points,
+	t_s_pp const *const *points,
 	void *projection)
 {
 	t_s_d *const	d = (t_s_d*)dot;

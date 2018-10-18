@@ -1,6 +1,6 @@
 #include "scene.h"
 
-void						onelessview(
+void						tspctr_onelessview(
 	t_s_pctr *ct)
 {
 	if (!ct)

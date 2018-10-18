@@ -6,10 +6,11 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 15:19:15 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 17:56:31 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "functions.h"
 #include "scene.h"
 
