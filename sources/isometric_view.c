@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 06:16:07 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 14:54:48 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:09:33 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static void				set_prj(
 	t_s_sv *v)
 {
 	t_proj const	ar[e_seg_sz] = {
-		pnv_projection,
-		pnv_projection,
+		point_projection,
 		isometric_dot_proj,
 		isometric_line_proj,
 		0,

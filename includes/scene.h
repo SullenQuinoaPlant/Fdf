@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 12:11:37 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:10:53 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@
 enum						e_scene_element_groups
 {
 	e_p,
-	e_v,
 	e_d,
 	e_l,
 	e_a,
@@ -296,6 +295,10 @@ enum						e_view_projection_groups
  **Flag:
  **	- visibility
  */
+/*
+**Point projections are
+**	(t_s_p)s minus the reference counter.
+*/
 struct						s_point_projection
 {
 	union
