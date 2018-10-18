@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene_typedefs.h"
+#include "functions.h"
 #include "scene.h"
 #include "line_frame_intersections.h"
 
@@ -38,7 +38,7 @@ static void						filter_xy_visible(
 static void						filter_p1p2_dir(
 	int pt_ct,
 	double isect[ISEC_CT][PNT_DEC_SZ],
-	double pnd[ISEC_CT][PNT_DEC_SZ],
+	t_pdp pdp,
 	int valid[ISEC_CT])
 {
 	int		j;
@@ -49,7 +49,7 @@ static void						filter_p1p2_dir(
 			continue ;
 		j = 0;
 		while (j < DIMS &&
-			sign(pnd[DT][j]) == sign(isect[pt_ct][j] - pnd[P1][j]))
+			sign(pdp[PDP_DT][j]) == sign(isect[pt_ct][j] - pdp[PDP_P1][j]))
 			j++;
 		if (j != DIMS)
 			valid[pt_ct] = 0;
@@ -63,7 +63,7 @@ static void						filter_p1p2_dir(
 static void						filter_isects(
 	t_s_sv *v,
 	int pt_ct,
-	doube isect[ISEC_CT][PNT_DEC_SZ],
+	double isect[ISEC_CT][PNT_DEC_SZ],
 	double pnd[3][PNT_DEC_SZ])
 {
 	int		valid[ISEC_CT];
