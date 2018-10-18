@@ -19,9 +19,9 @@
 # include "line_frame_intersections.h"
 
 t_s_pctr					*add_camera(
-	t_pctrm	*coordinate_transforms__cts,
-	int		coordinate_transforms_count__ct_ct,
-	t_s_s	*s);
+	t_pctrm	const	*coordinate_transforms__cts,
+	int				coordinate_transforms_count__ct_ct,
+	t_s_s			*s);
 
 t_s_pctr					*add_isometric_camera(
 	t_zntr	zoom_and_translation__zntr,

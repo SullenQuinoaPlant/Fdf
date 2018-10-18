@@ -10,7 +10,7 @@
 ** - ct_ct : coordinate transform count
 */
 t_s_pctr				*add_camera(
-	t_pctrm *cts,
+	t_pctrm const *cts,
 	int ct_ct,
 	t_s_s *s)
 {

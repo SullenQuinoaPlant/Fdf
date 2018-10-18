@@ -1,4 +1,5 @@
-#include "camera.h"
+#include "functions.h"
+#include "scene.h"
 
 #define SIN_PI_4 0xb.504f333f9de6485p-4
 #define COS_PI_4 0xb.504f333f9de6484p-4
