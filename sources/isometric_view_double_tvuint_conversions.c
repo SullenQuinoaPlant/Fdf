@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isometric_view_double_tvuint_conversions.          :+:      :+:    :+:   */
+/*   isometric_view_double_tvuint_conversions.c         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -47,4 +47,16 @@ int							iso_dbl_to_tvuint(
 	else
 		*ret = offset - (t_vuint)(sign * d);
 	return (SUCCESS);
+}
+
+int								iso_dbl_dims_to_tvpos(
+	t_s_sv const *v,
+	double const pos[DIMS],
+	t_vpos ret)
+{
+	int		r;
+
+	r = iso_dbl_to_tvuint(v->w, pos[X], &ret[V_W]);
+	r |= iso_dbl_to_tvuint(v->h, pos[Y], &ret[V_H]);
+	return (r);
 }
