@@ -110,16 +110,18 @@ int								isometric_line_xy_isect(
 	if ((d = pnd[DT][X]))
 	{
 		p = pnd[P1][X];
-		set_mult_pxl_dec(pnd[PND_P1], pnd[PND_DT], (r = -p / d), isect[pt_ct++]);
-		r = ((double)(v->w - 1) - p) / d;
-		set_mult_dims_arbgs(pnd[P1], pnd[DT], r, isect[pt_ct++]);
+		r = (-(double)(v->w / 2) - p) / d;
+		set_mult_pnt_dec(pdp[PDP_P1], pdp[PDP_DT], r, isect[pt_ct++]);
+		r = ((double)(v->w / 2 - (v->w & 1 ? 0 : 1) - p) / d;
+		set_mult_pnt_dec(pdp[PDP_P1], pdp[PDP_DT], r, isect[pt_ct++]);
 	}
 	if ((d = pnd[DT][Y]))
 	{
 		p = pnd[P1][Y];
-		set_mult_dims_arbgs(pnd[P1], pnd[DT], (r = -p / d)), isect[pt_ct++]);
-		r = ((double)(v->h - 1) - p) / d;
-		set_mult_dims_arbgs(pnd[P1], pnd[DT], r, isect[pt_ct++]);
+		r = (-(double)(v->h / 2) - p) / d;
+		set_mult_pnt_dec(pdp[PDP_P1], pdp[PDP_DT], r, isect[pt_ct++]);
+		r = ((double)(v->h / 2 - (v->w & 1 ? 0 : 1) - p) / d;
+		set_mult_pnt_dec(pdp[PDP_P1], pdp[PDP_DT], r, isect[pt_ct++]);
 	}
-	return (filter_isects(v, pnd, pt_ct, isect));
+	return (filter_isects(v, pdp, pt_ct, isect));
 }
