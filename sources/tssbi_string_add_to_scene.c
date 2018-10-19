@@ -36,13 +36,13 @@ static int				use_input(
 }
 
 int						add_tssbis_to_scene(
-	t_s_sbi *input_str,
+	t_s_sbi **input_str,
 	t_s_s *scene)
 {
 	int		r;
 
-	while (input_str)
-		if ((r = use_input(input_str++, scene) != SUCCESS))
+	while (*input_str)
+		if ((r = use_input(*input_str++, scene) != SUCCESS))
 			break;
 	return (r);
 }

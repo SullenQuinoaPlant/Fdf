@@ -23,6 +23,11 @@ t_s_pctr					*add_camera(
 	int				coordinate_transforms_count__ct_ct,
 	t_s_s			*s);
 
+int							add_isometric_v(
+	t_vpos	view_height_and_width__hw,
+	t_zntr	view_camera_position__cam_pos,
+	t_s_s	*s);
+
 t_s_pctr					*add_isometric_camera(
 	t_zntr	zoom_and_translation__zntr,
 	t_s_s	*s);
@@ -31,12 +36,8 @@ int							add_star(
 	t_e_seg group,
 	t_s_s	*scene);
 
-/*
-**In add_tssbis_to_scene:
-**	string is freed no matter what.
-*/
 int							add_tssbis_to_scene(
-	t_s_sbi	*input_str,
+	t_s_sbi	**input_str,
 	t_s_s	*scene);
 
 int							add_view(
@@ -92,7 +93,7 @@ void						free_tso_tsse_content(
 	t_s_se	*tso_tsse);
 
 void						free_tssbi_str(
-	t_s_sbi	*str);
+	t_s_sbi	**str);
 
 void						free_tsse(
 	t_s_se	*se);
@@ -176,7 +177,7 @@ int							isometric_line_z_isect(
 **If input_str is not null, make_scene always frees the contents.
 */
 int							make_scene(
-	t_s_sbi	*input_str,
+	t_s_sbi	**input_str,
 	t_s_s	**p_ret_scene);
 
 t_e_vpg						map_seg_to_vpg(

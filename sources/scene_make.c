@@ -34,7 +34,7 @@ static int				init_scene(
 }
 
 int						make_scene(
-	t_s_sbi *input_str,
+	t_s_sbi **input_str,
 	t_s_s **p_ret_scene)
 {
 	int		r;

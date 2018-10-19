@@ -17,8 +17,11 @@ static void				free_tssbi(
 }
 
 void					free_tssbi_str(
-	t_s_sbi *str)
+	t_s_sbi **str)
 {
-	while (str)
-		free_tssbi(str++);
+	while (*str)
+	{
+		free_tssbi(*str);
+		*str++ = 0;
+	}
 }

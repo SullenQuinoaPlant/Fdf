@@ -131,7 +131,7 @@ int							get_cdgfxyrz_sbi(
 		(*ret = malloc(sizeof(t_s_sbi))))
 		**ret = (t_s_sbi){e_sit_cdgfxyrz, p};
 	else if (p)
-			free(p);
+		free(p);
 	if (fd >= 0)
 		close(fd);
 	ft_lstdel(&bs, 0);
