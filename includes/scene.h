@@ -92,17 +92,9 @@ enum						e_scene_element_groups
 	e_seg_null
 };
 
-# define X 0
-# define Y 1
-# define Z 2
 /*
- **T: θ, in (xOy) plane, from x
- **P: φ, from z to (xOy) plane.
- **R: radius, from O.
- */
-# define T 0
-# define P 1
-# define R 2
+**See outer.h for space positioning constants.
+*/
 struct						s_point
 {
 	t_refct			refs;

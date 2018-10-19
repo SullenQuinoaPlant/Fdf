@@ -39,7 +39,7 @@ static void						move_point(
 	while (++i < PNT_DEC_SZ)
 	{
 		pdp[pt][i] += ratio * pdp[PDP_DT][i];
-		pdp[DT][i] = pdp[P2][i] - pdp[P1][i];
+		pdp[PDP_DT][i] = pdp[PDP_P2][i] - pdp[PDP_P1][i];
 	}
 }
 
