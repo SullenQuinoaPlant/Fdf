@@ -131,8 +131,8 @@ int							is_iso_visible(
 	double pt[DIMS]);
 
 int							is_iso_xy_visible(
-	t_s_sv *v,
-	double pt[DIMS]);
+	t_s_sv	*v,
+	t_xyz	pt);
 
 int							is_iso_z_visible(
 	t_s_sv *v,

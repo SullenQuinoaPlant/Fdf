@@ -15,7 +15,7 @@
 
 int							is_iso_visible(
 	t_s_sv *v,
-	double pt[DIMS])
+	t_xyz pt);
 {
 	if (dbl_within_dimsz(v->w, pt[X]) &&
 		dbl_within_dimsz(v->h, pt[Y]) &&

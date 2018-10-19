@@ -27,7 +27,7 @@
 static void						filter_xy_visible(
 	t_s_sv *v,
 	int pt_ct,
-	double isect[ISEC_CT][DIMS],
+	t_xyz isect[ISEC_CT],
 	int valid[ISEC_CT])
 {
 	while (pt_ct--)
@@ -37,7 +37,7 @@ static void						filter_xy_visible(
 
 static void						filter_p1p2_dir(
 	int pt_ct,
-	double isect[ISEC_CT][PNT_DEC_SZ],
+	t_xyz isect[ISEC_CT],
 	t_pdp pdp,
 	int valid[ISEC_CT])
 {
@@ -63,7 +63,7 @@ static void						filter_p1p2_dir(
 static void						filter_isects(
 	t_s_sv *v,
 	int pt_ct,
-	double isect[ISEC_CT][PNT_DEC_SZ],
+	t_xyz isect[ISEC_CT],
 	double pnd[3][PNT_DEC_SZ])
 {
 	int		valid[ISEC_CT];
@@ -98,9 +98,9 @@ int
 */
 int								isometric_line_xy_isect(
 	t_s_sv *v,
-	t_pnd pnd)
+	t_pdp pdp)
 {
-	double	isect[ISEC_CT][PNT_DEC_SZ];
+	t_xyz	isect[ISEC_CT];
 	double	d;
 	double	p;
 	double	r;
