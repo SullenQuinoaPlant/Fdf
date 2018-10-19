@@ -6,10 +6,8 @@ TARGETS := \
 	cdgfxyrz_parser \
 	discrete_ratio_tracking \
 	discrete_ratio_tracking_pixel_line \
-	double_dims_ar_set_and_multiply \
 	double_sign \
 	isometric_dot_projection \
-	isometric_double_dims_to_tvpos \
 	isometric_line_projection \
 	isometric_view \
 	isometric_view_double_tvuint_conversions \
@@ -21,6 +19,7 @@ TARGETS := \
 	multiply_double_array \
 	object_projection \
 	open \
+	pnt_dec_set_and_multiply \
 	pnv_projection \
 	print_dot \
 	print_line \

@@ -230,7 +230,7 @@ int							reg_tssefreetags(
 void						scene_teardown(
 	t_s_s	**s);
 
-void						set_mult_dims_argb(
+void						set_mult_pnt_dec(
 	double	src[DIMS],
 	double	deltas[DIMS],
 	double	ratio,

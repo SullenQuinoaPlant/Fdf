@@ -72,25 +72,24 @@ static int						filter_isects(
 
 	ft_bzero(valid, sizeof(valid));
 	filter_xy_visible(v, pt_ct, isect, valid);
-	filter_p1p2_dir(pnd, pt_ct, isect, valid);
+	filter_p1p2_dir(pt_ct, pdp, isect, valid);
 	i = -1;
-	j = P2;
+	j = PDP_P2;
 	while (++i < pt_ct)
 		if (valid[i])
 		{
-			ft_memcpy(pdp[j], isect[i], sizeof(pdp[P1]));
-			j = P1;
+			ft_memcpy(pdp[j], isect[i], sizeof(pdp[PDP_P1]));
+			j = PDP_P1;
 		}
-	return (j != P2 ? SUCCES : OUT_OF_VIEW);
+	return (j != PDP_P2 ? SUCCESS : OUT_OF_VIEW);
 }
 
-int	
 /*
-**If onyl one of the two 'pnd' points is within the view
+**If onyl one of the two 'pdp' points is within the view
 **	frame, that point must be at position P1.
 **
 **Abbreviations:
-** - pnd : points and delta. see .h.
+** - pdp : points and delta. see .h.
 ** - isect : intersections
 ** - d : delta
 ** - p : point
@@ -107,21 +106,21 @@ int								isometric_line_xy_isect(
 	int		pt_ct;
 
 	pt_ct = 0;
-	if ((d = pnd[DT][X]))
+	if ((d = pdp[PDP_DT][X]))
 	{
-		p = pnd[P1][X];
+		p = pdp[PDP_P1][X];
 		r = (-(double)(v->w / 2) - p) / d;
 		set_mult_pnt_dec(pdp[PDP_P1], pdp[PDP_DT], r, isect[pt_ct++]);
-		r = ((double)(v->w / 2 - (v->w & 1 ? 0 : 1) - p) / d;
+		r = ((double)(v->w / 2 - (v->w & 1 ? 0 : 1)) - p) / d;
 		set_mult_pnt_dec(pdp[PDP_P1], pdp[PDP_DT], r, isect[pt_ct++]);
 	}
-	if ((d = pnd[DT][Y]))
+	if ((d = pdp[PDP_DT][Y]))
 	{
-		p = pnd[P1][Y];
+		p = pdp[PDP_P1][Y];
 		r = (-(double)(v->h / 2) - p) / d;
 		set_mult_pnt_dec(pdp[PDP_P1], pdp[PDP_DT], r, isect[pt_ct++]);
-		r = ((double)(v->h / 2 - (v->w & 1 ? 0 : 1) - p) / d;
+		r = ((double)(v->h / 2 - (v->w & 1 ? 0 : 1)) - p) / d;
 		set_mult_pnt_dec(pdp[PDP_P1], pdp[PDP_DT], r, isect[pt_ct++]);
 	}
-	return (filter_isects(v, pdp, pt_ct, isect));
+	return (filter_isects(v, pt_ct, isect, pdp));
 }
