@@ -18,16 +18,16 @@
 **Get intersection points between the lines that prolong the viewing frame
 ** and the line we want to draw.
 **
-** x = 0
-** y = 0
-** y = w - 1
-** x = h - 1
+** x = w / 2
+** y = h / 2 
+** y = w / 2 - 1 or 0
+** x = h / 2 - 1 or 0
 */
 
 static void						filter_xy_visible(
 	t_s_sv *v,
 	int pt_ct,
-	t_xyz isect[ISEC_CT],
+	t_pdd isect[ISEC_CT],
 	int valid[ISEC_CT])
 {
 	while (pt_ct--)
@@ -37,7 +37,7 @@ static void						filter_xy_visible(
 
 static void						filter_p1p2_dir(
 	int pt_ct,
-	t_xyz isect[ISEC_CT],
+	t_pdd isect[ISEC_CT],
 	t_pdp pdp,
 	int valid[ISEC_CT])
 {
@@ -60,11 +60,11 @@ static void						filter_p1p2_dir(
 ** If P1 is valid, then there is only one valid intersection point
 ** that remains after filtering.
 */
-static void						filter_isects(
+static int						filter_isects(
 	t_s_sv *v,
 	int pt_ct,
-	t_xyz isect[ISEC_CT],
-	double pnd[3][PNT_DEC_SZ])
+	t_pdd isect[ISEC_CT],
+	t_pdp pdp)
 {
 	int		valid[ISEC_CT];
 	int		i;
@@ -78,7 +78,7 @@ static void						filter_isects(
 	while (++i < pt_ct)
 		if (valid[i])
 		{
-			ft_memcpy(pnd[j], isect[i], sizeof(pnd[P1]));
+			ft_memcpy(pdp[j], isect[i], sizeof(pdp[P1]));
 			j = P1;
 		}
 	return (j != P2 ? SUCCES : OUT_OF_VIEW);
@@ -100,7 +100,7 @@ int								isometric_line_xy_isect(
 	t_s_sv *v,
 	t_pdp pdp)
 {
-	t_xyz	isect[ISEC_CT];
+	t_pdd	isect[ISEC_CT];
 	double	d;
 	double	p;
 	double	r;

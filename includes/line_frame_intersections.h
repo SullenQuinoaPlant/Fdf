@@ -33,8 +33,8 @@
 # define PDP_P2 2
 # define PDP_SZ 3
 
-typedef double	t_pixel_double_decomposition[PNT_DEC_SZ];
-typedef t_pixel_double_decomposition	t_pdd;
+typedef double	t_point_double_decomposition[PNT_DEC_SZ];
+typedef t_point_double_decomposition	t_pdd;
 typedef t_pdd	t_pdp[PDP_SZ];
 
 #endif
