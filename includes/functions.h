@@ -281,6 +281,9 @@ int							tssv_add_pxl_ars(
 	t_vuint	w,
 	t_s_sv	*v);
 
+int							tssv_print_ascii(
+	t_s_sv	*v);
+
 void						tssv_seg_apply_proj(
 	void	*p_seg,
 	t_ring	p_tssv);
