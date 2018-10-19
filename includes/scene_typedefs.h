@@ -77,7 +77,7 @@ typedef struct s_line_projection	t_s_lp;
 
 typedef struct s_object	t_s_o;
 
-typedef struct s_object_projeciton	t_s_op;
+typedef struct s_object_projection	t_s_op;
 
 typedef struct s_object_handle	t_s_oh;
 

@@ -1,3 +1,6 @@
+#include "functions.h"
+#include "scene.h"
+
 void						point_projection(
 	t_s_sv *v,
 	void *scene_point,

@@ -40,7 +40,7 @@ void							tvpos_pair_to_tdni(
 	ret[V_W][DNI_INI] = val;
 }
 
-static int					characterize_slope(
+static int						characterize_slope(
 	t_vpos const ends[2],
 	t_ruint *dt)
 {
@@ -63,7 +63,7 @@ static int					characterize_slope(
 	return (is_w_slope ? V_W : V_H);
 }
 
-static void					set_along(
+static void						set_along(
 	t_ruint dt,
 	t_dni along,
 	t_ruint *ar)

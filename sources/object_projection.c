@@ -9,7 +9,9 @@ void						obj_projection(
 	t_s_o *const	o = (t_s_o*)obj;
 	t_s_op *const	op = (t_s_op*)projection;
 
+	(void)v;
 	(void)points;
+	(void)o;
 	op->set_flgs = 0;
 	op->un_flgs = ~(uint8_t)0;
 }

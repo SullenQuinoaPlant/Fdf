@@ -20,7 +20,7 @@ TARGETS := \
 	object_projection \
 	open \
 	pnt_dec_set_and_multiply \
-	pnv_projection \
+	point_projection \
 	print_dot \
 	print_line \
 	print_obj \

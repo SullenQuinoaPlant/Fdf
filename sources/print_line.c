@@ -1,3 +1,4 @@
+#include "functions.h"
 #include "scene.h"
 #include "discrete_ratio_tracking.h"
 
@@ -13,12 +14,12 @@ static int					set_precedences(
 
 	*ret = 0;
 	len = dt + 1;
-	if (!(p = malloc((len * double))))
+	if (!(p = malloc(len * sizeof(double))))
 		return (SYS_ERR);
 	d = ends[1];
 	while (len--)
 	{
-		p[len] = d
+		p[len] = d;
 		d -= inc;
 	}
 	return (SUCCESS);
@@ -30,8 +31,9 @@ static void					print_line_like_really(
 	double *prec,
 	t_ruint dt)
 {
-	t_rgba (*const	canvas)[v->w] = v->pxl;
-	t_ruint (*const	dec)[PXL_DEC_SZ] = decomposed;
+	t_argb (*const	canvas)[v->w] = (t_argb(*)[v->w])v->pxl;
+	double (*const	vprec)[v->w] = (double(*)[v->w])v->pxl_prec;
+	t_ruint (*const	dec)[PXL_DEC_SZ] = (t_ruint(*)[PXL_DEC_SZ])decomposed;
 	t_vuint			h;
 	t_vuint			w;
 
@@ -40,8 +42,8 @@ static void					print_line_like_really(
 	{
 		h = dec[dt][V_H];
 		w = dec[dt][V_W];
-		if (prec[dt] < v->pxl_prec[h][w])
-			canvas[h][w] = truint_dec_to_targb(&dec[dt][PXDAO]);
+		if (prec[dt] < vprec[h][w])
+			truint_dec_to_targb(&dec[dt][PXDAO], &canvas[h][w]);
 	}
 }
 
@@ -49,7 +51,7 @@ int							print_line(
 	t_s_sv *v,
 	t_tag t)
 {
-	t_s_lp *const	l = &(v->e[e_slna].ar[t >> TPS])[t & TPM];
+	t_s_lp *const	l = &((t_s_lp*)v->e[e_l].ar[t >> TPS])[t & TPM];
 	t_ruint			*dec;
 	t_ruint			dt;
 	double			*prec;

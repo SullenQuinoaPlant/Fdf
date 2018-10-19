@@ -263,6 +263,12 @@ void						tpctrm_mult(
 	t_pctrm const	times_this_b,
 	t_pctrm 		equals_this_c);
 
+int							track_pixel_line(
+	t_s_lp const *const	lp,
+	t_ruint				*ret_dt,
+	int					*ret_along,
+	t_ruint				**ret);
+
 void						track_ratios(
 	t_ruint const	over_delta__dt,
 	t_dni			*these__vals,

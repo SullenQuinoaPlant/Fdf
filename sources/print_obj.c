@@ -1,10 +1,11 @@
+#include "functions.h"
 #include "scene.h"
 
 static void					print_listed_elements(
 	t_s_sv *v,
 	t_s_o *o)
 {
-	t_printer const	printers[e_oeg_sz] = {
+	t_printer const	printers[e_seg_sz] = {
 		0,
 		0,
 		print_dot,
