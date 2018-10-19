@@ -47,7 +47,6 @@ int								isometric_line_z_isect(
 	t_pdp pdp)
 {
 	int		isect;
-	double	
 
 	if ((isect = has_isect(pdp)) == NOT_IN_VIEW)
 		return (OUT_OF_VIEW);

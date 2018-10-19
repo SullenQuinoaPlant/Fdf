@@ -31,6 +31,18 @@
 **Space dimensions:
 */
 # define DIMS 3
+# define X 0
+# define Y 1
+# define Z 2
+/*
+ **T: θ, in (xOy) plane, from x
+ **P: φ, from z to (xOy) plane.
+ **R: radius, from O.
+ */
+# define T 0
+# define P 1
+# define R 2
+
 # define VIEW_DIMS 2
 
 /*

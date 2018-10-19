@@ -10,29 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "functions.h"
 #include "scene.h"
 
-int							iso_dbl_within_dimsz(
-	t_vuint const dim_sz,
-	double d)
-{
-	t_vuint const	half = dim_sz / 2;
-	int const		sign = d > 0 ? 1 : -1;
-	int const		even = dim_sz & 0x1 ? 0 : 1;
-	t_vuint			cast;
-	int				ret;
-
-	if ((d *= (double)sign) > (double)(TVUINT_MAX))
-		return (0);
-	cast = (t_vuint)d;
-	if (even && sign == 1)
-		ret = cast > half - 1 ? 0 : 1;
-	else
-		ret = cast > half ? 0 : 1;
-	return (ret);
-}
-
-int							iso_dbl_to_tvuint(
+int								iso_dbl_to_tvuint(
 	t_vuint const dim_sz,
 	double const d,
 	t_vuint *ret)

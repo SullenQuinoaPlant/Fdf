@@ -10,15 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene_typedefs.h"
+#include "functions.h"
 #include "scene.h"
+
+int							iso_dbl_within_dimsz(
+	t_vuint const dim_sz,
+	double d)
+{
+	t_vuint const	half = dim_sz / 2;
+	int const		sign = d > 0 ? 1 : -1;
+	int const		even = dim_sz & 0x1 ? 0 : 1;
+	t_vuint			cast;
+	int				ret;
+
+	if ((d *= (double)sign) > (double)(TVUINT_MAX))
+		return (0);
+	cast = (t_vuint)d;
+	if (even && sign == 1)
+		ret = cast > half - 1 ? 0 : 1;
+	else
+		ret = cast > half ? 0 : 1;
+	return (ret);
+}
 
 int							is_iso_visible(
 	t_s_sv *v,
-	t_xyz pt);
+	t_xyz pt)
 {
-	if (dbl_within_dimsz(v->w, pt[X]) &&
-		dbl_within_dimsz(v->h, pt[Y]) &&
+	if (iso_dbl_within_dimsz(v->w, pt[X]) &&
+		iso_dbl_within_dimsz(v->h, pt[Y]) &&
 		pt[Z] >= 0)
 		return (1);
 	return (0);
@@ -26,16 +46,16 @@ int							is_iso_visible(
 
 int							is_iso_xy_visible(
 	t_s_sv *v,
-	double pt[DIMS])
+	t_xyz pt)
 {
-	if (dbl_within_dimsz(v->w, pt[X]) &&
-		dbl_within_dimsz(v->h, pt[Y]))
+	if (iso_dbl_within_dimsz(v->w, pt[X]) &&
+		iso_dbl_within_dimsz(v->h, pt[Y]))
 		return (1);
 	return (0);
 }
 
 int							is_iso_z_visible(
-	double pt[DIMS])
+	t_xyz pt)
 {
 	double			d;
 

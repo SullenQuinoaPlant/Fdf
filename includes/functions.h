@@ -127,16 +127,15 @@ int							initiate_se_release(
 	void	*se);
 
 int							is_iso_visible(
-	t_s_sv *v,
-	double pt[DIMS]);
+	t_s_sv	*v,
+	t_xyz	pt);
 
 int							is_iso_xy_visible(
 	t_s_sv	*v,
 	t_xyz	pt);
 
 int							is_iso_z_visible(
-	t_s_sv *v,
-	double pt[DIMS]);
+	t_xyz	pt);
 
 int							iso_dbl_dims_to_tvpos(
 	t_s_sv const	*v,
@@ -147,6 +146,10 @@ int							iso_dbl_to_tvuint(
 	t_vuint const	dim_sz,
 	double const	d,
 	t_vuint			*ret);
+
+int							iso_dbl_within_dimsz(
+	t_vuint const	dim_sz,
+	double			d);
 
 void						isometric_dot_proj(
 	t_s_sv				*v,
