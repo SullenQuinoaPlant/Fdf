@@ -16,8 +16,8 @@ static void					print_listed_elements(
 	t_e_oeg		i;
 	t_list		*p;
 
-	i = e_ov;
-	while (++i < e_oeg_sz)
+	i = e_v;
+	while (++i < e_seg_sz)
 	{
 		p = o->e[i];
 		while (p)
@@ -28,7 +28,7 @@ static void					print_listed_elements(
 	}
 }
 
-void						print_obj(
+void						print_object(
 	t_s_sv *v,
 	t_tag t)
 {

@@ -213,7 +213,27 @@ void						point_projection(
 	t_s_pp const *const *invalid,
 	void	*view_point);
 
-void						prinrt_scene_points(
+void						print_arrow(
+	t_s_sv	*v,
+	t_tag	t);
+
+void						print_dot(
+	t_s_sv	*v,
+	t_tag	t);
+
+void						print_fill(
+	t_s_sv	*v,
+	t_tag	t);
+
+void						print_line(
+	t_s_sv	*v,
+	t_tag	t);
+
+void						print_object(
+	t_s_sv	*v,
+	t_tag	t);
+
+void						print_scene_points(
 	t_s_s	*s);
 
 int							realloc_tars(
