@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 01:57:03 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/12 02:22:17 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/20 15:25:20 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void							doubles_to_targb(
 	t_argb	recompose;
 
 	i = -1;
+	recompose = 0;
 	argb = 0;
 	while (++i < ARGBS)
 	{

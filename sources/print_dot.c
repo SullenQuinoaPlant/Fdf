@@ -1,6 +1,6 @@
 #include "scene.h"
 
-void						print_dot(
+int							print_dot(
 	t_s_sv *v,
 	t_tag t)
 {
@@ -14,4 +14,5 @@ void						print_dot(
 		return ;
 	prec[h][w] = d->prec;
 	pxl[h][w] = d->argb;
+	return (SUCCESS);
 }

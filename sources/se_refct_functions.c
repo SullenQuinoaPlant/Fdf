@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:40:18 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/08 04:47:37 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/20 15:30:48 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int							chg_setag_refct(
 	return (SUCCESS);
 }
 
-int							cgh_grptag_refct(
+int							chg_grptag_refct(
 	t_e_seg g,
 	t_tag t,
 	int chg,
@@ -45,6 +45,6 @@ int							cgh_grptag_refct(
 {
 	t_s_se	*grp;
 
-	grp = get_se(s, g, t);
+	grp = &s->e[g];
 	return (chg_setag_refct(grp, t, chg, s));
 }

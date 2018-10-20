@@ -34,7 +34,7 @@ int				main(
 
 	if (ac == 1)
 		return (0);
-	input[2] = 0;
+	input[1] = 0;
 	if (get_cdgfxyrz_sbi(av[1], input) == SUCCESS &&
 		make_scene(input, &scene) == SUCCESS &&
 		add_isometric_v((t_vpos){110, 510}, (t_zntr){0.01, 0, 0, 0}, scene) == SUCCESS)
