@@ -23,7 +23,7 @@ static int				init_scene(
 	if (!(s = malloc(sizeof(t_s_s))))
 		return (SYS_ERR);
 	init_vars(s);
-	i = e_spnv;
+	i = e_p;
 	while (i < e_seg_sz && (r = init_tsse(i, &s->e[i], s)) == SUCCESS)
 		i++;
 	if (r != SUCCESS)

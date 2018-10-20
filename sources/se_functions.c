@@ -21,7 +21,7 @@ void						*get_se_ij(
 	size_t i,
 	size_t j)
 {
-	t_s_se const *const	tsse = s->e[g];
+	t_s_se const *const	tsse = &s->e[g];
 
 	return (tsse->ar[i] + tsse->e_sz * j);
 }

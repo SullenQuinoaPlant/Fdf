@@ -4,17 +4,17 @@
 size_t					teseg_type_sz(
 	t_e_seg g)
 {
-	if (g == e_spnv)
-		return (sizeof(t_u_spsv));
-	if (g == e_sd)
-		return (sizeof(t_s_d));
-	if (g == e_slna)
-		return (sizeof(t_u_slsa));
-	if (g == e_sf)
-		return (sizeof(t_s_f));
-	if (g == e_so)
-		return (sizeof(t_s_o));
-	return (0);
+	size_t const	sizes[e_seg_sz] = {
+		sizeof(t_s_p),
+		sizeof(t_s_d),
+		sizeof(t_s_l),
+		sizeof(t_s_a),
+		sizeof(t_s_f),
+		sizeof(t_s_o)};
+
+	if (g == e_seg_null)
+		return (0);
+	return (sizes[g]);
 }
 
 int						init_tsse(

@@ -9,7 +9,7 @@ void				scene_teardown(
 
 	if (!scene)
 		return ;
-	free_tso_tsse_content(&s->e[e_o]);
+	free_tso_tsse_content(&scene->e[e_o]);
 	i = e_p;
 	while (i < e_seg_sz)
 		free_tsse(&scene->e[i++]);
