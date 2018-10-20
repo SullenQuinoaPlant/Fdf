@@ -14,6 +14,8 @@ static void					tssv_grp_apply_proj(
 	i = -1;
 	while (++i < v_grp->ar_sz)
 	{
+		if (!v_grp->prj)
+			continue ;
 		p_ve = v_grp->ar[i];
 		p_se = s_grp->ar[i];
 		lim_ve = p_ve + TAS * v_grp->e_sz;
