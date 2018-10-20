@@ -23,7 +23,7 @@ void							targb_to_doubles(
 	while (--i)
 	{
 		ret[i] = argb & ARGB_MASK;
-		argb >> ARGB_BYTE;
+		argb >>= ARGB_SHIFT;
 	}
 }
 
@@ -35,14 +35,14 @@ void							doubles_to_targb(
 	t_argb *ret)
 {
 	int		i;
-	t_argb	argb;
+	t_argb	recompose;
 
 	i = -1;
 	argb = 0;
 	while (++i < ARGBS)
 	{
-		argb <<= ARGB_BYTE;
-		argb |= ((t_argb)*argb++) & ARGB_MASK;
+		recompose <<= ARGB_SHIFT;
+		recompose |= ((t_argb)*argb++) & ARGB_MASK;
 	}
-	*ret = argb;
+	*ret = recompose;
 }

@@ -23,7 +23,7 @@ void						free_tar(
 	t_s_s *s)
 {
 	free_free_tar(ar, ar_sz, e_sz);
-	s->tar_allocs -= ar_sz * sz;
+	s->tar_allocs -= ar_sz * e_sz;
 }
 
 int							tar_alloc(
