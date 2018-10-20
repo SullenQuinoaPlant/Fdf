@@ -7,22 +7,25 @@ static void					print_listed_elements(
 {
 	t_printer const	printers[e_seg_sz] = {
 		0,
-		0,
 		print_dot,
 		print_line,
 		print_arrow,
 		print_fill,
 		print_object};
-	t_e_oeg		i;
-	t_list		*p;
+	t_e_seg const	print_order[e_seg_sz] = {
+		e_o, e_f, e_l, e_a, e_d};
+	t_e_seg			g;
+	int				i;
+	t_list			*p;
 
-	i = e_v;
-	while (++i < e_seg_sz)
+	i = -1;
+	while (++i < e_seg_sz - 1)
 	{
-		p = o->e[i];
+		g = print_order[i];
+		p = o->e[print_order[i]];
 		while (p)
 		{
-			(*printers)(v, *(t_tag*)p->content);
+			(*printers[g])(v, *(t_tag*)p->content);
 			p = p->next;
 		}
 	}
@@ -33,9 +36,9 @@ void						print_object(
 	t_tag t)
 {
 
-	t_s_op *const	op = &(v->e[e_so].ar[t >> TPS])[t & TPM];
-	t_s_o *const	o = &(v->s->e[e_so].ar[t >> TPS])[t & TPM];
-	uint8_t const	flgs = o->flgs | op->set_flgs & op->un_flgs;
+	t_s_op *const	op = &((t_s_op*)v->e[e_o].ar[t >> TPS])[t & TPM];
+	t_s_o *const	o = &((t_s_o*)v->s->e[e_o].ar[t >> TPS])[t & TPM];
+	uint8_t const	flgs = (o->flgs | op->set_flgs) & op->un_flgs;
 
 	if (!(flgs & O_SHOW))
 		return ;
