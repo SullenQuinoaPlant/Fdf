@@ -37,7 +37,7 @@ int				main(
 	input[1] = 0;
 	if (get_cdgfxyrz_sbi(av[1], input) == SUCCESS &&
 		make_scene(input, &scene) == SUCCESS &&
-		add_isometric_v((t_vpos){110, 510}, (t_zntr){0.01, 0, 0, 0}, scene) == SUCCESS)
+		add_isometric_v((t_vpos){478, 2550}, (t_zntr){0.01, 0, 0, 0}, scene) == SUCCESS)
 	{
 		print_scene_points(scene);
 		printf("\n");

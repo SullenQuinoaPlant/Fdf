@@ -34,5 +34,5 @@ endif
 ifndef CFLAGS
 	CFLAGS := -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBS_I)
 endif
-CFLAGS_MORE =
+CFLAGS_MORE = -g
 CFLAGS += $(CFLAGS_MORE)

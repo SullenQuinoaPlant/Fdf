@@ -2,9 +2,9 @@
 #include "parse.h"
 
 #define BUF_CT 256
-#define BUF_SZ BUF_CT * sizeof(t_s_cxyd)
 #define E_CT 0
 #define E_CT_ALLOCS 1
+
 static int					new_buff(
 	t_list **prv,
 	size_t *counters,
@@ -14,12 +14,12 @@ static int					new_buff(
 	t_s_cxyd	*ar;
 
 	new = 0;
-	if ((ar = malloc(BUF_SZ)) &&
+	if ((ar = malloc(BUF_CT * sizeof(t_s_cxyd))) &&
 		(new = ft_lstnew(0, 0)))
 	{
 		*p = ar;
 		new->content = ar;
-		new->content_size = BUF_SZ;
+		new->content_size = BUF_CT * sizeof(t_s_cxyd);
 		ft_lstadd(prv, new);
 		counters[E_CT] = BUF_CT;
 		counters[E_CT_ALLOCS]++;
@@ -54,6 +54,7 @@ static int					parse_sncnl_like_really(
 */
 #define DIM_R 0
 #define DIM_C 1
+
 int							parse_cdgfxyrz_sncnl(
 	int fd,
 	size_t *dims,
