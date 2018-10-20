@@ -60,7 +60,7 @@ int							parse_cdgfxyrz(
 	size_t *dims,
 	t_list **bs)
 {
-	char const	*l[2];
+	char 		*l[2];
 	size_t		l_ct;
 	size_t		e_ct[2];
 	t_s_cxyd	*p;
@@ -68,14 +68,14 @@ int							parse_cdgfxyrz(
 
 	*bs = 0;
 	l_ct = 0;
-	ft_bzero(e_ct, sizeof(e_ct);
+	ft_bzero(e_ct, sizeof(e_ct));
 	r = 0;
-	while ((r = get_next_line(fd, (char**)&l[0])) > 0)
+	while ((r = get_next_line(fd, &l[0])) > 0)
 	{
 		l[1] = l[0];
 		l_ct++;
 		while ((e_ct[E_CT] || (r = new_buff(bs, e_ct, &p)) == SUCCESS) &&
-			(r = parse_like_really(&l[1], &p) == SUCCESS))
+			(r = parse_like_really((char const **)&l[1], &p) == SUCCESS))
 			e_ct[E_CT]--;
 		free(l[0]);
 		if (r != SUCCESS)
