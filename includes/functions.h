@@ -329,14 +329,13 @@ void						tssv_apply_projs(
 
 void						tssv_grp_apply_proj(
 	t_s_sv	*v,
-	t_proj	proj,
 	t_s_se	*s_grp,
-	t_s_ta	*v_grp);
+	t_s_ve	*v_grp);
 
 int							tssv_print_ascii(
 	t_s_sv	*v);
 
-void						tssv_seg_apply_proj(
+void						tssv_ring_seg_apply_proj(
 	void	*p_seg,
 	t_ring	p_tssv);
 

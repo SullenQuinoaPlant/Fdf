@@ -13,4 +13,5 @@ void						point_projection(
 	(void)points;
 	tpctrm_apply(v->ct->mashed, p->xyz, pp->xyz);
 	txyz_to_ttpr(pp->xyz, pp->tpr);
+	v->e_tick[e_p] = v->ct->tick;
 }

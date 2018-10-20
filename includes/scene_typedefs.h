@@ -33,6 +33,8 @@ typedef struct s_scene_view	t_s_sv;
 
 typedef unsigned int	t_tag;
 
+typedef unsigned int	t_ticker;
+
 typedef void	(*t_printer)(
 	t_s_sv *view,
 	t_tag tag);
@@ -92,6 +94,8 @@ typedef struct s_scene_elements	t_s_se;
 typedef struct s_tagged_array	t_s_ta;
 
 typedef t_s_p	t_s_v;
+
+typedef struct s_view_element	t_s_ve;
 
 typedef double	t_zntr[DIMS + 1];
 

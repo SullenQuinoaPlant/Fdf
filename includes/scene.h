@@ -258,21 +258,23 @@ struct						s_point_coordinates_transform
 	t_s_pctr	*nxt;
 	t_pctrm		own;
 	t_pctrm		mashed;
+	t_tick		tick;
 };
 
-/*
- **Projections hold the shadows in the view plane of the points required
- **	to describe scene elements.
- */
-enum						e_view_projection_groups
+struct						s_view_element
 {
-	e_vpg,
-	e_vdg,
-	e_vlnag,
-	e_vfg,
-	e_vog,
-	e_vpg_sz,
-	e_vpg_null
+	union
+	{
+		struct
+		{
+			void		**ar;
+			size_t		ar_sz;
+			size_t		e_sz;
+		};
+		t_s_ta	ta;
+	};
+	t_proj	prj;
+	t_tick	tick;
 };
 
 /*
@@ -439,12 +441,13 @@ struct						s_scene_view
 	t_s_s		*s;
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
-	t_proj		prj[e_seg_sz];
-	t_s_ta		e[e_seg_sz];
+	t_ticker	ct_tick;
+	t_s_ve		e[e_seg_sz];
 	t_vuint		h;
 	t_vuint		w;
 	t_argb		*pxl;
 	double		*pxl_prec;
+	t_ticker	pxl_tick;
 	int			out_fd;
 	void		*out_wdw;
 };
