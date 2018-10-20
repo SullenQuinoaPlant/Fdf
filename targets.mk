@@ -32,7 +32,6 @@ TARGETS := \
 	ring \
 	scene_add_tagged_array \
 	scene_make \
-	scene_realloc_tars \
 	scene_teardown \
 	se_functions \
 	se_refct_functions \
