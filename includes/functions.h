@@ -78,6 +78,11 @@ void						doubles_to_tvpos(
 	double	coords[DIMS],
 	t_vpos	*ret);
 
+void						free_free_tar(
+	void	**ar,
+	size_t	ar_sz,
+	size_t	e_sz);
+
 void						free_object_lists(
 	t_s_o	*object);
 
@@ -282,6 +287,11 @@ void						set_tpctrm_identity(
 
 int							sign(
 	double	d);
+
+int							tar_alloc(
+	t_s_s	*s,
+	size_t	type_sz,
+	void	**p_alloc);
 
 void						targb_to_doubles(
 	t_argb	argb,

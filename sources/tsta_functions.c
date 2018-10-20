@@ -1,10 +1,11 @@
 #include "functions.h"
+#include "scene.h"
 
 int							tsta_allocs(
 	t_s_s *s,
 	t_s_ta *ta)
 {
-	size_t const	e_sz = ta->e_sz
+	size_t const	e_sz = ta->e_sz;
 	size_t const	sz = e_sz * TAS * ta->ar_sz;
 	size_t			ar_sz;
 	void			**ar;
@@ -21,7 +22,7 @@ int							tsta_allocs(
 	if (!ar_sz)
 		return (SUCCESS);
 	if (ar)
-		free_tar(ta->ar, ta->ar_sz - ar_sz)
+		free_tar(ta->ar, ta->ar_sz - ar_sz, e_sz, s);
 	ta->ar = 0;
 	return (r ? r : SYS_ERR);
 }
@@ -29,9 +30,11 @@ int							tsta_allocs(
 int							mirror_tsta(
 	t_s_s *s,
 	t_s_ta const *model,
-	size_t e_sz;
+	size_t e_sz,
 	t_s_ta *reflection)
 {
+	int		r;
+
 	reflection->ar = 0;
 	reflection->ar_sz = model->ar_sz;
 	reflection->e_sz = e_sz;
@@ -48,6 +51,7 @@ int						clone_tsta(
 	size_t const	ttl_sz = sz * ta->ar_sz;
 	void			**p;
 	size_t			i;
+	int				r;
 
 	ret->ar = 0;
 	if ((r = TAC - s->tar_allocs < ttl_sz ? MEM_CAP : 0) ||
@@ -76,11 +80,11 @@ void					copy_tsta(
 	void **dest)
 {
 	size_t const	ar_sz = from->ar_sz;
-	size_t const	sz = frome->e_sz * TAS;
+	size_t const	sz = from->e_sz * TAS;
 	void **const	lim = from->ar + ar_sz;
 	void			**p;
 
-	p = from->ar
+	p = from->ar;
 	while (p < lim)
 		ft_memcpy(*dest++, *p++, sz);
 }
