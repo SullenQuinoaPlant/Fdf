@@ -41,7 +41,8 @@ void					ring_free(
 	nxt = p;
 	while ((p = nxt))
 	{
-		nxt = p->nxt;
+		if ((nxt = p->nxt) == p)
+			nxt = 0;
 		(*del)((void*)p, container_sz);
 	}
 	*p_ring = 0;

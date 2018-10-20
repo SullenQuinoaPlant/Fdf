@@ -68,7 +68,7 @@ int							parse_cdgfxyrz(
 
 	*bs = 0;
 	l_ct = 0;
-	ft_memset(e_ct, 0, 2);
+	ft_bzero(e_ct, sizeof(e_ct);
 	r = 0;
 	while ((r = get_next_line(fd, (char**)&l[0])) > 0)
 	{
@@ -77,7 +77,7 @@ int							parse_cdgfxyrz(
 		while ((e_ct[E_CT] || (r = new_buff(bs, e_ct, &p)) == SUCCESS) &&
 			(r = parse_like_really(&l[1], &p) == SUCCESS))
 			e_ct[E_CT]--;
-		free((void*)l[0]);
+		free(l[0]);
 		if (r != SUCCESS)
 			return (r);
 	}
@@ -86,8 +86,6 @@ int							parse_cdgfxyrz(
 	return (r == 0 ? SUCCESS : SYS_ERR);
 }
 
-#define USE 0
-#define SAVE 1
 static int					fill_tscdgfxyrz(
 	size_t *dims,
 	t_list *bs,

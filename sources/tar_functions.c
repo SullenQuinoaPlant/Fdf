@@ -9,7 +9,7 @@ void						free_free_tar(
 	void **const	lim = ar + ar_sz;
 	void			**p;
 
-	if (!*(p = ar))
+	if (!(p = ar))
 		return ;
 	while (p < lim)
 		ft_cleanfree(*p++, sz);
@@ -23,7 +23,7 @@ void						free_tar(
 	t_s_s *s)
 {
 	free_free_tar(ar, ar_sz, e_sz);
-	s->tar_allocs -= ar_sz * e_sz;
+	s->tar_allocs -= ar_sz * e_sz * TAS;
 }
 
 int							tar_alloc(
