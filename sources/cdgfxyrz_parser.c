@@ -75,7 +75,7 @@ int							parse_cdgfxyrz(
 		l[1] = l[0];
 		l_ct++;
 		while ((e_ct[E_CT] || (r = new_buff(bs, e_ct, &p)) == SUCCESS) &&
-			(r = parse_like_really((char const **)&l[1], &p) == SUCCESS))
+			(r = parse_like_really((char const **)&l[1], &p) == NOT_DONE))
 			e_ct[E_CT]--;
 		free(l[0]);
 		if (r != SUCCESS)
