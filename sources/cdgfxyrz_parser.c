@@ -34,17 +34,19 @@ static int					parse_like_really(
 	char const **str,
 	t_s_cxyd **p)
 {
-	char const	*s = *str;
+	char 		*s;
 	t_argb		col;
 	int			z;
 
+	s = (char*)*str;
 	col = 0;
 	if (!*s)
 		return (SUCCESS);
-	if (ft_atoierr(s, &z, (char**)&s) ||
-		(*s == ',' && ft_axtoierr(++s, (int*)&col, (char**)&s)) ||
+	if (ft_atoierr(s, &z, &s) ||
+		(*s == ',' && ft_axtoierr(++s, (int*)&col, &s)) ||
 		(*s && *s++ != ' '))
 		return (BAD_INFILE);
+	*str = (char const*)s;
 	*((*p)++) = (t_s_cxyd){z, col};
 	return (NOT_DONE);
 }
