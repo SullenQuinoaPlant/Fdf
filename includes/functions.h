@@ -84,7 +84,8 @@ void						free_object_lists(
 void						free_tar(
 	void	**ar,
 	size_t	ar_sz,
-	size_t	e_sz);
+	size_t	e_sz,
+	t_s_s	*s);
 
 void						free_tscdgfxyrz(
 	t_s_sbi	*p);
@@ -186,7 +187,7 @@ int							make_scene(
 	t_s_sbi	**input_str,
 	t_s_s	**p_ret_scene);
 
-t_e_vpg						map_seg_to_vpg(
+t_e_seg						map_seg_to_vpg(
 	t_e_seg	sg);
 
 void						mult_dbl_ar(
@@ -321,7 +322,7 @@ void						tssv_seg_apply_proj(
 	t_ring	p_tssv);
 
 int							tssv_tar_allocs(
-	t_e_vpg	grp,
+	t_e_seg	grp,
 	t_s_s	*s);
 
 int							tssvs_add_tar(

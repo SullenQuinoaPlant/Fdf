@@ -23,7 +23,7 @@ int						nxt_fresh_obj(
 	int		r;
 
 	*ret = 0;
-	if ((r = get_nxt_se(e_so, s, &tag, (void**)&o)) != SUCCESS)
+	if ((r = get_nxt_se(e_o, s, &tag, (void**)&o)) != SUCCESS)
 		return (r);
 	ft_bzero(o, sizeof(t_s_o));
 	o->hdl.type = e_seg_null;

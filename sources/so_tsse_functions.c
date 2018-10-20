@@ -1,3 +1,6 @@
+#include "functions.h"
+#include "scene.h"
+
 /*
 **No t_refct bookeeping done in the following:
 **	the structures are being freed so any subsequent access is an error.

@@ -19,8 +19,6 @@ typedef uint32_t	t_argb;
 
 typedef enum e_scene_element_groups	t_e_seg;
 
-typedef enum e_view_projection_groups	t_e_vpg;
-
 typedef union u_spsv	t_u_spsv;
 
 typedef void	(*t_pctr)(\

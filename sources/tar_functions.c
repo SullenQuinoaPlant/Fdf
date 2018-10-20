@@ -1,6 +1,6 @@
 #include "scene.h"
 
-void					free_free_tar(
+void						free_free_tar(
 	void **ar,
 	size_t ar_sz,
 	size_t e_sz)
@@ -16,7 +16,7 @@ void					free_free_tar(
 	ft_cleanfree(ar, sizeof(void*) * ar_sz);
 }
 
-void					free_tar(
+void						free_tar(
 	void **ar,
 	size_t ar_sz,
 	size_t e_sz,

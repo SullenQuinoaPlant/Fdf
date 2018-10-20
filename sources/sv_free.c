@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "functions.h"
 #include "scene.h"
 
 void					free_pxl_ars(
@@ -26,7 +27,7 @@ static void				free_view_members(
 	size_t ttl_sz)
 {
 	t_s_sv *const	v = (t_s_sv*)view;
-	t_e_vpg			i;
+	t_e_seg			i;
 
 	if (!view)
 		return ;
