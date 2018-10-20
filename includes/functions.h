@@ -97,7 +97,8 @@ void						free_tssbi_str(
 	t_s_sbi	**str);
 
 void						free_tsse(
-	t_s_se	*se);
+	t_s_se	*se,
+	t_s_s	*s);
 
 void						free_view(
 	t_s_sv	*ring);
@@ -119,6 +120,9 @@ void						*get_se(
 	t_s_s const	*s,
 	t_e_seg		g,
 	t_tag		t);
+
+size_t						get_ve_size(
+	t_e_seg	g);
 
 int							inc_tar_alloc(
 	t_s_s	*s,

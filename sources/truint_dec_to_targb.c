@@ -1,4 +1,4 @@
-#include "scene_typedefs.h"
+#include "scene.h"
 #include "discrete_ratio_tracking.h"
 
 t_argb							truint_dec_to_targb(

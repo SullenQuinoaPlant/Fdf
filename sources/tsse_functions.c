@@ -34,9 +34,10 @@ int						init_tsse(
 }
 
 void					free_tsse(
-	t_s_se *se)
+	t_s_se *se,
+	t_s_s *s)
 {
-	free_tar(se->ar, se->ar_sz, se->e_sz);
+	free_tar(se->ar, se->ar_sz, se->e_sz, s);
 	ft_lstdel(&se->nxt, ft_cleanfree);
 }
 

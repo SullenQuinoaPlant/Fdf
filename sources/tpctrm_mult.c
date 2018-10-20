@@ -1,4 +1,5 @@
 #include "scene_typedefs.h"
+#include "scene.h"
 
 void					set_tpctrm_identity(
 	t_pctrm ret)
@@ -19,6 +20,7 @@ void					tpctrm_mult(
 {
 	int		i;
 	int		j;
+	int		k;
 
 	ft_bzero(c, sizeof(t_pctrm));
 	i = -1;
@@ -34,5 +36,5 @@ void					tpctrm_mult(
 	}
 	i = -1;
 	while (++i < DIMS)
-		c[TR][i] += b[TR][i];
+		c[TPCTRM_TR][i] += b[TPCTRM_TR][i];
 }

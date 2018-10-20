@@ -1,3 +1,4 @@
+#include "functions.h"
 #include "scene.h"
 
 static int				mirror_tsses(
@@ -38,16 +39,18 @@ int						add_view(
 	t_s_s *s,
 	t_s_sv **ret)
 {
-	t_s_sv	*v;
+	t_s_sv	**v;
 	int		r;
 
 	*ret = 0;
 	r = SYS_ERR;
-	v = s->v;
-	if (ring_expand(sizeof(t_s_sv), 0, (void**)&s->v) == RING_SUCCESS &&
-		(r = init_view(s, v)) == SUCCESS)
-		*ret = s->v;
-	else if (s->v != v)
-		ring_shrink(sizeof(t_s_v), free_view_members, (void**)&s->v);
+	v = &s->v;
+	if (ring_expand(sizeof(t_s_sv), 0, (void**)v) == RING_SUCCESS)
+	{
+		if ((r = init_view(s, *v)) != SUCCESS)
+			ring_shrink(sizeof(t_s_v), free_view_members, (void**)v);
+		else if (ret)
+			*ret = *v;
+	}
 	return (r);
 }

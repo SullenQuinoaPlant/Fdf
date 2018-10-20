@@ -12,7 +12,7 @@ void				scene_teardown(
 	free_tso_tsse_content(&scene->e[e_o]);
 	i = e_p;
 	while (i < e_seg_sz)
-		free_tsse(&scene->e[i++]);
+		free_tsse(&scene->e[i++], scene);
 	free_views(scene->v);
 	ft_scleanfree((void**)s, sizeof(t_s_s));
 }
