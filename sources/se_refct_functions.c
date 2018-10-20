@@ -33,7 +33,7 @@ int							chg_setag_refct(
 	else if (chg < 0 && chg > -1 * sign * *refct)
 			return (REFCOUNT_INCOHERENT);
 	if (!(*refct += chg * sign))
-		return (reg_tssefreetags(t, 0, s, grp));
+		return (reg_tsse_freetags(t, 0, s, grp));
 	return (SUCCESS);
 }
 

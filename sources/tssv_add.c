@@ -13,7 +13,7 @@ static int				mirror_tsses(
 	while (++i < e_seg_sz)
 	{
 		e_sz = get_ve_size(i);
-		if ((r = mirror_tsta(s, &s->e[i].ta, e_sz, &v->e[i])) != SUCCESS)
+		if ((r = mirror_tsta(s, &s->e[i].ta, e_sz, &v->e[i].ta)) != SUCCESS)
 			break ;
 	}
 	return (r);

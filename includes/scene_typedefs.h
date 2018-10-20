@@ -35,7 +35,7 @@ typedef unsigned int	t_tag;
 
 typedef unsigned int	t_ticker;
 
-typedef void	(*t_printer)(
+typedef int		(*t_printer)(
 	t_s_sv *view,
 	t_tag tag);
 

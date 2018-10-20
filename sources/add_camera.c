@@ -3,7 +3,7 @@
 
 /*
 ** It is expected that the new camera will be used, so the returned
-**	structure has it's reference count set to one.
+**	structure has its reference count set to one.
 **
 ** Abbreviations :
 ** - cts : coordinate transforms

@@ -23,8 +23,14 @@ static void				set_prj(
 		0,
 		0,
 		obj_projection};
+	t_e_seg			i;
 
-	ft_memcpy(v->prj, ar, sizeof(ar));
+	i = e_p;
+	while (i < e_seg_sz)
+	{
+		v->e[i].prj = ar[i];
+		i++;
+	}
 }
 
 int						add_isometric_v(
@@ -33,7 +39,6 @@ int						add_isometric_v(
 	t_s_s *s)
 {
 	t_s_sv		*new_v;
-	int			i;
 	int			r;
 
 	if ((r = add_view(s, &new_v)) == SUCCESS &&
@@ -41,12 +46,10 @@ int						add_isometric_v(
 		(r = tssv_add_pxl_ars(hw[V_H], hw[V_W], new_v)) == SUCCESS)
 	{
 		set_prj(new_v);
-		i = -1;
-		while (++i < e_seg_sz)
-			tssv_seg_apply_proj(&i, new_v);
+		tssv_apply_projs(new_v);
 		return (SUCCESS);
 	}
 	if (r == SUCCESS)
-		free_view(s->v);
+		free_view(&s->v);
 	return (SYS_ERR);
 }

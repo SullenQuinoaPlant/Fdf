@@ -235,23 +235,23 @@ void						point_projection(
 	t_s_pp const *const *invalid,
 	void	*view_point);
 
-void						print_arrow(
+int							print_arrow(
 	t_s_sv	*v,
 	t_tag	t);
 
-void						print_dot(
+int							print_dot(
 	t_s_sv	*v,
 	t_tag	t);
 
-void						print_fill(
+int							print_fill(
 	t_s_sv	*v,
 	t_tag	t);
 
-void						print_line(
+int							print_line(
 	t_s_sv	*v,
 	t_tag	t);
 
-void						print_object(
+int							print_object(
 	t_s_sv	*v,
 	t_tag	t);
 
