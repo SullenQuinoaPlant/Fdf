@@ -58,7 +58,7 @@ int							tssvs_seg_apply_proj(
 {
 	int		r;
 
-	r = ring_apply(&s->v, tssv_ring_seg_apply_proj, &grp);
+	r = ring_apply(s->v, tssv_ring_seg_apply_proj, &grp);
 	r = r == RING_SUCCESS ? SUCCESS : SYS_ERR;
 	return (r);
 }

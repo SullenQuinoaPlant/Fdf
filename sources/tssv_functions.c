@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 17:56:31 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/20 17:14:24 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int					ring_tssv_add_tar(
 	t_s_s *const	s = v->s;
 	t_e_seg const	g = *(t_e_seg*)p_seg;
 	t_s_ta *const	ta = &v->e[g].ta;
-	int		r;
+	int				r;
 
 	if ((r = inc_tar_alloc(s, ta->e_sz, &ta->ar_sz, &ta->ar)) == SUCCESS)
 		r = RING_SUCCESS;
@@ -38,7 +38,7 @@ int							tssvs_add_tar(
 {
 	int		r;
 
-	r = ring_apply(&s->v, ring_tssv_add_tar, &grp);
+	r = ring_apply(s->v, ring_tssv_add_tar, &grp);
 	r = r == RING_SUCCESS ? SUCCESS : SYS_ERR;
 	return (r);
 }
