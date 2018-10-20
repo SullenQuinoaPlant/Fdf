@@ -13,6 +13,6 @@ void				scene_teardown(
 	i = e_p;
 	while (i < e_seg_sz)
 		free_tsse(&scene->e[i++], scene);
-	free_views(scene->v);
+	free_views(&scene->v);
 	ft_scleanfree((void**)s, sizeof(t_s_s));
 }

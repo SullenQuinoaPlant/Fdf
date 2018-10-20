@@ -101,10 +101,10 @@ void						free_tsse(
 	t_s_s	*s);
 
 void						free_view(
-	t_s_sv	*ring);
+	t_s_sv	**ring);
 
 void						free_views(
-	t_s_sv	*ring);
+	t_s_sv	**ring);
 
 int							get_cdgfxyrz_sbi(
 	char const	*file,
@@ -193,6 +193,12 @@ int							make_scene(
 
 t_e_seg						map_seg_to_vpg(
 	t_e_seg	sg);
+
+int							mirror_tsta(
+	t_s_s			*s,
+	t_s_ta const	*model,
+	size_t			e_sz,
+	t_s_ta			*reflection);
 
 void						mult_dbl_ar(
 	double mult,

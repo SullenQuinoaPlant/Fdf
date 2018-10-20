@@ -40,13 +40,13 @@ static void				free_view_members(
 }
 
 void					free_view(
-	t_s_sv *ring_bit)
+	t_s_sv **ring_bit)
 {
-	ring_shrink(sizeof(t_s_sv), free_view_members, (void**)&ring_bit);
+	ring_shrink(sizeof(t_s_sv), free_view_members, (void**)ring_bit);
 }
 
 void					free_views(
-	t_s_sv *ring)
+	t_s_sv **ring)
 {
-	ring_free(sizeof(t_s_sv), free_view_members, (void**)&ring);
+	ring_free(sizeof(t_s_sv), free_view_members, (void**)ring);
 }

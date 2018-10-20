@@ -1,5 +1,4 @@
-#include "scene_typedefs.h"
-#include "ring.h"
+#include "scene.h"
 
 void						tssv_apply_proj(
 	t_s_sv *v,
