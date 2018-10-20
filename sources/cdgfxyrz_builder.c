@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 04:54:31 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/08 04:51:40 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/20 19:13:45 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ static void				add_point_refct(
 }
 
 int						cdgfxyrz_builder(
-	t_s_sbi *sbi,
+	void *input,
 	t_s_s *s)
 {
-	t_s_cdgfxyrz *const	p = (t_s_cdgfxyrz*)sbi->input;
+	t_s_cdgfxyrz *const	p = (t_s_cdgfxyrz*)input;
 	size_t const		sz = sizeof(t_tag) * p->x_sz * p->y_sz;
 	t_tag				*tags;
 	t_s_o				*o;

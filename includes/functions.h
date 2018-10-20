@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/20 16:20:07 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/20 19:14:15 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int							chg_setag_refct(
 	t_s_s	*s);
 
 int							cdgfxyrz_builder(
-	t_s_sbi	*sbi,
+	void	*sbi,
 	t_s_s	*s);
 
 int							clone_tar(

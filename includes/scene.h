@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 17:52:26 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/20 19:22:24 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,8 @@ struct						s_object
 };
 
 /*
- **Scene control structures:
- */
+**Scene control structures:
+*/
 struct						s_free_tags
 {
 	t_tag	free;

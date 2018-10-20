@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:54:46 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/11 20:54:59 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/20 19:13:52 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "scene.h"
 
 static int				no_scene_builder(
-	t_s_sbi *a,
+	void *a,
 	t_s_s *b)
 {
 	(void)a;
