@@ -30,7 +30,7 @@ static int					new_buff(
 }
 
 #define NOT_DONE 1
-static int					parse_sncnl_like_really(
+static int					parse_like_really(
 	char const **str,
 	t_s_cxyd **p)
 {
@@ -55,7 +55,7 @@ static int					parse_sncnl_like_really(
 #define DIM_R 0
 #define DIM_C 1
 
-int							parse_cdgfxyrz_sncnl(
+int							parse_cdgfxyrz(
 	int fd,
 	size_t *dims,
 	t_list **bs)
@@ -75,7 +75,7 @@ int							parse_cdgfxyrz_sncnl(
 		l[1] = l[0];
 		l_ct++;
 		while ((e_ct[E_CT] || (r = new_buff(bs, e_ct, &p)) == SUCCESS) &&
-			(r = parse_sncnl_like_really(&l[1], &p) == SUCCESS))
+			(r = parse_like_really(&l[1], &p) == SUCCESS))
 			e_ct[E_CT]--;
 		free((void*)l[0]);
 		if (r != SUCCESS)
@@ -122,11 +122,13 @@ int							get_cdgfxyrz_sbi(
 	size_t			dims[2];
 	t_list			*bs;
 	t_s_cdgfxyrz	*p;
+	int				r;
 
 	p = 0;
 	*ret = 0;
-	if (open_file(file, &fd) == SUCCESS &&
-		parse_cdgfxyrz_sncnl(fd, dims, &bs) == SUCCESS &&
+	bs = 0;
+	if ((r = open_file(file, &fd)) == SUCCESS &&
+		(r = parse_cdgfxyrz(fd, dims, &bs)) == SUCCESS &&
 		(p = malloc(sizeof(t_s_cdgfxyrz))) &&
 		fill_tscdgfxyrz(dims, bs, p) == SUCCESS &&
 		(*ret = malloc(sizeof(t_s_sbi))))
@@ -136,5 +138,7 @@ int							get_cdgfxyrz_sbi(
 	if (fd >= 0)
 		close(fd);
 	ft_lstdel(&bs, 0);
-	return (*ret ? SUCCESS : SYS_ERR);
+	if (!*ret)
+		return (r == SUCCESS ? SYS_ERR : r);
+	return (SUCCESS);
 }

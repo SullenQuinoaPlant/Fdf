@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/20 16:13:23 by nmauvari          #+#    #+#             */
+/*   Updated: 2018/10/20 16:19:02 by nmauvari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 
 #include "functions.h"
@@ -30,19 +42,25 @@ int				main(
 	char **av)
 {
 	t_s_sbi	*input[2];
-	t_s_s	*scene;
+	t_s_s	*s;
+	int		r;
 
-	if (ac == 1)
-		return (0);
 	input[1] = 0;
-	if (get_cdgfxyrz_sbi(av[1], input) == SUCCESS &&
-		make_scene(input, &scene) == SUCCESS &&
-		add_isometric_v((t_vpos){478, 2550}, (t_zntr){0.01, 0, 0, 0}, scene) == SUCCESS)
+	s = 0;
+	r = SUCCESS;
+	if (ac != 2 ||
+		((r = get_cdgfxyrz_sbi(av[1], input)) != SUCCESS && r == BAD_INFILE))
+		r = usage(void);
+	else if (r == SUCCESS &&
+		(r = make_scene(input, &s)) == SUCCESS &&
+		!(r = add_isometric_v((t_vpos){478, 2550}, (t_zntr){0.01, 0, 0, 0}, s)))
 	{
-		print_scene_points(scene);
+		print_scene_points(s);
 		printf("\n");
-		tssv_print_ascii(scene->v);
+		tssv_print_ascii(s->v);
 	}
-	scene_teardown(&scene);	
-	return (0);
+	scene_teardown(&s);	
+	if (r != SUCCESS)
+		report_error(r);
+	return (r);
 }
