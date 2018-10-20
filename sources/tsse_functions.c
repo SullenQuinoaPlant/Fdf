@@ -94,6 +94,6 @@ int						reg_teseg_freetags(
 	t_e_seg g)
 {
 	t_s_se *const	grp = &s->e[g];
-	
+
 	return (reg_tsse_freetags(first, diff_with_last, s, grp));
 }
