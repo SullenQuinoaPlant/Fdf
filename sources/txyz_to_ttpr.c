@@ -5,12 +5,13 @@ void						txyz_to_ttpr(
 	t_xyz const in,
 	t_tpr out)
 {
-	double const	x = in[x];
-	double const	y = in[y];
+	double const	x = in[X];
+	double const	y = in[Y];
+	double const	z = in[Z];
 	double			r;
 
-	out[t] = atan2(y, x);
+	out[T] = atan2(y, x);
 	r = sqrt(x * x + y * y + z * z);
-	out[r] = r;
-	out[p] = acos(z / r);
+	out[R] = r;
+	out[P] = acos(z / r);
 }

@@ -1,3 +1,5 @@
+#include "scene.h"
+
 size_t						get_ve_size(
 	t_e_seg g)
 {

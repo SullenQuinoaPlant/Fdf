@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cdgfxyrz_builder.h"
+#include "functions.h"
+#include "scene.h"
+#include "parse.h"
 
 /*
 **LINE_COUNT  is :
@@ -41,7 +43,7 @@ static int				get_container_obj(
 		ft_lstdel(&lines, 0);
 	}
 	else
-		(**o).e[e_ol] = lines;
+		(**o).e[e_l] = lines;
 	return (r);
 }
 

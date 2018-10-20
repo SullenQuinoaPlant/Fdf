@@ -13,7 +13,7 @@
 #include "functions.h"
 #include "scene.h"
 
-int						nxt_fresh_obj(
+static int				nxt_fresh_obj(
 	t_s_s *s,
 	t_s_o **ret,
 	t_tag *ret_tag)
@@ -22,7 +22,6 @@ int						nxt_fresh_obj(
 	t_s_o	*o;
 	int		r;
 
-	*ret = 0;
 	if ((r = get_nxt_se(e_o, s, &tag, (void**)&o)) != SUCCESS)
 		return (r);
 	ft_bzero(o, sizeof(t_s_o));
@@ -40,12 +39,18 @@ int						nxt_active_obj(
 {
 	int		r;
 
-	if ((r = nxt_fresh_obj(s, ret, ret_tag)) == SUCCESS &&
-		(r = ring_expand(sizeof(t_s_ao), 0, (void**)&s->ao) == RING_SUCCESS))
+	*ret = 0;
+	if (ret_tag)
+		*ret_tag = 0;
+	if (ring_expand(sizeof(t_s_ao), 0, (void**)&s->ao) != RING_SUCCESS)
+		return (SYS_ERR);
+	if ((r = nxt_fresh_obj(s, ret, ret_tag)) == SUCCESS)
 	{
 		(**ret).refs = 1;
 		(**ret).flgs |= O_SHOW;
 	}
+	else
+		ring_shrink(sizeof(t_s_ao), 0, (void**)&s->ao);
 	return (r);
 }
 
