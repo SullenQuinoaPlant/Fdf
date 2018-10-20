@@ -258,7 +258,7 @@ struct						s_point_coordinates_transform
 	t_s_pctr	*nxt;
 	t_pctrm		own;
 	t_pctrm		mashed;
-	t_tick		tick;
+	t_ticker	tick;
 };
 
 struct						s_view_element
@@ -273,8 +273,8 @@ struct						s_view_element
 		};
 		t_s_ta	ta;
 	};
-	t_proj	prj;
-	t_tick	tick;
+	t_proj		prj;
+	t_ticker	tick;
 };
 
 /*
@@ -441,7 +441,6 @@ struct						s_scene_view
 	t_s_s		*s;
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
-	t_ticker	ct_tick;
 	t_s_ve		e[e_seg_sz];
 	t_vuint		h;
 	t_vuint		w;

@@ -335,10 +335,6 @@ void						tssv_grp_apply_proj(
 int							tssv_print_ascii(
 	t_s_sv	*v);
 
-void						tssv_ring_seg_apply_proj(
-	void	*p_seg,
-	t_ring	p_tssv);
-
 int							tssv_tar_allocs(
 	t_e_seg	grp,
 	t_s_s	*s);
