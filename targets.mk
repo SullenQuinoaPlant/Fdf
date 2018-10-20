@@ -26,6 +26,7 @@ TARGETS := \
 	print_obj \
 	print_scene_points \
 	print_view \
+	realloc_tars \
 	ring \
 	scene_add_tagged_array \
 	scene_make \

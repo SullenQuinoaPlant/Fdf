@@ -119,6 +119,12 @@ void						*get_se(
 	t_e_seg		g,
 	t_tag		t);
 
+int							inc_tar_alloc(
+	t_s_s	*s,
+	size_t	type_sz,
+	size_t	*ar_sz,
+	void	***p_ar);
+
 int							init_tsse(
 	t_e_seg	g,
 	t_s_se	*se,
@@ -239,13 +245,13 @@ void						print_scene_points(
 int							realloc_tars(
 	t_s_s	*s);
 
-int							reg_tesegfreetags(
+int							reg_teseg_freetags(
 	t_tag	first,
 	t_tag	diff_with_last,
 	t_s_s	*s,
 	t_e_seg	group);
 
-int							reg_tssefreetags(
+int							reg_tsse_freetags(
 	t_tag	first,
 	t_tag	diff_with_last,
 	t_s_s	*s,
@@ -316,6 +322,10 @@ void						tssv_seg_apply_proj(
 
 int							tssv_tar_allocs(
 	t_e_vpg	grp,
+	t_s_s	*s);
+
+int							tssvs_add_tar(
+	t_e_seg	grp,
 	t_s_s	*s);
 
 void						txyz_to_ttpr(

@@ -66,7 +66,7 @@ int						get_nxt_se(
 	return (SUCCESS);
 }
 
-int						reg_tssefreetags(
+int						reg_tsse_freetags(
 	t_tag first,
 	t_tag diff_with_last,
 	t_s_s *s,
@@ -82,11 +82,11 @@ int						reg_tssefreetags(
 	ft_lstadd(&g->nxt, tl);
 	r = SUCCESS;
 	if ((s->nxt_allocs += sizeof(t_list)) >= TAG_NXT_CAP)
-		r = realloc_tars(s);//this is heavy. do it later. if and when element suppressions are introduced
+		r = realloc_tars(s);
 	return (r);
 }
 
-int						reg_tesegfreetags(
+int						reg_teseg_freetags(
 	t_tag first,
 	t_tag diff_with_last,
 	t_s_s *s,
@@ -94,5 +94,5 @@ int						reg_tesegfreetags(
 {
 	t_s_se *const	grp = &s->e[g];
 	
-	return (reg_tssefreetags(first, diff_with_last, s, grp));
+	return (reg_tsse_freetags(first, diff_with_last, s, grp));
 }
