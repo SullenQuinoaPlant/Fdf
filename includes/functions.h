@@ -324,6 +324,15 @@ int							tssv_add_pxl_ars(
 	t_vuint	w,
 	t_s_sv	*v);
 
+void						tssv_apply_projs(
+	t_s_sv	*v);
+
+void						tssv_grp_apply_proj(
+	t_s_sv	*v,
+	t_proj	proj,
+	t_s_se	*s_grp,
+	t_s_ta	*v_grp);
+
 int							tssv_print_ascii(
 	t_s_sv	*v);
 

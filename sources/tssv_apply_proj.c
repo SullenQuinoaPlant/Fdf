@@ -1,16 +1,16 @@
 #include "scene.h"
 
-void						tssv_apply_proj(
+void						tssv_grp_apply_proj(
 	t_s_sv *v,
 	t_proj proj,
 	t_s_se *s_grp,
 	t_s_ta *v_grp)
 {
-	t_u_spsv const *const *const	pnv = v->e[e_spnv].ar;
-	void							*p_ve;
-	void							*p_se;
-	void							*lim_ve;
-	size_t							i;
+	t_s_p const *const *const	pts = (t_s_p**)v->e[e_p].ar;
+	void						*p_ve;
+	void						*p_se;
+	void						*lim_ve;
+	size_t						i;
 
 	i = -1;
 	while (++i < v_grp->ar_sz)
@@ -20,10 +20,23 @@ void						tssv_apply_proj(
 		lim_ve = p_ve + TAS * v_grp->e_sz;
 		while (p_ve < lim_ve)
 		{
-			(*proj)(v, p_se, pnv, p_ve);
+			(*proj)(v, p_se, pts, p_ve);
 			p_se += s_grp->e_sz;
 			p_ve += v_grp->e_sz;
 		}
+	}
+}
+
+void						tssv_apply_projs(
+	t_s_sv *v)
+{
+	t_e_seg		i;
+
+	i = e_p;
+	while (i < e_seg_sz)
+	{
+		tssv_grp_apply_proj(v, v->prj[i], &v->s->e[i], &v->e[i]);
+		i++;
 	}
 }
 
@@ -36,7 +49,7 @@ void						tssv_seg_apply_proj(
 	t_e_seg const	g = *(t_e_seg*)p_seg;
 	t_s_ta *const	ta = &v->e[g];
 
-	tssv_apply_proj(v, v->prj[g], &s->e[g], &v->e[g]);
+	tssv_grp_apply_proj(v, v->prj[g], &s->e[g], &v->e[g]);
 }
 
 int							tssvs_seg_apply_proj(
