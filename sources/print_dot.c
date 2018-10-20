@@ -11,7 +11,7 @@ int							print_dot(
 	t_vuint const	h = d->here[V_H];
 
 	if (prec[h][w] < d->prec)
-		return ;
+		return (SUCCESS);
 	prec[h][w] = d->prec;
 	pxl[h][w] = d->argb;
 	return (SUCCESS);

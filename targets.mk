@@ -21,7 +21,9 @@ TARGETS := \
 	open \
 	pnt_dec_set_and_multiply \
 	point_projection \
+	print_arrow \
 	print_dot \
+	print_fill \
 	print_line \
 	print_obj \
 	print_scene_points \
