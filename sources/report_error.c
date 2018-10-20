@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <unistd.h>
 #include <errno.h>
 #include "outer.h"
@@ -6,7 +7,7 @@
 static void				our_errors(
 	int err)
 {
-	char const *const	msgs = {
+	char const *const	msgs[OUT_OF_VIEW] = {
 		"bad argumentss\n",
 		"memory cap\n",
 		"bad input file\n",
@@ -27,5 +28,5 @@ void					report_error(
 	if (err > 0)
 		our_errors(err);
 	else
-		sys_error(void);
+		sys_error();
 }

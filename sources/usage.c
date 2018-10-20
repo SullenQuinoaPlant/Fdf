@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include "libft.h"
+#include "outer.h"
 
 #define USAGE "usage: ./fdf path-to-conforming-file\n"
 
@@ -12,3 +12,4 @@ int								usage(
 	if ((r = write(1, USAGE, ft_strlen(USAGE))) != len)
 		return (SYS_ERR);
 	return (SUCCESS);
+}

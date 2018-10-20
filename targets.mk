@@ -29,6 +29,7 @@ TARGETS := \
 	print_scene_points \
 	print_view \
 	realloc_tars \
+	report_error \
 	ring \
 	scene_add_tagged_array \
 	scene_make \
@@ -53,4 +54,5 @@ TARGETS := \
 	tssv_print_scene_ascii \
 	tsta_functions \
 	txyz_to_ttpr \
+	usage \
 	ve_functions

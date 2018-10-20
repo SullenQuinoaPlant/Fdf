@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 16:13:23 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/20 16:19:02 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/20 16:33:06 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				main(
 	r = SUCCESS;
 	if (ac != 2 ||
 		((r = get_cdgfxyrz_sbi(av[1], input)) != SUCCESS && r == BAD_INFILE))
-		r = usage(void);
+		r = usage();
 	else if (r == SUCCESS &&
 		(r = make_scene(input, &s)) == SUCCESS &&
 		!(r = add_isometric_v((t_vpos){478, 2550}, (t_zntr){0.01, 0, 0, 0}, s)))
