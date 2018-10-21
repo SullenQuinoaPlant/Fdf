@@ -138,7 +138,7 @@ int							get_cdgfxyrz_sbi(
 		free(p);
 	if (fd >= 0)
 		close(fd);
-	ft_lstdel(&bs, 0);
+	ft_lstdel(&bs, ft_cleanfree);
 	if (!*ret)
 		return (r == SUCCESS ? SYS_ERR : r);
 	return (SUCCESS);
