@@ -42,7 +42,7 @@ int						nxt_active_obj(
 	*ret = 0;
 	if (ret_tag)
 		*ret_tag = 0;
-	if (ring_expand(sizeof(t_s_ao), 0, (void**)&s->ao) != RING_SUCCESS)
+	if (!ring_expand(sizeof(t_s_ao), 0, (void**)&s->ao))
 		return (SYS_ERR);
 	if ((r = nxt_fresh_obj(s, ret, ret_tag)) == SUCCESS)
 	{

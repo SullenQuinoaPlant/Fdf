@@ -46,7 +46,7 @@ int						add_view(
 		*ret = 0;
 	r = SYS_ERR;
 	v = &s->v;
-	if (ring_expand(sizeof(t_s_sv), 0, (void**)v) == RING_SUCCESS)
+	if (ring_expand(sizeof(t_s_sv), 0, (void**)v))
 	{
 		if ((r = init_view(s, *v)) != SUCCESS)
 			free_view(v);
