@@ -1,6 +1,9 @@
 all : $(OUT_DIR)/$(NAME)
 
-$(OUT_DIR)/$(NAME) : $(OBJS)
+$(OUT_DIR)/$(NAME)\
+:\
+$(OBJS)\
+$(patsubst %,$(LIBS_L)/%.a,$(DEPENDENCIES))
 	$(CC) -o $@ $^\
 		-L $(LIBS_L)\
 		-lm\

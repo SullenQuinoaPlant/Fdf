@@ -72,9 +72,9 @@
 /*
 **Sometimes not:
 */
-# define PXL_DEC_ARGB_OFFSET DIMS
+# define PXL_DEC_ARGB_OFFSET VIEW_DIMS
 # define PXDAO PXL_DEC_ARGB_OFFSET
-# define PNT_DEC_ARGB_OFFSET VIEW_DIMS
+# define PNT_DEC_ARGB_OFFSET DIMS
 # define PTDAO PNT_DEC_ARGB_OFFSET
 
 #endif

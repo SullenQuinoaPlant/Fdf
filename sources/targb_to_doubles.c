@@ -39,7 +39,6 @@ void							doubles_to_targb(
 
 	i = -1;
 	recompose = 0;
-	argb = 0;
 	while (++i < ARGBS)
 	{
 		recompose <<= ARGB_SHIFT;
