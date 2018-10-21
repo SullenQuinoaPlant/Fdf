@@ -8,4 +8,5 @@ void					free_tscdgfxyrz(
 	size_t const		sz = p->x_sz * p->y_sz;
 
 	ft_cleanfree(p->ar, sizeof(t_s_cxyd) * sz);
+	free(input);
 }

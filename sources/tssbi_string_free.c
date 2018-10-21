@@ -12,16 +12,17 @@ static void				free_tssbi(
 	t_tssbi_freer	f;
 
 	if ((f = far[tssbi->type]))
-		f(tssbi);
-	ft_cleanfree(tssbi, sizeof(t_s_sbi));
+		f(tssbi->input);
+	free(tssbi);
 }
 
 void					free_tssbi_str(
 	t_s_sbi **str)
 {
-	while (*str)
-	{
-		free_tssbi(*str);
-		*str++ = 0;
-	}
+	t_s_sbi **const	save = str;
+	t_s_sbi			*p;
+
+	while ((p = *str++))
+		free_tssbi(p);
+	*save = 0;
 }
