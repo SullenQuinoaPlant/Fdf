@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "parse.h"
+#include "colors.h"
 
 #define BUF_CT 256
 #define E_CT 0
@@ -39,7 +40,7 @@ static int					parse_like_really(
 	int			z;
 
 	s = (char*)*str;
-	col = 0;
+	col = COL_WHITE;
 	if (!*s)
 		return (SUCCESS);
 	if (ft_atoierr(s, &z, &s) ||
