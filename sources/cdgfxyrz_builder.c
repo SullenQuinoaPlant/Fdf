@@ -72,6 +72,7 @@ static int					add_points(
 			*r = get_nxt_se(e_p, s, &tags[i][j], (void**)&pt);
 			if (*r != SUCCESS)
 				return (*r);
+			pt->refs = 0;
 			pt->xyz[X] = i + p->at[X];
 			pt->xyz[Y] = j + p->at[Y];
 			pt->xyz[Z] = par[i][j].z + p->at[Z];

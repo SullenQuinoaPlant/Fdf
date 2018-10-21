@@ -18,10 +18,14 @@ int							add_star(
 	t_s_s *s)
 {
 	t_s_se *const	se = &s->e[g];
+	size_t const	e_sz = se->e_sz;
 	int				r;
 
 	if ((r = tssvs_add_tar(g, s)) == SUCCESS &&
-		(r = inc_tar_alloc(s, se->e_sz, &se->ar_sz, &se->ar)) == SUCCESS)
+		(r = inc_tar_alloc(s, e_sz, &se->ar_sz, &se->ar)) == SUCCESS)
+	{
+		ft_bzero(se->ar[se->ar_sz - 1], TAS * e_sz);
 		r = reg_teseg_freetags(((t_tag)se->ar_sz - 1) << TPS, TPM, s, g);
+	}
 	return (r);
 }
