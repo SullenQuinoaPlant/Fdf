@@ -64,5 +64,5 @@ t_s_pctr				*add_camera(
 	if (*at)
 		p->prv = (**at).prv;
 	ring_insert(p, (void**)at);
-	return (p);
+	return (dummy.prv);
 }

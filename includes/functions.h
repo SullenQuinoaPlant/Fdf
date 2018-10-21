@@ -94,7 +94,7 @@ void						free_tar(
 	t_s_s	*s);
 
 void						free_tscdgfxyrz(
-	t_s_sbi	*p);
+	void	*p);
 
 void						free_tso_tsse_content(
 	t_s_se	*tso_tsse);

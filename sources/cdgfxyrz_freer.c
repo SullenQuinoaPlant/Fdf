@@ -2,9 +2,10 @@
 #include "parse.h"
 
 void					free_tscdgfxyrz(
-	t_s_sbi *sbi)
+	void *input)
 {
-	t_s_cdgfxyrz *const	p = (t_s_cdgfxyrz*)sbi->input;
+	t_s_cdgfxyrz *const	p = (t_s_cdgfxyrz*)input;
+	size_t const		sz = p->x_sz * p->y_sz;
 
-	free(p->ar);
+	ft_cleanfree(p->ar, sizeof(t_s_cxyd) * sz);
 }

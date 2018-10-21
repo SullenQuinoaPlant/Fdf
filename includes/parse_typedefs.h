@@ -25,7 +25,7 @@ typedef struct s_scene_builder_input	t_s_sbi;
 
 typedef int		(*t_scene_builder)(void*, t_s_s*);
 
-typedef void	(*t_tssbi_freer)(t_s_sbi*);
+typedef void	(*t_tssbi_freer)(void*);
 /*
 **typedef struct s_cartesian_xy_dot	t_s_cxyd;
 **
