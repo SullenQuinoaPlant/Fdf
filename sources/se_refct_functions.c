@@ -19,7 +19,7 @@ int							chg_setag_refct(
 	int chg,
 	t_s_s *s)
 {
-	t_refct *const	refct = (int*)grp;
+	t_refct *const	refct = (int*)(grp->ar[t >> TPS] + grp->e_sz * (t & TPM));
 	int		sign;
 
 	sign = *refct < 0 ? -1 : 1;
@@ -30,7 +30,7 @@ int							chg_setag_refct(
 		if (MAX_REFS - *refct < chg)
 			return (REFCOUNT_TOO_BIG);
 	}
-	else if (chg < 0 && chg > -1 * sign * *refct)
+	else if (chg < 0 && chg < -1 * sign * *refct)
 			return (REFCOUNT_INCOHERENT);
 	if (!(*refct += chg * sign))
 		return (reg_tsse_freetags(t, 0, s, grp));
