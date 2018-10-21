@@ -46,7 +46,7 @@ int						ring_clone(
 	void	*clonee,
 	void	**ret);
 
-int						ring_expand(
+void					*ring_expand(
 	size_t	container_sz,
 	void	*content,
 	void	**p_ring);
@@ -54,6 +54,10 @@ int						ring_expand(
 void					ring_free(
 	size_t	container_sz,
 	void	(*del)(void*, size_t),
+	void	**p_ring);
+
+void					ring_insert(
+	void	*insertee,
 	void	**p_ring);
 
 void					ring_shrink(

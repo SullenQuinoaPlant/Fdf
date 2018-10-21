@@ -1,7 +1,7 @@
 TARGETS := \
 	add_camera \
-	cdgfxyrz_builder \
 	cdgfxyrz_builder_add_lines \
+	cdgfxyrz_builder \
 	cdgfxyrz_freer \
 	cdgfxyrz_parser \
 	discrete_ratio_tracking \

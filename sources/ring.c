@@ -1,30 +1,39 @@
 #include <stdlib.h>
 #include "ring.h"
 
-int						ring_expand(
+void					ring_insert(
+	void *insertee,
+	void **p_ring)
+{
+	t_s_ring *const	ins = insertee;
+	t_s_ring *const	here = *p_ring;
+
+	if (here)
+	{
+		*ins = (t_s_ring){here, here->nxt};
+		ins->nxt->prv = ins;
+		here->nxt = ins;
+	}
+	else
+		*ins = (t_s_ring){ins, ins};
+	*p_ring = ins->prv;
+}
+
+void					*ring_expand(
 	size_t container_sz,
 	void *content,
 	void **p_ring)
 {
-	t_s_ring *const	prv = *p_ring;
-	t_s_ring		*p;
+	void	*p;
 
 	if (!(p = malloc(container_sz)))
-		return (RING_SYS_ERR);
+		return (0);
 	if (content)
 		ft_memcpy(p, content, container_sz);
 	else
 		ft_bzero(p, container_sz);
-	if (prv)
-	{
-		*p = (t_s_ring){prv, prv->nxt};
-		p->nxt->prv = p;
-		prv->nxt = p;
-	}
-	else
-		*p = (t_s_ring){p, p};
-	*p_ring = p;
-	return (RING_SUCCESS);
+	ring_insert(p, p_ring);
+	return (p);
 }
 
 void					ring_free(

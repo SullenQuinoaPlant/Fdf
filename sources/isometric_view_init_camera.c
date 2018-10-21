@@ -28,5 +28,5 @@ t_s_pctr					*add_isometric_camera(
 		{0, 0, zntr[ZTR_Z]},
 		{zntr[ZTR_TR + X], zntr[ZTR_TR + Y], zntr[ZTR_TR + Z]}}};
 
-	return (add_camera(cts, CYRPZ, s));
+	return (add_camera(cts, CYRPZ, &s->ct));
 }

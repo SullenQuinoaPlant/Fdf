@@ -21,7 +21,8 @@
 t_s_pctr					*add_camera(
 	t_pctrm	const	*coordinate_transforms__cts,
 	int				coordinate_transforms_count__ct_ct,
-	t_s_s			*s);
+	t_s_pctr		**add_at);
+//	t_s_s			*s);
 
 int							add_isometric_v(
 	t_vpos	view_height_and_width__hw,
