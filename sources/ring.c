@@ -86,10 +86,10 @@ int						ring_clone(
 	*ret = 0;
 	if (!(p = clonee))
 		return (RING_SUCCESS);
-	while ((r = ring_expand(c_sz, p, (void**)&petri)) == RING_SUCCESS &&
+	while (ring_expand(c_sz, p, (void**)&petri) &&
 		(p = p->nxt) != lim)
 		;
-	if (r != RING_SUCCESS)
+	if ((r = p == lim ? RING_SUCCESS : RING_SYS_ERR) != RING_SUCCESS)
 		ring_free(c_sz, 0, (void**)&petri);
 	else
 		*ret = petri;

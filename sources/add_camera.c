@@ -38,45 +38,12 @@
 //	return (dummy.prv);
 //}
 
-t_s_pctr				*add_camera(
-	t_pctrm const *cts,
-	int ct_ct,
-	t_s_pctr **at)
-{
-	t_s_pctr	dummy;
-	t_pctrm		mash[2];
-	t_s_pctr	*p;
-	int			tic;
-	int			r;
-
-	set_tpctrm_identity(*(mash + (tic = 0)));
-	ft_bzero(&dummy, sizeof(t_s_pctr));
-	dummy.refs = 1;
-	dummy.prv = *at ? (**at).prv : 0;
-	while (ct_ct--)
-	{
-		ft_memcpy(dummy.own, *cts, sizeof(t_pctrm));
-		tpctrm_mult(*(mash + tic), *cts, *(mash + !tic));
-		ft_memcpy(dummy.mashed, *(mash + (tic = !tic)), sizeof(t_pctrm));
-		r = ring_expand(sizeof(t_s_pctr), &dummy, (void**)&(p = *at));
-		if (r != RING_SUCCESS)
-			return (0);
-		if (dummy.prv)
-			dummy.prv->nxt = p;
-		dummy.prv = p;
-		at = &p->nxt;
-		cts++;
-	}
-	return (dummy.prv);
-}
-
 static t_s_pctr			*cleanup(
-	t_s_pctr *dummy)
+	t_s_pctr *p)
 {
-	t_s_pctr	*p;
 	t_s_pctr	*prv;
 
-	prv = dummy->prv;
+	prv = p->prv;
 	while ((p = prv))
 	{
 		prv = p->prv;
@@ -106,7 +73,7 @@ t_s_pctr				*add_camera(
 {
 	t_s_pctr	dummy;
 	t_pctrm		mash[2];
-	void		*p;
+	t_s_pctr	*p;
 	int			tic;
 
 	set_tpctrm_identity(*(mash + (tic = 0)));
@@ -118,13 +85,12 @@ t_s_pctr				*add_camera(
 		tpctrm_mult(*(mash + tic), *cts++, *(mash + !tic));
 		ft_memcpy(dummy.mashed, *(mash + (tic = !tic)), sizeof(t_pctrm));
 		p = 0;
-		if (ring_expand(sizeof(t_s_pctr), &dummy, &p)) != RING_SUCCESS)
+		if (!(p = ring_expand(sizeof(t_s_pctr), &dummy, (void**)&p)))
 			return (cleanup(&dummy));
-		dummy.prv = p;
 	}
 	p = rewind(&dummy);
 	if (*at)
 		p->prv = (**at).prv;
-	ring_insert(p, at);
+	ring_insert(p, (void**)at);
 	return (p);
 }
