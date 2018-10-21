@@ -53,10 +53,11 @@ int				main(
 		r = usage();
 	else if (r == SUCCESS &&
 		(r = make_scene(input, &s)) == SUCCESS &&
-		!(r = add_isometric_v((t_vpos){478, 2550}, (t_zntr){0.01, 0, 0, 0}, s)))
+		!(r = add_isometric_v((t_vpos){52, 158}, (t_zntr){0.01, 0, 0, 0}, s)))
 	{
 		print_scene_points(s);
-		printf("\n");
+		printf("\nPRINTING AS ASCII :\n");
+		s->v->out_fd = 1;
 		tssv_print_ascii(s->v);
 	}
 	scene_teardown(&s);	

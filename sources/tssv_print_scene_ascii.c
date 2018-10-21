@@ -10,6 +10,8 @@ int							tssv_print_ascii(
 	t_argb			*pxl;
 	int				r;
 
+	if (fd < 0)
+		return (SUCCESS);
 	if ((r = write(fd, "", 0)))
 		return (SYS_ERR);
 	pxl = v->pxl;
