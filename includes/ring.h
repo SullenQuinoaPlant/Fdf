@@ -65,6 +65,10 @@ void					ring_shrink(
 	void	(*del)(void*, size_t),
 	void	**p_at);
 
+void					ring_simple_free(
+	size_t	container_sz,
+	void	**p_ring);
+
 # define RING_SYS_ERR -1
 # define RING_SUCCESS 0
 

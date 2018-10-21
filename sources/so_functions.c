@@ -50,7 +50,7 @@ int						nxt_active_obj(
 		(**ret).flgs |= O_SHOW;
 	}
 	else
-		ring_shrink(sizeof(t_s_ao), 0, (void**)&s->ao);
+		ring_shrink(sizeof(t_s_ao), ft_free, (void**)&s->ao);
 	return (r);
 }
 
