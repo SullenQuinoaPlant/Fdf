@@ -13,7 +13,7 @@ void				scene_teardown(
 	i = e_p;
 	while (i < e_seg_sz)
 		free_tsse(&scene->e[i++], scene);
-	ring_free(sizeof(t_s_ao), ft_free, &(**s).ao);
+	ring_free(sizeof(t_s_ao), ft_free, (void**)&(**s).ao);
 	free_views(&scene->v);
 	ft_scleanfree((void**)s, sizeof(t_s_s));
 }

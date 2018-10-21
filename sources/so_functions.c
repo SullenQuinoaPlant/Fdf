@@ -61,5 +61,5 @@ void					free_object_lists(
 
 	i = e_p;
 	while (i < e_seg_sz)
-		ft_lstdel(&o->e[i++], 0);
+		ft_lstdel(&o->e[i++], ft_free);
 }
