@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/20 19:22:24 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 13:40:11 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,12 +480,15 @@ struct						s_active_object
 ** - v : views
 ** - av : active view
 */
+# define MIN 0
+# define MAX 1
+# define MINMAX_SZ
 struct						s_scene
 {
 	size_t		tar_allocs;
 	size_t		nxt_allocs;
 	t_s_se		e[e_seg_sz];
-	t_xyz		maxmin[2];
+	t_xyz		maxmin[DIMS][MIN_MAX_SZ];
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
 	t_s_sv		*v;

@@ -2,28 +2,28 @@
 #include "parse.h"
 #include "colors.h"
 
-#define BUF_CT 256
-#define E_CT 0
-#define E_CT_ALLOCS 1
+#define BUF_SZ 256
+#define CT_E 0
+#define CT_ALLOCS 1
 
 static int					new_buff(
 	t_list **prv,
-	size_t *counters,
+	size_t *counter,
 	t_s_cxyd **p)
 {
 	t_list		*new;
 	t_s_cxyd	*ar;
 
 	new = 0;
-	if ((ar = malloc(BUF_CT * sizeof(t_s_cxyd))) &&
+	if ((ar = malloc(BUF_SZ * sizeof(t_s_cxyd))) &&
 		(new = ft_lstnew(0, 0)))
 	{
 		*p = ar;
 		new->content = ar;
-		new->content_size = BUF_CT * sizeof(t_s_cxyd);
+		new->content_size = BUF_SZ * sizeof(t_s_cxyd);
 		ft_lstadd(prv, new);
-		counters[E_CT] = BUF_CT;
-		counters[E_CT_ALLOCS]++;
+		counter[CT_E] = BUF_SZ;
+		counter[CT_ALLOCS]++;
 	}
 	else if (ar)
 		free(ar);
@@ -65,27 +65,27 @@ int							parse_cdgfxyrz(
 {
 	char 		*l[2];
 	size_t		l_ct;
-	size_t		e_ct[2];
+	size_t		counter[2];
 	t_s_cxyd	*p;
 	int			r;
 
 	*bs = 0;
 	l_ct = 0;
-	ft_bzero(e_ct, sizeof(e_ct));
+	ft_bzero(counter, sizeof(counter));
 	r = 0;
 	while ((r = get_next_line(fd, &l[0])) > 0)
 	{
 		l[1] = l[0];
 		l_ct++;
-		while ((e_ct[E_CT] || (r = new_buff(bs, e_ct, &p)) == SUCCESS) &&
+		while ((counter[CT_E] || (r = new_buff(bs, counter, &p)) == SUCCESS) &&
 			(r = parse_like_really((char const **)&l[1], &p) == NOT_DONE))
-			e_ct[E_CT]--;
+			counter[CT_E]--;
 		free(l[0]);
 		if (r != SUCCESS)
 			return (r);
 	}
 	dims[DIM_R] = l_ct;
-	dims[DIM_C] = (e_ct[E_CT_ALLOCS] * BUF_CT - e_ct[E_CT]) / l_ct;
+	dims[DIM_C] = (counter[CT_ALLOCS] * BUF_SZ - counter[CT_E]) / l_ct;
 	return (r == 0 ? SUCCESS : SYS_ERR);
 }
 
@@ -103,11 +103,11 @@ static int					fill_tscdgfxyrz(
 	if (!(ar = malloc(sizeof(t_s_cxyd) * ct_all)))
 		return (SYS_ERR);
 	p_ar = ar + ct_all;
-	if ((sz = ct_all % BUF_CT))
+	if ((sz = ct_all % BUF_SZ))
 		ft_memcpy((p_ar -= sz), bs->content, sz * sizeof(t_s_cxyd));
-	sz = BUF_CT * sizeof(t_s_cxyd);
+	sz = BUF_SZ * sizeof(t_s_cxyd);
 	while ((bs = bs->next))
-		ft_memcpy((p_ar -= BUF_CT), bs->content, sz);
+		ft_memcpy((p_ar -= BUF_SZ), bs->content, sz);
 	ret->x_sz = dims[DIM_R];
 	ret->y_sz = dims[DIM_C];
 	ret->ar = ar;
