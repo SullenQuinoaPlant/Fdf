@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 15:34:36 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 15:49:12 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ enum						e_scene_input_types
 **		(x, y) position, one and only one z-axis value is assigned.
 ** - the parse is described in a 2-dimensional (t_cgfxyrz) array
 **		where the dimensions are assigned as follows : ar[x][y]
+** - 'at' : specifies where to place grid origin in scene, not optional.
 **
 **Grid rows are along the y axis, grid columns are along the x axis.
 */
@@ -43,6 +44,7 @@ struct						s_cartesian_xy_dot
 
 struct						s_cartesian_dot_grid_fullxy_regularz
 {
+	t_xyz			at;
 	size_t			x_sz;
 	size_t			y_sz;
 	int				zmm[MIN_MAX_SZ];
@@ -52,14 +54,12 @@ struct						s_cartesian_dot_grid_fullxy_regularz
 /*
 **Scene builders, (*t_scene_builder)s, add elements to the scene.
 **They take the following struct as an argument.
-** - 'at' : specifies where to place grid origin in scene, not optional.
 ** - 'minmax' : gives the coordinates of furthest points along the axes
 ** - 'type' : specifies what the 'input' (void*) must be cast to.
 ** - 'input' : pointer to an input-specific structure.
 */
 struct						s_scene_builder_input
 {
-	t_xyz	at;
 	t_xyz	minmax[DIMS][MIN_MAX_SZ];
 	t_e_sit	type;
 	void	*input;

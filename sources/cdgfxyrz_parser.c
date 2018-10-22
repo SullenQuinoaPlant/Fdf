@@ -30,8 +30,9 @@ static int					new_buff(
 	return (new ? SUCCESS : SYS_ERR);
 }
 
+#define DONE SUCCESS 
 #define NOT_DONE 1
-static int					parse_like_really(
+static int					really_parse(
 	char const **str,
 	int zmm[MIN_MAX_SZ],
 	t_s_cxyd **p)
@@ -43,7 +44,7 @@ static int					parse_like_really(
 	s = (char*)*str;
 	col = COL_WHITE;
 	if (!*s)
-		return (SUCCESS);
+		return (DONE);
 	if (ft_atoierr(s, &z, &s) ||
 		(*s == ',' && ft_axtoierr(++s, (int*)&col, &s)) ||
 		(*s && *s++ != ' '))
@@ -70,29 +71,26 @@ int							parse_cdgfxyrz(
 	t_list **bs)
 {
 	char 		*l[2];
-	size_t		l_ct;
 	size_t		counter[2];
 	t_s_cxyd	*p;
 	int			r;
 
-	*bs = 0;
-	l_ct = 0;
-	ft_bzero(counter, sizeof(counter));
+	dims[DIM_R] = -1;
 	ft_memcpy(zmm, (int[MIN_MAX_SZ]){INT_MAX, INT_MIN}, sizeof(int[2]));
-	r = 0;
+	*bs = 0;
+	ft_bzero(counter, sizeof(counter));
 	while ((r = get_next_line(fd, &l[0])) > 0)
 	{
 		l[1] = l[0];
-		l_ct++;
-		while ((counter[CT_E] || (r = new_buff(bs, counter, &p)) == SUCCESS) &&
-			(r = parse_like_really((char const **)&l[1], zmm, &p) == NOT_DONE))
-			counter[CT_E]--;
+		ft_memcpy(dims, (size_t[2]){++dims[DIM_R], 0});
+		while ((counter[CT_E]-- || (r = new_buff(bs, counter, &p)) == SUCCESS) &&
+			(r = really_parse((char const **)&l[1], dims, zmm, &p) == NOT_DONE))
+			dims[DIM_C]++;
 		free(l[0]);
 		if (r != SUCCESS)
 			return (r);
 	}
-	dims[DIM_R] = l_ct;
-	dims[DIM_C] = (counter[CT_ALLOCS] * BUF_SZ - counter[CT_E]) / l_ct;
+	dims[DIM_R]++;
 	return (r == 0 ? SUCCESS : SYS_ERR);
 }
 
@@ -133,6 +131,7 @@ int							get_cdgfxyrz_sbi(
 	int				r;
 
 	bs = 0;
+	ft_bzero(dims, sizeof(dims));
 	if ((p = malloc(sizeof(t_s_cdgfxyrz))) &&
 		(r = open_file(file, &fd)) == SUCCESS &&
 		(r = parse_cdgfxyrz(fd, dims, p, &bs)) == SUCCESS &&
@@ -141,7 +140,7 @@ int							get_cdgfxyrz_sbi(
 	{
 		(**ret).type = e_sit_cdgfxyrz;
 		(**ret).input = p;
-		ft_bzero((**ret).at, sizeof(t_xyz));
+		ft_bzero(p->at, sizeof(t_xyz));
 		cdgfxyrz_set_sbi_minmax(p, *ret);
 	}
 	else if (p)
