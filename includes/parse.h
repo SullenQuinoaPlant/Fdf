@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 18:05:02 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 18:25:25 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ enum						e_scene_input_types
 ** - the parse is described in a 2-dimensional (t_cgfxyrz) array
 **		where the dimensions are assigned as follows : ar[x][y]
 ** - 'at' : specifies where to place grid origin in scene, not optional.
+**		This array must be present in first position in all input
+**		describing structures.
 **
 **Grid rows are along the y axis, grid columns are along the x axis.
 */
