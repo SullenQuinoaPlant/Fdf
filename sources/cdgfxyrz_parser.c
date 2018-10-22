@@ -30,10 +30,6 @@ static int					new_buff(
 	return (new ? SUCCESS : SYS_ERR);
 }
 
-/*
-**Some type-fishy conversions from size_t to int,
-**	ought to be okay on reasonable input.
-*/
 #define DONE SUCCESS 
 #define NOT_DONE 1
 static int					really_parse(
@@ -57,9 +53,9 @@ static int					really_parse(
 	*str = (char const*)s;
 	*((*p)++) = (t_s_cxyd){z, col};
 	if (z < zmm[MIN])
-		ft_memcpy(zmm[MIN], (int[3]){dims[ROW], dims[COL], z}, sizeof(int[3]));
+		zmm[MIN] = z;
 	else if (z > zmm[MAX])
-		ft_memcpy(zmm[MAX], (int[3]){dims[ROW], dims[COL], z}, sizeof(int[3]));
+		zmm[MAX] = z;
 	return (NOT_DONE);
 }
 
@@ -139,13 +135,12 @@ int							get_cdgfxyrz_sbi(
 	ft_bzero(dims, sizeof(dims));
 	if ((p = malloc(sizeof(t_s_cdgfxyrz))) &&
 		(r = open_file(file, &fd)) == SUCCESS &&
-		(r = parse_cdgfxyrz(fd, dims, p, &bs)) == SUCCESS &&
+		(r = parse_cdgfxyrz(fd, dims, p->zmm, &bs)) == SUCCESS &&
 		(r = fill_tscdgfxyrz(dims, bs, p)) == SUCCESS &&
 		(*ret = malloc(sizeof(t_s_sbi))))
 	{
 		(**ret).type = e_sit_cdgfxyrz;
 		(**ret).input = p;
-		ft_bzero(p->at, sizeof(t_xyz));
 		cdgfxyrz_set_sbi_minmax(p, *ret);
 	}
 	else if (p)
