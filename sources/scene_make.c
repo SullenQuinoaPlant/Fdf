@@ -10,6 +10,7 @@ static void				init_vars(
 	s->ao = 0;
 	s->ct = 0;
 	s->v = 0;
+	s->av = 0;
 }
 
 static int				init_scene(

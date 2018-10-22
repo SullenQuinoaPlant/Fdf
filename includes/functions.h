@@ -18,6 +18,9 @@
 # include "discrete_ratio_tracking.h"
 # include "line_frame_intersections.h"
 
+void						activate_view(
+	t_s_sv	*v);
+
 t_s_pctr					*add_camera(
 	t_pctrm	const	*coordinate_transforms__cts,
 	int				coordinate_transforms_count__ct_ct,
@@ -70,6 +73,9 @@ int							cdgfxyrz_builder(
 int							clone_tar(
 	t_s_ta	*ta,
 	void	***p_ret);
+
+void						deactivate_view(
+	t_s_sv	*v);
 
 void						doubles_to_targb(
 	double	argb[ARGBS],

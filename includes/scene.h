@@ -398,6 +398,12 @@ struct						s_pixel
 	double	prec;
 };
 
+enum						e_scene_view_type
+{
+	e_iso,
+	e_svt_sz
+};
+
 /*
 **Each view has its coordinates system.
 **	The x axis is taken along the view width, from left to right.
@@ -420,6 +426,7 @@ struct						s_pixel
 **
 **Abbreviations:
 ** - id: view  identification number.
+** - vt: view type (see enum e_scene_view_type)
 ** - s: scene.
 ** - ao: cursor on the scene's active object ring.
 ** - ct: coordinates transform.
@@ -440,6 +447,7 @@ struct						s_scene_view
 {
 	t_s_ring	ring;
 	int			id;
+	t_e_svt		vt;
 	t_s_s		*s;
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
@@ -469,6 +477,7 @@ struct						s_active_object
 ** - ao : active objects
 ** - ct : coordinate transforms
 ** - v : views
+** - av : active view
 */
 struct						s_scene
 {
@@ -478,6 +487,7 @@ struct						s_scene
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
 	t_s_sv		*v;
+	t_s_sv		*av;
 };
 
 /*

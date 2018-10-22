@@ -61,15 +61,17 @@ int						add_isometric_v(
 	t_s_sv		*new_v;
 	int			r;
 
-	if ((r = add_view(s, &new_v)) == SUCCESS &&
-		(new_v->ct = add_isometric_camera(cam_pos, s)) &&
-		(r = tssv_add_pxl_ars(hw[V_H], hw[V_W], new_v)) == SUCCESS)
+	if ((r = add_view(s, hw, &new_v)) == SUCCESS &&
+		(new_v->ct = add_isometric_camera(cam_pos, s)))
 	{
+		new_v->vt = e_iso;
 		set_prj(new_v);
 		tssv_apply_projs(new_v);
-		return (SUCCESS);
 	}
-	if (r == SUCCESS)
+	else if (r == SUCCESS)
+	{
+		r = SYS_ERR;
 		free_view(&s->v);
-	return (SYS_ERR);
+	}
+	return (r);
 }

@@ -21,6 +21,7 @@ static int				mirror_tsses(
 
 static int				init_view(
 	t_s_s *s,
+	t_vpos hw,
 	t_s_sv *v)
 {
 	int		r;
@@ -29,7 +30,8 @@ static int				init_view(
 	v->id = (v->ring.prv == (t_ring)v) ? 0 : ((t_s_sv*)v->ring.prv)->id + 1;
 	v->s = s;
 	v->ao = s->ao;
-	r = mirror_tsses(s, v);
+	if ((r = mirror_tsses(s, v) == SUCCESS)
+		r = tssv_add_pxl_ars(hw[V_H], hw[V_W], v);
 	v->out_fd = -1;
 	v->out_wdw = 0;
 	return (r);
@@ -37,6 +39,7 @@ static int				init_view(
 
 int						add_view(
 	t_s_s *s,
+	t_vpos hw,
 	t_s_sv **ret)
 {
 	t_s_sv	**v;
@@ -48,7 +51,7 @@ int						add_view(
 	v = &s->v;
 	if (ring_expand(sizeof(t_s_sv), 0, (void**)v))
 	{
-		if ((r = init_view(s, *v)) != SUCCESS)
+		if ((r = init_view(s, hw, *v)) != SUCCESS)
 			free_view(v);
 		else if (ret)
 			*ret = *v;
