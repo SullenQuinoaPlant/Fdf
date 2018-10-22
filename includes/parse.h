@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 15:49:12 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:20:11 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ struct						s_cartesian_dot_grid_fullxy_regularz
 	t_xyz			at;
 	size_t			x_sz;
 	size_t			y_sz;
-	int				zmm[MIN_MAX_SZ];
+	int				zmm[MIN_MAX_SZ][DIMS];
 	t_s_cxyd		*ar;
 };
 

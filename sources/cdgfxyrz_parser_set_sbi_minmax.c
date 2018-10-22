@@ -10,6 +10,6 @@ void							cdgfxyrz_set_sbi_minmax(
 	int					x;
 	int					y;
 
-	ft_memcpy(ret[X][MIN], (t_xyz){0, 0, par[0][0].z}, sizeof(t_xyz));
-	ft_memcpy(ret[X][MAX], (t_xyz){--(x = p->x_sz), --(y = p->y_sz), par[x][y].z}, sz);
+	ft_memcpy(ret[X][MIN], (t_xyz){0, 0, par[0][0].z}, sz);
+	ft_memcpy(ret[X][MAX], (t_xyz){x - 1, y - 1, par[x][y].z}, sz);
 }

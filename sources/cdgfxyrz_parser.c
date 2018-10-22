@@ -30,10 +30,15 @@ static int					new_buff(
 	return (new ? SUCCESS : SYS_ERR);
 }
 
+/*
+**Some type-fishy conversions from size_t to int,
+**	ought to be okay on reasonable input.
+*/
 #define DONE SUCCESS 
 #define NOT_DONE 1
 static int					really_parse(
 	char const **str,
+	size_t dims[V_DIMS],
 	int zmm[MIN_MAX_SZ],
 	t_s_cxyd **p)
 {
@@ -52,17 +57,17 @@ static int					really_parse(
 	*str = (char const*)s;
 	*((*p)++) = (t_s_cxyd){z, col};
 	if (z < zmm[MIN])
-		zmm[MIN] = z;
+		ft_memcpy(zmm[MIN], (int[3]){dims[ROW], dims[COL], z}, sizeof(int[3]));
 	else if (z > zmm[MAX])
-		zmm[MAX] = z;
+		ft_memcpy(zmm[MAX], (int[3]){dims[ROW], dims[COL], z}, sizeof(int[3]));
 	return (NOT_DONE);
 }
 
 /*
 **Constants to access rows and columns:
 */
-#define DIM_R 0
-#define DIM_C 1
+#define ROW 0
+#define COL 1
 
 int							parse_cdgfxyrz(
 	int fd,
@@ -75,22 +80,22 @@ int							parse_cdgfxyrz(
 	t_s_cxyd	*p;
 	int			r;
 
-	dims[DIM_R] = -1;
+	dims[ROW] = -1;
 	ft_memcpy(zmm, (int[MIN_MAX_SZ]){INT_MAX, INT_MIN}, sizeof(int[2]));
 	*bs = 0;
 	ft_bzero(counter, sizeof(counter));
 	while ((r = get_next_line(fd, &l[0])) > 0)
 	{
 		l[1] = l[0];
-		ft_memcpy(dims, (size_t[2]){++dims[DIM_R], 0});
+		ft_memcpy(dims, (size_t[2]){++dims[ROW], 0});
 		while ((counter[CT_E]-- || (r = new_buff(bs, counter, &p)) == SUCCESS) &&
 			(r = really_parse((char const **)&l[1], dims, zmm, &p) == NOT_DONE))
-			dims[DIM_C]++;
+			dims[COL]++;
 		free(l[0]);
 		if (r != SUCCESS)
 			return (r);
 	}
-	dims[DIM_R]++;
+	dims[ROW]++;
 	return (r == 0 ? SUCCESS : SYS_ERR);
 }
 
@@ -104,7 +109,7 @@ static int					fill_tscdgfxyrz(
 	t_s_cxyd	*ar;
 	t_s_cxyd	*p_ar;
 
-	ct_all = dims[DIM_R] * dims[DIM_C];
+	ct_all = dims[ROW] * dims[COL];
 	if (!(ar = malloc(sizeof(t_s_cxyd) * ct_all)))
 		return (SYS_ERR);
 	p_ar = ar + ct_all;
@@ -113,8 +118,8 @@ static int					fill_tscdgfxyrz(
 	sz = BUF_SZ * sizeof(t_s_cxyd);
 	while ((bs = bs->next))
 		ft_memcpy((p_ar -= BUF_SZ), bs->content, sz);
-	ret->x_sz = dims[DIM_R];
-	ret->y_sz = dims[DIM_C];
+	ret->x_sz = dims[ROW];
+	ret->y_sz = dims[COL];
 	ret->ar = ar;
 	ft_memcpy(ret->at, &(double[3]){0, 0, 0}, sizeof(double[3]));
 	return (SUCCESS);
