@@ -33,6 +33,7 @@ static int					new_buff(
 #define NOT_DONE 1
 static int					parse_like_really(
 	char const **str,
+	int zmm[MIN_MAX_SZ],
 	t_s_cxyd **p)
 {
 	char 		*s;
@@ -49,6 +50,10 @@ static int					parse_like_really(
 		return (BAD_INFILE);
 	*str = (char const*)s;
 	*((*p)++) = (t_s_cxyd){z, col};
+	if (z < zmm[MIN])
+		zmm[MIN] = z;
+	else if (z > zmm[MAX])
+		zmm[MAX] = z;
 	return (NOT_DONE);
 }
 
@@ -61,6 +66,7 @@ static int					parse_like_really(
 int							parse_cdgfxyrz(
 	int fd,
 	size_t *dims,
+	int zmm[MIN_MAX_SZ],
 	t_list **bs)
 {
 	char 		*l[2];
@@ -72,13 +78,14 @@ int							parse_cdgfxyrz(
 	*bs = 0;
 	l_ct = 0;
 	ft_bzero(counter, sizeof(counter));
+	ft_memcpy(zmm, (int[MIN_MAX_SZ]){INT_MAX, INT_MIN}, sizeof(int[2]));
 	r = 0;
 	while ((r = get_next_line(fd, &l[0])) > 0)
 	{
 		l[1] = l[0];
 		l_ct++;
 		while ((counter[CT_E] || (r = new_buff(bs, counter, &p)) == SUCCESS) &&
-			(r = parse_like_really((char const **)&l[1], &p) == NOT_DONE))
+			(r = parse_like_really((char const **)&l[1], zmm, &p) == NOT_DONE))
 			counter[CT_E]--;
 		free(l[0]);
 		if (r != SUCCESS)
@@ -125,21 +132,21 @@ int							get_cdgfxyrz_sbi(
 	t_s_cdgfxyrz	*p;
 	int				r;
 
-	p = 0;
-	*ret = 0;
 	bs = 0;
-	if ((r = open_file(file, &fd)) == SUCCESS &&
-		(r = parse_cdgfxyrz(fd, dims, &bs)) == SUCCESS &&
-		(p = malloc(sizeof(t_s_cdgfxyrz))) &&
+	if ((p = malloc(sizeof(t_s_cdgfxyrz))) &&
+		(r = open_file(file, &fd)) == SUCCESS &&
+		(r = parse_cdgfxyrz(fd, dims, p, &bs)) == SUCCESS &&
 		fill_tscdgfxyrz(dims, bs, p) == SUCCESS &&
 		(*ret = malloc(sizeof(t_s_sbi))))
-		**ret = (t_s_sbi){e_sit_cdgfxyrz, p};
+	{
+		(**ret).type = e_sit_cdgfxyrz;
+		(**ret).input = p;
+		cdgfxyrz_set_sbi_minmax(p, *ret);
+	}
 	else if (p)
 		free(p);
 	if (fd >= 0)
 		close(fd);
 	ft_lstdel(&bs, ft_cleanfree);
-	if (!*ret)
-		return (r == SUCCESS ? SYS_ERR : r);
-	return (SUCCESS);
+	return (r == SUCCESS && !*ret ? SYS_ERR : r);
 }
