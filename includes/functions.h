@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 19:19:25 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 19:43:40 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,9 @@ int							reg_tsse_freetags(
 
 void						report_error(
 	int		err);
+
+void						scene_init_extr(
+	t_s_s	*s);
 
 void						scene_teardown(
 	t_s_s	**s);

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 16:13:23 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/20 16:33:06 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 19:47:50 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int				main(
 		r = usage();
 	else if (r == SUCCESS &&
 		(r = make_scene(input, &s)) == SUCCESS &&
-		!(r = add_isometric_v((t_vpos){52, 158}, (t_zntr){0.01, 0, 0, 0}, s)))
+		(r = add_default_iso_v(&v, s)) == SUCCESS)
 	{
-		activate_view(
+		activate_view(v);
 		print_scene_points(s);
 		printf("\nPRINTING AS ASCII :\n");
 		s->v->out_fd = 1;
