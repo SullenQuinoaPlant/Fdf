@@ -33,6 +33,26 @@ static void				set_prj(
 	}
 }
 
+static void				set_prt(
+	t_s_sv *v)
+{
+	t_printer const	ar[e_seg_sz] = {
+		0,
+		print_dot,
+		print_isometric_line,
+		0,
+		0,
+		print_object};
+	t_e_seg			i;
+
+	i = e_p;
+	while (i < e_seg_sz)
+	{
+		v->e[i].prt = ar[i];
+		i++;
+	}
+}
+
 int						add_isometric_v(
 	t_vpos hw,
 	t_zntr cam_pos,

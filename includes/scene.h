@@ -261,7 +261,7 @@ struct						s_point_coordinates_transform
 	t_ticker	tick;
 };
 
-struct						s_view_element
+struct						s_view_elements
 {
 	union
 	{
@@ -274,7 +274,9 @@ struct						s_view_element
 		t_s_ta	ta;
 	};
 	t_proj		prj;
-	t_ticker	tick;
+	t_ticker	prj_tick;
+	t_printer	prt;
+	t_ticker	prt_tick;
 };
 
 /*

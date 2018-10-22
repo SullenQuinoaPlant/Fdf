@@ -5,30 +5,24 @@ static int					print_listed_elements(
 	t_s_sv *v,
 	t_s_o *o)
 {
-	t_printer const	printers[e_seg_sz] = {
-		0,
-		print_dot,
-		print_line,
-		print_arrow,
-		print_fill,
-		print_object};
 	t_e_seg const	print_order[e_seg_sz - 1] = {
-		e_o, e_f, e_l, e_a, e_d};
+		e_o, e_f, e_l, e_a, e_d, e_p};
+	t_printer 		prt;
 	int				i;
 	t_list			*p;
 	int				r;
 
 	i = -1;
-	while (++i < e_seg_sz - 1)
+	while (++i < e_seg_sz)
 	{
+		if (!(prt = v->e[print_order[i]].prt))
+			continue ;
 		p = o->e[print_order[i]];
 		while (p)
-		{
-			r = (*printers[print_order[i]])(v, *(t_tag*)p->content);
-			if (r != SUCCESS)
+			if ((r = prt(v, *(t_tag*)p->content)) != SUCCESS)
 				return (r);
-			p = p->next;
-		}
+			else
+				p = p->next;
 	}
 	return (SUCCESS);
 }

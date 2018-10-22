@@ -95,7 +95,7 @@ typedef struct s_tagged_array	t_s_ta;
 
 typedef t_s_p	t_s_v;
 
-typedef struct s_view_element	t_s_ve;
+typedef struct s_view_elements	t_s_ve;
 
 typedef double	t_zntr[DIMS + 1];
 
