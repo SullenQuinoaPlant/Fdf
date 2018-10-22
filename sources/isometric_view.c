@@ -56,6 +56,7 @@ static void				set_prt(
 int						add_isometric_v(
 	t_vpos hw,
 	t_zntr cam_pos,
+	t_s_sv **ret_v,
 	t_s_s *s)
 {
 	t_s_sv		*new_v;
@@ -73,5 +74,7 @@ int						add_isometric_v(
 		r = SYS_ERR;
 		free_view(&s->v);
 	}
+	if (ret_v)
+		*ret_v = new_v;
 	return (r);
 }

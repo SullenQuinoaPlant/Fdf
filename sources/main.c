@@ -43,6 +43,7 @@ int				main(
 {
 	t_s_sbi	*input[2];
 	t_s_s	*s;
+	t_s_sv	*v;
 	int		r;
 
 	input[1] = 0;
@@ -55,6 +56,7 @@ int				main(
 		(r = make_scene(input, &s)) == SUCCESS &&
 		!(r = add_isometric_v((t_vpos){52, 158}, (t_zntr){0.01, 0, 0, 0}, s)))
 	{
+		activate_view(
 		print_scene_points(s);
 		printf("\nPRINTING AS ASCII :\n");
 		s->v->out_fd = 1;

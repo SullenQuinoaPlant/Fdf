@@ -475,6 +475,7 @@ struct						s_active_object
 ** - nxt_allocs counts bytes allocated to t_list structures in (t_s_se)s.
 ** - e : scene elements
 ** - ao : active objects
+** - maxmin : store maximum point positions here.
 ** - ct : coordinate transforms
 ** - v : views
 ** - av : active view
@@ -484,6 +485,7 @@ struct						s_scene
 	size_t		tar_allocs;
 	size_t		nxt_allocs;
 	t_s_se		e[e_seg_sz];
+	t_xyz		maxmin[2];
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
 	t_s_sv		*v;

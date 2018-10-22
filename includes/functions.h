@@ -30,6 +30,7 @@ t_s_pctr					*add_camera(
 int							add_isometric_v(
 	t_vpos	view_height_and_width__hw,
 	t_zntr	view_camera_position__cam_pos,
+	t_s_sv	**optional_return_pointer,
 	t_s_s	*s);
 
 t_s_pctr					*add_isometric_camera(
@@ -237,6 +238,12 @@ int							open_file(
 	int			*ret_fd);
 
 void						point_projection(
+	t_s_sv	*v,
+	void	*scene_point,
+	t_s_pp const *const *invalid,
+	void	*view_point);
+
+void						point_projection_iso_persist(
 	t_s_sv	*v,
 	void	*scene_point,
 	t_s_pp const *const *invalid,
