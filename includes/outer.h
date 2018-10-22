@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 01:07:39 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 14:26:34 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 17:37:13 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include "ring.h"
 # include "libgetnextline.h"
 
+/*
+**Return values:
+*/
 # define SYS_ERR -1
 # define SUCCESS 0
 # define BAD_ARGS 1
@@ -76,5 +79,14 @@
 # define PXDAO PXL_DEC_ARGB_OFFSET
 # define PNT_DEC_ARGB_OFFSET DIMS
 # define PTDAO PNT_DEC_ARGB_OFFSET
+
+/*
+**Mins and maxes:
+*/
+# define MIN 0
+# define MAX 1
+# define MIN_MAX_SZ
+# define MIN_MAX_XYZ_PERMUTATION_COUNT 8
+# define MMXYZPC MIN_MAX_XYZ_PERMUTATION_COUNT
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/20 19:14:15 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 18:02:24 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ int							alloc_tar(
 	size_t	type_sz,
 	size_t	*ar_sz,
 	void	***p_ar);
+
+void						barycenter(
+	t_xyz	*pts,
+	int		pt_ct,
+	t_xyz	ret);
 
 int							chg_grptag_refct(
 	t_e_seg	g,
@@ -206,6 +211,10 @@ int							make_scene(
 
 t_e_seg						map_seg_to_vpg(
 	t_e_seg	sg);
+
+void						minmax_permute(
+	t_xyz	xyz_mins_and_maxes[MIN_MAX_SZ],
+	t_xyz	ret[MIN_MAX_XYZ_PERMUTATION_COUNT]);
 
 int							mirror_tsta(
 	t_s_s			*s,
