@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 19:40:47 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 20:50:03 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -483,6 +483,7 @@ struct						s_active_object
 ** - v : views
 ** - v_hw_def : default height and width when creating views.
 ** - av : active view
+** - is_updating : true if an update loop is running false otherwise.
 */
 # define DEF_V_H 200
 # define DEF_V_W 300
@@ -500,6 +501,7 @@ struct						s_scene
 	t_s_sv		*v;
 	t_vpos		v_hw_def;
 	t_s_sv		*av;
+	char		is_updating;
 };
 
 /*

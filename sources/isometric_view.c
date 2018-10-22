@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 06:16:07 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 19:58:39 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 20:37:40 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,4 @@ int						add_isometric_v(
 	if (ret_v)
 		*ret_v = new_v;
 	return (r);
-}
-
-int						add_default_iso_v(
-	t_s_sv **ret_v,
-	t_s_s *s)
-{
-	t_s_sv	*v;
-	int		r;
-
-	ret_v ? (*ret_v = 0) : (1);
-	if ((r = add_isometric_v(s->v_hw_def, (t_zntr){1, 0, 0, 0}, &v, s)))
-		return (r);
-
 }
