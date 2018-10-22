@@ -136,11 +136,12 @@ int							get_cdgfxyrz_sbi(
 	if ((p = malloc(sizeof(t_s_cdgfxyrz))) &&
 		(r = open_file(file, &fd)) == SUCCESS &&
 		(r = parse_cdgfxyrz(fd, dims, p, &bs)) == SUCCESS &&
-		fill_tscdgfxyrz(dims, bs, p) == SUCCESS &&
+		(r = fill_tscdgfxyrz(dims, bs, p)) == SUCCESS &&
 		(*ret = malloc(sizeof(t_s_sbi))))
 	{
 		(**ret).type = e_sit_cdgfxyrz;
 		(**ret).input = p;
+		ft_bzero((**ret).at, sizeof(t_xyz));
 		cdgfxyrz_set_sbi_minmax(p, *ret);
 	}
 	else if (p)

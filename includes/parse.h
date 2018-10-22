@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 15:28:06 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 15:34:36 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,16 @@ struct						s_cartesian_dot_grid_fullxy_regularz
 };
 
 /*
-**Scene builders, (*t_scene_builder)s, add elements to the scene,
-**They take the following struct as an argument
-** - the "at" array specifies where to place grid origin in scene, not optional.
+**Scene builders, (*t_scene_builder)s, add elements to the scene.
+**They take the following struct as an argument.
+** - 'at' : specifies where to place grid origin in scene, not optional.
+** - 'minmax' : gives the coordinates of furthest points along the axes
+** - 'type' : specifies what the 'input' (void*) must be cast to.
+** - 'input' : pointer to an input-specific structure.
 */
 struct						s_scene_builder_input
 {
-	double			at[3];
+	t_xyz	at;
 	t_xyz	minmax[DIMS][MIN_MAX_SZ];
 	t_e_sit	type;
 	void	*input;
