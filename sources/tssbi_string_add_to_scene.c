@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:54:46 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 18:37:51 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 19:25:24 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,29 @@ static int				use_input(
 	return (f[input->type](input->input, scene));
 }
 
-stotic void				check_minmax(
+stotic int				check_minmax(
 	t_xyz	sbi_minmax[MIN_MAX_SZ],
 	t_xyz	s_minmax[MIN_MAX_SZ])
 {
 	int		i;
+	int		has_changed;
 
+	has_changed = 0;
 	i = -1;
 	while (++i < DIMS)
 	{
 		if (s_minmax[MIN][i] > sbi_minmax[MIN][i])
+		{
 			s_minmax[MIN][i] = sbi_minmax[MIN][i];
+			has_changed = 1;
+		}
 		if (s_minmax[MAX][i] < sbi_minmax[MAX][i])
+		{
 			s_minmax[MAX][i] = sbi_minmax[MAX][i];
+			has_changed = 1;
+		}
 	}
+	return (has_changed);
 }
 
 int						add_tssbis_to_scene(
@@ -56,15 +65,19 @@ int						add_tssbis_to_scene(
 	t_s_s *scene)
 {
 	t_s_sbi	*p;
+	int		mm_chg;
 	int		r;
 
 	r = SUCCESS;
+	mm_chg = 0;
 	while ((p = *input_str))
 	{
 		if ((r = use_input(p, scene) != SUCCESS))
 			break;
-		check_minmax(p->minmax, scene->minmax);
+		mm_chg = check_minmax(p->minmax, scene->minmax);
 		input_str++;
 	}
+	if (mm_chg)
+		scene_set_extr(s);
 	return (r);
 }

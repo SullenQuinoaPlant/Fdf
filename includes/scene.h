@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 17:34:32 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/22 19:40:47 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -475,20 +475,30 @@ struct						s_active_object
 ** - nxt_allocs counts bytes allocated to t_list structures in (t_s_se)s.
 ** - e : scene elements
 ** - ao : active objects
-** - maxmin : store maximum point positions here.
+** - minmax : store maximum point positions along canonical axes here.
+** - extr : extremums, if a view can display these points,
+**		it can display all points.
+** - extr_bar : barycenter of the above.
 ** - ct : coordinate transforms
 ** - v : views
+** - v_hw_def : default height and width when creating views.
 ** - av : active view
 */
+# define DEF_V_H 200
+# define DEF_V_W 300
 struct						s_scene
 {
 	size_t		tar_allocs;
 	size_t		nxt_allocs;
+	size_t		pxl_allocs;
 	t_s_se		e[e_seg_sz];
-	t_xyz		minmax[MIN_MAX_SZ]
+	t_xyz		minmax[MIN_MAX_SZ];
+	t_xyz		extr[MMXYZPC];
+	t_xyz		extr_bar;
 	t_s_ao		*ao;
 	t_s_pctr	*ct;
 	t_s_sv		*v;
+	t_vpos		v_hw_def;
 	t_s_sv		*av;
 };
 

@@ -4,13 +4,9 @@
 static void				init_vars(
 	t_s_s *s)
 {
-	s->tar_allocs = 0;
-	s->nxt_allocs = 0;
-	ft_bzero(s->e, sizeof(s->e));
-	s->ao = 0;
-	s->ct = 0;
-	s->v = 0;
-	s->av = 0;
+	ft_bzero(s, sizeof(t_s_s));
+	scene_init_extr(s);
+	ft_memcpy(s->v_hw_def, (t_vpos){DEF_V_H, DEF_V_W}, sizeof(t_vpos));
 }
 
 static int				init_scene(

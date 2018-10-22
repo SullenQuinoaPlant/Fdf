@@ -24,7 +24,7 @@ void							cdgfxyrz_set_sbi_minmax(
 
 	set_mm(p, mm);
 	minmax_permute(mm, extr);
-	barycenter(extr, MMXPC, bar);
+	barycenter(extr, MMXYZPC, bar);
 	ft_memcpy(p->at, bar, sizeof(t_xyz));
 	i = -1;
 	while (++i < DIMS)
