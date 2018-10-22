@@ -76,7 +76,7 @@ static void						set_along(
 		*ar++ = v++;
 }
 
-int							track_pixel_line(
+int							track_pixel_line_ratios(
 	t_s_lp const *const lp,
 	t_ruint *ret_dt,
 	int *ret_along,

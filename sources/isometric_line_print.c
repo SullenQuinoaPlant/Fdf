@@ -59,7 +59,7 @@ int							print_line(
 
 	dec = 0;
 	prec = 0;
-	if ((r = track_pixel_line(l, &dt, 0, &dec)) == SUCCESS &&
+	if ((r = track_pixel_line_ratios(l, &dt, 0, &dec)) == SUCCESS &&
 		(r = set_precedences(l->prec, dt, &prec)) == SUCCESS)
 		print_line_like_really(v, dec, prec, dt);
 	if (prec)
