@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 18:26:10 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 18:58:38 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,6 +364,10 @@ void						tpctrm_mult(
 	t_pctrm const	this_a,
 	t_pctrm const	times_this_b,
 	t_pctrm 		equals_this_c);
+
+void						tpctrm_scalar_mult(
+	double	k,
+	t_pctrm	c);
 
 int							track_pixel_line_ratios(
 	t_s_lp const *const	lp,

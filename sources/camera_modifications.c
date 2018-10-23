@@ -53,10 +53,28 @@ void							cam_tr(
 	t_s_pctr *const		trz = get_camera_component(v->ct, TRZ);
 	t_s_pctrm *const	old = &trz->own;
 	t_s_pctrm			new;
+	int					i;
 
 	ft_memcpy(new, old, sizeof(t_s_pctrm));
-	new[TPCTRM_TR][X] = tr[X];
-	new[TPCTRM_TR][Y] = tr[Y];
-	new[TPCTRM_TR][Z] = tr[Z];
+	i = -1;
+	while (++i < DIMS)
+		new[TPCTRM_TR][i] = old[TPCTRM_TR][i] - tr[i];
 	chg_tpctrm(new, TRZ, trz);
+}
+
+void							cam_zoom(
+	double ratio,
+	t_s_sv *v)
+{
+	t_s_pctr *const		trz = get_camera_component(v->ct, TRZ);
+	t_s_pctrm *const	old = &trz->own;
+	t_s_pctrm			new;
+	int					i;
+
+	ft_memcpy(new, old, sizeof(t_s_pctrm));
+	i = -1;
+	while (++i < DIMS)
+		new[i][i] = old[TPCTRM_TR][i] - tr[i];
+	chg_tpctrm(new, TRZ, trz);
+
 }

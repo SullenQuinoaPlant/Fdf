@@ -38,3 +38,27 @@ void					tpctrm_mult(
 	while (++i < DIMS)
 		c[TPCTRM_TR][i] += b[TPCTRM_TR][i];
 }
+
+void					tpctrm_scalar_mult(
+	double k,
+	t_pctrm c)
+{
+	int		i;
+	int		j;
+	int		k;
+
+	i = -1;
+	while (++i < DIMS_N_TR)
+	{
+		j = -1;
+		while (++j < DIMS)
+		{
+			k = -1;
+			while (++k < DIMS)
+				c[i][j] *= k;
+		}
+	}
+	i = -1;
+	while (++i < DIMS)
+		c[TPCTRM_TR][i] *= k;
+}
