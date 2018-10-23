@@ -43,20 +43,19 @@ static int					ring_update_a_view(
 	return (RING_SUCCESS);
 }
 	
-void						update_loop(
+void						refresh_loop(
 	t_s_s *s)
 {
 	t_s_sv	*v;
 	t_e_seg	g;
 
-	if (++s->is_updating > 1)
-		return ;
+	s->refreshing += REFRESHING;
 	g = e_p;
-	while (g < e_seg_sz)
+	while (g < e_seg_sz && s->refreshing < REFRESH_LOCK)
 	{
 		r = ring_apply((void*)s->ao, ring_update_a_view, &g);
 		if (r != RING_SUCCESS)
 			break ;
 	}
-	s->is_updating = 0;
+	s->is_updating -= REFRESHING;
 }

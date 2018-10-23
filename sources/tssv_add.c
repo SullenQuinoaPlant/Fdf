@@ -20,27 +20,31 @@ static int				mirror_tsses(
 	return (r);
 }
 
+static int				add_mlx_ptrs(
+	t_vuint h,
+	t_vuint w,
+	t_s_sv *v)
+{
+	t_s_s *const	s = v->s;
+
+}
+
 static int				add_pxl_ars(
 	t_vuint h,
 	t_vuint w,
 	t_s_sv *v)
 {
-	size_t const	sz = (sizeof(double) + sizeof(t_argb)) * h * w;
-	t_argb			*p1;
-	double			*p2;
+	size_t const	sz = sizeof(double) * h * w;
+	double			*p;
 	size_t			ct;
 
 	if (sz > PAC - v->s->pxl_allocs)
 		return (MEM_CAP);
-	if ((p1 = malloc((ct = h * w) * sizeof(t_argb))) &&
-		(p2 = malloc(ct * sizeof(double))))
+	if ((p2 = malloc(ct * sizeof(double))))
 	{
 		v->s->pxl_allocs -= sz;
 		while (ct--)
-		{
-			p2[ct] = DBL_MAX;
-			p1[ct] = COL_BLACK;
-		}
+			p[ct] = DBL_MAX;
 		v->h = h;
 		v->w = w;
 		v->pxl = p1;
@@ -54,25 +58,25 @@ static int				add_pxl_ars(
 
 static int				init_view(
 	t_s_s *s,
-	t_vpos hw,
+	t_vpos const hw,
 	t_s_sv *v)
 {
 	int		r;
 
 	ft_bzero(&v->id, sizeof(t_s_v) - sizeof(t_s_ring));
+	if ((r = mirror_tsses(s, v) == SUCCESS) &&
+		(r = add_mlx_ptrs(hw[V_H], hw[V_W], v) == SUCCESS))
+		r = add_pxl_ars(hw[V_H], hw[V_W], v);
 	v->id = (v->ring.prv == (t_ring)v) ? 0 : ((t_s_sv*)v->ring.prv)->id + 1;
 	v->s = s;
 	v->ao = s->ao;
-	if ((r = mirror_tsses(s, v) == SUCCESS)
-		r = add_pxl_ars(hw[V_H], hw[V_W], v);
 	v->out_fd = -1;
-	v->out_wdw = 0;
 	return (r);
 }
 
 int						add_view(
 	t_s_s *s,
-	t_vpos hw,
+	t_vpos const hw,
 	t_s_sv **ret)
 {
 	t_s_sv	**v;
@@ -82,6 +86,7 @@ int						add_view(
 		*ret = 0;
 	r = SYS_ERR;
 	v = &s->v;
+	disable_updates();
 	if (ring_expand(sizeof(t_s_sv), 0, (void**)v))
 	{
 		if ((r = init_view(s, hw, *v)) != SUCCESS)
@@ -89,5 +94,6 @@ int						add_view(
 		else if (ret)
 			*ret = *v;
 	}
+	enable_updates();
 	return (r);
 }

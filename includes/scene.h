@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 21:55:30 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 23:19:42 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -468,7 +468,8 @@ struct						s_scene_view
 	double		*pxl_prec;
 	t_ticker	pxl_tick;
 	int			out_fd;
-	void		*out_mlx;
+	void		*mlx_img;
+	void		*mlx_wdw;
 };
 
 /*
@@ -495,7 +496,8 @@ struct						s_active_object
 ** - v : views
 ** - v_hw_def : default height and width when creating views.
 ** - av : active view
-** - is_updating : true if an update loop is running false otherwise.
+** - refreshing : true if a refresh loop is running or refreshing is disabled.
+**		See REFRESH constants and enable_disable_refresh.c
 ** - mlx : pointer to mlx instance
 */
 
