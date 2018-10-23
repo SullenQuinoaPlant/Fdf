@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 20:50:03 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 16:59:33 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,20 @@ struct						s_point_coordinates_transform
 	t_ticker	tick;
 };
 
+/*
+**Cameras are implemented using (t_s_pctr)s.
+**Here are some constants:
+*/
+# define CAMERA_YAW_ROLL_PITCH_ZOOMTRANSLATION 4
+# define CYRPZ CAMERA_YAW_ROLL_PITCH_ZOOMTRANSLATION
+# define YAW 0
+# define ROLL 1
+# define PITCH 2
+# define ZOOM_TRANSLATION 3
+# define ZTR ZOOM_TRANSLATION
+# define ZTR_Z 0
+# define ZTR_TR 1
+
 struct						s_view_elements
 {
 	union
@@ -503,13 +517,5 @@ struct						s_scene
 	t_s_sv		*av;
 	char		is_updating;
 };
-
-/*
-**Cameras :
-*/
-# define CAMERA_YAW_ROLL_PITCH_ZOOMTRANSLATION 4
-# define CYRPZ CAMERA_YAW_ROLL_PITCH_ZOOMTRANSLATION
-# define ZTR_Z 0
-# define ZTR_TR 1
 
 #endif

@@ -9,9 +9,9 @@ static void				set_zoom_ratio(
 
 static void				set_translation(
 	t_extr extr_bar,
-	t_extr extr[MMXYZPC],
 	t_s_pctr *ct)
 {
+	:vs
 }
 
 int						add_default_iso_v(
@@ -28,9 +28,9 @@ int						add_default_iso_v(
 	if ((r = add_isometric_v(s->v_hw_def, (t_zntr){1, 0, 0, 0}, &v, s)))
 		return (r);
 	tpctrm_apply(v->ct, s->extr_bar, extr_bar);
+	set_translation(extr_bar, extr, v->ct);
 	i = -1;
 	while (++i < MMXYZPC)
 		tpctrm_apply(v->ct, s->extr[i], extr[i]);
-	set_translation(extr_bar, extr, v->ct);
 	set_zoom_ratio(extr, v);
 }
