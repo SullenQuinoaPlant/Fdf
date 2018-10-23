@@ -34,7 +34,6 @@ static int					new_buff(
 #define NOT_DONE 1
 static int					really_parse(
 	char const **str,
-	size_t dims[VIEW_DIMS],
 	int zmm[MIN_MAX_SZ],
 	t_s_cxyd **p)
 {
@@ -83,9 +82,9 @@ int							parse_cdgfxyrz(
 	while ((r = get_next_line(fd, &l[0])) > 0)
 	{
 		l[1] = l[0];
-		ft_memcpy(dims, (size_t[2]){++dims[ROW], 0});
+		ft_memcpy(dims, (size_t[2]){++dims[ROW], 0}, sizeof(size_t[2]));
 		while ((counter[CT_E]-- || (r = new_buff(bs, counter, &p)) == SUCCESS) &&
-			(r = really_parse((char const **)&l[1], dims, zmm, &p) == NOT_DONE))
+			(r = really_parse((char const **)&l[1], zmm, &p) == NOT_DONE))
 			dims[COL]++;
 		free(l[0]);
 		if (r != SUCCESS)
