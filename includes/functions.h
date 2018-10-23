@@ -278,6 +278,12 @@ int							print_line(
 	t_s_sv	*v,
 	t_tag	t);
 
+int							print_obj_grps(
+	t_s_o	*o,
+	t_e_seg	*groups,
+	int		group_count,
+	t_s_sv	*v);
+
 int							print_object(
 	t_s_sv	*v,
 	t_tag	t);
@@ -395,6 +401,9 @@ int							tssvs_add_tar(
 void						txyz_to_ttpr(
 	t_xyz const	in,
 	t_tpr		out);
+
+void						update_loop(
+	t_s_s	*s);
 
 int							usage(
 	void);

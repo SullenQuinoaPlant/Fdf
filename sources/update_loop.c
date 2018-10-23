@@ -16,7 +16,7 @@ static void					update_a_grp(
 	tssv_push_to_displays(v);
 }
 
-int							ring_update_a_view(
+static int					ring_update_a_view(
 	void *p_teseg,
 	t_ring p_view)
 {
