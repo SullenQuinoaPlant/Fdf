@@ -15,3 +15,17 @@ size_t						get_ve_size(
 		return (0);
 	return (sizes[g]);
 }
+
+void						*get_ve_tag(
+	t_s_sv const *v,
+	t_e_seg g,
+	t_tag t)
+{
+	t_tag const			ar_tag = t >> TPS;
+	t_tag const 		e_tag = t & TPM;
+	t_s_ve const *const	tsve = &v->e[g];
+	void				*p;
+
+	p = tsve->ar[ar_tag] + tsve->e_sz * e_tag;
+	return (p);
+}

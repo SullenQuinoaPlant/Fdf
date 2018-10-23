@@ -138,13 +138,24 @@ int							get_nxt_se(
 	t_tag	*ret,
 	void	**ret_addr);
 
-void						*get_se(
+void						*get_se_ij(
+	t_s_s const	*s,
+	t_e_seg		g,
+	size_t		i,
+	size_t		j);
+
+void						*get_se_tag(
 	t_s_s const	*s,
 	t_e_seg		g,
 	t_tag		t);
 
 size_t						get_ve_size(
 	t_e_seg	g);
+
+void						*get_ve_tag(
+	t_s_sv const	*v,
+	t_e_seg			g,
+	t_tag			t);
 
 int							inc_tar_alloc(
 	t_s_s	*s,

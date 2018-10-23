@@ -2,27 +2,30 @@
 #include "scene.h"
 
 int							print_obj_groups(
-	t_e_seg *grps,
+	t_e_seg *print_order,
 	int grp_ct,
 	t_s_o *o,
 	t_s_sv *v)
 {
-	t_printer 		prt;
 	int				i;
+	t_e_seg			g;
+	t_printer 		prt;
 	t_list			*p;
 	int				r;
 
 	i = -1;
 	while (++i < e_seg_sz)
 	{
-		if (!(prt = v->e[print_order[i]].prt))
+		g = print_order[i];
+		if (!(prt = v->e[g].prt))
 			continue ;
-		p = o->e[print_order[i]];
+		p = o->e[g];
 		while (p)
 			if ((r = prt(v, *(t_tag*)p->content)) != SUCCESS)
 				return (r);
 			else
 				p = p->next;
+		v->e[g].prt_tick = v->e[e_p].prj_tick;
 	}
 	return (SUCCESS);
 }
@@ -42,8 +45,12 @@ int							print_object(
 						e_a,
 						e_d,
 						e_p};
+	int				r;
 
+	r = SUCCESS;
 	if (flgs & O_SHOW)
-		return (print_obj_groups(o, print_order, e_seg_sz - 1, v));
-	return (SUCCESS);
+	{
+		r = print_obj_groups(o, print_order, e_seg_sz - 1, v);
+	}
+	return (r);
 }
