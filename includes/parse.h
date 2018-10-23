@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 18:25:25 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 20:58:44 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,11 @@ int							cdgfxyrz_add_lines(
 	t_tag			*tags,
 	t_s_s			*scene,
 	t_s_o			*object);
+
+int							cdgfxyrz_parse(
+	int			fd,
+	size_t		*dims,
+	int			zmm[MIN_MAX_SZ],
+	t_list		**bs);
 
 #endif
