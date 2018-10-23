@@ -13,7 +13,7 @@ static void					update_a_grp(
 {
 	tssv_grp_apply_proj(v, &v->s[g], &v->e[g]);
 	print_active_objects_a_grp(v, g);
-	tssv_push_to_screen(v);
+	tssv_push_to_displays(v);
 }
 
 int							ring_update_a_view(
@@ -31,7 +31,7 @@ int							ring_update_a_view(
 	else
 	{
 		if (v->e[e_d].prj_tick != master)
-			print_v_background(v);
+			tssv_reset_print_canvas(v);
 		while (++g <= *pg)
 			if (v->e[g].prj_tick != master)
 			{

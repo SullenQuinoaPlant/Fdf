@@ -378,6 +378,12 @@ void						tssv_grp_apply_proj(
 int							tssv_print_ascii(
 	t_s_sv	*v);
 
+void						tssv_push_to_displays(
+	t_s_sv	*v);
+
+void						tssv_reset_print_canvas(
+	t_s_sv	*v);
+
 int							tssv_tar_allocs(
 	t_e_seg	grp,
 	t_s_s	*s);
