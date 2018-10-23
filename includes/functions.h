@@ -138,13 +138,24 @@ int							get_nxt_se(
 	t_tag	*ret,
 	void	**ret_addr);
 
-void						*get_se(
+void						*get_se_ij(
+	t_s_s const	*s,
+	t_e_seg		g,
+	size_t		i,
+	size_t		j);
+
+void						*get_se_tag(
 	t_s_s const	*s,
 	t_e_seg		g,
 	t_tag		t);
 
 size_t						get_ve_size(
 	t_e_seg	g);
+
+void						*get_ve_tag(
+	t_s_sv const	*v,
+	t_e_seg			g,
+	t_tag			t);
 
 int							inc_tar_alloc(
 	t_s_s	*s,
@@ -278,6 +289,12 @@ int							print_line(
 	t_s_sv	*v,
 	t_tag	t);
 
+int							print_obj_grps(
+	t_s_o	*o,
+	t_e_seg	*groups,
+	int		group_count,
+	t_s_sv	*v);
+
 int							print_object(
 	t_s_sv	*v,
 	t_tag	t);
@@ -378,6 +395,12 @@ void						tssv_grp_apply_proj(
 int							tssv_print_ascii(
 	t_s_sv	*v);
 
+void						tssv_push_to_displays(
+	t_s_sv	*v);
+
+void						tssv_reset_print_canvas(
+	t_s_sv	*v);
+
 int							tssv_tar_allocs(
 	t_e_seg	grp,
 	t_s_s	*s);
@@ -389,6 +412,9 @@ int							tssvs_add_tar(
 void						txyz_to_ttpr(
 	t_xyz const	in,
 	t_tpr		out);
+
+void						update_loop(
+	t_s_s	*s);
 
 int							usage(
 	void);

@@ -82,3 +82,29 @@ void						tssv_set_out_fd(
 		close(old_fd);
 	v->out_fd = fd;
 }
+
+void						tssv_push_to_displays(
+	t_s_sv *v)
+{
+	if (v->out_wdw)
+		//do stuff
+	if (v->out_fd > -1)
+		tssv_print_ascii(v);
+}
+
+void						tssv_reset_print_canvas(
+	t_s_sv *v)
+{
+	t_argb *const	lim1 = v->pxl + v->h * v->w;
+	double *const	lim2 = v->pxl_prec + v->h * v->w;
+	t_argb			*p1;
+	double			*p2;
+
+	if ((p1 = v->pxl))
+		while (p < lim1)
+			*p1++ = COL_BLACK;
+	if ((p2 = v->pxl_prec))
+		while (p2 < lim2)
+			*p2++ = PREC_MIN;
+
+}
