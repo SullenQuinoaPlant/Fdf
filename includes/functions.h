@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 21:16:23 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:22:47 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,8 +240,8 @@ void						minmax_init(
 	t_xyz	minmax[MIN_MAX_SZ]);
 
 void						minmax_permute(
-	t_xyz	xyz_mins_and_maxes[MIN_MAX_SZ],
-	t_xyz	ret[MIN_MAX_XYZ_PERMUTATION_COUNT]);
+	t_xyz	mins_n_maxes[MIN_MAX_SZ],
+	t_xyz	*ret_permutations);
 
 void						minmax_set(
 	t_xyz	*points,

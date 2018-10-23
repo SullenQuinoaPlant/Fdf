@@ -1,3 +1,4 @@
+#include "scene_typedefs.h"
 #include <float.h>
 
 void							minmax_init(
@@ -8,14 +9,14 @@ void							minmax_init(
 	i = -1;
 	while (++i < DIMS)
 	{
-		s->minmax[MIN][i] = DBL_MAX;
-		s->minmax[MAX][i] = -DBL_MAX;
+		mm[MIN][i] = DBL_MAX;
+		mm[MAX][i] = -DBL_MAX;
 	}
 }
 
 void							minmax_permute(
 	t_xyz mm[MIN_MAX_SZ],
-	t_xyz ret[MIN_MAX_XYZ_PERMUTATION_COUNT])
+	t_xyz *ret)
 {
 	int		i;
 	int		j;
@@ -30,9 +31,9 @@ void							minmax_permute(
 			k = -1;
 			while (++k < MIN_MAX_SZ)
 			{
-				ret[X] = mm[i][X];
-				ret[Y] = mm[j][Y];
-				ret[Z] = mm[k][Z];
+				(*ret)[X] = mm[i][X];
+				(*ret)[Y] = mm[j][Y];
+				(*ret)[Z] = mm[k][Z];
 				ret++;
 			}
 		}
@@ -44,24 +45,23 @@ void						minmax_set(
 	size_t pt_ct,
 	t_xyz mm[MIN_MAX_SZ])
 {
-	t_xyz	*p;
 	double	d;
 
 	minmax_init(mm);
 	while (pt_ct--)
 	{
-		p = pts[pt_ct];
-		if ((d = (*p)[X]) < mm[MIN][X])
+		if ((d = (*pts)[X]) < mm[MIN][X])
 			mm[MIN][X] = d;
 		if (d > mm[MAX][X])
 			mm[MAX][X] = d;
-		if ((d = (*p)[Y]) < mm[MIN][Y])
+		if ((d = (*pts)[Y]) < mm[MIN][Y])
 			mm[MIN][Y] = d;
 		if (d > mm[MAX][Y])
 			mm[MAX][Y] = d;
-		if ((d = (*p)[Z]) < mm[MIN][Z])
+		if ((d = (*pts)[Z]) < mm[MIN][Z])
 			mm[MIN][Z] = d;
 		if (d > mm[MAX][Z])
 			mm[MAX][Z] = d;
+		pts++;
 	}
 }
