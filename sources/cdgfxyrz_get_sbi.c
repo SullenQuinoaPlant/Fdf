@@ -1,4 +1,5 @@
-
+#include "functions.h"
+#include "parse.h"
 
 static int					fill_tscdgfxyrz(
 	size_t *dims,
@@ -27,11 +28,12 @@ static int					fill_tscdgfxyrz(
 }
 
 static void					init_cdgfxyrz_sbi(
+	t_s_cdgfxyrz *p,
 	t_s_sbi *ret)
 {
-	(**ret).type = e_sit_cdgfxyrz;
-	(**ret).input = p;
-	cdgfxyrz_set_sbi_minmax(p, *ret);
+	ret->type = e_sit_cdgfxyrz;
+	ret->input = p;
+	cdgfxyrz_set_sbi_minmax(p, ret);
 }
 
 int							get_cdgfxyrz_sbi(
@@ -47,12 +49,13 @@ int							get_cdgfxyrz_sbi(
 	bs = 0;
 	fd = -1;
 	ft_bzero(dims, sizeof(dims));
+	r = SYS_ERR;
 	if ((p = malloc(sizeof(t_s_cdgfxyrz))) &&
 		(r = open_file(file, &fd)) == SUCCESS &&
 		(r = cdgfxyrz_parse(fd, dims, p->zmm, &bs)) == SUCCESS &&
 		(r = fill_tscdgfxyrz(dims, bs, p)) == SUCCESS &&
 		(*ret = malloc(sizeof(t_s_sbi))))
-		init_cdgfxyrz_sbi(*ret);
+		init_cdgfxyrz_sbi(p, *ret);
 	if (p)
 		free(p);
 	if (fd >= 0)

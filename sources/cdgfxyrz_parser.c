@@ -2,7 +2,6 @@
 #include "parse.h"
 #include "colors.h"
 
-#define BUF_SZ 256
 #define CT_E 0
 #define CT_ALLOCS 1
 
@@ -58,8 +57,6 @@ static int					really_parse(
 	return (NOT_DONE);
 }
 
-#define ROW 0
-#define COL 1
 int							cdgfxyrz_parse(
 	int fd,
 	size_t *dims,

@@ -5,6 +5,7 @@ TARGETS := \
 	cdgfxyrz_builder \
 	cdgfxyrz_builder_add_lines \
 	cdgfxyrz_freer \
+	cdgfxyrz_get_sbi \
 	cdgfxyrz_parser \
 	cdgfxyrz_parser_set_sbi_minmax \
 	discrete_ratio_tracking \

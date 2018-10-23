@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 20:58:44 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:04:30 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,18 @@ struct						s_scene_builder_input
 };
 
 /*
+**Hand constants:
+*/
+# define ROW 0
+# define COL 1
+# define BUF_SZ 0x100
+
+/*
 **Builder auxilliary functions:
 */
 /*
 **cdgfxyrz :
 */
-void						cdgfxyrz_set_sbi_minmax(
-	t_s_cdgfxyrz *parsed,
-	t_s_sbi *sbi);
-
 int							cdgfxyrz_add_lines(
 	t_s_cdgfxyrz	*p,
 	t_tag			*tags,
@@ -88,5 +91,9 @@ int							cdgfxyrz_parse(
 	size_t		*dims,
 	int			zmm[MIN_MAX_SZ],
 	t_list		**bs);
+
+void						cdgfxyrz_set_sbi_minmax(
+	t_s_cdgfxyrz *parsed,
+	t_s_sbi *sbi);
 
 #endif
