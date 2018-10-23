@@ -1,8 +1,9 @@
 #include "parse.h"
+#include "functions.h"
 
 static void						set_mm(
 	t_s_cdgfxyrz *p,
-	t_xyz ret[MMXPC])
+	t_xyz ret[MMXYZPC])
 {
 	ret[MIN][X] = 0;
 	ret[MIN][Y] = 0;
@@ -17,7 +18,7 @@ void							cdgfxyrz_set_sbi_minmax(
 	t_s_sbi *sbi)
 {
 	t_xyz		mm[MIN_MAX_SZ];
-	t_xyz		extr[MMXPC];
+	t_xyz		extr[MMXYZPC];
 	t_xyz		bar;
 	int			i;
 	int			j;
