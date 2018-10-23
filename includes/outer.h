@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 01:07:39 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 17:37:13 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 17:57:42 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@
 */
 # define MIN 0
 # define MAX 1
-# define MIN_MAX_SZ
+# define MIN_MAX_SZ 2
 # define MIN_MAX_XYZ_PERMUTATION_COUNT 8
 # define MMXYZPC MIN_MAX_XYZ_PERMUTATION_COUNT
 

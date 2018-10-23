@@ -45,3 +45,18 @@ void							chg_tpctrm(
 	if ((nxt = chgee->nxt))
 		ring_apply(nxt, update_mashed, 0);
 }
+
+void							cam_tr(
+	t_xyz tr,
+	t_s_sv *v)
+{
+	t_s_pctr *const		trz = get_camera_component(v->ct, TRZ);
+	t_s_pctrm *const	old = &trz->own;
+	t_s_pctrm			new;
+
+	ft_memcpy(new, old, sizeof(t_s_pctrm));
+	new[TPCTRM_TR][X] = tr[X];
+	new[TPCTRM_TR][Y] = tr[Y];
+	new[TPCTRM_TR][Z] = tr[Z];
+	chg_tpctrm(new, TRZ, trz);
+}

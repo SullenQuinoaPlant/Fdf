@@ -5,7 +5,7 @@ static void				init_vars(
 	t_s_s *s)
 {
 	ft_bzero(s, sizeof(t_s_s));
-	scene_init_extr(s);
+	minmax_init(s->minmax);
 	ft_memcpy(s->v_hw_def, (t_vpos){DEF_V_H, DEF_V_W}, sizeof(t_vpos));
 }
 

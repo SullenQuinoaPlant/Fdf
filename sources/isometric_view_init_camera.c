@@ -23,10 +23,10 @@ t_s_pctr					*add_isometric_camera(
 		{0, 1, 0},
 		{-1.0L / SQRT_3, 0, SQRT_2 / SQRT_3},
 		{0, 0, 0}},
-		{{zntr[ZTR_Z], 0, 0},
-		{0, zntr[ZTR_Z], 0},
-		{0, 0, zntr[ZTR_Z]},
-		{zntr[ZTR_TR + X], zntr[ZTR_TR + Y], zntr[ZTR_TR + Z]}}};
+		{{zntr[TRZ_Z], 0, 0},
+		{0, zntr[TRZ_Z], 0},
+		{0, 0, zntr[TRZ_Z]},
+		{zntr[TRZ_TR + X], zntr[TRZ_TR + Y], zntr[TRZ_TR + Z]}}};
 
 	return (add_camera(cts, CYRPZ, &s->ct));
 }

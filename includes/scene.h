@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 16:59:33 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 18:09:36 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,9 +271,9 @@ struct						s_point_coordinates_transform
 # define ROLL 1
 # define PITCH 2
 # define ZOOM_TRANSLATION 3
-# define ZTR ZOOM_TRANSLATION
-# define ZTR_Z 0
-# define ZTR_TR 1
+# define TRZ ZOOM_TRANSLATION
+# define TRZ_Z 0
+# define TRZ_TR 1
 
 struct						s_view_elements
 {
