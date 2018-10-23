@@ -47,7 +47,7 @@ static void					print_line_like_really(
 	}
 }
 
-int							print_line(
+int							print_isometric_line(
 	t_s_sv *v,
 	t_tag t)
 {

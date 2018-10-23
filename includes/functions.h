@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 20:38:53 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:11:30 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int							add_tssbis_to_scene(
 
 int							add_view(
 	t_s_s	*s,
+	t_vpos	height_and_width,
 	t_s_sv	**ret);
 
 int							alloc_tar(
@@ -301,7 +302,7 @@ int							print_fill(
 	t_s_sv	*v,
 	t_tag	t);
 
-int							print_line(
+int							print_isometric_line(
 	t_s_sv	*v,
 	t_tag	t);
 
