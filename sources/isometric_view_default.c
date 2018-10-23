@@ -13,7 +13,7 @@ static void				set_zoom_ratio(
 	i = -1;
 	while (++i < MMXYZPC)
 		tpctrm_apply(v->ct, s->extr[i], extr[i]);
-
+	minmax_set(ext, MMXYZPC, mm);
 }
 
 int						add_default_iso_v(
