@@ -1,6 +1,6 @@
 #include "scene.h"
 
-static void					tssv_grp_apply_proj(
+void							tssv_grp_apply_proj(
 	t_s_sv *v,
 	t_s_se *s_grp,
 	t_s_ve *v_grp)
