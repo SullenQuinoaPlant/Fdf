@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/20 17:14:24 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:56:11 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,35 +41,6 @@ int							tssvs_add_tar(
 	r = ring_apply(s->v, ring_tssv_add_tar, &grp);
 	r = r == RING_SUCCESS ? SUCCESS : SYS_ERR;
 	return (r);
-}
-
-int							tssv_add_pxl_ars(
-	t_vuint h,
-	t_vuint w,
-	t_s_sv *v)
-{
-	double const	nan = NAN;
-	t_argb			*p1;
-	double			*p2;
-	size_t			sz;
-
-	if ((p1 = malloc((sz = h * w) * sizeof(t_argb))) &&
-		(p2 = malloc(sz * sizeof(double))))
-	{
-		while (sz--)
-		{
-			p2[sz] = nan;
-			p1[sz] = COL_BLACK;
-		}
-		v->h = h;
-		v->w = w;
-		v->pxl = p1;
-		v->pxl_prec = p2;
-		return (SUCCESS);
-	}
-	if (p1)
-		free(p1);
-	return (SYS_ERR);
 }
 
 void						tssv_set_out_fd(

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 20:47:12 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:55:30 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 **Least significant bits give tagged element position within array.
 **
 **Memory allocation for these arrays is capped.
-**	see TAG_AR_CAP
+**	see TAG_AR_CAP and TAG_NXT_CAP
 **
 **TAG_POS_MASK used to retrieve intra-array position.
 **TAG_POS_SHIFT used to shift out intra-array position bits.
@@ -43,11 +43,6 @@
 # define TPM TAG_POS_MASK 
 # define TPS TAG_POS_SHIFT
 # define TAS TAG_AR_SZ 
-
-# define TAG_AR_CAP ((size_t)1 << 30)
-# define TAG_NXT_CAP (TAG_AR_SZ / 4)
-# define TAC TAG_AR_CAP
-# define TNC TAG_NXT_CAP
 
 /*
 **Scene elements hold a reference count in a (t_refct).
@@ -419,7 +414,7 @@ enum						e_scene_view_type
 };
 
 /*
-**Each view has its coordinates system.
+**Each view is attached to a "camera" which defines a coordinate system:
 **	The x axis is taken along the view width, from left to right.
 **	The y axis is taken along the view height, from top to bottom.
 **	The z axis is in the away direction from the viewpoint.
@@ -429,14 +424,15 @@ enum						e_scene_view_type
 **			can be obtained by adding as so:
 **				((t_vuint)(x + (double)(w / 2)), (t_vuint)(y + (double)(h / 2)))
 **
-**The position of the 'id' field, first after the t_s_ring header, is relied upon
+**The position of the 'id' field is important;
+**	it is required to be first after the t_s_ring header,
 **	for initialization purposes.
 **
 **The following fields are initialized by the scene:
 ** - ring
 ** - id
 ** - ao_cursor
-** - (t_s_ta) array e (not the tar content)
+** - (t_s_ve) array 'e' allocations (not the tar contents)
 **
 **Abbreviations:
 ** - id: view  identification number.
@@ -472,7 +468,7 @@ struct						s_scene_view
 	double		*pxl_prec;
 	t_ticker	pxl_tick;
 	int			out_fd;
-	void		*out_wdw;
+	void		*out_mlx;
 };
 
 /*
@@ -485,11 +481,13 @@ struct						s_active_object
 };
 
 /*
+**In (s_scene):
 ** - tar_allocs counts bytes allocated for tagged arrays.
 ** - nxt_allocs counts bytes allocated to t_list structures in (t_s_se)s.
+** - pxl_allocs counts bytes allocated to views's 'pxl' and 'pxl_prec' ararys.
 ** - e : scene elements
 ** - ao : active objects
-** - minmax : store maximum point positions along canonical axes here.
+** - minmax : stores maximum point positions along canonical axes.
 ** - extr : extremums, if a view can display these points,
 **		it can display all points.
 ** - extr_bar : barycenter of the above.
@@ -498,9 +496,22 @@ struct						s_active_object
 ** - v_hw_def : default height and width when creating views.
 ** - av : active view
 ** - is_updating : true if an update loop is running false otherwise.
+** - mlx : pointer to mlx instance
 */
+
+/*
+**Memory caps:
+*/
+# define TAG_AR_CAP ((size_t)1 << 30)
+# define TAG_NXT_CAP (TAG_AR_SZ / 4)
+# define TAC TAG_AR_CAP
+# define TNC TAG_NXT_CAP
+# define PXL_AR_CAP ((size_t)1 << 30)
+# define PAC PXL_AR_CAP
+
 # define DEF_V_H 200
 # define DEF_V_W 300
+
 struct						s_scene
 {
 	size_t		tar_allocs;
@@ -516,6 +527,7 @@ struct						s_scene
 	t_vpos		v_hw_def;
 	t_s_sv		*av;
 	char		is_updating;
+	void		*mlx;
 };
 
 #endif

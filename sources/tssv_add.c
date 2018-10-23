@@ -1,3 +1,4 @@
+#include <float.h>
 #include "functions.h"
 #include "scene.h"
 
@@ -19,6 +20,38 @@ static int				mirror_tsses(
 	return (r);
 }
 
+static int				add_pxl_ars(
+	t_vuint h,
+	t_vuint w,
+	t_s_sv *v)
+{
+	size_t const	sz = (sizeof(double) + sizeof(t_argb)) * h * w;
+	t_argb			*p1;
+	double			*p2;
+	size_t			ct;
+
+	if (sz > PAC - v->s->pxl_allocs)
+		return (MEM_CAP);
+	if ((p1 = malloc((ct = h * w) * sizeof(t_argb))) &&
+		(p2 = malloc(ct * sizeof(double))))
+	{
+		v->s->pxl_allocs -= sz;
+		while (ct--)
+		{
+			p2[ct] = DBL_MAX;
+			p1[ct] = COL_BLACK;
+		}
+		v->h = h;
+		v->w = w;
+		v->pxl = p1;
+		v->pxl_prec = p2;
+		return (SUCCESS);
+	}
+	if (p1)
+		free(p1);
+	return (SYS_ERR);
+}
+
 static int				init_view(
 	t_s_s *s,
 	t_vpos hw,
@@ -31,7 +64,7 @@ static int				init_view(
 	v->s = s;
 	v->ao = s->ao;
 	if ((r = mirror_tsses(s, v) == SUCCESS)
-		r = tssv_add_pxl_ars(hw[V_H], hw[V_W], v);
+		r = add_pxl_ars(hw[V_H], hw[V_W], v);
 	v->out_fd = -1;
 	v->out_wdw = 0;
 	return (r);

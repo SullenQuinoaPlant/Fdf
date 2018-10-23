@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 21:22:47 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:42:39 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -396,11 +396,6 @@ void						truint_dec_to_targb(
 
 void						tspctr_onelessview(
 	t_s_pctr	*p_coord_transform);
-
-int							tssv_add_pxl_ars(
-	t_vuint	h,
-	t_vuint	w,
-	t_s_sv	*v);
 
 void						tssv_apply_projs(
 	t_s_sv	*v);
