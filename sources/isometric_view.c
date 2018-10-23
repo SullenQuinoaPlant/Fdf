@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 06:16:07 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 20:37:40 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:13:08 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,13 @@ int						add_isometric_v(
 	t_s_sv		*new_v;
 	int			r;
 
+	new_v = 0;
 	if ((r = add_view(s, hw, &new_v)) == SUCCESS &&
 		(new_v->ct = add_isometric_camera(cam_pos, s)))
 	{
 		new_v->vt = e_iso;
 		set_prj(new_v);
+		set_prt(new_v);
 		tssv_apply_projs(new_v);
 	}
 	else if (r == SUCCESS)

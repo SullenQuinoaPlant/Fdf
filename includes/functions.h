@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 21:11:30 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:16:23 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,7 @@ void						minmax_permute(
 void						minmax_set(
 	t_xyz	*points,
 	size_t	point_coutt,
-	t_xyz	minmax);
+	t_xyz	*minmax);
 
 int							mirror_tsta(
 	t_s_s			*s,

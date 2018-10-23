@@ -3,7 +3,6 @@
 #include "scene.h"
 
 static void				set_zoom_effect(
-	t_s_s *s,
 	t_xyz extr[MMXYZPC],
 	t_s_sv *v)
 {
@@ -13,8 +12,8 @@ static void				set_zoom_effect(
 	double	d2;
 	int		i;
 
-	minmax_set(ext, MMXYZPC, mm);
-	cam_tr(v, (t_xyz){0, 0, mm[MIN][Z]});
+	minmax_set(extr, MMXYZPC, mm);
+	cam_tr((t_xyz){0, 0, mm[MIN][Z]}, v);
 	i = -1;
 	while (++i < VIEW_DIMS)
 	{
@@ -35,13 +34,14 @@ int						add_default_iso_v(
 	int		i;
 	int		r;
 
-	ret_v ? (*ret_v = 0) : (1);
+	ret_v ? (*ret_v = 0) : ((t_s_sv*)0);
 	if ((r = add_isometric_v(s->v_hw_def, (t_zntr){1, 0, 0, 0}, &v, s)))
 		return (r);
-	tpctrm_apply(v->ct, s->extr_bar, extr_bar);
-	cam_tr(v, extr_bar);
+	tpctrm_apply(v->ct->mashed, s->extr_bar, extr_bar);
+	cam_tr(extr_bar, v);
 	i = -1;
 	while (++i < MMXYZPC)
-		tpctrm_apply(v->ct, s->extr[i], extr[i]);
+		tpctrm_apply(v->ct->mashed, s->extr[i], extr[i]);
 	set_zoom_effect(extr, v);
+	return (SUCCESS);
 }
