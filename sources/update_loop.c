@@ -1,6 +1,22 @@
 #include "scene.h"
 
-int							ring_update_a_view_prjs(
+static void					update_pt_obj_proj(
+	t_s_sv *v)
+{
+	tssv_grp_apply_proj(v, &v->s[g], &v->e[g]);
+	tssv_grp_apply_proj(v, &v->s[e_o], &v->e[e_o]);
+}
+
+static void					update_a_grp(
+	t_s_sv *v,
+	t_e_seg g)
+{
+	tssv_grp_apply_proj(v, &v->s[g], &v->e[g]);
+	print_active_objects_a_grp(v, g);
+	tssv_push_to_screen(v);
+}
+
+int							ring_update_a_view(
 	void *p_teseg,
 	t_ring p_view)
 {
@@ -11,16 +27,17 @@ int							ring_update_a_view_prjs(
 
 	g = e_p;
 	if (v->ct->tick != master)
-	{
-		tssv_grp_apply_proj(v, &v->s[g], &v->e[g]);
-		tssv_grp_apply_proj(v, &v->s[e_o], &v->e[e_o]);
-	}
+		update_pt_obj_proj(v);
 	else
 	{
 		if (v->e[e_d].prj_tick != master)
-			set_v_background(v);
+			print_v_background(v);
 		while (++g <= *pg)
-			if (v->e[g].prj_tick != 
+			if (v->e[g].prj_tick != master)
+			{
+				update_a_grp(v, g);
+				break ;
+			}
 	}
 	*pg = g;
 	return (RING_SUCCESS);
@@ -31,12 +48,15 @@ void						update_loop(
 {
 	t_s_sv	*v;
 	t_e_seg	g;
-	int		no_work;
 
 	if (++s->is_updating > 1)
 		return ;
-	no_work = 0;
 	g = e_p;
-
+	while (g < e_seg_sz)
+	{
+		r = ring_apply((void*)s->ao, ring_update_a_view, &g);
+		if (r != RING_SUCCESS)
+			break ;
+	}
 	s->is_updating = 0;
 }
