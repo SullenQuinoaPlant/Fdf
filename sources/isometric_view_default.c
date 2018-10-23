@@ -8,7 +8,7 @@ static void				set_zoom_effect(
 	t_s_sv *v)
 {
 	t_xyz	mm[MIN_MAX_SZ];
-	double	hw[V_DIMS];
+	double	hw[VIEW_DIMS];
 	double	d1;
 	double	d2;
 	int		i;
@@ -16,7 +16,7 @@ static void				set_zoom_effect(
 	minmax_set(ext, MMXYZPC, mm);
 	cam_tr(v, (t_xyz){0, 0, mm[MIN][Z]});
 	i = -1;
-	while (++i < V_DIMS)
+	while (++i < VIEW_DIMS)
 	{
 		d1 = fabs(mm[MAX][i]);
 		d2 = fabs(mm[MIN][i]);

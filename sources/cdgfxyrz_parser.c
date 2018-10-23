@@ -34,7 +34,7 @@ static int					new_buff(
 #define NOT_DONE 1
 static int					really_parse(
 	char const **str,
-	size_t dims[V_DIMS],
+	size_t dims[VIEW_DIMS],
 	int zmm[MIN_MAX_SZ],
 	t_s_cxyd **p)
 {

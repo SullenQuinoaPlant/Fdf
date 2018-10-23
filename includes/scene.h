@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 18:09:36 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 20:47:12 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,7 +302,7 @@ struct						s_view_elements
 # define TVUINT_MAX UINT_MAX
 # define V_H 0
 # define V_W 1
-# define V_DIMS VIEW_DIMS
+# define V_D VIEW_DIMS
 
 /*
  **In projection objects :
