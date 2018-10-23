@@ -1,4 +1,4 @@
-#include "scene_typedefs.h"
+#include "functions.h"
 
 #define TMP_SZ 5
 
@@ -22,12 +22,12 @@ void							barycenter(
 	while (++i < TMP_SZ)
 		barycenter(pts + (i ? tmp_ct[i] : 0), tmp_ct[i], tmp[i]);
 	i = -1;
-	ft_bzero(ret, sizeof(t_xyz);
+	ft_bzero(ret, sizeof(t_xyz));
 	while (++i < pt_ct)
 	{
 		j = -1;
 		while (++j < DIMS)
-			ret[j] += tmp_ct[i] * tmp[i];
+			ret[j] += tmp_ct[i] * tmp[i][j];
 	}
 	mult_dbl_ar(1.0 / (double)pt_ct, DIMS, ret);
 }
