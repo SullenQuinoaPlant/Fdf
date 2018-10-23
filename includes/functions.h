@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 18:58:38 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/23 20:38:53 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ void						barycenter(
 	t_xyz	*pts,
 	int		pt_ct,
 	t_xyz	ret);
+
+void						cam_tr(
+	t_xyz	translation,
+	t_s_sv	*v);
+
+void						cam_zoom(
+	double	zoom_ratio,
+	t_s_sv	*v);
 
 int							chg_grptag_refct(
 	t_e_seg	g,
