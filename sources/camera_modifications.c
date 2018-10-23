@@ -72,9 +72,6 @@ void							cam_zoom(
 	int					i;
 
 	ft_memcpy(new, old, sizeof(t_s_pctrm));
-	i = -1;
-	while (++i < DIMS)
-		new[i][i] = old[TPCTRM_TR][i] - tr[i];
+	tpctrm_scalar_mult(ratio, new);
 	chg_tpctrm(new, TRZ, trz);
-
 }
