@@ -496,7 +496,8 @@ struct						s_active_object
 ** - v : views
 ** - v_hw_def : default height and width when creating views.
 ** - av : active view
-** - loop :
+** - v_rel : list of pointers to views that need  to be released, and freed.
+** - loop_status : true if a scene loop is running.
 ** - mlx : pointer to mlx instance
 */
 
@@ -527,6 +528,7 @@ struct						s_scene
 	t_s_sv				*v;
 	t_vpos				v_hw_def;
 	t_s_sv				*av;
+	t_list				*v_rel;
 	volatile char		loop_status;
 	void				*mlx;
 };

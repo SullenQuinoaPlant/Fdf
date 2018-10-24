@@ -13,10 +13,7 @@ void						scene_loop(
 	while (g < e_seg_sz && s->loop_status < LOOP_LOCK)
 	{
 		scene_loop_free_views(
-		scene_loop_update_views(s, &g
-		r = ring_apply((void*)s->ao, ring_update_a_view, &g);
-		if (r != RING_SUCCESS)
-			break ;
+		scene_loop_update_views(s, &g);
 	}
 	s->loop_status -= LOOPING;
 }

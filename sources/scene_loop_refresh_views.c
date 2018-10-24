@@ -54,7 +54,10 @@ void						scene_loop_update_views(
 	int				r;
 
 	if (priority->prj_tick != av->ct->tick)
+	{
 		tssv_grp_apply_proj(av, &s[e_p], priority);
+		*g = e_p;
+	}
 	else
-		ring_apply((void*)s->ao, ring_update_a_view, &g);
+		ring_apply((void*)s->ao, ring_update_a_view, g);
 }
