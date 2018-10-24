@@ -24,7 +24,6 @@ void						print_active_objects(
 	t_s_sv *v)
 {
 	t_s_ao *const	lim = v->ao;
-	t_s_o			*o;
 	t_s_ao			*p;
 
 	p = lim;

@@ -34,7 +34,8 @@ static int				add_mlx_ptrs(
 
 	if ((v->mlx_img = mlx_new_image(s->mlx, w, h)))
 		v->pxl = (t_argb*)mlx_get_data_addr(v->mlx_img, &we, &dont, &care);
-	v->mlx_wdw = mlx_new_window(s->mlx, w, h, title);
+	if (v->mlx_wdw = mlx_new_window(s->mlx, w, h, title))
+		mlx_tssv_default_hooks(v);
 	if (v->mlx_img && v->mlx_wdw)
 		return (SUCCESS);
 	return (SYS_ERR);

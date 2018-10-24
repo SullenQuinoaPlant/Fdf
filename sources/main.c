@@ -6,12 +6,12 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 16:13:23 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 23:53:25 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 23:53:52 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-
+#include "mlx.h"
 #include "functions.h"
 #include "scene.h"
 
