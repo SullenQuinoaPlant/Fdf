@@ -64,6 +64,7 @@ TARGETS := \
 	tssv_apply_proj \
 	tssv_deactivate \
 	tssv_free \
+	tssv_free_members \
 	tssv_functions \
 	tssv_print_active_objects \
 	tssv_print_scene_ascii \

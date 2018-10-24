@@ -23,10 +23,20 @@ static int				mirror_tsses(
 static int				add_mlx_ptrs(
 	t_vuint h,
 	t_vuint w,
+	char *title,
 	t_s_sv *v)
 {
 	t_s_s *const	s = v->s;
+	int				we;
+	int				dont;
+	int				care;
 
+	if ((v->mlx_img = mlx_new_image(s->mlx, w, h)))
+		v->pxl = (t_argb*)mlx_get_data_addr(v->mlx_img, &we, &dont, &care);
+	v->mlx_wdw = mlx_new_window(s->mlx, w, h, title);
+	if (v->mlx_img && v->mlx_wdw)
+		return (SUCCESS);
+	return (SYS_ERR);
 }
 
 static int				add_pxl_ars(
@@ -56,13 +66,14 @@ static int				add_pxl_ars(
 static int				init_view(
 	t_s_s *s,
 	t_vpos const hw,
+	char *title,
 	t_s_sv *v)
 {
 	int		r;
 
 	ft_bzero(&v->id, sizeof(t_s_v) - sizeof(t_s_ring));
 	if ((r = mirror_tsses(s, v) == SUCCESS) &&
-		(r = add_mlx_ptrs(hw[V_H], hw[V_W], v) == SUCCESS))
+		(r = add_mlx_ptrs(hw[V_H], hw[V_W], title, v) == SUCCESS))
 		r = add_pxl_ars(hw[V_H], hw[V_W], v);
 	v->s = s;
 	v->ao = s->ao;
@@ -82,7 +93,7 @@ int						add_view(
 	if (ret)
 		*ret = 0;
 	disable_scene_looping(s);
-	if ((r = init_view(s, hw, &dummy)) == SUCCESS &&
+	if ((r = init_view(s, hw, DEFAULT_WDW_NAME, &dummy)) == SUCCESS &&
 		(wait_scene_not_looping(s) || (1)) &&
 		(p = ring_expand(sizeof(t_s_sv), dummy, (void**)s->v)))
 		p->id = (p->ring.prv == (t_ring)p) ? 0 : ((t_s_sv*)v->ring.prv)->id + 1;

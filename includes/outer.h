@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 01:07:39 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 19:46:55 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 22:21:00 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,8 @@
 # define LOOPING 1
 # define LOOP_LOCK 2
 
+/*
+**Default window name:
+*/
+# define DEFAULT_WDW_NAME "fdf window"
 #endif
