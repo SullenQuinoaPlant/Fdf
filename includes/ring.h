@@ -71,5 +71,6 @@ void					ring_simple_free(
 
 # define RING_SYS_ERR -1
 # define RING_SUCCESS 0
+# define RING_STOP 1
 
 #endif

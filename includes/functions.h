@@ -426,7 +426,7 @@ void						txyz_to_ttpr(
 	t_xyz const	in,
 	t_tpr		out);
 
-void						update_loop(
+void						scene_loop(
 	t_s_s	*s);
 
 int							usage(

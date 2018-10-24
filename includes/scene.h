@@ -496,8 +496,7 @@ struct						s_active_object
 ** - v : views
 ** - v_hw_def : default height and width when creating views.
 ** - av : active view
-** - refreshing : true if a refresh loop is running or refreshing is disabled.
-**		See REFRESH constants and enable_disable_refresh.c
+** - loop :
 ** - mlx : pointer to mlx instance
 */
 
@@ -516,20 +515,20 @@ struct						s_active_object
 
 struct						s_scene
 {
-	size_t		tar_allocs;
-	size_t		nxt_allocs;
-	size_t		pxl_allocs;
-	t_s_se		e[e_seg_sz];
-	t_xyz		minmax[MIN_MAX_SZ];
-	t_xyz		extr[MMXYZPC];
-	t_xyz		extr_bar;
-	t_s_ao		*ao;
-	t_s_pctr	*ct;
-	t_s_sv		*v;
-	t_vpos		v_hw_def;
-	t_s_sv		*av;
-	char		is_updating;
-	void		*mlx;
+	size_t				tar_allocs;
+	size_t				nxt_allocs;
+	size_t				pxl_allocs;
+	t_s_se				e[e_seg_sz];
+	t_xyz				minmax[MIN_MAX_SZ];
+	t_xyz				extr[MMXYZPC];
+	t_xyz				extr_bar;
+	t_s_ao				*ao;
+	t_s_pctr			*ct;
+	t_s_sv				*v;
+	t_vpos				v_hw_def;
+	t_s_sv				*av;
+	volatile char		loop_status;
+	void				*mlx;
 };
 
 #endif

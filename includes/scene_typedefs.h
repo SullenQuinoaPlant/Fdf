@@ -35,7 +35,7 @@ typedef struct s_scene_view	t_s_sv;
 
 typedef unsigned int	t_tag;
 
-typedef unsigned int	t_ticker;
+typedef volatile unsigned int	t_ticker;
 
 typedef int		(*t_printer)(
 	t_s_sv *view,
