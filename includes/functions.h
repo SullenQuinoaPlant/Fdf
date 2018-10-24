@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 21:57:40 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 22:25:22 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int							add_tssbis_to_scene(
 	t_s_s	*scene);
 
 int							add_view(
-	t_s_s	*s,
-	t_vpos	height_and_width,
-	t_s_sv	**ret);
+	t_s_s			*s,
+	t_vpos const	height_and_width,
+	t_s_sv			**ret);
 
 int							alloc_tar(
 	t_s_s	*s,

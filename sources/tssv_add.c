@@ -1,4 +1,5 @@
 #include <float.h>
+#include "mlx.h"
 #include "functions.h"
 #include "scene.h"
 
@@ -50,6 +51,7 @@ static int				add_pxl_ars(
 
 	if (sz > PAC - v->s->pxl_allocs)
 		return (MEM_CAP);
+	ct = h * w;
 	if ((p = malloc(ct * sizeof(double))))
 	{
 		v->s->pxl_allocs -= sz;
@@ -95,13 +97,13 @@ int						add_view(
 	disable_scene_looping(s);
 	if ((r = init_view(s, hw, DEFAULT_WDW_NAME, &dummy)) == SUCCESS &&
 		(wait_scene_not_looping(s) || (1)) &&
-		(p = ring_expand(sizeof(t_s_sv), dummy, (void**)s->v)))
-		p->id = (p->ring.prv == (t_ring)p) ? 0 : ((t_s_sv*)v->ring.prv)->id + 1;
+		(p = ring_expand(sizeof(t_s_sv), &dummy, (void**)s->v)))
+		p->id = (p->ring.prv == (t_ring)p) ? 0 : ((t_s_sv*)p->ring.prv)->id + 1;
 	else
 	{
 		r = SYS_ERR;
 		free_view_members(&dummy);
 	}
-	enable_sceen_looping(s);
+	enable_scene_looping(s);
 	return (r);
 }
