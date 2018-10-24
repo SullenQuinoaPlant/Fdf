@@ -40,19 +40,16 @@ static int				add_pxl_ars(
 
 	if (sz > PAC - v->s->pxl_allocs)
 		return (MEM_CAP);
-	if ((p2 = malloc(ct * sizeof(double))))
+	if ((p = malloc(ct * sizeof(double))))
 	{
 		v->s->pxl_allocs -= sz;
 		while (ct--)
 			p[ct] = DBL_MAX;
 		v->h = h;
 		v->w = w;
-		v->pxl = p1;
-		v->pxl_prec = p2;
+		v->pxl_prec = p;
 		return (SUCCESS);
 	}
-	if (p1)
-		free(p1);
 	return (SYS_ERR);
 }
 
@@ -67,7 +64,6 @@ static int				init_view(
 	if ((r = mirror_tsses(s, v) == SUCCESS) &&
 		(r = add_mlx_ptrs(hw[V_H], hw[V_W], v) == SUCCESS))
 		r = add_pxl_ars(hw[V_H], hw[V_W], v);
-	v->id = (v->ring.prv == (t_ring)v) ? 0 : ((t_s_sv*)v->ring.prv)->id + 1;
 	v->s = s;
 	v->ao = s->ao;
 	v->out_fd = -1;
@@ -79,21 +75,22 @@ int						add_view(
 	t_vpos const hw,
 	t_s_sv **ret)
 {
-	t_s_sv	**v;
+	t_s_sv	dummy;
+	t_s_sv	*p;
 	int		r;
 
 	if (ret)
 		*ret = 0;
-	r = SYS_ERR;
-	v = &s->v;
-	disable_updates();
-	if (ring_expand(sizeof(t_s_sv), 0, (void**)v))
+	disable_scene_looping(s);
+	if ((r = init_view(s, hw, &dummy)) == SUCCESS &&
+		(wait_scene_not_looping(s) || (1)) &&
+		(p = ring_expand(sizeof(t_s_sv), dummy, (void**)s->v)))
+		p->id = (p->ring.prv == (t_ring)p) ? 0 : ((t_s_sv*)v->ring.prv)->id + 1;
+	else
 	{
-		if ((r = init_view(s, hw, *v)) != SUCCESS)
-			free_view(v);
-		else if (ret)
-			*ret = *v;
+		r = SYS_ERR;
+		free_view_members(&dummy);
 	}
-	enable_updates();
+	enable_sceen_looping(s);
 	return (r);
 }

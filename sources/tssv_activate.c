@@ -13,6 +13,6 @@ void						activate_view(
 			deactivate_view(prv);
 		s->av = v;
 	}
-	if (v->vt = e_iso)
+	if (v->vt == e_iso)
 		v->e[e_p].prj = point_projection_iso_persist;
 }

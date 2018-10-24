@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 21:28:57 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 21:57:40 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ void						free_view(
 
 void						free_views(
 	t_s_sv	**ring);
+
+void						free_view_members(
+	t_s_sv	*v);
 
 int							get_cdgfxyrz_sbi(
 	char const	*file,
@@ -461,7 +464,7 @@ int							scene_loop_refresh_views(
 int							usage(
 	void);
 
-void						wait_scene_not_looping(
+int							wait_scene_not_looping(
 	t_s_s	*s);
 
 #endif
