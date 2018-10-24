@@ -36,6 +36,10 @@ TARGETS := \
 	report_error \
 	ring \
 	scene_add_tagged_array \
+	scene_enable_disable_loop \
+	scene_loop \
+	scene_loop_free_views \
+	scene_loop_refresh_views \
 	scene_make \
 	scene_set_extremums \
 	scene_teardown \
@@ -63,6 +67,5 @@ TARGETS := \
 	tssv_print_scene_ascii \
 	tsta_functions \
 	txyz_to_ttpr \
-	update_loop \
 	usage \
 	ve_functions

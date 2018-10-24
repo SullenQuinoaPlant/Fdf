@@ -16,7 +16,7 @@ void						enable_scene_loop(
 }
 
 /*
-**sleep not available, so it's a tight loop
+**sleep not available, so it's an ugly tight loop.
 */
 void						wait_scene_not_looping(
 	t_s_s *s)

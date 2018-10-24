@@ -1,6 +1,7 @@
 #include "mlx.h"
 #include "functions.h"
 #include "scene.h"
+#include "colors.h"
 
 void						point_projection(
 	t_s_sv *v,
@@ -28,5 +29,5 @@ void						point_projection_iso_persist(
 
 	point_projection(v, scene_point, points, view_point);
 	if (iso_dbl_dims_to_tvpos(v, pp->xyz, hw) == SUCCESS)
-		mlx_pixel_put(v->s->WHAT, v->win_ptr, hw[V_W], hw[V_H], COL_WHITE); 
+		mlx_pixel_put(v->s->mlx, v->mlx_wdw, hw[V_W], hw[V_H], COL_WHITE); 
 }

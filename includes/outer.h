@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 01:07:39 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 23:15:54 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 19:46:55 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@
 # define MMXYZPC MIN_MAX_XYZ_PERMUTATION_COUNT
 
 /*
-**Refresh state constants:
+**Loop state constants:
 */
-# define NOT_REFRESHING 0
-# define REFRESHING 1
-# define REFRESH_LOCK 2
+# define NOT_LOOPING 0
+# define LOOPING 1
+# define LOOP_LOCK 2
 
 #endif
