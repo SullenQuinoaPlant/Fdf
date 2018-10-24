@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 21:03:09 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 21:28:57 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,6 +358,9 @@ void						report_error(
 
 void						scene_teardown(
 	t_s_s	**s);
+
+void						scene_set_extr(
+	t_s_s	*s);
 
 void						set_mult_pnt_dec(
 	double	src[DIMS],

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:54:46 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/22 19:25:24 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 21:29:37 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int				use_input(
 	return (f[input->type](input->input, scene));
 }
 
-stotic int				check_minmax(
+static int				check_minmax(
 	t_xyz	sbi_minmax[MIN_MAX_SZ],
 	t_xyz	s_minmax[MIN_MAX_SZ])
 {
@@ -62,7 +62,7 @@ stotic int				check_minmax(
 
 int						add_tssbis_to_scene(
 	t_s_sbi **input_str,
-	t_s_s *scene)
+	t_s_s *s)
 {
 	t_s_sbi	*p;
 	int		mm_chg;
@@ -72,9 +72,9 @@ int						add_tssbis_to_scene(
 	mm_chg = 0;
 	while ((p = *input_str))
 	{
-		if ((r = use_input(p, scene) != SUCCESS))
+		if ((r = use_input(p, s) != SUCCESS))
 			break;
-		mm_chg = check_minmax(p->minmax, scene->minmax);
+		mm_chg = check_minmax(p->minmax, s->minmax);
 		input_str++;
 	}
 	if (mm_chg)

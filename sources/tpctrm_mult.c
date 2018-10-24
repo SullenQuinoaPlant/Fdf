@@ -40,7 +40,7 @@ void					tpctrm_mult(
 }
 
 void					tpctrm_scalar_mult(
-	double k,
+	double scalar,
 	t_pctrm c)
 {
 	int		i;
@@ -60,5 +60,5 @@ void					tpctrm_scalar_mult(
 	}
 	i = -1;
 	while (++i < DIMS)
-		c[TPCTRM_TR][i] *= k;
+		c[TPCTRM_TR][i] *= scalar;
 }
