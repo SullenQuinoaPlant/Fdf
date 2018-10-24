@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 22:25:22 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 23:50:10 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,6 +304,9 @@ void						point_projection_iso_persist(
 	t_s_pp const *const *invalid,
 	void	*view_point);
 
+void						print_active_objects(
+	t_s_sv	*v);
+
 void						print_active_objects_a_grp(
 	t_s_sv	*v,
 	t_e_seg	g);
@@ -333,6 +336,12 @@ int							print_obj_grps(
 int							print_object(
 	t_s_sv	*v,
 	t_tag	t);
+
+int							print_obj_groups(
+	t_e_seg const	*print_order,
+	int				print_order_sz,
+	t_s_o			*o,
+	t_s_sv			*v);
 
 void						print_scene_points(
 	t_s_s	*s);
@@ -431,6 +440,10 @@ void						tssv_grp_apply_proj(
 	t_s_ve	*v_grp);
 
 int							tssv_print_ascii(
+	t_s_sv	*v);
+
+void						tssv_proj_print(
+	int		project_points_or_not,
 	t_s_sv	*v);
 
 void						tssv_push_to_displays(

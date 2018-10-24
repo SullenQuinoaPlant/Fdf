@@ -68,6 +68,7 @@ TARGETS := \
 	tssv_functions \
 	tssv_print_active_objects \
 	tssv_print_scene_ascii \
+	tssv_project_and_print \
 	tsta_functions \
 	txyz_to_ttpr \
 	usage \

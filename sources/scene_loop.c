@@ -17,6 +17,5 @@ void						scene_loop(
 	}
 	if (s->loop_status < LOOP_LOCK && g == e_seg_sz && r == SUCCESS)
 		tssv_proj_print(0, s->av);
-		print_av_last(s->av);
 	s->loop_status -= LOOPING;
 }
