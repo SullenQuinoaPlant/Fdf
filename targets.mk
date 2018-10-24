@@ -56,6 +56,8 @@ TARGETS := \
 	tssbi_string_add_to_scene \
 	tssbi_string_free \
 	tsse_functions \
+	tsse_init_and_free \
+	tsse_register_free_tags \
 	tsso_functions \
 	tssv_activate \
 	tssv_add \

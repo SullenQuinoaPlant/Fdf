@@ -5,39 +5,37 @@
 static int				init_mlx(
 	void **ret)
 {
-	if (*ret = mlx_init())
+	if ((*ret = mlx_init()))
 		return (SUCCESS);
 	return (SYS_ERR);
 }
 
-static void				init_vars(
+static int				init_vars(
+	void *mlx,
 	t_s_s *s)
 {
 	ft_bzero(s, sizeof(t_s_s));
 	disable_scene_looping(s);
 	minmax_init(s->minmax);
 	ft_memcpy(s->v_hw_def, (t_vpos){DEF_V_H, DEF_V_W}, sizeof(t_vpos));
+	return (SUCCESS);
 }
 
-
 static int				init_scene(
-	t_s_s **p_ret_scene)
+	void *mlx,
+	t_s_s **ret)
 {
 	t_s_s	*s;
 	void	*mlx;
 	int		r;
 
-	*p_ret_scene = 0;
+	r = SYS_ERR;
 	if ((s = malloc(sizeof(t_s_s))) &&
-		(mlx
-		(r = init_tsses(s)) == SUCCESS) &&
-
-		return (SYS_ERR);
-	init_vars(s);
-	if (r != SUCCESS)
-		scene_teardown(&s);
-	else
-		*p_ret_scene = s;
+		(r = init_vars(mlx, s)) == SUCCESS &&
+		(r = init_tsses(s)) == SUCCESS))
+		*ret = s;
+	else if (s)
+		scene_teardown(s);
 	return (r);
 }
 
@@ -53,7 +51,7 @@ int						make_scene(
 		return (BAD_ARGS);
 	*ret = 0;
 	if ((r = init_mlx(&mlx) == SUCCESS) &&
-		(r = init_scene(&s)) == SUCCESS &&
+		(r = init_scene(mlx, &s)) == SUCCESS &&
 		(!in || (r = add_tssbis_to_scene(in, *p_ret_scene)) == SUCCESS))
 		enable_scene_looping((*ret = s));
 	else if (mlx)
