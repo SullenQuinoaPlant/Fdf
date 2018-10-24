@@ -1,13 +1,13 @@
 #include "scene.h"
 
-void						disable_scene_loop(
+void						disable_scene_looping(
 	t_s_s *s)
 {
 	s->loop_status += LOOP_LOCK;
 	return ;
 }
 
-void						enable_scene_loop(
+void						enable_scene_looping(
 	t_s_s *s)
 {
 	while (s->loop_status >= LOOP_LOCK)
@@ -21,6 +21,8 @@ void						enable_scene_loop(
 void						wait_scene_not_looping(
 	t_s_s *s)
 {
-	while (s->loop_status)
+	char	status;
+
+	while ((status = s->loop_status) && status >= LOOP_LOCK)
 		;
 }

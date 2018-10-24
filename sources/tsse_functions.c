@@ -1,30 +1,6 @@
 #include "functions.h"
 #include "scene.h"
 
-int						init_tsse(
-	t_e_seg g,
-	t_s_se *se,
-	t_s_s *s)
-{
-	t_s_ft const	last_link = (t_s_ft){0, 0};
-	t_list			*tl;
-
-	if (!(tl = ft_lstnew(&last_link, sizeof(t_s_ft))))
-		return (SYS_ERR);
-	se->nxt = tl;
-	se->ar_sz = 0;
-	se->e_sz = teseg_type_sz(g);
-	return (add_star(g, s));
-}
-
-void					free_tsse(
-	t_s_se *se,
-	t_s_s *s)
-{
-	free_tar(se->ar, se->ar_sz, se->e_sz, s);
-	ft_lstdel(&se->nxt, ft_cleanfree);
-}
-
 int						get_nxt_se(
 	t_e_seg g,
 	t_s_s *s,
@@ -49,35 +25,4 @@ int						get_nxt_se(
 	if (ret_addr)
 		*ret_addr = (p->ar[tag >> TPS]) + (tag & TPM) * teseg_type_sz(g);
 	return (SUCCESS);
-}
-
-int						reg_tsse_freetags(
-	t_tag first,
-	t_tag diff_with_last,
-	t_s_s *s,
-	t_s_se *g)
-{
-	t_tag const	last = first + diff_with_last;
-	t_list		*tl;
-	int			r;
-
-	
-	if (!(tl = ft_lstnew(&(t_s_ft){first, last}, sizeof(t_s_ft))))
-		return (SYS_ERR);
-	ft_lstadd(&g->nxt, tl);
-	r = SUCCESS;
-	if ((s->nxt_allocs += sizeof(t_list)) >= TAG_NXT_CAP)
-		r = realloc_tars(s);
-	return (r);
-}
-
-int						reg_teseg_freetags(
-	t_tag first,
-	t_tag diff_with_last,
-	t_s_s *s,
-	t_e_seg g)
-{
-	t_s_se *const	grp = &s->e[g];
-
-	return (reg_tsse_freetags(first, diff_with_last, s, grp));
 }

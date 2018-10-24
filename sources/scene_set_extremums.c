@@ -1,3 +1,4 @@
+#include "functions.h"
 #include "scene.h"
 
 void						scene_set_extr(

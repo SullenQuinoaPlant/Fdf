@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 20:30:34 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 21:03:09 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ int							clone_tar(
 void						deactivate_view(
 	t_s_sv	*v);
 
+void						disable_scene_looping(
+	t_s_s	*s);
+
 void						doubles_to_targb(
 	double	argb[ARGBS],
 	t_argb	*ret);
@@ -102,6 +105,9 @@ void						doubles_to_targb(
 void						doubles_to_tvpos(
 	double	coords[DIMS],
 	t_vpos	*ret);
+
+void						enable_scene_looping(
+	t_s_s	*s);
 
 void						free_free_tar(
 	void	**ar,
@@ -128,6 +134,9 @@ void						free_tssbi_str(
 
 void						free_tsse(
 	t_s_se	*se,
+	t_s_s	*s);
+
+void						free_tsses(
 	t_s_s	*s);
 
 void						free_view(
@@ -174,6 +183,9 @@ int							inc_tar_alloc(
 int							init_tsse(
 	t_e_seg	g,
 	t_s_se	*se,
+	t_s_s	*s);
+
+int							init_tsses(
 	t_s_s	*s);
 
 int							initiate_se_release(
@@ -445,5 +457,8 @@ int							scene_loop_refresh_views(
 
 int							usage(
 	void);
+
+void						wait_scene_not_looping(
+	t_s_s	*s);
 
 #endif
