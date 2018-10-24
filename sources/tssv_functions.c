@@ -6,11 +6,12 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:11:37 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 21:56:11 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 22:35:21 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
+#include <float.h>
+#include "mlx.h"
 #include "functions.h"
 #include "scene.h"
 #include "colors.h"
@@ -57,8 +58,10 @@ void						tssv_set_out_fd(
 void						tssv_push_to_displays(
 	t_s_sv *v)
 {
-	if (v->out_wdw)
-		//do stuff
+	t_s_s *const	s = v->s;
+
+	if (v->mlx_wdw)
+		mlx_put_image_to_window(s->mlx, v->mlx_wdw, v->pxl, 0, 0);
 	if (v->out_fd > -1)
 		tssv_print_ascii(v);
 }
@@ -72,10 +75,9 @@ void						tssv_reset_print_canvas(
 	double			*p2;
 
 	if ((p1 = v->pxl))
-		while (p < lim1)
+		while (p1 < lim1)
 			*p1++ = COL_BLACK;
 	if ((p2 = v->pxl_prec))
 		while (p2 < lim2)
-			*p2++ = PREC_MIN;
-
+			*p2++ = DBL_MAX;
 }

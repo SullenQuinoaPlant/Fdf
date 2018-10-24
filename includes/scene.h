@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 20:21:02 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 22:33:59 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,11 +300,11 @@ struct						s_view_elements
 # define V_D VIEW_DIMS
 
 /*
- **In projection objects :
- **Precendence 'prec' typically linked to depth,
- **Flag:
- **	- visibility
- */
+**In projection objects :
+**Precendence 'prec' typically linked to depth,
+**Flag:
+**	- visibility
+*/
 /*
 **Point projections are
 **	(t_s_p)s minus the reference counter.

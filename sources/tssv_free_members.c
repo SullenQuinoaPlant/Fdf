@@ -20,7 +20,7 @@ static void				release_mlx_ptrs(
 	void *const	mlx = v->s->mlx;
 
 	if (v->mlx_img)
-		mlx_destroy_image(>mlx, v->mlx_img);
+		mlx_destroy_image(mlx, v->mlx_img);
 	if (v->mlx_wdw)
 		mlx_destroy_window(mlx, v->mlx_wdw);
 }
@@ -38,7 +38,7 @@ static void				free_tars(
 void					free_view_members(
 	t_s_sv *v)
 {
-	if (!view)
+	if (!v)
 		return ;
 	tspctr_onelessview(v->ct);
 	free_pxl_ars(v);

@@ -26,7 +26,7 @@ void							tssv_grp_apply_proj(
 			p_ve += v_grp->e_sz;
 		}
 	}
-	v_grp->tick = v->e[e_p].tick;
+	v_grp->prj_tick = v->e[e_p].prj_tick;
 }
 
 void						tssv_apply_projs(
