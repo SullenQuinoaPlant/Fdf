@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 19:58:36 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 20:30:34 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,10 @@ void						point_projection_iso_persist(
 	t_s_pp const *const *invalid,
 	void	*view_point);
 
+void						print_active_objects_a_grp(
+	t_s_sv	*v,
+	t_e_seg	g);
+
 int							print_arrow(
 	t_s_sv	*v,
 	t_tag	t);
@@ -435,7 +439,7 @@ void						scene_loop(
 void						scene_loop_free_views(
 	t_s_s	*s);
 
-void						scene_loop_refresh_views(
+int							scene_loop_refresh_views(
 	t_s_s	*s,
 	t_e_seg	*g);
 

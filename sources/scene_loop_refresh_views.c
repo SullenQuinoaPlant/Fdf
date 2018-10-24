@@ -4,15 +4,15 @@
 static void					refresh_pt_obj_proj(
 	t_s_sv *v)
 {
-	tssv_grp_apply_proj(v, &v->s[e_p], &v->e[e_p]);
-	tssv_grp_apply_proj(v, &v->s[e_o], &v->e[e_o]);
+	tssv_grp_apply_proj(v, &v->s->e[e_p], &v->e[e_p]);
+	tssv_grp_apply_proj(v, &v->s->e[e_o], &v->e[e_o]);
 }
 
 static void					refresh_a_grp(
 	t_s_sv *v,
 	t_e_seg g)
 {
-	tssv_grp_apply_proj(v, &v->s[g], &v->e[g]);
+	tssv_grp_apply_proj(v, &v->s->e[g], &v->e[g]);
 	print_active_objects_a_grp(v, g);
 	tssv_push_to_displays(v);
 }
@@ -45,7 +45,7 @@ static int					ring_refresh_a_view(
 	return (s->loop_status >= LOOP_LOCK ? RING_STOP : RING_SUCCESS);
 }
 
-void						scene_loop_refresh_views(
+int							scene_loop_refresh_views(
 	t_s_s *s,
 	t_e_seg *g)
 {
@@ -55,9 +55,14 @@ void						scene_loop_refresh_views(
 
 	if (priority->prj_tick != av->ct->tick)
 	{
-		tssv_grp_apply_proj(av, &s[e_p], priority);
+		tssv_grp_apply_proj(av, &s->e[e_p], priority);
 		*g = e_p;
+		r = SUCCESS;
 	}
 	else
-		ring_apply((void*)s->ao, ring_refresh_a_view, g);
+	{
+		r = ring_apply((void*)s->ao, ring_refresh_a_view, g);
+		r = r == RING_SYS_ERR ? SYS_ERR : SUCCESS;
+	}
+	return (r);
 }
