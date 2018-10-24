@@ -27,6 +27,8 @@ static int					ring_refresh_a_view(
 	t_e_seg			g;
 	t_ticker		master;
 
+	if (v == s->av)
+		return (RING_SUCCESS);
 	g = e_p;
 	while (s->loop_status < LOOP_LOCK && g <= *pg)
 	{
@@ -61,7 +63,7 @@ int							scene_loop_refresh_views(
 	}
 	else
 	{
-		r = ring_apply((void*)s->ao, ring_refresh_a_view, g);
+		r = ring_apply(av->ring.nxt, ring_refresh_a_view, g);
 		r = r == RING_SYS_ERR ? SYS_ERR : SUCCESS;
 	}
 	return (r);

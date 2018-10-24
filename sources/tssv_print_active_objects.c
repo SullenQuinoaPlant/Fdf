@@ -4,7 +4,7 @@ void						print_active_objects_a_grp(
 	t_s_sv *v,
 	t_e_seg g)
 {
-	t_s_s *const	lim = v->s->ao;
+	t_s_ao *const	lim = v->s->ao;
 	t_e_seg const	group[1] = {g};
 	t_s_o			*o;
 	t_s_ao			*p;
