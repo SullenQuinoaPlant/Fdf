@@ -57,8 +57,6 @@ static void				free_view_members(
 void					free_view(
 	t_s_sv **ring_bit)
 {
-	t_s_s *const	s 
-	while (
 	ring_shrink(sizeof(t_s_sv), free_view_members, (void**)ring_bit);
 }
 

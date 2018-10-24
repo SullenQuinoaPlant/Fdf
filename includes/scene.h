@@ -528,7 +528,7 @@ struct						s_scene
 	t_s_sv				*v;
 	t_vpos				v_hw_def;
 	t_s_sv				*av;
-	t_list				*v_rel;
+	volatile t_list		*v_rel;
 	volatile char		loop_status;
 	void				*mlx;
 };

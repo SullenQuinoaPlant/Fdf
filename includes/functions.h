@@ -322,6 +322,10 @@ void						print_scene_points(
 int							realloc_tars(
 	t_s_s	*s);
 
+int							register_view_release(
+	t_s_sv	*v,
+	t_s_s	*s);
+
 int							reg_teseg_freetags(
 	t_tag	first,
 	t_tag	diff_with_last,
