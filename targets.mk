@@ -36,8 +36,8 @@ TARGETS := \
 	report_error \
 	ring \
 	scene_add_tagged_array \
-	scene_enable_disable_loop \
 	scene_loop \
+	scene_loop_enable_disable \
 	scene_loop_free_views \
 	scene_loop_refresh_views \
 	scene_make \

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 23:19:42 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 20:21:02 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -528,7 +528,7 @@ struct						s_scene
 	t_s_sv				*v;
 	t_vpos				v_hw_def;
 	t_s_sv				*av;
-	volatile t_list		*v_rel;
+	t_list				*v_rel;
 	volatile char		loop_status;
 	void				*mlx;
 };

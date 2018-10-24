@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 21:42:39 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/24 19:58:36 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_s_pctr					*add_camera(
 	t_pctrm	const	*coordinate_transforms__cts,
 	int				coordinate_transforms_count__ct_ct,
 	t_s_pctr		**add_at);
-//	t_s_s			*s);
 
 int							add_default_iso_v(
 	t_s_sv	**optional_return_pointer,
@@ -432,6 +431,13 @@ void						txyz_to_ttpr(
 
 void						scene_loop(
 	t_s_s	*s);
+
+void						scene_loop_free_views(
+	t_s_s	*s);
+
+void						scene_loop_refresh_views(
+	t_s_s	*s,
+	t_e_seg	*g);
 
 int							usage(
 	void);

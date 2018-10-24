@@ -12,8 +12,8 @@ void						scene_loop(
 	r = SUCCESS;
 	while (g < e_seg_sz && s->loop_status < LOOP_LOCK)
 	{
-		scene_loop_free_views(
-		scene_loop_update_views(s, &g);
+		scene_loop_free_views(s);
+		scene_loop_refresh_views(s, &g);
 	}
 	s->loop_status -= LOOPING;
 }

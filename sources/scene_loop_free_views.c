@@ -1,4 +1,4 @@
- "functions.h"
+#include "functions.h"
 #include "scene.h"
 
 int						register_view_release(
@@ -6,7 +6,6 @@ int						register_view_release(
 	t_s_s *s)
 {
 	t_list	*p;
-	int		r;
 
 	if (!(p = ft_lstnew(&v, sizeof(t_s_sv*))))
 		return (SYS_ERR);
@@ -37,5 +36,5 @@ void					scene_loop_free_views(
 
 	ft_lstiter(p, release_view);
 	if (p->next)
-		ft_lstdel(&p->next);
+		ft_lstdel(&p->next, ft_free);
 }

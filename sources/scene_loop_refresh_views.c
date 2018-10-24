@@ -1,14 +1,14 @@
 #include "functions.h"
 #include "scene.h"
 
-static void					update_pt_obj_proj(
+static void					refresh_pt_obj_proj(
 	t_s_sv *v)
 {
 	tssv_grp_apply_proj(v, &v->s[e_p], &v->e[e_p]);
 	tssv_grp_apply_proj(v, &v->s[e_o], &v->e[e_o]);
 }
 
-static void					update_a_grp(
+static void					refresh_a_grp(
 	t_s_sv *v,
 	t_e_seg g)
 {
@@ -17,7 +17,7 @@ static void					update_a_grp(
 	tssv_push_to_displays(v);
 }
 
-static int					ring_update_a_view(
+static int					ring_refresh_a_view(
 	void *p_teseg,
 	t_ring p_view)
 {
@@ -31,12 +31,12 @@ static int					ring_update_a_view(
 	while (s->loop_status < LOOP_LOCK && g <= *pg)
 	{
 		if (g == e_p && (master = v->ct->tick) != v->e[e_p].prj_tick)
-			update_pt_obj_proj(v);
+			refresh_pt_obj_proj(v);
 		else if (v->e[g].prj_tick != master)
 		{
 			if (g == e_d)
 				tssv_reset_print_canvas(v);
-			update_a_grp(v, g);
+			refresh_a_grp(v, g);
 			break ;
 		}
 		g++;
@@ -45,7 +45,7 @@ static int					ring_update_a_view(
 	return (s->loop_status >= LOOP_LOCK ? RING_STOP : RING_SUCCESS);
 }
 
-void						scene_loop_update_views(
+void						scene_loop_refresh_views(
 	t_s_s *s,
 	t_e_seg *g)
 {
@@ -59,5 +59,5 @@ void						scene_loop_update_views(
 		*g = e_p;
 	}
 	else
-		ring_apply((void*)s->ao, ring_update_a_view, g);
+		ring_apply((void*)s->ao, ring_refresh_a_view, g);
 }
