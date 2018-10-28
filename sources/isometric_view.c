@@ -6,11 +6,12 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 06:16:07 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/28 03:22:57 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/28 03:28:58 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "functions.h"
+#include "mlx.h"
 #include "scene.h"
 
 static void				set_prj(

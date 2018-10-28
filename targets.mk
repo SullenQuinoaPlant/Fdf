@@ -16,6 +16,7 @@ TARGETS := \
 	isometric_line_projection \
 	isometric_view \
 	isometric_view_default \
+	isometric_view_default_keyhooks \
 	isometric_view_double_tvuint_conversions \
 	isometric_view_init_camera \
 	isometric_view_line_frame_xy_isect \

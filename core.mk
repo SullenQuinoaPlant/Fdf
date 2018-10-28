@@ -1,4 +1,8 @@
-all : $(OUT_DIR)/$(NAME)
+.PHONY : all
+all : $(NAME)
+
+.PHONY : $(NAME)
+$(NAME) : $(OUT_DIR)/$(NAME)
 
 $(OUT_DIR)/$(NAME)\
 :\
@@ -7,6 +11,7 @@ $(patsubst %,$(LIBS_L)/%.a,$(DEPENDENCIES))
 	$(CC) -o $@ $^\
 		-L $(LIBS_L)\
 		-lm\
+		-lmlx -framework OpenGL -framework AppKit\
 		$(patsubst lib%,-l%,$(DEPENDENCIES))
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
