@@ -1,8 +1,5 @@
 .PHONY : all
-all : $(NAME)
-
-.PHONY : $(NAME)
-$(NAME) : $(OUT_DIR)/$(NAME)
+all : $(OUT_DIR)/$(NAME)
 
 $(OUT_DIR)/$(NAME)\
 :\
