@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/28 03:28:20 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/28 20:35:31 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int							alloc_tar(
 	void	***p_ar);
 
 void						barycenter(
-	t_xyz	*pts,
-	int		pt_ct,
-	t_xyz	ret);
+	t_xyz			*pts,
+	int const		pt_ct,
+	t_xyz			ret);
 
 void						cam_tr(
 	t_xyz	translation,

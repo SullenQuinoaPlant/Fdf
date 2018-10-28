@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:18:01 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/23 21:04:30 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/28 19:50:13 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ enum						e_scene_input_types
 **
 **Grid rows are along the y axis, grid columns are along the x axis.
 */
+
 struct						s_cartesian_xy_dot
 {
 	int		z;
@@ -60,6 +61,7 @@ struct						s_cartesian_dot_grid_fullxy_regularz
 ** - 'type' : specifies what the 'input' (void*) must be cast to.
 ** - 'input' : pointer to an input-specific structure.
 */
+
 struct						s_scene_builder_input
 {
 	t_xyz	minmax[MIN_MAX_SZ];
@@ -70,6 +72,7 @@ struct						s_scene_builder_input
 /*
 **Hand constants:
 */
+
 # define ROW 0
 # define COL 1
 # define BUF_SZ 0x100
@@ -77,9 +80,11 @@ struct						s_scene_builder_input
 /*
 **Builder auxilliary functions:
 */
+
 /*
 **cdgfxyrz :
 */
+
 int							cdgfxyrz_add_lines(
 	t_s_cdgfxyrz	*p,
 	t_tag			*tags,
@@ -93,7 +98,7 @@ int							cdgfxyrz_parse(
 	t_list		**bs);
 
 void						cdgfxyrz_set_sbi_minmax(
-	t_s_cdgfxyrz *parsed,
-	t_s_sbi *sbi);
+	t_s_cdgfxyrz	*parsed,
+	t_s_sbi			*sbi);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 16:13:23 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 23:53:52 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/28 19:21:38 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ int				main(
 
 	input[1] = 0;
 	s = 0;
-	if (ac != 2 ||
-		((r = get_cdgfxyrz_sbi(av[1], input)) != SUCCESS && r == BAD_INFILE))
+	//if (ac != 2 ||
+	//	((r = get_cdgfxyrz_sbi(av[1], input)) != SUCCESS && r == BAD_INFILE))
+	(void)av;
+	if (ac != 1 ||
+		((r = get_cdgfxyrz_sbi("42.fdf", input)) != SUCCESS && r == BAD_INFILE))
 		r = usage();
 	else if (r == SUCCESS &&
 		(r = make_scene(input, &s)) == SUCCESS &&

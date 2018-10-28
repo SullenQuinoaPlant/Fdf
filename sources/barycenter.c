@@ -18,9 +18,10 @@ static void						set_tmp_ct(
 
 void							barycenter(
 	t_xyz *pts,
-	int pt_ct,
+	int const pt_ct,
 	t_xyz ret)
 {
+	int		average_lim = pt_ct < TMP_SZ ? pt_ct : TMP_SZ;
 	t_xyz	tmp[TMP_SZ];
 	int		tmp_ct[TMP_SZ];
 	int		i;
@@ -34,11 +35,11 @@ void							barycenter(
 			barycenter(pts + (i ? tmp_ct[i] : 0), tmp_ct[i], tmp[i]);
 	ft_bzero(ret, sizeof(t_xyz));
 	i = -1;
-	while (++i < pt_ct)
+	while (++i < average_lim)
 	{
-		ret[X] += tmp_ct[i] * tmp[i][X];
-		ret[Y] += tmp_ct[i] * tmp[i][Y];
-		ret[Z] += tmp_ct[i] * tmp[i][Z];
+		ret[X] += (double)tmp_ct[i] * tmp[i][X];
+		ret[Y] += (double)tmp_ct[i] * tmp[i][Y];
+		ret[Z] += (double)tmp_ct[i] * tmp[i][Z];
 	}
 	mult_dbl_ar(1.0 / (double)pt_ct, DIMS, ret);
 }

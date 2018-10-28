@@ -7,7 +7,6 @@
 
 static int					new_buff(
 	t_list **prv,
-	size_t *counter,
 	t_s_cxyd **p)
 {
 	t_list		*new;
@@ -21,8 +20,6 @@ static int					new_buff(
 		new->content = ar;
 		new->content_size = BUF_SZ * sizeof(t_s_cxyd);
 		ft_lstadd(prv, new);
-		counter[CT_E] = BUF_SZ;
-		counter[CT_ALLOCS]++;
 	}
 	else if (ar)
 		free(ar);
@@ -31,6 +28,7 @@ static int					new_buff(
 
 #define DONE SUCCESS 
 #define NOT_DONE 1
+
 static int					really_parse(
 	char const **str,
 	int zmm[MIN_MAX_SZ],
@@ -52,7 +50,7 @@ static int					really_parse(
 	*((*p)++) = (t_s_cxyd){z, col};
 	if (z < zmm[MIN])
 		zmm[MIN] = z;
-	else if (z > zmm[MAX])
+	if (z > zmm[MAX])
 		zmm[MAX] = z;
 	return (NOT_DONE);
 }
@@ -64,19 +62,20 @@ int							cdgfxyrz_parse(
 	t_list **bs)
 {
 	char 		*l[2];
-	size_t		counter[2];
+	size_t		slots;
 	t_s_cxyd	*p;
 	int			r;
 
 	dims[ROW] = -1;
 	ft_memcpy(zmm, (int[MIN_MAX_SZ]){INT_MAX, INT_MIN}, sizeof(int[2]));
 	*bs = 0;
-	ft_bzero(counter, sizeof(counter));
+	slots = 0;
 	while ((r = get_next_line(fd, &l[0])) > 0)
 	{
 		l[1] = l[0];
 		ft_memcpy(dims, (size_t[2]){++dims[ROW], 0}, sizeof(size_t[2]));
-		while ((counter[CT_E]-- || (r = new_buff(bs, counter, &p)) == SUCCESS) &&
+		while ((slots-- ||
+			((r = new_buff(bs,&p)) == SUCCESS && (slots = BUF_SZ - 1))) &&
 			(r = really_parse((char const **)&l[1], zmm, &p) == NOT_DONE))
 			dims[COL]++;
 		free(l[0]);

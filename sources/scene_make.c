@@ -52,7 +52,7 @@ int						make_scene(
 	*ret = 0;
 	if ((r = init_mlx(&mlx) == SUCCESS) &&
 		(r = init_scene(mlx, &s)) == SUCCESS &&
-		(!in || (r = add_tssbis_to_scene(in, *ret)) == SUCCESS))
+		(!in || (r = add_tssbis_to_scene(in, s)) == SUCCESS))
 		enable_scene_looping((*ret = s));
 	else if (mlx)
 		scene_teardown(&s);
