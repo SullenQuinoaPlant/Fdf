@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 22:33:59 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/28 03:21:19 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -453,6 +453,7 @@ enum						e_scene_view_type
 **		pxl[h - 1][0] : bottom left
 **		pxl[h - 1][w - 1] : bottom right
 */
+
 struct						s_scene_view
 {
 	t_s_ring	ring;
@@ -475,6 +476,7 @@ struct						s_scene_view
 /*
 **Scene:
 */
+
 struct						s_active_object
 {
 	t_s_ring	ring;
@@ -504,6 +506,7 @@ struct						s_active_object
 /*
 **Memory caps:
 */
+
 # define TAG_AR_CAP ((size_t)1 << 30)
 # define TAG_NXT_CAP (TAG_AR_SZ / 4)
 # define TAC TAG_AR_CAP

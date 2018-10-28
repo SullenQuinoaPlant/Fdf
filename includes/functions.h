@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/24 23:50:10 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/28 03:28:20 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,10 @@ void						isometric_dot_proj(
 	void				*dot,
 	t_s_pp const *const	*points,
 	void				*ret_proj);
+
+void						isometric_keyhooks(
+	int		keycode,
+	void	*view);
 
 void						isometric_line_proj(
 	t_s_sv				*v,
