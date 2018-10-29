@@ -62,7 +62,7 @@ int							print_isometric_line(
 	t_tag t)
 {
 	t_s_lp *const	l = &((t_s_lp*)v->e[e_l].ar[t >> TPS])[t & TPM];
-	t_ruint			*dec;
+	t_ruint_dec		*dec;
 	t_ruint			dt;
 	double			*prec;
 	int				r;

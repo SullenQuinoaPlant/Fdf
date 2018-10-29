@@ -18,4 +18,10 @@ typedef unsigned int	t_ruint;
 */
 typedef t_ruint	(t_dni)[DNI_SZ];
 
+/*
+**typedef t_ruint	(t_truint_decomposition)[PXL_DEC_SZ];
+*/
+
+typedef t_ruint	(t_ruint_dec)[PXL_DEC_SZ];
+
 #endif
