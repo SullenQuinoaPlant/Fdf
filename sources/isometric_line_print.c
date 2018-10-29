@@ -7,11 +7,12 @@ static int					set_precedences(
 	t_ruint dt,
 	double **ret)
 {
-	double const	inc = (ends[1] - ends[0]) / (double)dt;
+	double			inc;
 	t_vuint			len;
 	double			d;
 	double			*p;
 
+	inc = dt ? (ends[1] - ends[0]) / (double)dt : 0;
 	*ret = 0;
 	len = dt + 1;
 	if (!(p = malloc(len * sizeof(double))))
@@ -22,6 +23,7 @@ static int					set_precedences(
 		p[len] = d;
 		d -= inc;
 	}
+	*ret = p;
 	return (SUCCESS);
 }
 

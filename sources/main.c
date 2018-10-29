@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 16:13:23 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/28 19:21:38 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/29 19:31:11 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void				print_scene_points(
 	}
 }
 
+
+#include <stdio.h>
+
 int				main(
 	int ac,
 	char **av)
@@ -48,8 +51,8 @@ int				main(
 
 	input[1] = 0;
 	s = 0;
-	//if (ac != 2 ||
-	//	((r = get_cdgfxyrz_sbi(av[1], input)) != SUCCESS && r == BAD_INFILE))
+//	if (ac != 2 ||
+//		((r = get_cdgfxyrz_sbi(av[1], input)) != SUCCESS && r == BAD_INFILE))
 	(void)av;
 	if (ac != 1 ||
 		((r = get_cdgfxyrz_sbi("42.fdf", input)) != SUCCESS && r == BAD_INFILE))
@@ -58,13 +61,18 @@ int				main(
 		(r = make_scene(input, &s)) == SUCCESS &&
 		(r = add_default_iso_v(&v, s)) == SUCCESS)
 	{
+printf("passed init\n");fflush(0);
 		tssv_apply_projs(v);
+printf("passed projs\n");fflush(0);
 		print_active_objects(v);
+printf("passed print active\n");fflush(0);
 		activate_view(v);
+printf("view activated\n");fflush(0);
 		print_scene_points(s);
-		printf("\nPRINTING AS ASCII :\n");
-		s->v->out_fd = 1;
-		tssv_print_ascii(s->v);
+		//s->v->out_fd = 1;
+		//printf("\nPRINTING AS ASCII :\n");
+		//tssv_print_ascii(s->v);
+printf("entering loop\n");fflush(0);
 		mlx_loop(s->mlx);
 	}
 	scene_teardown(&s);	

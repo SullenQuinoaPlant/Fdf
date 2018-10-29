@@ -26,7 +26,8 @@ void						print_active_objects(
 	t_s_ao *const	lim = v->ao;
 	t_s_ao			*p;
 
-	p = lim;
+	if (!(p = lim))
+		return ;
 	while (1)
 	{
 		print_object(v, p->tag);

@@ -100,8 +100,12 @@ int						add_view(
 	disable_scene_looping(s);
 	if ((r = init_view(s, hw, DEFAULT_WDW_NAME, &dummy)) == SUCCESS &&
 		(wait_scene_not_looping(s) || (1)) &&
-		(p = ring_expand(sizeof(t_s_sv), &dummy, (void**)s->v)))
+		(p = ring_expand(sizeof(t_s_sv), &dummy, (void**)&s->v)))
+	{
 		p->id = (p->ring.prv == (t_ring)p) ? 0 : ((t_s_sv*)p->ring.prv)->id + 1;
+		if (ret)
+			*ret = p;
+	}
 	else
 	{
 		r = SYS_ERR;

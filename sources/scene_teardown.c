@@ -19,5 +19,5 @@ void				scene_teardown(
 	ring_free(sizeof(t_s_ao), ft_free, (void**)&s->ao);
 	free_views(&s->v);
 	ft_lstdel(&s->v_rel, ft_free);
-	ft_scleanfree((void**)s, sizeof(t_s_s));
+	ft_scleanfree((void**)&s, sizeof(t_s_s));
 }

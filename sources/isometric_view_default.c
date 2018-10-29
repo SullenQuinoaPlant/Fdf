@@ -43,5 +43,6 @@ int						add_default_iso_v(
 	while (++i < MMXYZPC)
 		tpctrm_apply(v->ct->mashed, s->extr[i], extr[i]);
 	set_zoom_effect(extr, v);
+	ret_v ? (*ret_v = v) : ((t_s_sv*)0);
 	return (SUCCESS);
 }

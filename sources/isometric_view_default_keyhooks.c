@@ -10,9 +10,10 @@ void							isometric_keyhooks(
 	t_s_sv *const	v = (t_s_sv*)view;
 	t_s_s			*s;
 
+	if (!(s = v->s))
+		return ;
 	if (keycode == K_ESC)
 	{
-		s = v->s;
 		scene_teardown(&s);
 		exit(0);
 	}

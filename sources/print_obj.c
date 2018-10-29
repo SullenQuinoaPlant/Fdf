@@ -48,7 +48,7 @@ int							print_object(
 	r = SUCCESS;
 	if (flgs & O_SHOW)
 	{
-		r = print_obj_groups(&print_order[0], e_seg_sz - 1, o, v);
+		r = print_obj_groups(print_order, e_seg_sz - 1, o, v);
 	}
 	return (r);
 }
