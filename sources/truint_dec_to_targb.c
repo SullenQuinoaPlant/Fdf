@@ -1,7 +1,7 @@
 #include "scene.h"
 #include "discrete_ratio_tracking.h"
 
-t_argb							truint_dec_to_targb(
+t_argb						truint_dec_to_targb(
 	t_ruint *dec)
 {
 	t_argb	col;

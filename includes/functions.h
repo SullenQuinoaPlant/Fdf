@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 03:31:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/28 20:35:31 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/29 22:36:55 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -428,9 +428,8 @@ void						track_ratios(
 	int const		of_which_there_are__v_ct,
 	t_ruint			*ret);
 
-void						truint_dec_to_targb(
-	t_ruint	*decomposed_targb__dec,
-	t_argb	*ret);
+t_argb						truint_dec_to_targb(
+	t_ruint	*decomposed_targb__dec);
 
 void						tspctr_onelessview(
 	t_s_pctr	*p_coord_transform);

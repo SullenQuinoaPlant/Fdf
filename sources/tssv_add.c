@@ -55,9 +55,9 @@ static int				add_pxl_ars(
 	ct = h * w;
 	if ((p = malloc(ct * sizeof(double))))
 	{
-		v->s->pxl_allocs -= sz;
+		v->s->pxl_allocs += sz;
 		while (ct--)
-			p[ct] = DBL_MAX;
+			p[ct] = LEAST_PREC;
 		v->h = h;
 		v->w = w;
 		v->pxl_prec = p;

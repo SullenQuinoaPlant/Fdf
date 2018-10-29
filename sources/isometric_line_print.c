@@ -12,7 +12,7 @@ static int					set_precedences(
 	double			d;
 	double			*p;
 
-	inc = dt ? (ends[1] - ends[0]) / (double)dt : 0;
+	inc = dt ? (ends[1] - ends[0]) / (double)dt : ends[0];
 	*ret = 0;
 	len = dt + 1;
 	if (!(p = malloc(len * sizeof(double))))
@@ -27,6 +27,7 @@ static int					set_precedences(
 	return (SUCCESS);
 }
 
+#include <stdio.h>
 static void					print_line_like_really(
 	t_s_sv *v,
 	t_ruint *decomposed,
@@ -39,13 +40,20 @@ static void					print_line_like_really(
 	t_vuint			h;
 	t_vuint			w;
 
+	static int		call_ct;
+	call_ct++;
+printf("call_ct is : %d\n", call_ct);
+printf("dt is : %d\n", dt);
 	dt++;
 	while (dt--)
 	{
 		h = dec[dt][V_H];
 		w = dec[dt][V_W];
-		if (prec[dt] < vprec[h][w])
-			truint_dec_to_targb(&dec[dt][PXDAO], &canvas[h][w]);
+		double local_prec = prec[dt];
+		double view_prec = vprec[0][0];
+	printf("h :%d\tw :%d\n", h, w);fflush(0);
+		if (local_prec < view_prec)
+			canvas[h][w] = truint_dec_to_targb(&dec[dt][PXDAO]);
 	}
 }
 

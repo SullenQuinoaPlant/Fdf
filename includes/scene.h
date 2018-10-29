@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 04:35:47 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/28 03:21:19 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/29 21:52:23 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,10 @@ struct						s_view_elements
 **Flag:
 **	- visibility
 */
+
+# define LEAST_PRECEDENCE DBL_MAX
+# define LEAST_PREC LEAST_PRECEDENCE
+
 /*
 **Point projections are
 **	(t_s_p)s minus the reference counter.

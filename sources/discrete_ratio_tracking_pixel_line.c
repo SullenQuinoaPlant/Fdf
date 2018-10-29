@@ -90,7 +90,7 @@ int							track_pixel_line_ratios(
 	targb_pair_to_tdni(lp->argb, tdni + PXDAO);
 	tvpos_pair_to_tdni(lp->ends, tdni);
 	along = characterize_slope(lp->ends, &dt);
-	if (!(ar = malloc(sizeof(t_ruint) * (dt + 1) * PXL_DEC_SZ)))
+	if (!(ar = malloc(sizeof(t_ruint) * (dt + 1) * (PXL_DEC_SZ))))
 		return (SYS_ERR);
 	set_along(dt, tdni[along], ar);
 	track_ratios(dt, tdni, along, ar);
