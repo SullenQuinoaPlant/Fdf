@@ -36,7 +36,7 @@ static void					print_line_like_really(
 {
 	t_argb (*const	canvas)[v->w] = (t_argb(*)[v->w])v->pxl;
 	double (*const	vprec)[v->w] = (double(*)[v->w])v->pxl_prec;
-	t_ruint (*const	dec)[PXL_DEC_SZ] = (t_ruint(*)[PXL_DEC_SZ])decomposed;
+	t_ruint (*const	dec)[dt] = (t_ruint(*)[dt])decomposed;
 	t_vuint			h;
 	t_vuint			w;
 
@@ -47,10 +47,10 @@ printf("dt is : %d\n", dt);
 	dt++;
 	while (dt--)
 	{
-		h = dec[dt][V_H];
-		w = dec[dt][V_W];
+		h = dec[V_H][dt];
+		w = dec[V_W][dt];
 		double local_prec = prec[dt];
-		double view_prec = vprec[0][0];
+		double view_prec = vprec[h][w];
 	printf("h :%d\tw :%d\n", h, w);fflush(0);
 		if (local_prec < view_prec)
 			canvas[h][w] = truint_dec_to_targb(&dec[dt][PXDAO]);
@@ -62,7 +62,7 @@ int							print_isometric_line(
 	t_tag t)
 {
 	t_s_lp *const	l = &((t_s_lp*)v->e[e_l].ar[t >> TPS])[t & TPM];
-	t_ruint_dec		*dec;
+	t_ruint			*dec;
 	t_ruint			dt;
 	double			*prec;
 	int				r;

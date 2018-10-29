@@ -65,13 +65,13 @@ static int						characterize_slope(
 
 static void						set_along(
 	t_ruint dt,
-	t_dni along,
+	t_dni along_dni,
 	t_ruint *ar)
 {
 	t_ruint *const	lim = ar + dt + 1;
-	t_ruint	v;
+	t_ruint			v;
 
-	v = along[DNI_INI];
+	v = along_dni[DNI_INI];
 	while (ar < lim)
 		*ar++ = v++;
 }
@@ -80,19 +80,19 @@ int							track_pixel_line_ratios(
 	t_s_lp const *const lp,
 	t_ruint *ret_dt,
 	int *ret_along,
-	t_ruint_dec **ret)
+	t_ruint **ret)
 {
 	t_dni			tdni[PXL_DEC_SZ];
 	t_ruint			dt;
 	int				along;
-	t_ruint_dec		*ar;
+	t_ruint			*ar;
 
 	targb_pair_to_tdni(lp->argb, tdni + PXDAO);
 	tvpos_pair_to_tdni(lp->ends, tdni);
 	along = characterize_slope(lp->ends, &dt);
-	if (!(ar = malloc(sizeof(t_ruint_dec) * (dt + 1))))
+	if (!(ar = malloc(sizeof(t_ruint) * (dt + 1) * PXL_DEC_SZ)))
 		return (SYS_ERR);
-	set_along(dt, tdni[along], ar);
+	set_along(dt, tdni[along], ar + along * (dt + 1));
 	track_ratios(dt, tdni, along, ar);
 	along++;
 	track_ratios(dt, tdni + along, PXL_DEC_SZ - along, &ar[along * (dt + 1)]);
