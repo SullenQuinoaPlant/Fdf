@@ -75,10 +75,10 @@ static int				init_view(
 	int		r;
 
 	ft_bzero(&v->id, sizeof(t_s_v) - sizeof(t_s_ring));
+	v->s = s;
 	if ((r = mirror_tsses(s, v) == SUCCESS) &&
 		(r = add_mlx_ptrs(hw[V_H], hw[V_W], title, v) == SUCCESS))
 		r = add_pxl_ars(hw[V_H], hw[V_W], v);
-	v->s = s;
 	v->ao = s->ao;
 	v->out_fd = -1;
 	return (r);

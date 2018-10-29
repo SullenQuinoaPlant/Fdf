@@ -13,6 +13,23 @@ static void						set_mm(
 	ret[MAX][Z] = p->zmm[MAX];
 }
 
+static void						adjust_minmax(
+	t_xyz bar,
+	t_xyz *mm,
+	t_xyz *sbi_mm)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < DIMS)
+	{
+		j = -1;
+		while (++j < MIN_MAX_SZ)
+			sbi_mm[j][i] = mm[j][i] - bar[i];
+	}
+}
+
 void							cdgfxyrz_set_sbi_minmax(
 	t_s_cdgfxyrz *p,
 	t_s_sbi *sbi)
@@ -20,18 +37,10 @@ void							cdgfxyrz_set_sbi_minmax(
 	t_xyz		mm[MIN_MAX_SZ];
 	t_xyz		extr[MMXYZPC];
 	t_xyz		bar;
-	int			i;
-	int			j;
 
 	set_mm(p, mm);
 	minmax_permute(mm, extr);
 	barycenter(extr, MMXYZPC, bar);
+	adjust_minmax(bar, mm, sbi->minmax);
 	ft_memcpy(p->at, bar, sizeof(t_xyz));
-	i = -1;
-	while (++i < DIMS)
-	{
-		j = -1;
-		while (++j < MIN_MAX_SZ)
-			sbi->minmax[j][i] = mm[j][i] - bar[i];
-	}
 }
