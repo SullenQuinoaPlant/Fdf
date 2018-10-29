@@ -94,6 +94,13 @@ $(LIBS_L)/$(LIBNAME).a
 ############
 #RUN TESTS :
 
+.PHONY : relink
+relink : touch_force_relink all
+
+.PHONY : touch_force_relink
+touch_force_relink :
+	touch $(FORCE_RELINK)
+
 .PHONY : tests
 tests : list_tests test_prerequisites build_tests run_tests
 

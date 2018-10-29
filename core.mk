@@ -4,11 +4,12 @@ all : $(OUT_DIR)/$(NAME)
 $(OUT_DIR)/$(NAME)\
 :\
 $(OBJS)\
-$(patsubst %,$(LIBS_L)/%.a,$(DEPENDENCIES))
-	$(CC) -o $@ $^\
+$(patsubst %,$(LIBS_L)/%.a,$(DEPENDENCIES))\
+$(FORCE_RELINK)
+	$(CC) -o $@ $(OBJS)\
 		-L $(LIBS_L)\
 		-lm\
-		-lmlx -framework OpenGL -framework AppKit\
+		$(MLX_AND_CO)\
 		$(patsubst lib%,-l%,$(DEPENDENCIES))
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c

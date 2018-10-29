@@ -18,6 +18,9 @@ OBJS := $(patsubst %,$(OBJ_DIR)/%.o,$(TARGETS))
 INCS := $(INC_DIR)/*.h
 
 DEPENDENCIES = libft libgetnextline
+MLX_AND_CO = -lmockmlx
+#MLX_AND_CO = -lmlx -framework OpenGL -framework AppKit
+FORCE_RELINK = $(TEST_DIR)/relink
 
 ifndef TOOLS
 	TOOLS := mac
