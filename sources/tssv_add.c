@@ -28,12 +28,12 @@ static int				add_mlx_ptrs(
 	t_s_sv *v)
 {
 	t_s_s *const	s = v->s;
-	int				we;
-	int				dont;
-	int				care;
+	int				bpp;
+	int				l_sz;
+	int				endi;
 
 	if ((v->mlx_img = mlx_new_image(s->mlx, w, h)))
-		v->pxl = (t_argb*)mlx_get_data_addr(v->mlx_img, &we, &dont, &care);
+		v->pxl = (t_argb*)mlx_get_data_addr(v->mlx_img, &bpp, &l_sz, &endi);
 	if ((v->mlx_wdw = mlx_new_window(s->mlx, w, h, title)))
 		;
 	if (v->mlx_img && v->mlx_wdw)
@@ -73,8 +73,10 @@ static int				init_view(
 	t_s_sv *v)
 {
 	int		r;
+	size_t	sz;
 
-	ft_bzero(&v->id, sizeof(t_s_v) - sizeof(t_s_ring));
+	sz = sizeof(t_s_sv) - sizeof(t_s_ring);
+	ft_bzero(&v->id, sz);
 	v->s = s;
 	if ((r = mirror_tsses(s, v) == SUCCESS) &&
 		(r = add_mlx_ptrs(hw[V_H], hw[V_W], title, v) == SUCCESS))

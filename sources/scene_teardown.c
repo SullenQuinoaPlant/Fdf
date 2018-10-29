@@ -4,6 +4,7 @@
 /*
 ** - 'ct' ring ought to be completely freed after view ring free.
 */
+
 void				scene_teardown(
 	t_s_s **scene)
 {
