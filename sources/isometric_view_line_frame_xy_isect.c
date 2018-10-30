@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 23:53:24 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 12:56:34 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/30 01:40:25 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static int						filter_isects(
 ** - p : point
 ** - r : ratio
 */
+
 int								isometric_line_xy_isect(
 	t_s_sv *v,
 	t_pdp pdp)

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:53:53 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/18 17:20:17 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/30 01:27:23 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void					 	set_someof_pdp(
 	t_tag			t;
 
 	t = l->ends[0];
-	ft_memcpy(pdp[PDP_P1], &(pts[t >> TPS])[t & TPM], dims_sz);
+	ft_memcpy(pdp[PDP_P1], &(pts[t >> TPS])[t & TPM].xyz, dims_sz);
 	t = l->ends[1];
-	ft_memcpy(pdp[PDP_P2], &(pts[t >> TPS])[t & TPM], dims_sz);
+	ft_memcpy(pdp[PDP_P2], &(pts[t >> TPS])[t & TPM].xyz, dims_sz);
 }
 
 static void						set_somemoreof_pdp(
@@ -81,6 +81,7 @@ static void						set_ret(
 ** P1, P2 and the delta vector (P2 - P1).
 ** See .h for indexes.
 */
+
 void							isometric_line_proj(
 	t_s_sv *v,
 	void *line,

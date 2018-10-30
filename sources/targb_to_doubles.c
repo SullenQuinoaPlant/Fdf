@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 01:57:03 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/20 15:25:20 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/30 01:56:53 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void							targb_to_doubles(
 /*
 **No special fancy rounding, just a cast and a mask.
 */
+
 void							doubles_to_targb(
 	double argb[ARGBS],
 	t_argb *ret)

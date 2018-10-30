@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 00:41:08 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/15 08:45:38 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/30 01:24:49 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 ** A line may cross the rectangular views' boundaries four times when we extend
 ** these to infinity. Therefore isect[4].
 */
+
 # define ISEC_CT 4
 
 /*
@@ -28,6 +29,7 @@
 ** - delta between first point and second point (P2 - P1), (index DT)
 ** - second point (index P2)
 */
+
 # define PDP_P1 0
 # define PDP_DT 1
 # define PDP_P2 2
