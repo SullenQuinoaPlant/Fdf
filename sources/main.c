@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 16:13:23 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/29 19:31:11 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/30 00:38:04 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,18 @@ void				print_scene_points(
 	t_s_p	*p;
 	size_t	i;
 	size_t	j;
+	size_t	count;
 
 	pts = &s->e[e_p];
 	i = -1;
+	count = 0;
 	while (++i < pts->ar_sz)
 	{
 		p = pts->ar[i];
 		j = -1;
 		while (++j < TAS)
 		{
-			printf("xyz: %f %f %f\t", p->xyz[X], p->xyz[Y], p->xyz[Z]);
+			printf("xyz: %f %f %f\t point %zd\n", p->xyz[X], p->xyz[Y], p->xyz[Z], ++count);
 			p++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 04:54:31 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/10/20 19:13:45 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/10/30 00:44:08 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ static int					add_points(
 			if (*r != SUCCESS)
 				return (*r);
 			pt->refs = 0;
-			pt->xyz[X] = i + p->at[X];
-			pt->xyz[Y] = j + p->at[Y];
-			pt->xyz[Z] = par[i][j].z + p->at[Z];
+			pt->xyz[X] = i - p->at[X];
+			pt->xyz[Y] = j - p->at[Y];
+			pt->xyz[Z] = par[i][j].z - p->at[Z];
 		}
 	}
 	return ((*r = SUCCESS));
