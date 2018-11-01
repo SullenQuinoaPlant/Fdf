@@ -12,7 +12,7 @@ static int					set_precedences(
 	double			d;
 	double			*p;
 
-	inc = dt ? (ends[1] - ends[0]) / (double)dt : ends[0];
+	inc = dt ? (ends[1] - ends[0]) / (double)dt : 0;
 	*ret = 0;
 	len = dt + 1;
 	if (!(p = malloc(len * sizeof(double))))
@@ -35,7 +35,7 @@ static void					print_line_like_really(
 {
 	t_argb (*const	canvas)[v->w] = (t_argb(*)[v->w])v->pxl;
 	double (*const	vprec)[v->w] = (double(*)[v->w])v->pxl_prec;
-	t_ruint (*const	dec)[dt] = (t_ruint(*)[dt])decomposed;
+	t_ruint (*const	dec)[dt + 1] = (t_ruint(*)[dt + 1])decomposed;
 	t_vuint			h;
 	t_vuint			w;
 
@@ -46,7 +46,7 @@ static void					print_line_like_really(
 		w = dec[V_W][dt];
 		if (prec[dt] < vprec[h][w])
 		{
-			canvas[h][w] = truint_dec_to_targb(&dec[dt][PXDAO]);
+			canvas[h][w] = truint_dec_to_targb(&dec[PXDAO][dt], dt);
 			vprec[h][w] = prec[dt];
 		}
 	}

@@ -2,8 +2,8 @@ TARGETS := \
 	barycenter \
 	camera_add \
 	camera_modifications \
-	cdgfxyrz_builder \
 	cdgfxyrz_builder_add_lines \
+	cdgfxyrz_builder \
 	cdgfxyrz_freer \
 	cdgfxyrz_get_sbi \
 	cdgfxyrz_parser \

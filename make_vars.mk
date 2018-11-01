@@ -22,6 +22,7 @@ MLX_AND_CO = -lmockmlx
 #MLX_AND_CO = -lmlx -framework OpenGL -framework AppKit
 FORCE_RELINK = $(TEST_DIR)/relink
 
+TOOLS = gnu
 ifndef TOOLS
 	TOOLS := mac
 endif

@@ -23,6 +23,7 @@
 /*
 **Return values:
 */
+
 # define SYS_ERR -1
 # define SUCCESS 0
 # define BAD_ARGS 1
@@ -33,15 +34,18 @@
 /*
 **Space dimensions:
 */
+
 # define DIMS 3
 # define X 0
 # define Y 1
 # define Z 2
+
 /*
- **T: θ, in (xOy) plane, from x
- **P: φ, from z to (xOy) plane.
- **R: radius, from O.
- */
+**T: θ, in (xOy) plane, from x
+**P: φ, from z to (xOy) plane.
+**R: radius, from O.
+*/
+
 # define T 0
 # define P 1
 # define R 2
@@ -51,6 +55,7 @@
 /*
 **Color bytes:
 */
+
 # define ARGBS 4
 
 /*
@@ -64,17 +69,22 @@
 **	in 3-dimensional scene space,
 **	associated with the color to put at these coordinates.
 */
+
 # define PXL_DEC_SZ ARGBS + VIEW_DIMS
 # define PNT_DEC_SZ ARGBS + DIMS
+
 /*
 **Sometimes we put the coordinates last:
 */
+
 # define PXL_DEC_DIM_OFFSET ARGBS
 # define PNT_DEC_DIM_OFFSET ARGBS
 # define PDDO PXL_DEC_DIM_OFFSET
+
 /*
 **Sometimes not:
 */
+
 # define PXL_DEC_ARGB_OFFSET VIEW_DIMS
 # define PXDAO PXL_DEC_ARGB_OFFSET
 # define PNT_DEC_ARGB_OFFSET DIMS
@@ -83,6 +93,7 @@
 /*
 **Mins and maxes:
 */
+
 # define MIN 0
 # define MAX 1
 # define MIN_MAX_SZ 2
@@ -92,6 +103,7 @@
 /*
 **Loop state constants:
 */
+
 # define NOT_LOOPING 0
 # define LOOPING 1
 # define LOOP_LOCK 2
@@ -99,5 +111,7 @@
 /*
 **Default window name:
 */
+
 # define DEFAULT_WDW_NAME "fdf window"
+
 #endif

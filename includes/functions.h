@@ -429,7 +429,8 @@ void						track_ratios(
 	t_ruint			*ret);
 
 t_argb						truint_dec_to_targb(
-	t_ruint	*decomposed_targb__dec);
+	t_ruint	*decomposed_targb__dec,
+	t_ruint	dt_decomposition_delta);
 
 void						tspctr_onelessview(
 	t_s_pctr	*p_coord_transform);
