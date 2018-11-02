@@ -70,8 +70,13 @@
 **	associated with the color to put at these coordinates.
 */
 
-# define PXL_DEC_SZ ARGBS + VIEW_DIMS
-# define PNT_DEC_SZ ARGBS + DIMS
+/*
+**# define PXL_DEC_SZ ARGBS + VIEW_DIMS
+**# define PNT_DEC_SZ ARGBS + DIMS
+*/
+
+# define PXL_DEC_SZ 6
+# define PNT_DEC_SZ 7
 
 /*
 **Sometimes we put the coordinates last:

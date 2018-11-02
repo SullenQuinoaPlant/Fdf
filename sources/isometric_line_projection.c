@@ -79,7 +79,7 @@ static void						set_ret(
 /*
 ** The 'pdp' array holds the coordinates, and the color values of
 ** P1, P2 and the delta vector (P2 - P1).
-** See .h for indexes.
+**	X,Y,Z at indexes 0,1 and 2; B,G,R,A at indexes 3, 4, 5 and 6.
 */
 
 void							isometric_line_proj(

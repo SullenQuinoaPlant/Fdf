@@ -60,6 +60,7 @@ static void						filter_p1p2_dir(
 ** If P1 is valid, then there is only one valid intersection point
 ** that remains after filtering.
 */
+
 static int						filter_isects(
 	t_s_sv *v,
 	int pt_ct,
