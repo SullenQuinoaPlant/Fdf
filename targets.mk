@@ -27,7 +27,6 @@ TARGETS := \
 	multiply_double_array \
 	object_projection \
 	open \
-	pnt_dec_set_and_multiply \
 	point_projection \
 	print_arrow \
 	print_dot \
@@ -46,6 +45,7 @@ TARGETS := \
 	scene_teardown \
 	se_functions \
 	se_refct_functions \
+	set_and_multiply_double_decompositions \
 	so_tsse_functions \
 	tar_functions \
 	targb_to_doubles \

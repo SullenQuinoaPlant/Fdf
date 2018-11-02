@@ -19,8 +19,8 @@ void							targb_to_doubles(
 {
 	int		i;
 
-	i = ARGBS;
-	while (--i)
+	i = -1;
+	while (++i < ARGBS)
 	{
 		ret[i] = argb & ARGB_MASK;
 		argb >>= ARGB_SHIFT;

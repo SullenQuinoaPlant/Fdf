@@ -73,7 +73,7 @@ static int						filter_isects(
 
 	ft_bzero(valid, sizeof(valid));
 	filter_xy_visible(v, pt_ct, isect, valid);
-	filter_p1p2_dir(pt_ct, pdp, isect, valid);
+	filter_p1p2_dir(pt_ct, isect, pdp, valid);
 	i = -1;
 	j = PDP_P2;
 	while (++i < pt_ct)
