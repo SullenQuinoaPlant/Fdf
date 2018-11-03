@@ -13,6 +13,7 @@
 ** 3/4Pi around z
 ** -1/2Pi - arcsin(1/sqrt(3)) around yawed x.
 */
+
 t_s_pctr					*add_isometric_camera(
 	t_zntr zntr,
 	t_s_s *s)

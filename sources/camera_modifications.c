@@ -38,7 +38,7 @@ static void						chg_tpctrm(
 	t_s_pctr	*nxt;
 
 	ft_memcpy(chgee->own, new, sizeof(t_pctrm));
-	if (!(prv = chgee->prv))
+	if ((prv = chgee->prv))
 		tpctrm_mult(prv->mashed, new, chgee->mashed);
 	else
 		ft_memcpy(chgee->mashed, new, sizeof(t_pctrm));
@@ -52,8 +52,8 @@ void							cam_tr(
 	t_s_sv *v)
 {
 	t_s_pctr *const		trz = get_camera_component(v->ct, TRZ);
-	t_pctrm *const	old = &trz->own;
-	t_pctrm			new;
+	t_pctrm *const		old = &trz->own;
+	t_pctrm				new;
 	int					i;
 
 	ft_memcpy(new, old, sizeof(t_pctrm));

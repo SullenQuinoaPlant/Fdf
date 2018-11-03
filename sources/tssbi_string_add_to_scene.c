@@ -36,8 +36,8 @@ static int				use_input(
 }
 
 static int				check_minmax(
-	t_xyz	sbi_minmax[MIN_MAX_SZ],
-	t_xyz	s_minmax[MIN_MAX_SZ])
+	t_xyz sbi_minmax[MIN_MAX_SZ],
+	t_xyz s_minmax[MIN_MAX_SZ])
 {
 	int		i;
 	int		has_changed;
